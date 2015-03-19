@@ -2,6 +2,10 @@
 title: "R Programming Course Notes"
 author: "Xing Su"
 output:
+  html_document:
+    highlight: pygments
+    theme: spacelab
+    toc: yes
   pdf_document:
     toc: yes
     toc_depth: 3
@@ -900,6 +904,6 @@ system.time({
 
 
 
-ylim=range(unlist(rss))
+`ylim=range(unlist(rss))`
 
-ls("package:elasticnet")
+`ls("package:elasticnet")`

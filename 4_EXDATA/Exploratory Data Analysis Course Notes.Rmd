@@ -2,11 +2,13 @@
 title: "Exploratory Data Analysis Course Notes"
 author: "Xing Su"
 output:
+  html_document:
+    highlight: pygments
+    theme: spacelab
+    toc: yes
   pdf_document:
     toc: yes
     toc_depth: 3
-  html_document:
-    toc: yes
 ---
 $\pagebreak$
 
@@ -98,7 +100,7 @@ grid.raster(readPNG("figures/5.jpg"))
 ```
 
 ```{r fig.height = 3, fig.width = 4, fig.align='center', echo=FALSE}
-library(datasets)
+library(UsingR); data(galton)
 plot(jitter(child, 4)~parent, galton)
 ```
 
