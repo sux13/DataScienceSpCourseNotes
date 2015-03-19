@@ -8,6 +8,7 @@ output:
   html_document:
     toc: yes
   word_document: default
+header-includes: \usepackage{graphicx} 
 ---
 
 $\pagebreak$
@@ -192,18 +193,20 @@ P(D ~|~ +) & = \frac{P(+~|~D)P(D)}{P(+~|~D)P(D) + P(+~|~D^c)P(D^c)}\\
 
 
 ### Likelihood Ratios
+* **diagnostic likelihood ratio** of a **positive** test result is defined as $$DLR_+ = \frac{sensitivity}{1-specificity} =  \frac{P(+\:|\:D)}{P(+\:|\:D^c)}$$
+* **diagnostic likelihood ratio** of a **negative** test result is defined as $$DLR_- = \frac{1 - sensitivity}{specificity} =  \frac{P(-\:|\:D)}{P(-\:|\:D^c)}$$
 * from Baye's Rules, we can derive the *positive predictive value* and *false positive value*
-$$P(D\:|\:+) = \frac{P(+\:|\:D)P(D)}{P(+\:|\:D)P(D)+P(+\:|\:D^c)P(D^c)}$$
-$$P(D^c\:|\:+) = \frac{P(+\:|\:D^c)P(D^c)}{P(+\:|\:D)P(D)+P(+\:|\:D^c)P(D^c)}$$
-* if we divide the about quantities over each other (same denominator), we get the following $$\frac{P(D\:|\:+)}{P(D^c\:|\:+)} = \frac{P(+\:|\:D)}{P(+\:|\:D^c)} \times \frac{P(D)}{P(D^c)}$$
-* **odds** = $p/(1-p)$
-	* $\frac{P(D)}{P(D^c)}$ = odds of disease in absence of test
-	* $\frac{P(D\:|\:+)}{P(+\:|\:D^c)}$ = odds of disease given a positive test result
-* **Diagnostic Likelihood Ratio** of a positive test result is defined as $$DLR_+ = \frac{P(+\:|\:D)}{P(Dc\:|\:+)}$$
-	* in previous example, $DLR_+ = .997/(1-.985) = 66$
-	* $DLR_- =(1-.997)/.985 = 0.003$
-* **post-test odds of D** $= DLR_+ \times$ **pre-test odds of D**
-	* $DLR_+$ = the factor by which you multiply your odds in the presence of a positive test to obtain your post-test odds
+$$P(D\:|\:+) = \frac{P(+\:|\:D)P(D)}{P(+\:|\:D)P(D)+P(+\:|\:D^c)P(D^c)}~~~~~~\mbox{(1)}$$
+$$P(D^c\:|\:+) = \frac{P(+\:|\:D^c)P(D^c)}{P(+\:|\:D)P(D)+P(+\:|\:D^c)P(D^c)}~~~~~~\mbox{(2)}$$
+* if we divide equation $(1)$ over $(2)$, the quantities over have the same denominator so we get the following $$\frac{P(D\:|\:+)}{P(D^c\:|\:+)} = \frac{P(+\:|\:D)}{P(+\:|\:D^c)} \times \frac{P(D)}{P(D^c)}$$ which can also be written as $$\mbox{post-test odds of D} = DLR_+ \times \mbox{pre-test odds of D}$$
+	* **odds** = $p/(1-p)$
+	* $\frac{P(D)}{P(D^c)}$ = **pre-test odds**, or odds of disease in absence of test
+	* $\frac{P(D\:|\:+)}{P(+\:|\:D^c)}$ = **post-test odds**, or odds of disease given a positive test result
+	* $DLR_+$ = factor by which the odds in the presence of a positive test can be multiplied to obtain the post-test odds
+	* $DLR_-$ = relates the decrease in odds of disease after a negative result
+* following the previous example, for sensitivity of 0.997 and specificity of 0.985, so the diagnostic likelihood ratios are as follows $$DLR_+ = .997/(1-.985) = 66 ~~~~~~ DLR_- =(1-.997)/.985 = 0.003$$
+	* this indicates that the result of the positive test is the odds of disease is 66 times the pretest odds
+
 
 
 $\pagebreak$
@@ -232,28 +235,76 @@ $\pagebreak$
 		* sample mean = center of mass of observed data = empirical mean
         $$\bar X = \sum_{x}^n x_i p(x_i)$$ where $p(x_i) = 1/n$
 
+```{r fig.width = 5, fig.height = 3, fig.align = 'center', message = F, warning = F}
+# load relevant packages
+library(UsingR); data(galton); library(ggplot2)
+# plot galton data
+g <- ggplot(galton, aes(x = child))
+# add histogram for children data
+g <- g + geom_histogram(fill = "salmon", binwidth=1, aes(y=..density..), colour="black")
+# add density smooth
+g <- g + geom_density(size = 2)
+# add vertical line
+g <- g + geom_vline(xintercept = mean(galton$child), size = 2)
+# print graph
+g
+```
+ 
+
 * **average of random variables** = a new random variable where its distribution has an expected value that is the **same** as the original distribution (centers are the same) 
 	* the mean of the averages = average of the original data --> estimates average of the population
 	* if $E[sample~mean]$ = population mean, then estimator for the sample mean is **unbiased**
 		* [**derivation**] let $X_1$, $X_2$, $X_3$, ... $X_n$ be a collection of $n$ samples from the population with mean $\mu$
 		* mean of this sample $$\bar X = \frac{X_1 + X_2 + X_3 +  .  + X_n}{n}$$
-		* since $E(aX) = aE(X)$, the expected value of the mean is can be written as $$E[\frac{X_1 + X_2 + X_3 + ... + X_n}{n}] = \frac{1}{n} \times [E(X_1) + E(X_2) + E(X_3) + ... + E(X_n)]$$
+		* since $E(aX) = aE(X)$, the expected value of the mean is can be written as $$E\left[\frac{X_1 + X_2 + X_3 + ... + X_n}{n}\right] = \frac{1}{n} \times [E(X_1) + E(X_2) + E(X_3) + ... + E(X_n)]$$
 		* since each of the $E(X_i)$ is drawn from the population with mean $\mu$, the expected value of each sample should be $$E(X_i) = \mu$$
 		* therefore $$\begin{aligned}
-E[\frac{X_1 + X_2 + X_3 + ... + X_n}{n}] = \frac{1}{n} \times [E(X_1) + E(X_2) + E(X_3) + ... + E(X_n)]\\
+E\left[\frac{X_1 + X_2 + X_3 + ... + X_n}{n}\right] & = \frac{1}{n} \times [E(X_1) + E(X_2) + E(X_3) + ... + E(X_n)]\\
 & = \frac{1}{n} \times [\mu + \mu + \mu + ... + \mu]\\
 & = \frac{1}{n} \times n \times \mu\\
 & = \mu\\
-\end{aligned}$
+\end{aligned}$$
 * ***Note**: the more data that goes into the sample mean, the more concentrated its density/mass functions are around the population mean *
 
+```{r fig.width = 6, fig.height = 3, fig.align = 'center', message = F, warning = F}
+nosim <- 1000
+# simulate data for sample size 1 to 4
+dat <- data.frame(
+	x = c(sample(1 : 6, nosim, replace = TRUE),
+        apply(matrix(sample(1 : 6, nosim * 2, replace = TRUE), nosim), 1, mean),
+        apply(matrix(sample(1 : 6, nosim * 3, replace = TRUE), nosim), 1, mean),
+        apply(matrix(sample(1 : 6, nosim * 4, replace = TRUE), nosim), 1, mean)),
+	size = factor(rep(1 : 4, rep(nosim, 4))))
+# plot histograms of means by sample size
+g <- ggplot(dat, aes(x = x, fill = size)) + geom_histogram(alpha = .20, binwidth=.25, colour = "black") 
+g + facet_grid(. ~ size)
+```
+ 
 
 $\pagebreak$
 
 ## Variance
+
+```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
+# generate x value ranges
+xvals <- seq(-10, 10, by = .01)
+# generate data from normal distribution for sd of 1 to 4
+dat <- data.frame(
+    y = c(dnorm(xvals, mean = 0, sd = 1),
+        dnorm(xvals, mean = 0, sd = 2),
+        dnorm(xvals, mean = 0, sd = 3),
+        dnorm(xvals, mean = 0, sd = 4)),
+    x = rep(xvals, 4),
+    factor = factor(rep(1 : 4, rep(length(xvals), 4)))
+)
+# plot 4 lines for the different standard deviations
+ggplot(dat, aes(x = x, y = y, color = factor)) + geom_line(size = 2)
+```
+ 
+
 * **variance** = measure of spread, the square of expected distance from the mean (expressed in X's units$^2$)
+	- as we can see from above, higher variances --> more spread, lower --> smaller spread
 	* $Var(X) = E[(X-\mu)^2] = E[X^2] - E[X]^2$
-	* higher variances --> more spread, lower --> smaller spread
 	* **standard deviation** $= \sqrt{Var(X)}$ --> has same units as X
 	* ***example***
         * for die roll, $E[X] = 3.5$
@@ -277,8 +328,18 @@ grid.raster(readPNG("figures/6.png"))
 		* $E[S^2]$ = population variance, where $S$ = sample standard deviation
 		* as we see from the simulation results below, with more data, the distribution for $S^2$ gets more concentrated around population variance
         
-```{r echo = FALSE, fig.width = 5, fig.height = 4, fig.align = 'center'}
-grid.raster(readPNG("figures/7.png"))
+```{r fig.width = 4, fig.height = 3, fig.align = 'center'}
+# specify number of simulations
+nosim <- 10000; 
+# simulate data for various sample sizes
+dat <- data.frame(
+    x = c(apply(matrix(rnorm(nosim * 10), nosim), 1, var),
+          apply(matrix(rnorm(nosim * 20), nosim), 1, var),
+          apply(matrix(rnorm(nosim * 30), nosim), 1, var)),
+    n = factor(rep(c("10", "20", "30"), c(nosim, nosim, nosim))) )
+# plot density function for different sample size data
+ggplot(dat, aes(x = x, fill = n)) + geom_density(size = 1, alpha = .2) + 
+	geom_vline(xintercept = 1, size = 1) 
 ```
 
 * ***Note**: for any variable, properties of the population = **parameter**, estimates of properties for samples = **statistic** *
@@ -326,23 +387,83 @@ grid.raster(readPNG("figures/8.png"))
 ```{r message = F, warning = F}
 # specify number of simulations with 10 as number of observations per sample
 nosim <- 1000; n <-10
+# estimated standard deviation of mean
 sd(apply(matrix(rnorm(nosim * n), nosim), 1, mean))
+# actual standard deviation of mean of standard normals
+1 / sqrt(n)
 ```
 
 * `rnorm()` --> generate samples from the standard normal
 * `matrix()` --> puts all samples into a nosim by $n$ matrix, so that each row represents a simulation with `nosim` observations
 * `apply()` --> calculates the mean of the $n$ samples
 * `sd()` --> returns standard deviation
-* ***Note**: standard uniform --> triangle straight line distribution --> mean = 1/2 and variance = 1/12 *
 
+### Example - Standard Uniform
+* standard uniform --> triangle straight line distribution --> mean = 1/2 and variance = 1/12
+* means of random samples of $n$ uniforms have have standard deviation of $1/\sqrt{12 \times n}$
+
+
+```{r message = F, warning = F}
+# estimated standard deviation of the sample means
+sd(apply(matrix(runif(nosim * n), nosim), 1, mean))
+# actual standard deviation of the means
+1/sqrt(12*n)
+```
+
+
+### Example - Poisson
+* $Poisson(x^2)$ have variance of $x^2$
+* means of random samples of $n~ Poisson(4)$ have standard deviation of $2/\sqrt{n}$
+
+```{r message = F, warning = F}
+# estimated standard deviation of the sample means
+sd(apply(matrix(rpois(nosim * n, lambda=4), nosim), 1, mean))
+# actual standard deviation of the means
+2/sqrt(n)
+```
+
+
+### Example - Bernoulli
+* for $p = 0.5$, the Bernoulli distribution has variance of 0.25
+* means of random samples of $n$ coin flips have standard deviations of $1 / (2 \sqrt{n})$
+
+```{r message = F, warning = F}
+# estimated standard deviation of the sample means
+sd(apply(matrix(sample(0 : 1, nosim * n, replace = TRUE), nosim), 1, mean))
+# actual standard deviation of the means
+1/(2*sqrt(n))
+```
+
+### Example - Father/Son
+
+```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
+# load data
+library(UsingR); data(father.son); 
+# define son height as the x variable
+x <- father.son$sheight
+# n is the length
+n<-length(x)
+# plot histogram for son's heights
+g <- ggplot(data = father.son, aes(x = sheight)) 
+g <- g + geom_histogram(aes(y = ..density..), fill = "lightblue", binwidth=1, colour = "black")
+g <- g + geom_density(size = 2, colour = "black")
+g
+# we calculate the parameters for variance of distribution and sample mean, 
+round(c(sampleVar = var(x), 
+	sampleMeanVar = var(x) / n, 
+	# as well as standard deviation of distribution and sample mean
+	sampleSd = sd(x), 
+	sampleMeanSd = sd(x) / sqrt(n)),2)
+```
+ 
 
 
 $\pagebreak$
 
 ## Binomial Distribution
-* **binomial random variable** = sum of **n** Bernoulli variables = $\sum X_i$ where $X_i$ = $Bernoulli(p)$
-	* PMF is defined as $$P(X=x) = {n \choose x}p^x(1-p)^{n-x}$$ where ${n \choose x}$ = number of ways selecting $x$ items out of $n$ options without replacement or regard to order
-	* the **combination** or "$n$ choose $x$" is defined as $${n \choose x} = \frac{n!}{x!(n-x)!}$$
+* **binomial random variable** = sum of **n** Bernoulli variables $$X = \sum_{i=1}^n X_i$$ where $X_1,\ldots,X_n = Bernoulli(p)$
+	* PMF is defined as $$P(X=x) = {n \choose x}p^x(1-p)^{n-x}$$ where ${n \choose x}$ = number of ways selecting $x$ items out of $n$ options without replacement or regard to order and for $x=0,\ldots,n$
+	* **combination** or "$n$ choose $x$" is defined as $${n \choose x} = \frac{n!}{x!(n-x)!}$$
 	* the base cases are $${n \choose n} = {n \choose 0} = 1$$
 * **Bernoulli distribution** --> binary outcome
 	* only possible outcomes
@@ -354,19 +475,30 @@ $\pagebreak$
 
 ### Example
 * of 8 children, whats the probability of 7 or more girls (50/50 chance)?
-* ${8 \choose 7}.5^7(1-.5)^{1} + {8 \choose 8}.5^8(1-.5)^{0} \approx 0.04$
+$${8 \choose 7}.5^7(1-.5)^{1} + {8 \choose 8}.5^8(1-.5)^{0} \approx 0.04$$
+
+```{r message = F, warning = F}
+# calculate probability using PMF
+choose(8, 7) * .5 ^ 8 + choose(8, 8) * .5 ^ 8 
+# calculate probability using CMF from distribution
+pbinom(6, size = 8, prob = .5, lower.tail = FALSE)
+```
+
 * `choose(8, 7)` = R function to calculate n choose x
-* `pbinom(6, size=8, prob =0.5, lower.tail=TRUE)` = probability of 6 or less successes out of 8 samples with probability of 0.5
+* `pbinom(6, size=8, prob =0.5, lower.tail=TRUE)` = probability of 6 or less successes out of 8 samples with probability of 0.5 (CMF)
 	- `lower.tail=FALSE` = returns the complement, in this case it's the probability of greater than 6 successes out of 8 samples with probability of 0.5
 
+
+$\pagebreak$
 
 ## Normal Distribution
 * normal/Gaussian distribution for random variable X
 	* notation = $X \sim N(\mu, \sigma^2)$
-	* mean = $\mu$
-	* variance =  $\sigma^2$
+	* mean = $E[X] = \mu$
+	* variance = $Var(X) = \sigma^2$
 	* PMF is defined as $$f(x)=(2\pi\sigma^2)^{-1/2}e^{-(x-\mu)^2/2\sigma^2}$$
 * $X \sim N(0, 1)$ = **standard normal distribution** (standard normal random variables often denoted using $Z_1, Z_2, \ldots$)
+	- ***Note**: see below graph for reference for the following observations * 
 	* ~68% of data/normal density --> between $\pm$ 1 standard deviation from $\mu$
 	* ~95% of data/normal density --> between $\pm$ 2 standard deviation from $\mu$
 	* ~99% of data/normal density --> between $\pm$ 3 standard deviation from $\mu$
@@ -374,12 +506,46 @@ $\pagebreak$
 	* $\pm$ 1.645 standard deviations from $\mu$ --> 5$^{th}$ (-) and 95$^{th}$ (+) percentiles
 	* $\pm$ 1.96 standard deviations from $\mu$ --> 2.5$^{th}$ (-) and 97.5$^{th}$ (+) percentiles
 	* $\pm$ 2.33 standard deviations from $\mu$ --> 1$^{st}$ (-) and 99$^{th}$ (+) percentiles
+
+```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
+# plot standard normal
+x <- seq(-3, 3, length = 1000)
+g <- ggplot(data.frame(x = x, y = dnorm(x)), 
+            aes(x = x, y = y)) + geom_line(size = 2)
+g <- g + geom_vline(xintercept = -3 : 3, size = 2)
+g
+```
+
 * for any $X \sim N(\mu, \sigma^2)$, calculating the number of standard deviations each observation is from the mean ***converts*** the random variable to a ***standard normal*** (denoted as $Z$ below) $$Z=\frac{X-\mu}{\sigma} \sim N(0,1)$$	
 * conversely, a standard normal can then be converted to ***any normal distribution*** by multiplying by standard deviation and adding the mean $$X = \mu + \sigma Z \sim N(\mu, \sigma^2)$$
-* `qnorm(n, mean=mu, sd=sd)` = returns the $n^{th} percentiles for the given normal distribution
+* `qnorm(n, mean=mu, sd=sd)` = returns the $n^{th}$ percentiles for the given normal distribution
 * `pnorm(x, mean=mu, sd=sd, lower.tail=F)` = returns the probability of an observation drawn from the given distribution is larger in value than the specified threshold $x$
 
+### Example
+* the number of daily ad clicks for a company 
+is (approximately) normally distributed with a mean of 1020 and a standard deviation of 50
+* What's the probability of getting more than 1,160 clicks in a day?
 
+```{r}
+# calculate number of standard deviations from the mean
+(1160 - 1020) / 50
+# calculate probability using given distribution
+pnorm(1160, mean = 1020, sd = 50, lower.tail = FALSE)
+# calculate probability using standard normal
+pnorm(2.8, lower.tail = FALSE)
+```
+
+* therefore, it is not very likely (`r pnorm(2.8, lower.tail = FALSE)*100`% chance), since 1,160 is `r (1160 - 1020) / 50` standard deviations from the mean  
+* What number of daily ad clicks would represent the one where 75% of days have fewer clicks (assuming days are independent and identically distributed)?
+
+```{r}
+qnorm(0.75, mean = 1020, sd = 50)
+```
+
+* therefore, `r qnorm(0.75, mean = 1020, sd = 50)` would represent the threshold that has more clicks than 75% of days
+
+
+$\pagebreak$
 
 ## Poisson Distribution
 * used to model counts
@@ -398,61 +564,307 @@ $\pagebreak$
 		* $t$ = total monitoring time
 - `ppois(n, lambda = lambda*t)` = returns probability of $n$ or fewer events happening given the rate $\lambda$ and time $t$
 
+### Example
+* number of people that show up at a bus stop can be modeled with Poisson distribution with a mean of $2.5$ per hour
+* after watching the bus stop for $4$ hours, what is the probability that $3$ or fewer people show up for the whole time?
+
+```{r}
+# calculate using distribution
+ppois(3, lambda = 2.5 * 4)
+```
+
+* as we can see from above, there is a `r ppois(3, lambda = 2.5 * 4)*100`% chance for $3$ or fewer people show up total at the bus stop during 4 hours of monitoring 
+
+
+### Example - Approximating Binomial Distribution
+* flip a coin with success probability of $0.01$ a total 500 times (low $p$, large $n$)
+* what's the probability of 2 or fewer successes?
+
+```{r}
+# calculate correct probability from Binomial distribution
+pbinom(2, size = 500, prob = .01)
+# estimate probability using Poisson distribution
+ppois(2, lambda=500 * .01)
+```
+
+* as we can see from above, the two probabilities (`r pbinom(2, size = 500, prob = .01)*100`% vs `r pbinom(2, size = 500, prob = .01)*100`%) are extremely close
+
+$\pagebreak$
 
 ## Asymptotics
 * **asymptotics** = behavior of statistics as sample size --> $\infty$
 * useful for simple statistical inference/approximations
-* form basis for frequency interpretation of probabilities ("Law of Large Numbers")
+* form basis for frequentist interpretation of probabilities ("Law of Large Numbers")
+
 
 ### Law of Large Numbers (LLN)
-* IID sample statistic that estimates property of the sample (i.e. mean, variance) becomes the population statistic (i.e. population mean, population variance) as $n$ increases
+* IID sample statistic that estimates property of the sample (i.e. mean, variance) ***becomes*** the population statistic (i.e. population mean, population variance) as $n$ increases
 * ***Note**: an estimator is **consistent** if it converges to what it is estimating *
 * sample mean/variance/standard deviation are all ***consistent estimators*** for their population counterparts
+	- $\bar X_n$ is average of the result of $n$ coin flips (i.e. the sample proportion of heads) 
+	- as we flip a fair coin over and over, it ***eventually converges*** to the true probability of a head
+
+### Example - LLN for Normal and Bernoulli Distribution
+* for this example, we will simulate 10000 samples from the normal and Bernoulli distributions respectively
+* we will plot the distribution of sample means as $n$ increases and compare it to the population means 
+
+```{r fig.width = 6, fig.height = 3, fig.align = 'center', message = F, warning = F}
+# load library
+library(gridExtra)
+# specify number of trials
+n <- 10000
+# calculate sample (from normal distribution) means for different size of n
+means <- cumsum(rnorm(n)) / (1  : n)
+# plot sample size vs sample mean
+g <- ggplot(data.frame(x = 1 : n, y = means), aes(x = x, y = y)) 
+g <- g + geom_hline(yintercept = 0) + geom_line(size = 2) 
+g <- g + labs(x = "Number of obs", y = "Cumulative mean")
+g <- g + ggtitle("Normal Distribution")
+# calculate sample (coin flips) means for different size of n
+means <- cumsum(sample(0 : 1, n , replace = TRUE)) / (1  : n)
+# plot sample size vs sample mean
+p <- ggplot(data.frame(x = 1 : n, y = means), aes(x = x, y = y)) 
+p <- p + geom_hline(yintercept = 0.5) + geom_line(size = 2) 
+p <- p + labs(x = "Number of obs", y = "Cumulative mean")
+p <- p + ggtitle("Bernoulli Distribution (Coin Flip)")
+# combine plots
+grid.arrange(g, p, ncol = 2)
+```
+
+* as we can see from above, for both distributions the sample means undeniably approach the respective population means as $n$ increases
+
 
 ### Central Limit Theorem
-* distribution of means of IID variables approaches the standard normal as $n$ increases
+* one of the most important theorems in statistics
+* distribution of means of IID variables approaches the standard normal as sample size $n$ increases
 * in other words, for large values of $n$, $$\frac{\mbox{Estimate} - \mbox{Mean of Estimate}}{\mbox{Std. Err. of Estimate}} = \frac{\bar X_n - \mu}{\sigma / \sqrt{n}}=\frac{\sqrt n (\bar X_n - \mu)}{\sigma} \longrightarrow N(0, 1)$$
-* this translates to the distribution of the sample mean $\bar X$ is approximately $N(\mu, \sigma^2/n)$
+* this translates to the distribution of the sample mean $\bar X_n$ is approximately $N(\mu, \sigma^2/n)$
 * typically the Central Limit Theorem can be applied when $n \geq 30$
+
+### Example - CLT with Bernoulli Trials (Coin Flips)
+- for this example, we will simulate $n$ flips of a possibly unfair coin 
+	- $X_i$ be the $0$ or $1$ result of the $i^{th}$ flip of a possibly unfair coin
+	+ sample proportion , $\hat p$, is the average of the coin flips
+	+ $E[X_i] = p$ and $Var(X_i) = p(1-p)$
+	+ standard error of the mean is $SE = \sqrt{p(1-p)/n}$
++ in principle, normalizing the random variable $X_i$, we should get an approximately standard normal distribution $$\frac{\hat p - p}{\sqrt{p(1-p)/n}} \sim N(0,~1)$$
+- therefore, we will flip a coin $n$ times, take the sample proportion of heads (successes with probability $p$), subtract off 0.5 (ideal sample proportion) and multiply the result by divide by $\frac{1}{2 \sqrt{n}}$ and compare it to the standard normal
+
+```{r, echo = FALSE, fig.width=6, fig.height = 3, fig.align='center'}
+# specify number of simulations
+nosim <- 1000
+# convert to standard normal
+cfunc <- function(x, n) 2 * sqrt(n) * (mean(x) - 0.5) 
+# simulate data for sample sizes 10, 20, and 30
+dat <- data.frame(
+	x = c(apply(matrix(sample(0:1, nosim*10, replace=TRUE), nosim), 1, cfunc, 10),
+        apply(matrix(sample(0:1, nosim*20, replace=TRUE), nosim), 1, cfunc, 20),
+        apply(matrix(sample(0:1, nosim*30, replace=TRUE), nosim), 1, cfunc, 30)),
+	size = factor(rep(c(10, 20, 30), rep(nosim, 3))))
+# plot histograms for the trials
+g <- ggplot(dat, aes(x = x, fill = size)) + geom_histogram(binwidth=.3, 
+	colour = "black", aes(y = ..density..)) 
+# plot standard normal distribution for reference
+g <- g + stat_function(fun = dnorm, size = 2)
+# plot panel plots by sample size
+g + facet_grid(. ~ size)
+```
+
+* now, we can run the same simulation trials for an extremely unfair coin with $p = 0.9$
+
+```{r, echo = FALSE, fig.width=6, fig.height = 3, fig.align='center'}
+# specify number of simulations
+nosim <- 1000
+# convert to standard normal
+cfunc <- function(x, n) sqrt(n) * (mean(x) - 0.9) / sqrt(.1 * .9)
+# simulate data for sample sizes 10, 20, and 30
+dat <- data.frame(
+	x = c(apply(matrix(sample(0:1, prob = c(.1,.9), nosim * 10, replace = TRUE), 
+                     nosim), 1, cfunc, 10),
+        apply(matrix(sample(0:1, prob = c(.1,.9), nosim * 20, replace = TRUE), 
+                     nosim), 1, cfunc, 20),
+        apply(matrix(sample(0:1, prob = c(.1,.9), nosim * 30, replace = TRUE), 
+                     nosim), 1, cfunc, 30)),
+	size = factor(rep(c(10, 20, 30), rep(nosim, 3))))
+# plot histograms for the trials
+g <- ggplot(dat, aes(x = x, fill = size)) + geom_histogram(binwidth=.3, 
+	colour = "black", aes(y = ..density..)) 
+# plot standard normal distribution for reference
+g <- g + stat_function(fun = dnorm, size = 2)
+# plot panel plots by sample size
+g + facet_grid(. ~ size)
+```
+
+* as we can see from both simulations, the converted/standardized distribution of the samples convert to the standard normal distribution
 * ***Note**: speed at which the normalized coin flips converge to normal distribution depends on how biased the coin is (value of $p$) *
 * ***Note**: does not guarantee that the normal distribution will be a good approximation, but just that eventually it will be a good approximation as n --> $\infty$ *
 
 
 
-## Confidence Intervals - Z (using Central Limit Theorem)
+### Confidence Intervals - Normal Distribution/Z Intervals
 * **Z confidence interval** is defined as $$Estimate \pm ZQ \times SE_{Estimate}$$ where $ZQ$ = quantile from the standard normal distribution
-* sample mean is a  
-* **95% confidence interval for the population mean $\mu$** is defined as $$\bar X \pm 2\sigma^2/n$$ for the sample mean $\bar X \sim N(\mu, \sigma^2/n)$
+* according to CLT, the sample mean, $\bar X$, is approximately normal with mean $\mu$ and sd $\sigma / \sqrt{n}$
+* **95% confidence interval for the population mean $\mu$** is defined as $$\bar X \pm 2\sigma/\sqrt{n}$$ for the sample mean $\bar X \sim N(\mu, \sigma^2/n)$
 	* you can choose to use 1.96 to be more accurate for the confidence interval 
-	* $P(\bar{X} > \mu + 2\sigma^2/n~or~\bar{X} < \mu - 2\sigma^2/n = 5%$
+	* $P(\bar{X} > \mu + 2\sigma/\sqrt{n}~or~\bar{X} < \mu - 2\sigma/\sqrt{n}) = 5\%$
     * **interpretation**: if we were to repeated samples of size $n$ from the population and construct this confidence interval for each case, approximately 95% of the intervals will contain $\mu$
-* ***Note**: Poisson and binomial distributions have exact intervals that don't require CLT *
+* ***Note**: Poisson and binomial distributions have exact intervals that don't require CLT *  
+* ***example***
+	- for this example, we will compute the 95% confidence interval for sons height data in inches
 
-### Wald Confidence Interval (Bernoulli Distribution)
-* for Bernoulli distributions, confidence interval takes the form
-    $$\hat{p} \pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$$
-* $p$ = unknown, so use $\hat{p} = X/n$ to replace
-* $p(1-p)$ is largest when $p = 1/2$, so confidence interval becomes $$\hat{p} \pm \frac{1}{\sqrt{n}}$$
-* this is known as the **Wald Confidence Interval** and is useful in ***roughly estimating*** confidence intervals
-	* generally need $n$ = 100 for 1 decimal place, 10,000 for 2, and 1,000,000 for 3
-* `binom.test(k, n)` = returns confidence interval for `k` successes in `n` draws
+```{r message = F, warning = F}
+# load son height data 
+data(father.son); x <- father.son$sheight
+# calculate confidence interval for sons height in inches
+mean(x) + c(-1, 1) * qnorm(0.975) * sd(x)/sqrt(length(x))
+```
 
-### Agresti/Coull Interval (Binomial Distribution)
-* for a binomial distribution with smaller values of $n$ (when n is not large enough for CLT) we can construct the **Agresti/Coull Interval**, which is defined as $$\hat{p} = \frac{X+2}{n+4}$$ 
-* this is effectively ***adding 2*** to number of successes, $X$ and ***adding 2*** to number of failure
-* interval tend to be ***conservative***
+
+### Confidence Interval - Bernoulli Distribution/Wald Interval
+* for Bernoulli distributions, $X_i$ is $0$ or $1$ with success probability $p$ and the variance is $\sigma^2 = p(1 - p)$
+* the confidence interval takes the form of $$\hat{p} \pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$$ 
+* since the population proportion $p$ is unknown, we can use $\hat{p} = X/n$ as estimate
+* $p(1-p)$ is largest when $p = 1/2$, so 95% confidence interval can be calculated by $$\begin{aligned}
+\hat{p} \pm Z_{0.95} \sqrt{\frac{0.5(1-0.5)}{n}} & = \hat{p} \pm 1.96 \sqrt{\frac{1}{4n}}\\
+& = \hat{p} \pm \frac{1.96}{2} \sqrt{\frac{1}{n}}\\
+& \approx \hat{p} \pm \frac{1}{\sqrt{n}}\\
+\end{aligned}$$
+	* this is known as the **Wald Confidence Interval** and is useful in ***roughly estimating*** confidence intervals
+	* generally need $n$ = 100 for 1 decimal place, 10,000 for 2, and 1,000,000 for 3  
+* ***example***
+	- suppose a random sample of 100 likely voters, 56 intent to vote for you, can you secure a victory?
+	- we can use the Wald interval to quickly estimate the 95% confidence interval
+	- as we can see below, because the interval [`r 0.56 + c(-1, 1) * 1/sqrt(100)`] contains values below 50%, victory is not guaranteed
+	- `binom.test(k, n)$conf` = returns confidence interval binomial distribution (collection of Bernoulli trial) with `k` successes in `n` draws
+
+```{r message = F, warning = F}
+# define sample probability and size
+p = 0.56; n = 100
+# Wald interval
+c("WaldInterval" = p + c(-1, 1) * 1/sqrt(n))
+# 95% confidence interval
+c("95CI" = p + c(-1, 1) * qnorm(.975) * sqrt(p * (1-p)/n))
+# perform binomial test
+binom.test(p*100, n*100)$conf.int
+```
+
+
+### Confidence Interval - Binomial Distribution/Agresti-Coull Interval
+* for a binomial distribution with smaller values of $n$ (when $n$ < 30, thus not large enough for CLT), often time the normal confidence intervals, as defined by $$\hat{p} \pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$$ **do not** provide accurate estimates
+
+```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
+# simulate 1000 samples of size 20 each
+n <- 20; nosim <- 1000
+# simulate for p values from 0.1 to 0.9
+pvals <- seq(.1, .9, by = .05)
+# calculate the confidence intervals
+coverage <- sapply(pvals, function(p){
+	# simulate binomial data
+	phats <- rbinom(nosim, prob = p, size = n) / n
+	# calculate lower 95% CI bound
+	ll <- phats - qnorm(.975) * sqrt(phats * (1 - phats) / n)
+	# calculate upper 95% CI bound
+	ul <- phats + qnorm(.975) * sqrt(phats * (1 - phats) / n)
+	# calculate percent of intervals that contain p
+	mean(ll < p & ul > p)
+})
+# plot CI results vs 95%
+ggplot(data.frame(pvals, coverage), aes(x = pvals, y = coverage)) + geom_line(size = 2) + geom_hline(yintercept = 0.95) + ylim(.75, 1.0)
+```
+
+* as we can see from above, the interval do not provide adequate coverage as 95% confidence intervals (frequently only provide 80 to 90% coverage)
+* we can construct the **Agresti-Coull Interval**, which is defined uses the adjustment $$\hat{p} = \frac{X+2}{n+4}$$ where we effectively ***add 2*** to number of successes, $X$, and ***add 2*** to number of failure
+* therefore the interval becomes $$\frac{X+2}{n+4} \pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$$
+* ***Note**: interval tend to be **conservative** *  
+* ***example***
+	
+```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
+# simulate 1000 samples of size 20 each
+n <- 20; nosim <- 1000
+# simulate for p values from 0.1 to 0.9
+pvals <- seq(.1, .9, by = .05)
+# calculate the confidence intervals
+coverage <- sapply(pvals, function(p){
+	# simulate binomial data with Agresti/Coull Interval adjustment
+	phats <- (rbinom(nosim, prob = p, size = n) + 2) / (n + 4)
+		# calculate lower 95% CI bound
+	ll <- phats - qnorm(.975) * sqrt(phats * (1 - phats) / n)
+	# calculate upper 95% CI bound
+	ul <- phats + qnorm(.975) * sqrt(phats * (1 - phats) / n)
+	# calculate percent of intervals that contain p
+	mean(ll < p & ul > p)
+})
+# plot CI results vs 95%
+ggplot(data.frame(pvals, coverage), aes(x = pvals, y = coverage)) + geom_line(size = 2) + geom_hline(yintercept = 0.95) + ylim(.75, 1.0)
+````
+
+* as we can see from above, the coverage is much better for the 95% interval
+* in fact, all of the estimates are more conservative as we previously discussed, indicating the Agresti-Coull intervals are ***wider*** than the regular confidence intervals 
+
 
 ### Poisson Interval
 * for $X \sim Poisson(\lambda t)$
 	* estimate rate $\hat{\lambda} = X/t$
 	* $var(\hat{\lambda}) = \lambda/t$
 	* variance estimate $= \hat{\lambda}/t$ 
-	* for small values of $\lambda$ (few events larger time interval), should not use the asymptotic interval estimated here
-	* as $t \to \infty$, the interval becomes the true 95% interval
+* so the confidence interval is defined as $$\hat \lambda \pm z_{1-\alpha/2}\sqrt{\frac{\lambda}{t}}$$
+	* however, for small values of $\lambda$ (few events larger time interval), we **should not** use the asymptotic interval estimated
+	* ***example***
+		- for this example, we will go through a specific scenario as well as a simulation exercise to demonstrate the ineffectiveness of asymptotic intervals for small values of $\lambda$ 
+		- nuclear pump failed 5 times out of 94.32 days, give a 95% confidence interval for the failure rate per day?
+		+ `poisson.test(x, T)$conf` = returns Poisson 95% confidence interval for given `x` occurrence over `T` time period
+ 
+```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
+# define parameters
+x <- 5; t <- 94.32; lambda <- x / t
+# calculate confidence interval
+round(lambda + c(-1, 1) * qnorm(.975) * sqrt(lambda / t), 3)
+# return accurate confidence interval from poisson.test
+poisson.test(x, T = 94.32)$conf
+# small lambda simulations
+lambdavals <- seq(0.005, 0.10, by = .01); nosim <- 1000; t <- 100
+# calculate coverage using Poisson intervals
+coverage <- sapply(lambdavals, function(lambda){
+	# calculate Poisson rates
+	lhats <- rpois(nosim, lambda = lambda * t) / t
+	# lower bound of 95% CI
+	ll <- lhats - qnorm(.975) * sqrt(lhats / t)
+	# upper bound of 95% CI
+	ul <- lhats + qnorm(.975) * sqrt(lhats / t)
+	# calculate percent of intervals that contain lambda
+	mean(ll < lambda & ul > lambda)
+})
+# plot CI results vs 95%
+ggplot(data.frame(lambdavals, coverage), aes(x = lambdavals, y = coverage)) + geom_line(size = 2) + geom_hline(yintercept = 0.95)+ylim(0, 1.0)
+```
+
+* as we can see above, for small values of $\lambda = X/t$, the confidence interval produced by the asymptotic interval is ***not*** an accurate estimate of the actual 95% interval (not enough coverage)  
+* however, as $t \to \infty$, the interval becomes the ***true 95% interval***
+
+
+```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
+# small lambda simulations
+lambdavals <- seq(0.005, 0.10, by = .01); nosim <- 1000; t <- 1000
+# calculate coverage using Poisson intervals
+coverage <- sapply(lambdavals, function(lambda){
+	# calculate Poisson rates
+	lhats <- rpois(nosim, lambda = lambda * t) / t
+	# lower bound of 95% CI
+	ll <- lhats - qnorm(.975) * sqrt(lhats / t)
+	# upper bound of 95% CI
+	ul <- lhats + qnorm(.975) * sqrt(lhats / t)
+	# calculate percent of intervals that contain lambda
+	mean(ll < lambda & ul > lambda)
+})
+# plot CI results vs 95%
+ggplot(data.frame(lambdavals, coverage), aes(x = lambdavals, y = coverage)) + geom_line(size = 2) + geom_hline(yintercept = 0.95) + ylim(0, 1.0)
+```
+
+* as we can see from above, as $t$ increases, the Poisson intervals become closer to the actual 95% confidence intervals
 
 
 
-## Confidence Intervals - T (small samples)
+### Confidence Intervals - T (small samples)
 * **t** Confidence Interval 
     $$Estimate \pm TQ \times SE_{Estimate} = \bar X \pm  \frac{t_{n-1} S}{\sqrt{n}}$$ 
 	* $TQ$ = quantile from T distribution
@@ -886,7 +1298,7 @@ mean(permutations > observedStat)
 ```
 
 * we created 1000 permutations from the observed dataset, and found ***no datasets*** with mean differences between groups **B** and **C** larger than the original data
-* therefore, p-value is very small and we can ***reject the null*** hypothesis with any resonable $\alpha$ levels
+* therefore, p-value is very small and we can ***reject the null*** hypothesis with any reasonable $\alpha$ levels
 * below is the plot for the null distribution/permutations
 
 ```{r, echo= FALSE, fig.width=6, fig.height=4, fig.align='center'}
