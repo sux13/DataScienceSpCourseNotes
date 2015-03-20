@@ -139,7 +139,7 @@ img {
 </ul>
 </div>
 
-
+<p><span class="math">\(\pagebreak\)</span></p>
 <div id="overview-and-history-of-r" class="section level2">
 <h2>Overview and History of R</h2>
 <ul>
@@ -196,7 +196,7 @@ img {
 <li>5000+ packages available</li>
 </ul></li>
 </ul>
-
+<p><span class="math">\(\pagebreak\)</span></p>
 </div>
 <div id="coding-standards" class="section level2">
 <h2>Coding Standards</h2>
@@ -241,7 +241,7 @@ img {
 </ul></li>
 <li><code>[1]</code> at the beginning of the output = which element of the vector is being shown</li>
 </ul>
-
+<p><span class="math">\(\pagebreak\)</span></p>
 </div>
 <div id="r-objects-and-data-structures" class="section level2">
 <h2>R Objects and Data Structures</h2>
@@ -447,7 +447,7 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <li><code>table(factorVar)</code> = how many of each are in the factor</li>
 </ul></li>
 </ul>
-
+<p><span class="math">\(\pagebreak\)</span></p>
 </div>
 </div>
 <div id="missing-values" class="section level2">
@@ -483,7 +483,7 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 </ul></li>
 <li><p><strong>Imputing Missing Values</strong> = replacing missing values with estimates (can be averages from all other data with the similar conditions)</p></li>
 </ul>
-
+<p><span class="math">\(\pagebreak\)</span></p>
 </div>
 <div id="sequence-of-numbers" class="section level2">
 <h2>Sequence of Numbers</h2>
@@ -581,7 +581,7 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <li>x[[“a”, exact = false]]</li>
 </ul></li>
 </ul>
-
+<p><span class="math">\(\pagebreak\)</span></p>
 </div>
 </div>
 <div id="logic" class="section level2">
@@ -630,7 +630,7 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 </ul></li>
 <li><code>View(data.frame)</code> = opens and view the content of the data frame</li>
 </ul>
-
+<p><span class="math">\(\pagebreak\)</span></p>
 </div>
 <div id="split-apply-combine-funtions" class="section level2">
 <h2>Split-Apply-Combine Funtions</h2>
@@ -788,7 +788,7 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <li><code>na.rm = TRUE</code> –&gt; removes NA values</li>
 </ul></li>
 </ul>
-
+<p><span class="math">\(\pagebreak\)</span></p>
 </div>
 </div>
 <div id="simulation" class="section level2">
@@ -882,7 +882,7 @@ log(\mu) = \beta_0 + \beta_1 x  \\
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
 log.mu &lt;-<span class="st"> </span><span class="fl">0.5</span> +<span class="st"> </span><span class="fl">0.3</span>*<span class="st"> </span>x
 y &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">100</span>, <span class="kw">exp</span>(log.mu))</code></pre>
-
+<p><span class="math">\(\pagebreak\)</span></p>
 </div>
 </div>
 <div id="dates-and-times" class="section level2">
@@ -923,7 +923,7 @@ y &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">1
 <li><code>break = 100</code> = split data into 100 bins</li>
 </ul></li>
 </ul>
-
+<p><span class="math">\(\pagebreak\)</span></p>
 </div>
 <div id="reading-tabular-data" class="section level2">
 <h2>Reading Tabular Data</h2>
@@ -1011,7 +1011,7 @@ y &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">1
 </ul></li>
 </ul></li>
 </ul>
-
+<p><span class="math">\(\pagebreak\)</span></p>
 </div>
 </div>
 <div id="control-structures" class="section level2">
@@ -1118,7 +1118,7 @@ repeat {
     }
     ## Do something here
 }</code></pre>
-
+<p><span class="math">\(\pagebreak\)</span></p>
 </div>
 </div>
 <div id="functions" class="section level2">
@@ -1173,7 +1173,7 @@ repeat {
 <li><em><strong>Note</strong>: arguments coming after … must be explicitly matched and cannot be partially matched</em></li>
 </ul></li>
 </ul>
-
+<p><span class="math">\(\pagebreak\)</span></p>
 </div>
 <div id="scoping" class="section level2">
 <h2>Scoping</h2>
@@ -1311,7 +1311,7 @@ nLL &lt;-<span class="st"> </span><span class="kw">make.NegLogLik</span>(normals
 ##          b &lt;- -0.5*sum((data-mu)^2) / (sigma^2)
 ##          -(a + b)
 ##     }
-## &lt;environment: 0x7fc51d30b668&gt;</code></pre>
+## &lt;environment: 0x7fb85d0fac68&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Estimating Prameters</span>
 <span class="kw">optim</span>(<span class="kw">c</span>(<span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">1</span>), nLL)$par</code></pre>
 <pre><code>##       mu    sigma 
@@ -1324,7 +1324,7 @@ nLL &lt;-<span class="st"> </span><span class="kw">make.NegLogLik</span>(normals
 nLL &lt;-<span class="st"> </span><span class="kw">make.NegLogLik</span>(normals, <span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">FALSE</span>))
 <span class="kw">optimize</span>(nLL, <span class="kw">c</span>(<span class="fl">1e-6</span>, <span class="dv">10</span>))$minimum</code></pre>
 <pre><code>## [1] 1.800596</code></pre>
-
+<p><span class="math">\(\pagebreak\)</span></p>
 </div>
 </div>
 <div id="debugging" class="section level2">
@@ -1379,7 +1379,7 @@ nLL &lt;-<span class="st"> </span><span class="kw">make.NegLogLik</span>(normals
     }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.150   0.005   0.170</code></pre>
+##   0.152   0.004   0.162</code></pre>
 <ul>
 <li><code>system.time(expression)</code>
 <ul>

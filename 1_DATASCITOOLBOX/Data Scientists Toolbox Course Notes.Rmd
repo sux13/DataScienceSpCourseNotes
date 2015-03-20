@@ -1,8 +1,16 @@
 ---
 title: "Data Scientist’s Toolbox Course Notes"
 author: "Xing Su"
-output: pdf_document
+output:
+  html_document:
+    highlight: pygments
+    theme: spacelab
+    toc: yes
+  pdf_document:
+    toc: yes
+    toc_depth: 3
 ---
+
 
 ## CLI (Command Line Interface)
 
