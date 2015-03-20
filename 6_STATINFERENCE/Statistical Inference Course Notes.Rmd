@@ -2,13 +2,13 @@
 title: "Statistical Inference Course Notes"
 author: "Xing Su"
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: 3
   html_document:
     highlight: pygments
     theme: spacelab
     toc: yes
-  pdf_document:
-    toc: yes
-    toc_depth: 3
   word_document: default
 header-includes: \usepackage{graphicx}
 ---
@@ -641,6 +641,8 @@ grid.arrange(g, p, ncol = 2)
 * distribution of means of IID variables approaches the standard normal as sample size $n$ increases
 * in other words, for large values of $n$, $$\frac{\mbox{Estimate} - \mbox{Mean of Estimate}}{\mbox{Std. Err. of Estimate}} = \frac{\bar X_n - \mu}{\sigma / \sqrt{n}}=\frac{\sqrt n (\bar X_n - \mu)}{\sigma} \longrightarrow N(0, 1)$$
 * this translates to the distribution of the sample mean $\bar X_n$ is approximately $N(\mu, \sigma^2/n)$
+	- distribution is centered at the population mean 
+	- with standard deviation = standard error of the mean
 * typically the Central Limit Theorem can be applied when $n \geq 30$
 
 ### Example - CLT with Bernoulli Trials (Coin Flips)
@@ -710,6 +712,8 @@ g + facet_grid(. ~ size)
 	* you can choose to use 1.96 to be more accurate for the confidence interval 
 	* $P(\bar{X} > \mu + 2\sigma/\sqrt{n}~or~\bar{X} < \mu - 2\sigma/\sqrt{n}) = 5\%$
     * **interpretation**: if we were to repeated samples of size $n$ from the population and construct this confidence interval for each case, approximately 95% of the intervals will contain $\mu$
+* confidence intervals get **narrower** with less variability or
+larger sample sizes
 * ***Note**: Poisson and binomial distributions have exact intervals that don't require CLT *  
 * ***example***
 	- for this example, we will compute the 95% confidence interval for sons height data in inches
@@ -804,7 +808,7 @@ ggplot(data.frame(pvals, coverage), aes(x = pvals, y = coverage)) + geom_line(si
 * in fact, all of the estimates are more conservative as we previously discussed, indicating the Agresti-Coull intervals are ***wider*** than the regular confidence intervals 
 
 
-### Poisson Interval
+### Confidence Interval - Poisson Interval
 * for $X \sim Poisson(\lambda t)$
 	* estimate rate $\hat{\lambda} = X/t$
 	* $var(\hat{\lambda}) = \lambda/t$
@@ -866,18 +870,37 @@ ggplot(data.frame(lambdavals, coverage), aes(x = lambdavals, y = coverage)) + ge
 
 
 
-### Confidence Intervals - T (small samples)
-* **t** Confidence Interval 
-    $$Estimate \pm TQ \times SE_{Estimate} = \bar X \pm  \frac{t_{n-1} S}{\sqrt{n}}$$ 
+### Confidence Intervals - T Distribution(Small Samples)
+* **t** confidence interval is defined as $$Estimate \pm TQ \times SE_{Estimate} = \bar X \pm \frac{t_{n-1} S}{\sqrt{n}}$$
 	* $TQ$ = quantile from T distribution
-    * $t_{n-1}$ = relevant quantile = `qt(0.975, df = n-1)`
-    * t interval assumes data is IID normal
+    * $t_{n-1}$ = relevant quantile
+    * $t$ interval assumes data is IID normal so that $$\frac{\bar X - \mu}{S/\sqrt{n}}$$ follows Gosset's $t$ distribution with $n-1$ degrees of freedom
     * works well with data distributions that are roughly symmetric/mound shaped, and ***does not*** work with skewed distributions
         * skewed distribution --> meaningless to center interval around the mean $\bar X$
         * logs/median can be used instead
     * paired observations (multiple measurements from same subjects) can be analyzed by t interval of differences
     * as more data collected (large degrees of freedom), t interval --> z interval
-    
+    * `qt(0.975, df=n-1)` = calculate the relevant quantile using t distribution 
+
+```{r fig.width = 6, fig.height = 3, fig.align = 'center', message = F, warning = F}
+# Plot normal vs t distributions
+k <- 1000; xvals <- seq(-5, 5, length = k); df <- 10
+d <- data.frame(y = c(dnorm(xvals), dt(xvals, df)),x = xvals,
+              dist = factor(rep(c("Normal", "T"), c(k,k))))
+g <- ggplot(d, aes(x = x, y = y)) 
+g <- g + geom_line(size = 2, aes(colour = dist)) + ggtitle("Normal vs T Distribution")
+# plot normal vs t quantiles
+d <- data.frame(n= qnorm(pvals),t=qt(pvals, df),p = pvals)
+h <- ggplot(d, aes(x= n, y = t))
+h <- h + geom_abline(size = 2, col = "lightblue")
+h <- h + geom_line(size = 2, col = "black")
+h <- h + geom_vline(xintercept = qnorm(0.975))
+h <- h + geom_hline(yintercept = qt(0.975, df)) + ggtitle("Normal vs T Quantiles")
+# plot 2 graphs together
+grid.arrange(g, h, ncol = 2)
+```
+
+
 * William Gosset's **t** Distribution ("Student's T distribution")
 	* test = Gosset's pseudoname which he published under
 	* indexed/defined by ***degrees of freedom***, and becomes more like standard normal as degrees of freedom gets larger
@@ -886,28 +909,51 @@ ggplot(data.frame(lambdavals, coverage), aes(x = lambdavals, y = coverage)) + ge
 		* $S$ = standard deviation may be inaccurate, as the std of the data sample may not be truly representative of the population std
         * using the Z interval here thus may produce an interval that is too ***narrow***
 
-* Independent Group **t** Intervals - Same Variance
-    * compare two groups in randomized trial ("A/B Testing")
-        * cannot use the paired t test because the groups are independent and may have different sample sizes
-    * perform randomization to balance unobserved covariance that may otherwise affect the result
-    * Confidence Interval for $\mu_y - \mu_x$ 
-    $$
-    \bar Y - \bar X \pm t_{n_x + n_y - 2, 1 - \alpha/2}S_p\left(\frac{1}{n_x} + \frac{1}{n_y}\right)^{1/2}
-    $$
-        * $t_{n_x + n_y - 2, 1 - \alpha/2}$ = relevant quantile
-        * $n_x + n_y - 2$ = degrees of freedom 
-        * $S_p\left(\frac{1}{n_x} + \frac{1}{n_y}\right)^{1/2}$ = standard error
-        * $S_p^2 = \{(n_x - 1) S_x^2 + (n_y - 1) S_y^2\}/(n_x + n_y - 2)$ = pooled variance estimator
-            * This is effectively a weighted average between the two variances, such that different sample sizes are taken in to account
-        * ***Note:** this interval assumes **constant variance** across two groups; if variance is different, use the next interval*
+### Confidence Interval - Paired T Tests
+* compare observations for the same subjects over two different sets of data (i.e. different times, different treatments)
+* the confidence interval is defined by $$ \bar X_1 - \bar X_2 \pm \frac{t_{n-1} S}{\sqrt{n}}$$ where $\bar X_1$ represents the first observations and $\bar X_2$ the second set of observations
+* `t.test(difference)` = performs group mean t test and returns metrics as results, which includes the confidence intervals
+	- `t.test(g2, g1, paired = TRUE)` = performs the same paired t test with data directly
+* ***example***
+	- the data used here is for a study of the effects of two soporific drugs (increase in hours of sleep compared to control) on 10 patients
 
-* Independent Group **t** Intervals - Different Variance
-    * Confidence Interval for $\mu_y - \mu_x$ 
-        $$
-        \bar Y - \bar X \pm t_{df} \times \left(\frac{s_x^2}{n_x} + \frac{s_y^2}{n_y}\right)^{1/2}
-        $$
-        * $t_{df}$ = relevant quantile with df as defined below
-        * ***Note**: normalized statistic does not follow t distribution but can be approximated through the formula with df defined below *
+```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
+# load data
+data(sleep)
+# plot the first and second observations
+g <- ggplot(sleep, aes(x = group, y = extra, group = factor(ID)))
+g <- g + geom_line(size = 1, aes(colour = ID)) + geom_point(size =10, pch = 21, fill = "salmon", alpha = .5)
+g
+# define groups
+g1 <- sleep$extra[1 : 10]; g2 <- sleep$extra[11 : 20]
+# define difference 
+difference <- g2 - g1
+# calculate mean and sd of differences
+mn <- mean(difference); s <- sd(difference); n <- 10
+# calculate intervals manually 
+mn + c(-1, 1) * qt(.975, n-1) * s / sqrt(n)
+# perform the same test to get confidence intervals
+t.test(difference)
+t.test(g2, g1, paired = TRUE)
+```
+
+
+### Independent Group **t** Intervals - Same Variance
+* compare two groups in randomized trial ("A/B Testing")
+* cannot use the paired t test because the groups are independent and may have different sample sizes
+* perform randomization to balance unobserved covariance that may otherwise affect the result
+* $t$ confidence interval for $\mu_y - \mu_x$ is defined as $$\bar Y - \bar X \pm t_{n_x + n_y - 2, 1 - \alpha/2}S_p\left(\frac{1}{n_x} + \frac{1}{n_y}\right)^{1/2}$$
+    * $t_{n_x + n_y - 2, 1 - \alpha/2}$ = relevant quantile
+    * $n_x + n_y - 2$ = degrees of freedom 
+    * $S_p\left(\frac{1}{n_x} + \frac{1}{n_y}\right)^{1/2}$ = standard error
+    * $S_p^2 = \{(n_x - 1) S_x^2 + (n_y - 1) S_y^2\}/(n_x + n_y - 2)$ = pooled variance estimator
+        * this is effectively a weighted average between the two variances, such that different sample sizes are taken in to account
+    * ***Note:** this interval assumes **constant variance** across two groups; if variance is different, use the next interval *
+
+### Independent Group **t** Intervals - Different Variance
+* confidence interval for $\mu_y - \mu_x$ is defined as $$\bar Y - \bar X \pm t_{df} \times \left(\frac{s_x^2}{n_x} + \frac{s_y^2}{n_y}\right)^{1/2}$$
+    * $t_{df}$ = relevant quantile with df as defined below
+    * ***Note**: normalized statistic does not follow t distribution but can be approximated through the formula with df defined below *
         * $$df = \frac{\left(S_x^2 / n_x + S_y^2/n_y\right)^2}
         {\left(\frac{S_x^2}{n_x}\right)^2 / (n_x - 1) +
         \left(\frac{S_y^2}{n_y}\right)^2 / (n_y - 1)}$$

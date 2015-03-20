@@ -2,13 +2,13 @@
 title: "R Programming Course Notes"
 author: "Xing Su"
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: 3
   html_document:
     highlight: pygments
     theme: spacelab
     toc: yes
-  pdf_document:
-    toc: yes
-    toc_depth: 3
 ---
 $\pagebreak$
 
@@ -901,9 +901,6 @@ system.time({
 * ***Note**: R must be compiled with profiles support (generally the case)*
 * ***Note**: should NOT be used with system.time()*
 
-
-
-
-`ylim=range(unlist(rss))`
-
-`ls("package:elasticnet")`
+### Miscellaneous
+* `unlist(rss)` = converts a list object into data frame/vector
+* `ls("package:elasticnet")` = list methods in package
