@@ -371,3 +371,25 @@ footer a:hover {
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) { }
+
+.portrait{
+  border-radius: 100px;
+  width: 100px;
+  height: 100px;
+  float: left;
+}
+
+#aboutme{
+  color: #555;
+  margin-left: 120px;
+  margin-top: 20px;
+  vertical-align: baseline;
+}
+
+#aboutme a{
+  color: #ed6800;
+}
+
+#aboutme a:hover{
+  color: #ff8321;
+}
