@@ -593,8 +593,10 @@ Female |    557   |   1278   |
 
 
 ## Editing Text Variables
+* `names(dataframe)` --> access the list of variable names in a data frame
 * `tolower()` --> make all character values lowercase letters 
 * `toupper()` --> make all character values uppercase letters
+    * *example*: `tolower(names(data))` 
 * `strsplit(value, "\\.")` --> splits string into character vector by specified separator
     * ***Note**: `\\` must be added for the reserved operators in R *
 * `sapply(list, function)` --> can specify custom functions to return the part of the character desired
