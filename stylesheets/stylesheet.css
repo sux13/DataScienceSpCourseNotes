@@ -218,23 +218,38 @@ em {
 
 table {
   width: 100%;
-  border: 1px solid #ebebeb;
 }
 
 th {
-  font-weight: 500;
+  font-weight: 900;
+  border-bottom: 2px solid #CCC;
+  padding: 10px;
 }
 
 td {
   font-weight: 300;
   text-align: center;
-  border: 1px solid #ebebeb;
+  padding: 10px;
 }
+
+tbody tr {
+  border-left: 0px;
+  border-right: 0px;
+  border-top: 1px solid #d5d5d5;
+}
+
+tbody tr:hover {
+  background: #DDD;
+}
+
+tbody tr:first-of-type {
+  border-top: none;
+}
+
 
 form {
   padding: 20px;
   background: #f2f2f2;
-
 }
 
 
@@ -381,8 +396,8 @@ footer a:hover {
 
 #aboutme{
   color: #555;
-  margin-left: 120px;
-  margin-top: 20px;
+  padding-left: 120px;
+  margin: 20px;
   vertical-align: baseline;
 }
 
@@ -393,3 +408,4 @@ header h2 a, #aboutme a{
 header h2 a:hover, #aboutme a:hover{
   color: #ff8321;
 }
+
