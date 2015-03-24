@@ -1,144 +1,308 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset='utf-8'>
-		<meta http-equiv="X-UA-Compatible" content="chrome=1">
-		<link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-		<link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-		<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
-		<!--[if lt IE 9]>
-		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		<title>Data Science Specialization Course Notes</title>
-	</head>
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<title>Data Science Specialization Course Notes</title>
+	<meta name="description" content="Comprehensive set of notes for all 9 courses in the Johns Hopkins University/Coursera Data Science Specialization" />
+	<!-- <meta name="og:title" content="Data Science Specialization Course Notes" /> -->
+	<meta name="og:url" content="http://sux13.github.io/DataScienceSpCourseNotes/" />
+	<meta name="og:image" content="https://s3.amazonaws.com/coursera/specializations/jhudatascience/logo.png" />
+	<meta name="og:description" content="Comprehensive set of notes for all 9 courses in the Johns Hopkins University/Coursera Data Science Specialization" />
+	<meta name="og:site_name" content="Data Science Specialization Course Notes" />
+	<!-- <meta name="fb:admins" content="Facebook numeric ID" /> -->
+</head>
 
-	<body>
-		<div id="container">
-			<div class="inner">
+<body>
+	<div id="container">
+		<div class="inner">
+			<header>
+				<h1>Data Science Specialization Course Notes</h1>
+				<h2>
+					Notes for all 9 courses in the <a href="https://www.coursera.org/specialization/jhudatascience/1">Coursera Data Science Specialization</a> from Johns Hopkins University
+				</h2>
+			</header>
 
-<a href="https://github.com/sux13/DataScienceSpCourseNotes"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/8b6b8ccc6da3aa5722903da7b58eb5ab1081adee/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png"></a>
-				<header>
-					<h1>Data Science Specialization Course Notes</h1>
-					<h2>Notes for all 9 courses in the <a href="https://www.coursera.org/specialization/jhudatascience/1">Coursera Data Science Specialization</a> from Johns Hopkins University</h2>
-				</header>
+			<section id="downloads" class="clearfix">
+				<a href="https://github.com/sux13/DataScienceSpCourseNotes/zipball/master" id="download-zip" class="button">
+					<span>Download .zip</span>
+				</a>
+				<a href="https://github.com/sux13/DataScienceSpCourseNotes/tarball/master" id="download-tar-gz" class="button">
+					<span>Download .tar.gz</span>
+				</a>
+				<a href="https://github.com/sux13/DataScienceSpCourseNotes" id="view-on-github" class="button">
+					<span>View on GitHub</span>
+				</a>
+			</section>
 
-				<section id="downloads" class="clearfix">
-					<a href="https://github.com/sux13/DataScienceSpCourseNotes/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-					<a href="https://github.com/sux13/DataScienceSpCourseNotes/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-					<a href="https://github.com/sux13/DataScienceSpCourseNotes" id="view-on-github" class="button"><span>View on GitHub</span></a>
-				</section>
+			<hr>
 
-				<hr>
+			<section id="main_content">
+				<div class="share-button"></div>
+				<script type="text/javascript" src="javascripts/share.min.js"></script>
+				<script>
+					var share = new Share(".share-button", {
+						url: "http://sux13.github.io/DataScienceSpCourseNotes/",
+						// title: "Data Science Specialization Course Notes",
+						description: "Comprehensive set of notes for all 9 courses in the Johns Hopkins University/Coursera Data Science Specialization",
+						img: "https://s3.amazonaws.com/coursera/specializations/jhudatascience/logo.png",
+						networks: {
+						    facebook: {
+						      // enabled: // Enable Facebook. [Default: true]
+						      // load_sdk: // Load the FB SDK. If false, it will default to Facebook's sharer.php implementation. 
+						      //           // NOTE: This will disable the ability to dynamically set values and rely directly on applicable Open Graph tags.
+						      //           // [Default: true]
+						      // url: // the url you'd like to share to Facebook [Default: config.url]
+						      // app_id: // Facebook app id for tracking shares. if provided, will use the facebook API
+						      // title: // title to be shared alongside your link to Facebook [Default: config.title]
+						      // caption: // caption to be shared alongside your link to Facebook [Default: null]
+						      // description:    // text to be shared alongside your link to Facebook [Default: config.description]
+						      image: "https://s3.amazonaws.com/coursera/specializations/jhudatascience/logo.png"
+						    },
+						    pinterest: {
+						      enabled: false
+						      // url:     // the url you'd like to share to Pinterest [Default: config.url]
+						      // image:   // image to be shared to Pinterest [Default: config.image]
+						      // description:    // text to be shared alongside your link to Pinterest [Default: config.description]
+						    },
+						    email: {
+						      // enabled: // Enable Email. [Default: true]
+						      // title:     // the subject of the email [Default: config.title]
+						      // description:    // The body of the email [Default: config.description]
+						    }
+						}
+					});
+				</script>
+				<h1>
+					<a id="datasciencespcoursenotes" class="anchor" href="#datasciencespcoursenotes" aria-hidden="true">
+						<span class="octicon octicon-link"></span>
+					</a>
+					Happy Learning
+				</h1>
+				<a href="https://www.coursera.org/specialization/jhudatascience/1">
+					<img class="datascience" src="https://s3.amazonaws.com/coursera/specializations/jhudatascience/logo.png" alt="Data Science Specialization" width="250px" height="250px"></a>
+				<br>
+				<p>
+					All notes are written in <strong>R Markdown</strong> format and encompass all concepts covered in the <a href="https://www.coursera.org/specialization/jhudatascience/1">Data Science Specialization</a>, as well as additional examples and materials I compiled from lecture, my own exploration, <em>StackOverflow</em>, and <em>Khan Academy</em>.
+				</p>
 
-				<section id="main_content">
-					<h1>
-						<a id="datasciencespcoursenotes" class="anchor" href="#datasciencespcoursenotes" aria-hidden="true">
-							<span class="octicon octicon-link"></span>
-						</a>
-						Happy Learning
-					</h1>
-					<br>
-					<p>
-						All notes are written in <strong>R Markdown</strong> format and encompass all concepts covered in the <a href="https://www.coursera.org/specialization/jhudatascience/1">Data Science Specialization</a>, as well as additional examples and materials I compiled from lecture, my own exploration, <em>StackOverflow</em>, and <em>Khan Academy</em>.
-					</p>
+				<p>
+					They are <em>by no means perfect</em>, but feel free to <a href="https://github.com/sux13"><span class="fa fa-user-plus"></span> follow</a>, <a href="https://github.com/sux13/DataScienceSpCourseNotes/fork"><span class="fa fa-code-fork"></span> fork</a> and/or <a href="https://github.com/sux13/DataScienceSpCourseNotes/pulls"><span class="fa fa-github"></span>  contribute</a>. Please reach out to <a href="mailto:s.xing@me.com">s.xing@me.com</a> if you have any questions.
+				</p>
 
-					<p>
-						They are <em>by no means perfect</em>, but feel free to <a href="https://github.com/sux13"><span class="fa fa-user-plus"></span> follow</a>, <a href="https://github.com/sux13/DataScienceSpCourseNotes/fork"><span class="fa fa-code-fork"></span> fork</a> and/or <a href="https://github.com/sux13/DataScienceSpCourseNotes/pulls"><span class="fa fa-github"></span>  contribute</a>. Please reach out to <a href="mailto:s.xing@me.com">s.xing@me.com</a> if you have any questions.
-					</p>
+				<p>
+					All files are hosted in <a href="https://github.com/sux13/DataScienceSpCourseNotes">this</a> repository.
+				</p>
+				<br>
 
-					<p>
-						All files are hosted in <a href="https://github.com/sux13/DataScienceSpCourseNotes">this</a> repository.
-					</p>
-					<br>
+				<table>
+					<thead>
+						<tr>
+							<th align="center">Course</th>
+							<th align="center">HTML</th>
+							<th align="center">PDF</th>
+							<th align="center">Rmd</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td align="center">The Data Scientist’s Toolbox</td>
+							<td align="center">
+								<a href="1_DATASCITOOLBOX/Data_Scientists_Toolbox_Course_Notes.html">
+									<span class="fa fa-link" title = "HTML"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="1_DATASCITOOLBOX/Data_Scientists_Toolbox_Course_Notes.pdf">
+									<span class="fa fa-file-text" title = "PDF"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="1_DATASCITOOLBOX/Data%20Scientists%20Toolbox%20Course%20Notes.Rmd">
+									<span class="fa fa-file-code-o" title = "Rmd"></span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">R Programming</td>
+							<td align="center">
+								<a href="2_RPROG/R_Programming_Course_Notes.html">
+									<span class="fa fa-link" title = "HTML"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="2_RPROG/R_Programming_Course_Notes.pdf">
+									<span class="fa fa-file-text" title = "PDF"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="2_RPROG/R%20Programming%20Course%20Notes.Rmd">
+									<span class="fa fa-file-code-o" title = "Rmd"></span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">Getting and Cleaning Data</td>
+							<td align="center">
+								<a href="3_GETDATA/Getting_and_Cleaning_Data_Course_Notes.html">
+									<span class="fa fa-link" title = "HTML"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="3_GETDATA/Getting_and_Cleaning_Data_Course_Notes.pdf">
+									<span class="fa fa-file-text" title = "PDF"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="3_GETDATA/Getting%20and%20Cleaning%20Data%20Course%20Notes.Rmd">
+									<span class="fa fa-file-code-o" title = "Rmd"></span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">Exploratory Data Analysis</td>
+							<td align="center">
+								<a href="4_EXDATA/Exploratory_Data_Analysis_Course_Notes.html">
+									<span class="fa fa-link" title = "HTML"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="4_EXDATA/Exploratory_Data_Analysis_Course_Notes.pdf">
+									<span class="fa fa-file-text" title = "PDF"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="4_EXDATA/Exploratory%20Data%20Analysis%20Course%20Notes.Rmd">
+									<span class="fa fa-file-code-o" title = "Rmd"></span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">Reproducible Research</td>
+							<td align="center">
+								<a href="5_REPDATA/Reproducible_Research_Course_Notes.html">
+									<span class="fa fa-link" title = "HTML"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="5_REPDATA/Reproducible_Research_Course_Notes.pdf">
+									<span class="fa fa-file-text" title = "PDF"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="5_REPDATA/Reproducible%20Research%20Course%20Notes.Rmd">
+									<span class="fa fa-file-code-o" title = "Rmd"></span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">Statistical Inference</td>
+							<td align="center">
+								<a href="6_STATINFERENCE/Statistical_Inference_Course_Notes.html">
+									<span class="fa fa-link" title = "HTML"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="6_STATINFERENCE/Statistical_Inference_Course_Notes.pdf">
+									<span class="fa fa-file-text" title = "PDF"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="6_STATINFERENCE/Statistical%20Inference%20Course%20Notes.Rmd">
+									<span class="fa fa-file-code-o" title = "Rmd"></span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">Regression Models</td>
+							<td align="center">
+								<a href = "7_REGMODS/Regression_Models_Course_Notes_HTML.html">
+									<span class="fa fa-link" title = "HTML"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="7_REGMODS/Regression_Models_Course_Notes.pdf">
+									<span class="fa fa-file-text" title = "PDF"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href = "7_REGMODS/Regression%20Models%20Course%20Notes%20HTML.Rmd">
+									<span class="fa fa-file-code-o" title = "Rmd"></span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">Practical Machine Learning</td>
+							<td align="center">
+								<a href="8_PREDMACHLEARN/Practical_Machine_Learning_Course_Notes_HTML.html">
+									<span class="fa fa-link" title = "HTML"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="8_PREDMACHLEARN/Practical_Machine_Learning_Course_Notes.pdf">
+									<span class="fa fa-file-text" title = "PDF"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="8_PREDMACHLEARN/Practical%20Machine%20Learning%20Course%20Notes%20HTML.Rmd">
+									<span class="fa fa-file-code-o" title = "Rmd"></span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td align="center">Developing Data Products</td>
+							<td align="center">
+								<a href="9_DEVDATAPROD/Developing_Data_Products_Course_Notes_HTML.html">
+									<span class="fa fa-link" title = "HTML"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="9_DEVDATAPROD/Developing_Data_Products_Course_Notes.pdf">
+									<span class="fa fa-file-text" title = "PDF"></span>
+								</a>
+							</td>
+							<td align="center">
+								<a href="9_DEVDATAPROD/Developing%20Data%20Products%20Course%20Notes%20HTML.Rmd">
+									<span class="fa fa-file-code-o" title = "Rmd"></span>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<a href="https://github.com/sux13/DataScienceSpCourseNotes">
+				<img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/8b6b8ccc6da3aa5722903da7b58eb5ab1081adee/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png"></a>
+			</section>
 
-<table>
-<thead>
-<tr>
-  <th align="center">Course</th>
-  <th align="center">HTML</th>
-  <th align="center">PDF</th>
-  <th align="center">Rmd</th>
-</tr>
-</thead>
-<tbody><tr>
-  <td align="center">The Data Scientist’s Toolbox</td>
-  <td align="center"><a href="1_DATASCITOOLBOX/Data_Scientists_Toolbox_Course_Notes.html"><span class="fa fa-link" title = "HTML"></span></a></td>
-  <td align="center"><a href="1_DATASCITOOLBOX/Data_Scientists_Toolbox_Course_Notes.pdf"><span class="fa fa-file-text" title = "PDF"></span></a></td>
-  <td align="center"><a href="1_DATASCITOOLBOX/Data%20Scientists%20Toolbox%20Course%20Notes.Rmd"><span class="fa fa-file-code-o" title = "Rmd"></span></a></td>
-</tr>
-<tr>
-  <td align="center">R Programming</td>
-  <td align="center"><a href="2_RPROG/R_Programming_Course_Notes.html"><span class="fa fa-link" title = "HTML"></span></a></td>
-  <td align="center"><a href="2_RPROG/R_Programming_Course_Notes.pdf"><span class="fa fa-file-text" title = "PDF"></span></a></td>
-  <td align="center"><a href="2_RPROG/R%20Programming%20Course%20Notes.Rmd"><span class="fa fa-file-code-o" title = "Rmd"></span></a></td>
-</tr>
-<tr>
-  <td align="center">Getting and Cleaning Data</td>
-  <td align="center"><a href="3_GETDATA/Getting_and_Cleaning_Data_Course_Notes.html"><span class="fa fa-link" title = "HTML"></span></a></td>
-  <td align="center"><a href="3_GETDATA/Getting_and_Cleaning_Data_Course_Notes.pdf"><span class="fa fa-file-text" title = "PDF"></span></a></td>
-  <td align="center"><a href="3_GETDATA/Getting%20and%20Cleaning%20Data%20Course%20Notes.Rmd"><span class="fa fa-file-code-o" title = "Rmd"></span></a></td>
-</tr>
-<tr>
-  <td align="center">Exploratory Data Analysis</td>
-  <td align="center"><a href="4_EXDATA/Exploratory_Data_Analysis_Course_Notes.html"><span class="fa fa-link" title = "HTML"></span></a></td>
-  <td align="center"><a href="4_EXDATA/Exploratory_Data_Analysis_Course_Notes.pdf"><span class="fa fa-file-text" title = "PDF"></span></a></td>
-  <td align="center"><a href="4_EXDATA/Exploratory%20Data%20Analysis%20Course%20Notes.Rmd"><span class="fa fa-file-code-o" title = "Rmd"></span></a></td>
-</tr>
-<tr>
-  <td align="center">Reproducible Research</td>
-  <td align="center"><a href="5_REPDATA/Reproducible_Research_Course_Notes.html"><span class="fa fa-link" title = "HTML"></span></a></td>
-  <td align="center"><a href="5_REPDATA/Reproducible_Research_Course_Notes.pdf"><span class="fa fa-file-text" title = "PDF"></span></a></td>
-  <td align="center"><a href="5_REPDATA/Reproducible%20Research%20Course%20Notes.Rmd"><span class="fa fa-file-code-o" title = "Rmd"></span></a></td>
-</tr>
-<tr>
-  <td align="center">Statistical Inference</td>
-  <td align="center"><a href="6_STATINFERENCE/Statistical_Inference_Course_Notes.html"><span class="fa fa-link" title = "HTML"></span></a></td>
-  <td align="center"><a href="6_STATINFERENCE/Statistical_Inference_Course_Notes.pdf"><span class="fa fa-file-text" title = "PDF"></span></a></td>
-  <td align="center"><a href="6_STATINFERENCE/Statistical%20Inference%20Course%20Notes.Rmd"><span class="fa fa-file-code-o" title = "Rmd"></span></a></td>
-</tr>
-<tr>
-  <td align="center">Regression Models</td>
-  <td align="center"><a href = "7_REGMODS/Regression_Models_Course_Notes_HTML.html"><span class="fa fa-link" title = "HTML"></span></a></td>
-  <td align="center"><a href="7_REGMODS/Regression_Models_Course_Notes.pdf"><span class="fa fa-file-text" title = "PDF"></span></a></td>
-  <td align="center"><a href = "7_REGMODS/Regression%20Models%20Course%20Notes%20HTML.Rmd"><span class="fa fa-file-code-o" title = "Rmd"></span></a></td>
-</tr>
-<tr>
-  <td align="center">Practical Machine Learning</td>
-  <td align="center"><a href="8_PREDMACHLEARN/Practical_Machine_Learning_Course_Notes_HTML.html"><span class="fa fa-link" title = "HTML"></span></a></td>
-  <td align="center"><a href="8_PREDMACHLEARN/Practical_Machine_Learning_Course_Notes.pdf"><span class="fa fa-file-text" title = "PDF"></span></a></td>
-  <td align="center"><a href="8_PREDMACHLEARN/Practical%20Machine%20Learning%20Course%20Notes%20HTML.Rmd"><span class="fa fa-file-code-o" title = "Rmd"></span></a></td>
-</tr>
-<tr>
-  <td align="center">Developing Data Products</td>
-  <td align="center"><a href="9_DEVDATAPROD/Developing_Data_Products_Course_Notes_HTML.html"><span class="fa fa-link" title = "HTML"></span></a></td>
-  <td align="center"><a href="9_DEVDATAPROD/Developing_Data_Products_Course_Notes.pdf"><span class="fa fa-file-text" title = "PDF"></span></a></td>
-  <td align="center"><a href="9_DEVDATAPROD/Developing%20Data%20Products%20Course%20Notes%20HTML.Rmd"><span class="fa fa-file-code-o" title = "Rmd"></span></a></td>
-</tr>
-</tbody></table>
+			<footer>
+				<a href="https://www.linkedin.com/in/suxing/en">
+					<img class = "portrait" alt="Xing Su" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/172/23d/12d2ade.jpg" width="100" height="100"></a>
+				<div id = "aboutme">
+					Xing graduated from Duke University in 2013, worked in consulting in NYC for 16 months, and moved to SF to pursue opportunities in product and data science. You can find him on <a href="https://www.linkedin.com/in/suxing/en">LinkedIn</a>, <a href="https://github.com/sux13">Github</a>, or through <a href="mailto:s.xing@me.com">s.xing@me.com</a>.
+				</div>
+				<br>
+				<br>
+				This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+			</footer>
 
-				</section>
-
-
-
-				<footer>
-					<a href="https://www.linkedin.com/in/suxing/en"><img class = "portrait" alt="Xing Su" src="https://media.licdn.com/mpr/mpr/shrink_100_100/p/4/000/172/23d/12d2ade.jpg" width="100" height="100"></a> <div id = "aboutme"> Xing graduated from Duke University in 2013, worked in consulting in NYC for 16 months, and moved to SF to pursue opportunities in product and data science. You can find him on <a href="https://www.linkedin.com/in/suxing/en">LinkedIn</a>, <a href="https://github.com/sux13">Github</a>, or through <a href="mailto:s.xing@me.com">s.xing@me.com</a>.</div>
-					<br><br>
-					This page was generated by <a href="http://pages.github.com">GitHub Pages</a> . Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-				</footer>
-
-				<script type="text/javascript">
+			<script type="text/javascript">
 					var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 					document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 				</script>
-				<script type="text/javascript">
+			<script type="text/javascript">
 					try {
 						var pageTracker = _gat._getTracker("UA-60505387-1");
 					pageTracker._trackPageview();
 					} catch(err) {}
 				</script>
-			</div>
 		</div>
-	</body>
+	</div>
+</body>
 </html>

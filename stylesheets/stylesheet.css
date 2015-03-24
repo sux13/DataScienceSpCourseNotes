@@ -387,25 +387,52 @@ footer a:hover {
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) { }
 
-.portrait{
+.portrait {
   border-radius: 100px;
   width: 100px;
   height: 100px;
   float: left;
 }
 
-#aboutme{
+#aboutme {
   color: #555;
   padding-left: 120px;
   margin: 20px;
   vertical-align: baseline;
 }
 
-header h2 a, #aboutme a{
+header h2 a, #aboutme a {
   color: #ed6800;
 }
 
-header h2 a:hover, #aboutme a:hover{
+header h2 a:hover, #aboutme a:hover {
   color: #ff8321;
 }
 
+.datascience {
+  margin: 30px;
+  -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1px 3px rgba(0,0,0,.4);
+  -moz-box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1px 3px rgba(0,0,0,.4);
+  box-shadow: inset 0 0 2px rgba(0,0,0,.7), inset 0 2px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(0,0,0,.5), 0 1px 3px rgba(0,0,0,.4);
+  border-radius: 20px;
+  float: right;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.datascience:hover {
+  -webkit-box-shadow: 0 0 20px rgba(255,255,255,.6), inset 0 0 20px rgba(255,255,255,1);
+  -moz-box-shadow: 0 0 20px rgba(255,255,255,.6), inset 0 0 20px rgba(255,255,255,1);
+  box-shadow: 0 0 20px rgba(255,255,255,.6), inset 0 0 20px rgba(255,255,255,1);
+
+  -webkit-border-radius: 125px;
+  -moz-border-radius: 125px;
+  border-radius: 125px;
+}
+
+.share-button {
+  float: right;
+  margin-right: 30px;
+  margin-top: 15px;
+}
