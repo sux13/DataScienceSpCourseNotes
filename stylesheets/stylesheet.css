@@ -56,6 +56,10 @@ body {
   background: #e7e7e7 url(../images/body-bg.png) 0 0 repeat;
 }
 
+.share-button {
+  text-shadow: none;
+}
+
 a {
   color: #3399f3;
 }
@@ -326,7 +330,7 @@ dl dt {
 }
 
 footer {
-  padding-top: 20px;
+  padding-top: 65px;
   padding-bottom: 30px;
   margin-top: 40px;
   font-size: 13px;
@@ -387,11 +391,16 @@ footer a:hover {
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) { }
 
+.vert-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .portrait {
   border-radius: 100px;
   width: 100px;
   height: 100px;
-  float: left;
 }
 
 #aboutme {
