@@ -131,7 +131,7 @@ g
 $\pagebreak$
 
 ### Derivation for Least Squares = Empirical Mean (Finding the Minimum)
-* Let $X_i = **regressor**/**predictor**, and $Y_i =$ **outcome**/**result** so we want to minimize the the squares: $$\sum_{i=1}^n (Y_i - \mu)^2$$
+* Let $X_i =$ **regressor**/**predictor**, and $Y_i =$ **outcome**/**result** so we want to minimize the the squares: $$\sum_{i=1}^n (Y_i - \mu)^2$$
 * Proof is as follows $$
 \begin{aligned}
 \sum_{i=1}^n (Y_i - \mu)^2 & = \sum_{i=1}^n (Y_i - \bar Y + \bar Y - \mu)^2 \Leftarrow \mbox{added}  \pm \bar Y \mbox{which is adding 0 to the original equation}\\
