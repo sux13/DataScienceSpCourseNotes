@@ -335,12 +335,16 @@ grid.raster(readPNG("figures/5.png"))
 * rChart objects have various attributes/functions that you can use when saved `n1 <- nplot(...)`
 	- `n1$` + TAB in R Console brings up list of all functions contained in the object
 	- `n1$html()` = prints out the HTML for the plot
-	- `n1$save(filename)` = embeds code into slidify document
+	- `n1$save("filename.html")` = saves result to a file named "filename.html"
+  - `cat(embeds code into slidify document
 	- `n1$print()` = print out the JavaScript
 	- `n1$show("inline", include_assets = TRUE, cdn = F)` = embed HTML/JS code directly with in Rmd file (for HTML output)
 	- `n1$publish('plotname', host = 'gist'/'rpubs')` = publishes the plot under the specified `plotname` as a `gist` or to `rpubs`
-* to use with ***slidify***, the following YAML (Yet Another Markup Language/YAML Ain't Markup Language) must be added
-	- `yaml ext_widgets : {rCharts: ["libraries/nvd3"]}`
+* to use with ***slidify***, 
+  - the following YAML (Yet Another Markup Language/YAML Ain't Markup Language) must be added
+	  - `yaml ext_widgets : {rCharts: ["libraries/nvd3"]}`
+  - `cat('<iframe src="map3.html" width=100%, height=600></iframe>')` to embed a map or chart form a saved file (saved with: `map3$save('map3.html', cdn = TRUE)`)
+
 
 ### Example
 
