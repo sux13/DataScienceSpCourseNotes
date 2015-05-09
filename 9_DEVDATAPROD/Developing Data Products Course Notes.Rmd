@@ -482,7 +482,7 @@ library(plotly); library(ggplot2)
 # load data
 load("courseraData.rda")
 # bar plot using ggplot2
-g <- ggplot(myData, aes(y = enrollment, x = class, fill = offering))
+g <- ggplot(myData, aes(y = enrollment, x = class, fill = as.factor(offering)))
 g <- g + geom_bar(stat = "identity")
 g
 # initiate plotly object
