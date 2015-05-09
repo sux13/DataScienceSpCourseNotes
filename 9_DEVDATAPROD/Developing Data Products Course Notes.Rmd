@@ -390,6 +390,7 @@ $\pagebreak$
 	- [documentation](http://cran.r-project.org/web/packages/googleVis/googleVis.pdf)
 	- [plot gallery](https://developers.google.com/chart/interactive/docs/gallery)
 	- [FAQ](https://developers.google.com/chart/interactive/faq)
+* can use the pipe operator from magrittr: `mtcars %>% ggvis(~mpg, ~wt, fill = ~ as.factor(am)) %>% layer_points() %>% layer_smooths()`
 
 $\pagebreak$
 
