@@ -214,6 +214,7 @@ grid.raster(readPNG("figures/6.png"))
 $\pagebreak$
 
 ## Receiver Operating Characteristic Curves
+* are commonly used techniques to measure the quality of a prediction algorithm.
 * predictions for binary classification often are quantitative (i.e. probability, scale of 1 to 10)
 	- different cutoffs/threshold of classification (> 0.8 --> one outcome) yield different results/predictions
 	- **Receiver Operating Characteristic** curves are generated to compare the different outcomes
