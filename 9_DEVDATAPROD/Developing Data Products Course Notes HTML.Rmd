@@ -388,7 +388,13 @@ n1$show("inline", include_assets = TRUE, cdn = F)
 	- [documentation](http://cran.r-project.org/web/packages/googleVis/googleVis.pdf)
 	- [plot gallery](https://developers.google.com/chart/interactive/docs/gallery)
 	- [FAQ](https://developers.google.com/chart/interactive/faq)
+* can use the pipe operator from magrittr: `mtcars %>% ggvis(~mpg, ~wt, fill = ~ as.factor(am)) %>% layer_points() %>% layer_smooths()`
 
+```{r, echo=F}
+suppressPackageStartupMessages(library(magrittr))
+suppressPackageStartupMessages(library(ggvis))
+mtcars %>% ggvis(~mpg, ~wt, fill = ~ as.factor(am)) %>% layer_points() %>% layer_smooths()
+```
 
 
 ### Example (line chart)
@@ -469,7 +475,7 @@ library(plotly); library(ggplot2)
 # load data
 load("courseraData.rda")
 # bar plot using ggplot2
-g <- ggplot(myData, aes(y = enrollment, x = class, fill = offering))
+g <- ggplot(myData, aes(y = enrollment, x = class, fill = as.factor(offering)))
 g <- g + geom_bar(stat = "identity")
 g
 # initiate plotly object
