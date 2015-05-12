@@ -641,7 +641,7 @@ grid.raster(readPNG("figures/3.png"))
 * RStudio format/runs the code when the document is saved
 
 ### Creating Presentation
-* file --> New File --> R Presentation (`alt` + `f` + `p`)
+* file --> New File --> R Presentation (`alt-f` + `f` + `p`)
 * `class: classname` = specify slide-specific control from CSS
 * `css: file.css` = can be used to import an external CSS file
 	- alternatively, a css file that has the same name as the presentation will be automatically loaded
