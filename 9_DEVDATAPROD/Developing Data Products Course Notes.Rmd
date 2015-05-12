@@ -608,6 +608,9 @@ mode        : selfcontained # {standalone, draft}
 		+ a page like the one below will be generated when processed with slidify
 
 ```Rmd
+
+--- &radio
+
 ## Question 1
 
 What is 1 + 1?
