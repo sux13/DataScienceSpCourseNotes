@@ -528,7 +528,7 @@ p2 <- qplot(cutWage,age, data=training,fill=cutWage,
 grid.arrange(p1,p2,ncol=2)
 ```
 
-* `table(cutVariable, data$var2)` = tabulates the cut factor variable vs another variable in the dataset
+* `table(cutVariable, data$var2)` = tabulates the cut factor variable vs another variable in the dataset (ie; builds a contingency table using cross-classifying factors)
 * `prop.table(table, margin=1)` = converts a table to a proportion table
 	- `margin=1` = calculate the proportions based on the rows
 	- `margin=2` = calculate the proportions based on the columns
