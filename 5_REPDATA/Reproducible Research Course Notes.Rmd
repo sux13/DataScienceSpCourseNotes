@@ -2,13 +2,14 @@
 title: "Reproducible Research Course Notes"
 author: "Xing Su"
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: 3
   html_document:
     highlight: pygments
     theme: spacelab
     toc: yes
-  pdf_document:
-    toc: yes
-    toc_depth: 3
+header-includes: \usepackage{graphicx}
 ---
 $\pagebreak$
 
@@ -18,10 +19,10 @@ $\pagebreak$
 * particularly important in studies that affect policy
 * HOWEVER, some studies can’t be replicated (time, opportunity, money, unique)
 	* Make research reproducible (making available data/code so others may reproduce analysis)
-	
+
 ## Reproducibility
 * bridges gap between replication and letting the study stand alone
-* take data/code and replicate findings --> validate their findings
+* take data/code and replicate findings $\rightarrow$ validate their findings
 * why we need reproducible research
 	* new technologies increase data throughput while adding complexities and dimension to data
 	* existing databases merged into bigger collection of data
@@ -60,7 +61,7 @@ grid.raster(readPNG("figures/1.jpg"))
 * original idea came from *Don Knuth*
 * statistical analysis is divided into text and code chunks
 	* text explains whats going on
-	* code loads data/computes results 
+	* code loads data/computes results
 	* presentation code formats results (tables, graphics, etc)
 * Literate Programming requires
 	* **documentation language** - [***weave***] produce human-readable docs (HTML/PDF)
@@ -73,25 +74,27 @@ grid.raster(readPNG("figures/1.jpg"))
 		* focus on LaTeX, difficult to learn markup languages
 		* lacks features like caching, multiple plots per chunk, mixing programming languages with many other technical terms
 		* not frequently updated/actively developed
-* **`knitr`** - alternative literate programming package
+* **`knitr`** = alternative literate programming package
 	* R for programming (can use others as well)
 	* LaTeX/HTML/Markdown for documentation
-	* developed by Iowa grad student *Yihui Xie* 
-* Reproducible research = minimum standard for non-replicable/computationally intensive studies
+	* developed by Iowa grad student *Yihui Xie*
+* **reproducible research** = minimum standard for non-replicable/computationally intensive studies
 	* infrastructure still need for creating/distributing reproducible documents
 
 
 
-## Key Challenge in Data Analysis
-* "Ask yourselves, what problem have you solved, ever, that was worth solving, where you knew all of the given information in advance? Where you didn’t have a surplus of information and have to filter it out, or you had insufficient information and have to go find some?” - Dan Myer
 
 ## Structure of Data Analysis
 
+### Key Challenge in Data Analysis
+
+> "Ask yourselves, what problem have you solved, ever, that was worth solving, where you knew all of the given information in advance? Where you didn’t have a surplus of information and have to filter it out, or you had insufficient information and have to go find some?” - ***Dan Myer***
+
 ### Define The Question
 * most powerful dimension reduction tool, narrowing down question reduces noise/simply problem
-* Science --> Data --> Applied Statistics --> Theoretical Statistics
+* Science $\rightarrow$ Data $\rightarrow$ Applied Statistics $\rightarrow$ Theoretical Statistics
 * properly using the combination of science/data/applied statistics = proper data analysis
-* ***example*** 
+* ***example***
 	* general question: Can I automatically detect emails that are SPAM from those that are not?
 	* concrete question: Can I use quantitative characteristics of the emails to classify them as SPAM/HAM?
 
@@ -117,15 +120,15 @@ grid.raster(readPNG("figures/1.jpg"))
 * raw data need to be processed to be fed into modeling program
 * if already processed, need to understand how and understand documentation on how the pre-processing was done
 * understanding source of data (i.e. survey - how survey was done?)
-* may need to reformat/subsample data --> need to record steps
-* determine if data is good enough to solve the problem --> if not, find other data/quit/change question to avoid misleading conclusions 
+* may need to reformat/subsample data $\rightarrow$ need to record steps
+* determine if data is good enough to solve the problem $\rightarrow$ if not, find other data/quit/change question to avoid misleading conclusions
 
 ### Exploratory Data Analysis
 * for the purpose of the SPAM question, data needs to be split into training and test test (Predictive)
 
-```{r}
+```{r warning = F}
 # If it isn't installed, install the kernlab package with install.packages()
-suppressWarnings(library(kernlab))
+library(kernlab)
 data(spam)
 set.seed(3435)
 trainIndicator = rbinom(4601, size = 1, prob = 0.5)
@@ -141,16 +144,17 @@ testSpam = spam[trainIndicator == 0, ]
 * create exploratory plots
 	* `plot(trainSpam$capitalAve ~ trainSpam$type)`
 	* `plot(log10(trainSpam$capitalAve + 1) ~ trainSpam$type)`
-	* because data is skewed --> use log
-	* a lot of zeroes --> +1
+		- because data is skewed $\rightarrow$ use `log`
+		- a lot of zeroes $\rightarrow$ `+1`
 * perform exploratory analysis (clustering)
 	* relationships between predictors
 	* `plot(log10(trainSpam[, 1:4] + 1))`
 		* log transformations diagrams between pairs of variables
-    
+
 ```{r fig.height = 3, fig.width = 3, fig.align='center', echo=FALSE}
 grid.raster(readPNG("figures/2.jpg"))
-```	
+```
+
 * hierarchical cluster analysis (**Dendrogram**) = what words/characteristics tend to cluster together
 	* `hCluster = hclust(dist(t(trainSpam[, 1:57])))`
 		* ***Note**: Dendrograms can be sensitive to skewness in distribution of individual variables, so maybe useful to transform predictor (see below) *
@@ -158,8 +162,8 @@ grid.raster(readPNG("figures/2.jpg"))
 
 ```{r fig.height = 4, fig.width = 6, fig.align='center', echo=FALSE}
 grid.raster(readPNG("figures/3.jpg"))
-```	
- 
+```
+
 ### Statistical Modelling/Prediction
 * should be guided by exploratory analysis
 * exact methods depend on the question of interest
@@ -173,10 +177,8 @@ cvError = rep(NA, 55)
 library(boot)
 for (i in 1:55) {
     # creates formula with one variable and the result
-    lmFormula = reformulate(names(trainSpam)[i], response = "numType") 
-    
+    lmFormula = reformulate(names(trainSpam)[i], response = "numType")
     glmFit = glm(lmFormula, family = "binomial", data = trainSpam)
-
     # cross validated error
     cvError[i] = cv.glm(trainSpam, glmFit, costFunction, 2)$delta[2]
 }
@@ -184,22 +186,18 @@ for (i in 1:55) {
 names(trainSpam)[which.min(cvError)]
 ```
 
-* think about measures/sources of uncertainty 
+* think about measures/sources of uncertainty
 
 ```{r warning = FALSE, cache = TRUE}
 # Use the best model from the group
 predictionModel = glm(numType ~ charDollar,family="binomial",data=trainSpam)
-
 # Get predictions on the test set
 predictionTest = predict(predictionModel,testSpam)
 predictedSpam = rep("nonspam",dim(testSpam)[1])
-
 # Classify as 'spam' for those with prob > 0.5
 predictedSpam[predictionModel$fitted > 0.5] = "spam"
-
 # Classification table
 table(predictedSpam, testSpam$type)
-
 # Error rate
 (61 + 458)/(1346 + 458 + 61 + 449)
 ```
@@ -217,16 +215,16 @@ table(predictedSpam, testSpam$type)
 
 ### Challenge Results
 * good to challenge the whole process/all results you found (because somebody else will)
-	* question --> data source --> processing --> analysis --> conclusion
+	* question $\rightarrow$ data source $\rightarrow$ processing $\rightarrow$ analysis $\rightarrow$ conclusion
 * challenge measures of uncertainty and choices in what to include in the model
 * think about alternative analyses, maybe useful to try in case they produce interesting/better models/predictions
 
 ### Synthesize/Write Up and Results
 * tell coherent story of the most important part of analysis
-* lead with question --> provide context to better understand framework of analysis
+* lead with question $\rightarrow$ provide context to better understand framework of analysis
 	* Can I use quantitative characteristics of the emails to classify them as SPAM/HAM?
 * summarize the analysis into the story
-	* Collected data from UCI -> created training/test sets
+	* Collected data from UCI $\rightarrow$ created training/test sets
 	* Explored relationships
 	* Choose logistic model on training set by cross validation
 	* Applied to test, 78% test set accuracy
@@ -239,8 +237,8 @@ table(predictedSpam, testSpam$type)
 * include well defined figures to help understanding
 
 ### Create Reproducible Code
-* document your analysis as you do them using markdown or knitr 
-	* preserve any R code or written summary in a single document using knitr
+* document your analysis as you do them using markdown or `knitr`
+	* preserve any R code or written summary in a single document using `knitr`
 * ensure all analysis is reproducible (standard that most data analysis are judged on)
 
 
@@ -271,7 +269,7 @@ $\pagebreak$
 		* placed in a separate part of the data analysis directory (separate from final)
 	* **R code**: final scripts
 		* clearly commented - small comments for what/when/why/how, big comment blocks for whole sections to explain what is being done
-		* include processing details for the raw data 
+		* include processing details for the raw data
 		* should pertain to only analyses that appear in in the final write up
 	* **R code**: R markdown files
 		* not necessary or require but useful to summarize parts of analysis
@@ -286,7 +284,7 @@ $\pagebreak$
 		* coherent story from all analysis performed, but does not need to include all analysis performed but only the most important and relevant parts
 		* should include references for statistical methods, software packages, implementation that were used (for reproducibility)
 * **Resources**
-	* [Project template](http://projecttemplate.net/) --> a external R package
+	* [Project template](http://projecttemplate.net/) = a external R package
 	* [Managing a statistical analysis project guidelines and best practices](http://www.r-statistics.com/2010/09/managing-a-statistical-analysis-project-guidelines-and-best-practices/)
 
 
@@ -300,23 +298,23 @@ $\pagebreak$
 
 
 ## Markdown ([documentation](http://daringfireball.net/projects/markdown/syntax))
-* Markdown = text-to-HTML conversion tool for web writers. 
+* Markdown = text-to-HTML conversion tool for web writers.
 	* simplified version of markup language
 	* write using easy-to-read, easy-to-write plain text format
 	* any text editor can create markdown document
 	* convert the text to structurally valid XHTML/HTML
 	* created by John Gruber
-* **italics** --> `*text*`
-* **bold** --> `**text**`
-* **main heading** --> `#Heading`
-* **secondary heading** --> `##Heading`
-* **tertiary main heading** --> `###Heading` 
-* **unordered list** --> `- first element`
-* **ordered list** --> `1. first element`
+* **italics** = `*text*`
+* **bold** = `**text**`
+* **main heading** = `#Heading`
+* **secondary heading** = `##Heading`
+* **tertiary main heading** = `###Heading`
+* **unordered list** = `- first element`
+* **ordered list** = `1. first element`
 	* the number in front actually doesn’t matter, as long as there is a number there, markdown will be compiled to an ordered list (no need for renumbering)
-* **links** --> `[text](url)`
-	* OR `[text][1]` --> `[1]: url "text"` 
-* **new lines** --> requires a ***double space*** after the end of a line
+* **links** = `[text](url)`
+	* OR `[text][1]` $\rightarrow$ later in the document, define all of the links in this format: `[1]: url "text"`
+* **new lines** = requires a ***double space*** after the end of a line
 
 
 
@@ -325,7 +323,7 @@ $\pagebreak$
 	* allows creating documents containing "live" R code
 	* R code is evaluated as a part of the processing of the markdown
 	* results from R code inserted into markdown document
-	* core tool for literate statistical programming 
+	* core tool for literate statistical programming
 	* **pros**
 		* text/code all in one place in logical order
 		* data/results automatically updated to reflect external changes
@@ -342,81 +340,89 @@ $\pagebreak$
 	* evaluates R markdown documents and return/records the results, and write out a Markdown files
 	* Markdown file can then be converted into HTML using markdown package
 	* solidify package converts R markdown into presentation slides
-* In RStudio, create new R Markdown files by clicking New --> R Markdown
-	* `========` --> indicates title of document (large text)
-	* `$expression$` --> indicates LaTeX expression/formatting
-	* \``text`\` --> changes text to code format (typewriter font)
-	* \`\`\``{r name, echo = FALSE, results = hide}...`\`\`\` --> R code chunk
+* In RStudio, create new R Markdown files by clicking New $\rightarrow$ R Markdown
+	* `========` = indicates title of document (large text)
+	* `$expression$` = indicates LaTeX expression/formatting
+	* \``text`\` = changes text to code format (typewriter font)
+	* \`\`\``{r name, echo = FALSE, results = hide}...`\`\`\` = R code chunk
 		* `name` = name of the code chunk
-		* `echo = FALSE` --> turns off the echo of the R code chunk, which means display only the result
-		* ***Note**: by default code in code chunk is echoed --> print code AND results*
-		* `results = hide` --> hides the results from being placed in the markdown document
+		* `echo = FALSE` = turns off the echo of the R code chunk, which means display only the result
+		* ***Note**: by default code in code chunk is echoed = print code AND results *
+		* `results = hide` = hides the results from being placed in the markdown document
 	* inline text computations
-		* \``r` `variable`\`--> prints the value of that variable directly inline with the text
+		* \``r` `variable`\` = prints the value of that variable directly inline with the text
 	* incorporating graphics
-		* \`\`\``{r scatterplot, fig.height = 4, fig.width = 6} ... plot() ... `\`\`\` --> inserts a plot into markdown document
+		* \`\`\``{r scatterplot, fig.height = 4, fig.width = 6} ... plot() ... `\`\`\` = inserts a plot into markdown document
 			* `scatterplot` = name of this code chunk (can be anything)
-			* `fig.height = 4` --> adjusts height of the figure, specifying this alone will produce a rectangular plot rather than a square one by default
-			* `fig.width = 6` --> adjusts width of the figure
+			* `fig.height = 4` = adjusts height of the figure, specifying this alone will produce a rectangular plot rather than a square one by default
+			* `fig.width = 6` = adjusts width of the figure
 		* knitr produces HTML, with the image embedded in HTML using base64 encoding
 			* does not depend on external image files
 			* not efficient but highly transportable
 	* incorporating tables (xtable package: `install.packages("xtable")`)
 		* `xtable`prints the table in html format, which is better presented than plain text normally
 
-```{r showtable, results = "asis"} 
+```{r showtable, results = "asis", fig.align = 'center'}
 library(datasets)
 library(xtable)
 fit <- lm(Ozone ~ Wind + Temp + Solar.R, data = airquality)
 xt <- xtable(summary(fit))
-print(xt)
+print(xt, "html")
 ```
 
-* setting global options
-	* \`\`\``{r setoptions, echo = FALSE} opt_chunk$set(echo = FALSE, results = "hide")`\`\`\` --> sets the default option to not print the code/results unless otherwise specified
-* common options
+* **setting global options**
+	* \`\`\``{r setoptions, echo = FALSE} opt_chunk$set(echo = FALSE, results = "hide")`\`\`\` = sets the default option to not print the code/results unless otherwise specified
+* **common options**
 	* **output**: `results = "asis"` OR `"hide"`
-		* `"asis"` = output to stay in original format and not compiled into HTML 
+		* `"asis"` = output to stay in original format and not compiled into HTML
 	* **output**: `echo = TRUE` OR `FALSE`
 	* **figures**: `fig.height = numeric`
 	* **figures**: `fig.width = numeric`
-* caching computations
+* **caching computations**
 	* add argument to code chunk: `cache = TRUE`
 	* computes and stores result of code the first time it is run, and calls the stored result directly from file for each subsequent call
 	* useful for complex computations
 	* caveats:
 		* if data/code changes, you will need to re-run cached code chunks
-		* dependencies not checked explicitly (changes in other parts of the code --> need to re-run the cached code)
+		* dependencies not checked explicitly (changes in other parts of the code $\rightarrow$ need to re-run the cached code)
 		* if code does something outside of the document (i.e. produce a png file), the operation cannot be cached
 * **"Knit HTML"** button to process the document
 	* alternatively, when not in RStudio, the process can be accomplished through the following
-	`library(knitr); setwd(<working directory>); knit2html("document.Rmd"); browseURL("document.html")`
+
+```r
+library(knitr)
+setwd(<working directory>)
+knit2html("document.Rmd")
+browseURL("document.html")
+```
+
 * processing of `knitr` documents
-	* author drafts R Markdown (.Rmd) --> `knitr` processes file to Markdown (.md) --> `knitr` converts file to HTML
-	* ***Note**: author should NOT edit/save the .md or .mtml document until you are done with the document *
+	* author drafts R Markdown (.Rmd) $\rightarrow$ `knitr` processes file to Markdown (.md) $\rightarrow$ `knitr` converts file to HTML
+	* ***Note**: author should NOT edit/save the .md or .html document until you are done with the document *
+
 
 $\pagebreak$
 
 ## Communicating Results
 * when presenting information, it is important to breakdown results of an analysis into different levels of granularity/detail
-* below are listed in order of ***least --> most specific***
+* below are listed in order of ***least $\rightarrow$ most specific***
 
-### Hierarchy of Information - Research Paper 
-* _title/author list_ --> description of topic covered
-* _abstract_ --> a few hundred words about the problem, motivation, and solution
-* _body/results_ --> detailed methods, results, sensitivity analysis, discussion/implication of findings
-* _supplementary material_ --> granular details about analysis performed and method used
-* _code/detail_ --> material to reproduce analysis/finding
+### Hierarchy of Information - Research Paper
+* **title/author list** = description of topic covered
+* **abstract** = a few hundred words about the problem, motivation, and solution
+* **body/results** = detailed methods, results, sensitivity analysis, discussion/implication of findings
+* **supplementary material** = granular details about analysis performed and method used
+* **code/detail** = material to reproduce analysis/finding
 
 ### Hierarchy of Information - Email Presentation
-* _subject line/sender_ --> must have, should be concise/descriptive, summarize findings in one sentence if possible
-* _email body_ --> should be 1-2 paragraphs, brief description of problem/context, summarize findings/results
+* **subject line/sender** = must have, should be concise/descriptive, summarize findings in one sentence if possible
+* **email body** = should be 1-2 paragraphs, brief description of problem/context, summarize findings/results
 	- If action needs to be taken, suggest some options and make them as concrete as possible
 	- If questions need to be addressed, try to make them yes/no
-* _attachment(s)_ --> R Markdown/report containing more details, should still stay concise (not pages of code)
-* _links to supplementary materials_ --> GitHub/web link to code, software, data
+* **attachment(s)** = R Markdown/report containing more details, should still stay concise (not pages of code)
+* **links to supplementary materials** = GitHub/web link to code, software, data
 
-### [RPubs](http://rpubs.com/)
+### RPubs ([link](http://rpubs.com/))
 * built-in service with RStudio and works seamlessly with `knitr`
 * after kniting the R Markdown file in HTML, you can click on **Publish** to publish the HTML document on RPubs
 * _**Note**: all publications to RPups are publicly available immediately_
@@ -446,7 +452,7 @@ $\pagebreak$
 	- worthwhile to automate all tasks through script/programming
 	- code = precise instructions to process/analyze data
 	- teaching the computer almost guarantee's reproducibility
-	- `download.file("url", "filename")` --> convenient way to download file
+	- `download.file("url", "filename")` = convenient way to download file
 		+ full URL specified (instead series of links/clicks)
 		+ name of file specified
 		+ directory specified
@@ -457,33 +463,33 @@ $\pagebreak$
 	- helps to slow down
 		+ forces the author to think about changes made and commit changes and keep track of analysis performed
 	- helps to keep track of history/snapshots
-	- allows reverting to old versions 
+	- allows reverting to old versions
 
 * ***keep track of software environment***
 	- some tools/datasets may only work on certain software/environment
 		+ software and computing environment are critical to reproducing analysis
 		+ everything should be documented
-	- _computer architecture_: CPU (Intel, AMD, ARM), GPUs, 32 vs 64bit
-	- _operating system_: Windows, Mac OS, Linux/Unix
-	- _software toolchain_: compilers, interpreters, command shell, programming languages (C, Perl, Python, etc.), database backends, data analysis software
-	- _supporting software/infrastructure_: Libraries, R packages, dependencies
-	- _external dependencies_: web sites, data repositories (data source), remote databases, software repositories
-	- _version numbers_: ideally, for everything (if available)
+	- **computer architecture**: CPU (Intel, AMD, ARM), GPUs, 32 vs 64bit
+	- **operating system**: Windows, Mac OS, Linux/Unix
+	- **software toolchain**: compilers, interpreters, command shell, programming languages (C, Perl, Python, etc.), database backends, data analysis software
+	- **supporting software/infrastructure**: Libraries, R packages, dependencies
+	- **external dependencies**: web sites, data repositories (data source), remote databases, software repositories
+	- **version numbers**: ideally, for everything (if available)
 	- `sessionInfo()` = prints R version, operating system, local, base/attached/utilized packages
 
 * ***set random number generator seed***
 	- random number generators produce pseudo-random numbers based on initial seed (usually number/set of numbers)
 		+ `set.seed()` can be used to specify seet for random generator in R
 	- setting seed allows stream of random numbers to be reproducible
-	- whenever you need to generate steam of random numbers for non-trivial purpose (i.e. simulations, Markov Chain Monte Carlo analysis), **always** set the seed.
+	- whenever you need to generate steam of random numbers for non-trivial purpose (i.e. simulations, Markov Chain Monte Carlo analysis), ***always*** set the seed.
 
 * ***think about entire pipeline***
 	- data analysis is length process, important to ensure each piece is reproducible
 		+ final product is important, but the process is just as important
-	- raw data --> processed data --> analysis --> report
+	- raw data $\rightarrow$ processed data $\rightarrow$ analysis $\rightarrow$ report
 	- the more of the pipeline that is made reproducible, the more credible the results are
 
-### Don'ts 
+### Don'ts
 * ***do things by hand***
 	- may lead to unreproducible results
 		+ edit spreadsheets using Excel
@@ -516,7 +522,7 @@ $\pagebreak$
 ## Replication vs Reproducibility
 * **Replication**
 	- focuses on validity of scientific claim
-	- if a study states "if X is related to Y" then we ask "is the claim true?" 
+	- if a study states "if X is related to Y" then we ask "is the claim true?"
 	- need to reproduce results with new investigators, data, analytical methods, laboratories, instruments, etc.
 	- particularly important in studies that can impact broad policy or regulatory decisions
 	- stands as **ultimate standard** for strengthening scientific evidence
@@ -529,9 +535,9 @@ $\pagebreak$
 	- arguably a **minimum standard** for any scientific study
 
 ### Background and Underlying Trend for Reproducibility
-* some studies cannot be replicated (money/time/unique/opportunistic) --> 25 year studies in epidemiology
+* some studies cannot be replicated (money/time/unique/opportunistic) $\rightarrow$ 25 year studies in epidemiology
 * technology increases rate of collection/complexity of data
-* existing databases merged to become bigger databases (sometimes used off-label) --> administrative data used in health studies
+* existing databases merged to become bigger databases (sometimes used off-label) $\rightarrow$ administrative data used in health studies
 * computing power allows for more sophisitcated analyses
 * "computational" fields are ubiquitous
 * all of the above leads to the following
@@ -543,9 +549,9 @@ $\pagebreak$
 
 
 ### Problems with Reproducibility
-* aiming for reproducibility provides for 
+* aiming for reproducibility provides for
 	- transparency of data analysis
-		+ check validity of analysis--> people check each other --> "self-correcting" community
+		+ check validity of analysis $\rightarrow$ people check each other $\rightarrow$ "self-correcting" community
 		+ re-run the analysis
 		+ check the code for bugs/errors/sensitivity
 		+ try alternate approaches
@@ -568,8 +574,8 @@ $\pagebreak$
 		+ _key question_: "Are short-term changes in pollution associated with short-term changes in a population health outcome?"
 		+ long history of statistical research investigating proper methods of analysis
 		+ pipeline
-			1. check for outliers, high leverage, overdispersion --> skewedness of data
-			2. Fill in missing data? --> NO! (systematic missing data, imputing would add noise) 	
+			1. check for outliers, high leverage, overdispersion $\rightarrow$ skewedness of data
+			2. Fill in missing data? $\rightarrow$ NO! (systematic missing data, imputing would add noise)
 			3. model selection: estimate degrees of freedom to adjust for unmeasured confounding variables
 			4. multiple lag analysis
 			5. sensitivity analysis with respect to unmeasured confounder adjustment/influential points
@@ -581,20 +587,20 @@ $\pagebreak$
 
 ## Caching Computations
 * Literate (Statistical) Programming
-	- paper/code chunks --> database/cached computations --> published report
+	- paper/code chunks $\rightarrow$ database/cached computations $\rightarrow$ published report
 
-```{r fig.height = 5, fig.width = 7, echo=FALSE}
+```{r fig.height = 5, fig.width = 7, fig.align = "center", echo=FALSE}
 grid.raster(readPNG("figures/4.png"))
-```	
+```
 
 ### `cacher` Package
 * evaluates code in files and stores intermediate results in a key-value database
 * R expressions are given ***SHA-1 hash values*** so changes can be tracked and code can be re-evaluated if necessary
 * **cacher packages**
 	- used by authors to create data analyses packages for distribution
-	- used by readers to clone analysis and inspect/evaluate subset of code/data objects --> readers may not have resources/want to see entire analysis
+	- used by readers to clone analysis and inspect/evaluate subset of code/data objects $\rightarrow$ readers may not have resources/want to see entire analysis
 * **conceptual model**
-	- dataset/code --> source file --> result
+	- dataset/code $\rightarrow$ source file $\rightarrow$ result
 * **process for authors**
 	- `cacher` package parses R source files and creates necessary cache directories/subdirectories
 	- if expression = never evaluated
@@ -621,7 +627,7 @@ grid.raster(readPNG("figures/4.png"))
 			* using the first 4 characters is generally enough to identify
 		+ `showfiles()` = lists R scripts available in cache
 		+ `sourcefile("name.R")` = loads cached R file
-		+ `code()` = prints the content of the R file line by line 
+		+ `code()` = prints the content of the R file line by line
 		+ `graphcode()` = plots a graph to demonstrate dependencies/structure of code
 		+ `objectcode("object")` = shows lines of code that were used to generate that specific object (tracing all the way back to reading data)
 		+ `runcode()` = executes code by loading data from cached database (much faster than regular)
@@ -646,23 +652,23 @@ showfiles() # show files stored in cache
 sourcefile("top20.R") # load R script
 
 code() # examine the content of the code
-# output: 
+# output:
 # source file: top20.R
 # 1  cities <- readLines("citylist.txt")
 # 2  classes <- readLines("colClasses.txt")
-# 3  vars <- c("date", "dow", "death", 
+# 3  vars <- c("date", "dow", "death",
 # 4  data <- lapply(cities, function(city) {
 # 5  names(data) <- cities
 # 6  estimates <- sapply(data, function(city) {
 # 7  effect <- weighted.mean(estimates[1,
 # 8  stderr <- sqrt(1/sum(1/estimates[2,
 
-graphcode() # generate graph showing structure of code 
+graphcode() # generate graph showing structure of code
 ```
 
 ```{r fig.height = 5, fig.width = 4, fig.align = 'center', echo=FALSE}
 grid.raster(readPNG("figures/5.png"))
-```	
+```
 
 ```r
 objectcode(“data”)
@@ -681,8 +687,8 @@ objectcode(“data”)
 loadcache()
 ls()
 # output:
-# [1] "cities"    "classes" 	"data"      "effect"  
-# [5] "estimates" "stderr" 		"vars" 
+# [1] "cities"    "classes" 	"data"      "effect"
+# [5] "estimates" "stderr" 		"vars"
 
 cities
 # output:
@@ -716,23 +722,24 @@ $\pagebreak$
 
 ```{r fig.height = 2, fig.width = 6, fig.align = 'center', echo=FALSE}
 grid.raster(readPNG("figures/6.png"))
-```	
+```
 
 ### Analysis: Does Nickel Make PM Toxic?
-* Long-term average nickel concentrations appear correlated with PM risk ($p < 0.01$ --> statistically significant)
-* there appear to be some outliers on the right-hand side (New York City) 
+* Long-term average nickel concentrations appear correlated with PM risk ($p < 0.01$ $\rightarrow$ statistically significant)
+* there appear to be some outliers on the right-hand side (New York City)
 	- adjusting the data by removing the New York counties altered the regression line (shown in blue)
 	- though the relationship is still positive, regression line no longer statistically significant ($p < 0.31$)
 
 ```{r fig.height = 4, fig.width = 4, fig.align = 'center', echo=FALSE}
 grid.raster(readPNG("figures/7.png"))
-```	
+```
 
 * sensitivity analysis shows that the regression line is particularly sensative to the New York data
 
 ```{r fig.height = 4, fig.width = 4, fig.align = 'center', echo=FALSE}
 grid.raster(readPNG("figures/8.png"))
-```	
+```
+
 ### Conclusions and Lessons Learnt
 
 * New York havs very high levels of nickel and vanadium, much higher than any other US community
@@ -750,7 +757,8 @@ $\pagebreak$
 
 ```{r fig.height = 2, fig.width = 6, fig.align = 'center', echo=FALSE}
 grid.raster(readPNG("figures/9.png"))
-```    
+```
+
 * Potti _et al._ published in 2006 that microarray data from cell lines (the NCI60) can be used to define drug response "signatures", which can be used to predict whether patients will respond
 * however, analysis performed were fundamentally flawed as there exist much misclassification and mishandling of data and were unreproducible
 * the results of their study, even after being corrected twice, still contained many errors and were unfortunately used as guidelines for clinical trials

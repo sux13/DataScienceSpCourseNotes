@@ -2,13 +2,13 @@
 title: "R Programming Course Notes"
 author: "Xing Su"
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: 3
   html_document:
     highlight: pygments
     theme: spacelab
     toc: yes
-  pdf_document:
-    toc: yes
-    toc_depth: 3
 ---
 $\pagebreak$
 
@@ -26,7 +26,7 @@ $\pagebreak$
     * 1993     first announcement of R to public
     * 1995     Martin Machler convinces founders to use GNU General Public license to make R free
     * 1996     public mailing list created R-help and R-devel
-    * 1997     R Core Group formed 
+    * 1997     R Core Group formed
     * 2000     R v1.0.0 released
 * **R Features**
     * Syntax similar to S, semantics similar to S, runs on any platforms, frequent releasees
@@ -34,7 +34,7 @@ $\pagebreak$
     * useful for interactive work, powerful programming language
     * active user community and ***FREE*** (4 freedoms)
          * freedom to run the program
-         * freedom to study how the program works and adapt it 
+         * freedom to study how the program works and adapt it
          * freedom to redistribute copies
          * freedom to improve the program
 * **R Drawbacks**
@@ -47,7 +47,7 @@ $\pagebreak$
     * functionality divided into different packages
          * **base R** contains core functionality and fundamental functions
          * other utility packages included in the base install: `util`, `stats`, `datasets`, ...
-         * Recommended packages: boot class, KernSmooth, etc 
+         * Recommended packages: `bootclass`, `KernSmooth`, etc
     * 5000+ packages available
 
 $\pagebreak$
@@ -64,8 +64,8 @@ $\pagebreak$
 * `setwd()` = set current working directory
 * `?function` = brings up help for that function
 * `dir.create("path/foldername", recursive = TRUE)` = create directories/subdirectories
-* `unlink(directory, recursive = TRUE)` = delete directory and subdirectories``
-* `ls()` = list all objects in the local workspace 
+* `unlink(directory, recursive = TRUE)` = delete directory and subdirectories
+* `ls()` = list all objects in the local workspace
 * `list.files(recursive = TRUE)` = list all, including subdirectories
 * `args(function)` = returns arguments for the function
 * `file.create("name")` = create file
@@ -82,13 +82,13 @@ $\pagebreak$
 * `#` = comment
 * expression is evaluated after hitting `enter` and result is returned
 * autoprinting occurs when you call a variable
-    * print(x) = explicitly printing
+    * `print(x)` = explicitly printing
 * `[1]` at the beginning of the output = which element of the vector is being shown
 
 $\pagebreak$
 
 ## R Objects and Data Structures
-* 5 basic/**atomic classes** of objects: 
+* 5 basic/**atomic classes** of objects:
     1. character
     2. numeric
     3. integer
@@ -96,7 +96,7 @@ $\pagebreak$
     5. logical
 * **Numbers**
     * numbers generally treated as `numeric` objects (double precision real numbers - decimals)
-    * Integer objects can be created by adding `L` to the end of a number(ex. 1L)
+    * Integer objects can be created by adding `L` to the end of a number(ex. `1L`)
     * `Inf` = infinity, can be used in calculations
     * `NaN` = not a number/undefined
     * `sqrt(value)` = square root of value
@@ -108,27 +108,27 @@ $\pagebreak$
     * `vector <- c(value1, value2, …)` = creates a vector with specified values
     * `vector1*vector2` = element by element multiplication (rather than matrix multiplication)
         * if the vectors are of different lengths, shorter vector will be recycled until the longer runs out
-        * computation on vectors/between vectors (+, -, ==, /, etc.) are done element by element by default
+        * computation on vectors/between vectors (`+`, `-`, `==`, `/`, etc.) are done element by element by default
         * `%*%` = force matrix multiplication between vectors/matrices
     * `vector("class", n)` = creates empty vector of length n and specified class
-        - `vector("numeric", 3)` = creates 0 0 0 
+        - `vector("numeric", 3)` = creates 0 0 0
 * `c()` = concatenate
-    * `T, F` = shorthand for TRUE and FALSE
+    * `T, F` = shorthand for `TRUE` and `FALSE`
     * `1+0i` = complex numbers
 * **explicit coercion**
     * `as.numeric(x)`, `as.logical(x)`, `as.character(x)`, `as.complex(x)` = convert object from one class to another
-    * nonsensible coercion will result in NA (ex. as.numeric(c("a", "b"))
+    * nonsensible coercion will result in NA (ex. `as.numeric(c("a", "b")`)
     * `as.list(data.frame)` = converts a `data.frame` object into a `list` object
-    * `as.characters(list)` = converts list into a character vector
-* **implicit coercion** 
+    * `as.character(list)` = converts list into a character vector
+* **implicit coercion**
     * matrix/vector can only contain one data type, so when attempting to create matrix/vector with different classes, forced coercion occurs to make every element to same class
         * *least common denominator* is the approach used (basically everything is converted to a class that all values can take, numbers --> characters) and *no errors generated*
         * coercion occurs to make every element to same class (implicit)
         - `x <- c(NA, 2, "D")` will create a vector of character class
 * `list()` = special vector wit different classes of elements
     - `list` = vector of objects of different classes
-    * elements of list use [[]], elements of other vectors use []
-* **logical vectors** = contain values `TRUE`, `FALSE`, and `NA`, values are generated as result of logical conditions comparing two objects/values 
+    * elements of list use `[[]]`, elements of other vectors use `[]`
+* **logical vectors** = contain values `TRUE`, `FALSE`, and `NA`, values are generated as result of logical conditions comparing two objects/values
 * `paste(characterVector, collapse = " ")` = join together elements of the vector and separating with the `collapse` parameter
 * `paste(vec1, vec2, sep = " ")` = join together different vectors and separating with the `sep` parameter
     * ***Note**: vector recycling applies here too*
@@ -139,7 +139,7 @@ $\pagebreak$
 * `matrix` can contain **only 1** type of data
 * `data.frame` can contain **multiple**
 * `matrix(values, nrow = n, ncol = m)` = creates a n by m matrix
-    * constructed **COLUMN WISE** --> the elements are placed into the matrix from top to bottom for each column, and by column from left to right 
+    * constructed **COLUMN WISE** --> the elements are placed into the matrix from top to bottom for each column, and by column from left to right
     * matrices can also be created by adding the dimension attribute to vector
         * `dim(m) <- c(2, 5)`
     * matrices can also be created by binding columns and rows
@@ -176,11 +176,11 @@ x
     * objects can have attributes: `names`, `dimnames`, `row.names`, `dim` (matrices, arrays), `class`, `length`, or any user-defined ones
     * `attributes(obj)`, `class(obj)` = return attributes/class for an R object
     * `attr(object, "attribute") <- "value"` = creates/assigns a value to a new/existing attribute for the object
-    * **`names` attribute**
+    * `names` attribute
         * all objects can have names
-        * `names(x)` = returns names (NULL if no name exists)
+        * `names(x)` = returns names (`NULL` if no name exists)
             * `names(x) <- c("a", …)` = can be used to assign names to vectors
-        * `lists(a = 1, b = 2, …)` = a, b are names 
+        * `list(a = 1, b = 2, …)` = `a`, `b` are names
         * `dimnames(matrix) <- list(c("a", "b"), c("c" , "d"))` = assign names to matrices
             * use list of two vectors: row, column in that order
     * `colnames(data.frame)` = return column names (can be used to set column names as well, similar to `dim()`)
@@ -201,7 +201,7 @@ x
     - `x <- rnorm(20); dim(x) <- c(2, 2, 5)` = converts a 20 element vector to a 2x2x5 array
 
 ### Factors
-* Factors are used to represent categorical data (integer vector where each value has a label)
+* factors are used to represent *categorical data* (integer vector where each value has a label)
 * 2 types: **unordered** vs **ordered**
 * treated specially by `lm()`, `glm()`
 * Factors easier to understand because they self describe (vs. 1 and 2)
@@ -213,21 +213,21 @@ x
 
 $\pagebreak$
 
-## Missing Values          
+## Missing Values
 * `NaN` or `NA` = missing values
     * `NaN` = undefined mathematical operations
     * `NA` = any value not available or missing in the statistical sense
         -  any operations with `NA` results in `NA`
         -  NA can have different classes potentially (integer, character, etc)
     * ***Note**: NaN is an NA value, but NA is not NaN*
-* `is.na(), is.nan()` = use to test if each element of the vector is NA and NaN
-    * ***Note**: cannot compare NA (with ==) as it is not a value but a **placeholder** for a quantity that is not available*    
+* `is.na()`, `is.nan()` = use to test if each element of the vector is `NA` and `NaN`
+    * ***Note**: cannot compare `NA` (with `==`) as it is not a value but a **placeholder** for a quantity that is not available*
 * `sum(my_na)` = sum of a logical vector (`TRUE` = 1 and `FALSE` = 0) is effectively the number of `TRUE`s
 
-* **Removing NA Values**
-    * `is.na()` = creates logical vector where T is where value exists, F is NA
+* **Removing `NA` Values**
+    * `is.na()` = creates logical vector where T is where value exists, F is `NA`
         * subsetting with the above result can return only the non NA elements
-    * `complete.cases(obj1, obj2)` = creates logical vector where `TRUE` is where both values exist, and `FALSE` is where any is NA
+    * `complete.cases(obj1, obj2)` = creates logical vector where `TRUE` is where both values exist, and `FALSE` is where any is `NA`
         * can be used on data frames as well
         * `complete.cases(data.frame)` = creates logical vectors indicating which observation/row is good
         * `data.frame[logicalVector, ]` = returns all observations with complete data
@@ -255,7 +255,7 @@ $\pagebreak$
 * R uses **one based index** --> starts counting at $1$
     * `x[0]` returns `numeric(0)`, not error
     * `x[3000]` returns `NA` (not out of bounds/error)
-* `[]` = always returns object of same class, can select more than one element of an object [1;2]
+* `[]` = always returns object of same class, can select more than one element of an object (ex. `[1:2]`)
 * `[[]]` = can extract one element from list or data frame, returned object not necessarily list/dataframe
 * `$` = can extract elements from list/dataframe that have names associated with it, not necessarily same class
 
@@ -277,37 +277,37 @@ $\pagebreak$
 * `x <- list(foo = 1:4, bar = 0.6)`
 * `x[1]` or `x["foo"]` = returns the list object `foo`
 * `x[[2]]` or `x[["bar"]]` or `x$bar` = returns the content of the second element from the list (in this case vector without name attribute)
-* `x[c(1, 3)]` = extract multiple elements of list ([[]] 
-    * ***Note**: `$` can’t extract multiple*
-* `x[[name]]` = extract using variable, where as $ must match name of element
+    * ***Note**: `$` can’t extract multiple elements *
+* `x[c(1, 3)]` = extract multiple elements of list
+* `x[[name]]` = extract using variable, where as `$` must match name of element
 * `x[[c(1, 3)]]` or `x[[1]][[3]]` = extracted nested elements of list third element of the first object extracted from the list
 
 ### Matrices
-* `x[1, 2]` = extract the (row, column) element   
+* `x[1, 2]` = extract the (row, column) element
     * `x[,2]` or `x[1,]` = extract the entire column/row
 * `x[ , 11:17]` = subset the x `data.frame` with all rows, but only 11 to 17 columns
 * when an element from the matrix is retrieved, a vector is returned
-    * behavior can be turned off (force return a matrix) by adding `drop = FALSE` 
+    * behavior can be turned off (force return a matrix) by adding `drop = FALSE`
         * `x[1, 2, drop = F]`
 
-### Partial Matching 
+### Partial Matching
 * works with `[[]]` and `$`
 * `$` automatically partial matches the name (`x$a`)
 * `[[]]` can partial match by adding exact = `FALSE`
-    * x[["a", exact = false]]
+    * `x[["a", exact = false]]`
 
 $\pagebreak$
 
 ## Logic
-* `<`, `>=` --> less than, greater or equal to
-* `==` --> exact equality
-* `!=` --> inequality
+* `<`, `>=` = less than, greater or equal to
+* `==` = exact equality
+* `!=` = inequality
 * `A | B` = union
 * `A & B` = intersection
-* `!` = negation 
+* `!` = negation
 * `&` or `|` evaluates every instance/element in vector
 * `&&` or `||` evaluate only first element
-    * All AND operators are evaluated before PR operators
+    * ***Note**: All AND operators are evaluated before OR operators *
 * `isTRUE(condition)` = returns `TRUE` or `FALSE` of the condition
 * `xor(arg1, arg2)` = exclusive OR, one argument must equal `TRUE` one must equal `FALSE`
 * `which(condition)` = find the indicies of elements that satisfy the condition (TRUE)
@@ -325,10 +325,10 @@ $\pagebreak$
 * `table(data.frame$variable)` = table of all values of the variable, and how many observations there are for each
     * ***Note**: mean for variables that only have values 1 and 0 = proportion of success*
 * `str(data.frame)` = structure of data, provides data class, num of observations vs variables, and name of class of each variable and preview of its contents
-    * compactly display the internal structure of an R object    
+    * compactly display the internal structure of an R object
     * "What’s in this object"
     * well-suited to compactly display the contents of lists
-+ `View(data.frame)` = opens and view the content of the data frame
++ `view(data.frame)` = opens and view the content of the data frame
 
 $\pagebreak$
 
@@ -344,7 +344,7 @@ $\pagebreak$
 * `interactions(gl(2, 5), gl(5, 2))` = 1.1, 1.2, … 2.5
     - `gl(n, m)` = group level function
         * `n` = number of levels
-        * `m` = number of repetitions 
+        * `m` = number of repetitions
     - `split` function can do this by passing in list(f1, f2) in argument
         * `split(data, list(gl(2, 5), gl(5, 2)))` = splits the data into 1.1, 1.2, … 2.5 levels
 
@@ -356,13 +356,13 @@ $\pagebreak$
     * `x` = array
     * `MARGIN` = 2 (column), 1 (row)
     * `FUN` = function
-    * `…` = other arguments that need to be passed to other functions        
+    * `…` = other arguments that need to be passed to other functions
 * ***examples***
     * `apply(x, 1, sum)` or `apply(x, 1, mean)` = find row sums/means
     * `apply(x, 2, sum)` or `apply(x, 2, mean)` = find column sums/means
     * `apply(x, 1, quantile, props = c(0.25, 0.75))` = find 25% 75% percentile of each row
     * `a <- array(rnorm(2*2*10), c(2, 2, 10))` = create 10 2x2 matrix
-    * `apply(a, c(1, 2), mean)` = returns the means of 10 
+    * `apply(a, c(1, 2), mean)` = returns the means of 10
 
 
 ### `lapply()`
@@ -386,7 +386,7 @@ $\pagebreak$
     * if not possible to simplify, `sapply` returns a `list` (same as `lapply()`)
 
 
-### `vapply()` 
+### `vapply()`
 * safer version of `sapply` in that it allows to you specify the format for the result
     * `vapply(flags, class, character(1))` = returns the `class` of values in the flags variable in the form of character of length 1 (1 value)
 
@@ -399,9 +399,9 @@ $\pagebreak$
     * `…` = arguments to be passed to function
     * `simplify` = whether to simplify the result
 * ***example***
-    - `x <- c(rnorm(10), runif(10), rnorm(10, 1))` 
+    - `x <- c(rnorm(10), runif(10), rnorm(10, 1))`
     - `f <- gl(3, 10); tapply(x, f, mean)` = returns the mean of each group (f level) of x data
- 
+
 ### `mapply()`
 * multivariate apply, applies a function in parallel over a set of arguments
 * `mapply(FUN, ..., MoreArgs = NULL, SIMPLIFY = TRUE)`
@@ -419,7 +419,7 @@ mapply(rep, 1:4, 4:1)
 * `aggregate(list(name = dataToCompute), list(name = factorVar1,name = factorVar2), function, na.rm = TRUE)`
     * `dataToCompute` = this is what the function will be applied on
     * `factorVar1, factorVar1` = factor variables to split the data by
-    * ***Note*: order matters here in terms of how to break down the data*
+    * ***Note**: order matters here in terms of how to break down the data *
     * `function` = what is applied to the subsets of data, can be sum/mean/median/etc
     * `na.rm = TRUE` --> removes NA values
 
@@ -435,13 +435,13 @@ $\pagebreak$
     * `sample(c(y, z), 100)` = select 100 random elements from combination of values y and z
     * `sample(10)` = select positive integer sample of size 10 without repeat
 * Each probability distribution functions usually have 4 functions associated with them:
-    * `r***` function (for "random") --> random number generation
-    * `d***` function (for "density") --> calculate density
-    * `p***` function (for "probability") --> cumulative distribution
-    * `q***` function (for "quantile") --> quantile function
+    * `r***` function (for "random") --> random number generation (ex. `rnorm`)
+    * `d***` function (for "density") --> calculate density (ex. `dunif`)
+    * `p***` function (for "probability") --> cumulative distribution (ex. `ppois`)
+    * `q***` function (for "quantile") --> quantile function (ex. `qbinom`)
 * If $\Phi$ is the cumulative distribution function for a standard Normal distribution, then `pnorm(q)` = $\Phi(q)$ and qnorm(p) = $\Phi^{-1}(q)$.
-* `set.seed()` = reproduce same data
- 
+* `set.seed()` = sets seed for randon number generator to ensure that the same data/analysis can be reproduced
+
 ### Simulation Examples
 * `rbinom(1, size = 100, prob = 0.7)` = returns a binomial random variable that represents the number of successes in a give number of independent trials
     * `1` = corresponds number of observations
@@ -469,19 +469,19 @@ $\pagebreak$
 * `replicate(n, rpois())` = repeat operation n times
 
 ### Generate Numbers for a Linear Model
-* Linear model 
+* Linear model
 $$
 y = \beta_0 + \beta_1 x + \epsilon \\
 ~\mbox{where}~ \epsilon \sim N(0, 2^2), x \sim N(0, 1^2),  \beta_0 = 0.5,  \beta_1 = 2
-$$         
+$$
 ``` {r}
 set.seed(20)
-x <- rnorm(100)          # normal 
+x <- rnorm(100)          # normal
 x <- rbinom(100, 1, 0.5) # binomial
 e <- rnorm(100, 0, 2)
 y <- 0.5 + 2* x + e
 ```
-* Poisson model     
+* Poisson model
 $$
 Y ~ Poisson(\mu) \\
 log(\mu) = \beta_0 + \beta_1 x  \\
@@ -518,7 +518,7 @@ $\pagebreak$
     * `xlab, ylab` = corresponding labels
     * `main, sub` = title, subtitle
     * `col = 2` or `col = "red"` = color
-    * `pch = 2` = different symbols for points 
+    * `pch = 2` = different symbols for points
     * `xlim,ylim(v1, v2)` = restrict range of plot
 * `boxplot(x ~ y, data = d)` = creates boxplot for x vs y variables using the data.frame provided
 * `hist(x, breaks)` = plots histogram of the data
@@ -546,16 +546,16 @@ $\pagebreak$
     * `stringsAsFactors` = defaults to TRUE, should characters be coded as Factor
 * `read.table` can be used without any other argument to create data.frame
     * telling R what type of variables are in each column is helpful for larger datasets (efficiency)
-    * `read.csv()` = `read.table` except default sep is comma (read.table is " ") and header` = TRUE
+    * `read.csv()` = `read.table` except default sep is comma (`read.table` default is `sep = " "` and `header = TRUE`)
 
 ### Larger Tables
  * ***Note**: help page for read.table important*
  * need to know how much RAM is required --> calculating memory requirements
-    * numRow x numCol x 8 bytes/numeric value = size required in bites
+    * `numRow` x `numCol` x 8 bytes/numeric value = size required in bites
     * double the above results and convert into GB = amount of memory recommended
- * `set comment.char` = "" to save time if there are no comments in the file
- * specifying colClasses can make reading data much faster
- * `nrow` = n, number of rows to read in (can help with memory usage)
+ * set `comment.char = ""` to save time if there are no comments in the file
+ * specifying `colClasses` can make reading data much faster
+ * `nrow = n` = number of rows to read in (can help with memory usage)
      * `initial <- read.table("file", rows = 100)` = read first 100 lines
      * `classes <- sapply(initial, class)` = determine what classes the columns are
      * `tabAll <- read.table("file", colClasses = classes)` = load in the entire file with determined classes
@@ -581,7 +581,7 @@ $\pagebreak$
 * `download.file(fileURL, destfile = "fileName", method = "curl")`
     - `fileURL` = url of the file that needs to be downloaded
     - `destfile = "fileName"` = specifies where the file is to be saved
-        + "dir/fileName" = directories can be referenced here
+        + `dir/fileName` = directories can be referenced here
     - `method = "curl"` = necessary for downloading files from "https://" links on Macs
         + `method = "auto"` = should work on all other machines
 
@@ -590,14 +590,14 @@ $\pagebreak$
 
 ## Control Structures
 * Common structures are
-    * `if, else` = testing a condition
+    * `if`, `else` = testing a condition
     * `for` = execute a loop a fixed number of times
     * `while` = execute a loop while a condition is true
     * `repeat` = execute an infinite loop
     * `break` = break the execution of a loop
     * `next` = skip an interation of a loop
-    * `return` = exit a function 
-* ***Note**: Control structures are primarily useful for writing programs; for command-line interactive work, the `apply` functions are more useful*
+    * `return` = exit a function
+* ***Note**: Control structures are primarily useful for writing programs; for command-line interactive work, the `apply` functions are more useful *
 
 ### `if - else`
 ```r
@@ -634,9 +634,9 @@ for(i in seq_len(nrow(x))) {
     }
 }
 ```
-* `seq_along()` = to length of the vector
 * `for(letter in x)` = loop through letter in character vector
-* `seq_len()` = 1:length of vector
+* `seq_along(vector)` = create a number sequence from 1 to length of the vector
+* `seq_len(length)` = create a number sequence that starts at 1 and ends at length specified
 
 ### `while`
 ```{r}
@@ -649,7 +649,7 @@ while(count < 10) {
 * conditions can be combined with logical operators
 
 ### `repeat` and `break`
-* Repeat initiates an infinite loop
+* `repeat` initiates an infinite loop
 * not commonly used in statistical applications but they do have their uses
 * The only way to exit a `repeat` loop is to call `break`
 
@@ -657,16 +657,16 @@ while(count < 10) {
 x0 <- 1
 tol <- 1e-8
 repeat {
-        x1 <- computeEstimate()
-        if(abs(x1 - x0) < tol) {
-            break
-        } else {
-            x0 <- x1 # requires algorithm to converge
-        }
+    x1 <- computeEstimate()
+    if(abs(x1 - x0) < tol) {
+        break
+    } else {
+        x0 <- x1 # requires algorithm to converge
+    }
 }
 ```
-* ***Note**: The above loop is a bit dangerous because there’s no guarantee it will stop*
-    * Better to set a hard limit on the number of iterations (e.g. using a `for` loop) and then report whether convergence was achieved or not.     
+* ***Note**: The above loop is a bit dangerous because there’s no guarantee it will stop *
+    * Better to set a hard limit on the number of iterations (e.g. using a `for` loop) and then report whether convergence was achieved or not.
 
 
 ### `next` and `return`
@@ -684,7 +684,7 @@ for(i in 1:100) {
 
 $\pagebreak$
 
-## Functions      
+## Functions
 * `name <- function(arg1, arg2, …){ }`
     * inputs can be specified with default values by `arg1 = 10`
     * it is possible to define an argument to `NULL`
@@ -698,45 +698,45 @@ f <- function(<arguments>) {
 ```
 * function are first class object and can be **treated like other objects** (pass into other functions)
     * functions can be nested, so that you can define a function inside of another function
-* function have named arguments (i.e. x = mydata) which can be used to specifiy **default values** 
+* function have named arguments (i.e. `x = mydata`) which can be used to specifiy **default values**
     * `sd(x = mydata)` (matching by name)
 * formal arguments = arguments included in the functional definition
     * `formals()` = returns all formal arguments
     * not all functional call specifies all arguments, some can be missing and may have default values
     * `args()` = return all arguments you can specify
-    * multiple arguments inputted in random orders (R performs positional matching) --> not recommended
-    * argument matching order: exact —> partial —> positional
+    * multiple arguments inputted in random orders (R performs positional matching) $\rightarrow$ not recommended
+    * argument matching order: exact $\rightarrow$ partial $\rightarrow$ positional
         - *partial* = instead of typing `data = x`, use `d = x`
-* Lazy Evaluation 
+* **Lazy Evaluation**
     * R will evaluate as needed, so everything executes until an error occurs
-        * `f <- function (a, b) {a^2}`  
-        * if b is not used in the function, calling `f(5)` will not produce an error 
-* "..." argument
+        * `f <- function (a, b) {a^2}`
+        * if b is not used in the function, calling `f(5)` will not produce an error
+* `...` argument
     * used to extend other functions by representing the rest of the arguments
-    * generic functions use … to pass extra arguments (i.e. mean = 1, sd = 2)
+    * generic functions use `...` to pass extra arguments (i.e. mean = 1, sd = 2)
     * necessary when the number of arguments passed can not be known in advance
-         * functions that use "..." = `paste()`, `cat()`
-    * ***Note**: arguments coming after ... must be explicitly matched and cannot be partially matched*
+         * functions that use `...` = `paste()`, `cat()`
+    * ***Note**: arguments coming after `...` must be explicitly matched and cannot be partially matched *
 
 
 $\pagebreak$
 
 ## Scoping
-* scoping rules determine how a value is associated with a free variable in a function 
+* scoping rules determine how a value is associated with a free variable in a function
 * **free variables** = variables not explicitly defined in the function (not arguments, or local variables - variable defined in the function)
 * R uses **lexical/static scoping**
     * common alternative = **dynamic scoping**
-    * **lexical scoping** = values of free vars are searched in the environment in which the function is defined 
-        * environment = collection of symbol/value pairs (x = 3.14) 
+    * **lexical scoping** = values of free vars are searched in the environment in which the function is defined
+        * environment = collection of symbol/value pairs (x = 3.14)
             * each package has its own environment
             * only environment **without** parent environment is the *empty environment*
-    * **closure/function closure** = function + associated environment 
-* search order for free variable 
+    * **closure/function closure** = function + associated environment
+* search order for free variable
     1. environment where the function is defined
     2. parent environment
     3. ... (repeat if multiple parent environments)
     4. top level environment: global environment (worspace) or namespace package
-    5. empty environment --> produce error
+    5. empty environment $\rightarrow$ produce error
 * when a function/variable is called, R searches through the following list to match the first result
     1. `.GlobalEnv`
     2. `package:stats `
@@ -785,24 +785,25 @@ g <- function(x) {
 }
 ```
 * **Lexical Scoping**
-    1. f(3) —> calls g(x) 
-    2. y isn’t defined locally in g(x) —> searches in parent environment (working environment/global workspace)
-    3. finds y —> y = 10
-* **Dynamic Scoping** 
-    1. f(3) —> calls g(x) 
-    2. y isn’t defined locally in g(x) —> searches in calling environment (f function)
-    3. find y —> 2
+    1. `f(3)` $\rightarrow$ calls `g(x)`
+    2. `y` isn’t defined locally in `g(x)` $\rightarrow$ searches in parent environment (working environment/global workspace)
+    3. finds `y` $\rightarrow$ `y = 10`
+* **Dynamic Scoping**
+    1. `f(3)` $\rightarrow$ calls `g(x)`
+    2. `y` isn’t defined locally in `g(x)` $\rightarrow$ searches in calling environment (f function)
+    3. find `y` $\rightarrow$ `y <- 2`
     * **parent frame** = refers to calling environment in R, environment from which the function was called
-* ***Note**: when the defining environment and calling environment is the same, lexical and dynamic scoping produces the same result*
+* ***Note**: when the defining environment and calling environment is the same, lexical and dynamic scoping produces the same result *
 * **Consequences of Lexical Scoping**
     * all objects must be carried in memory
     * all functions carry pointer to their defining environment (memory address)
 
 ### Optimization
-* Optimization routines in R (`optim`, `nlm`, `optimize`) require you to pass a function whose argument is a vector of parameters
-    * ***Note**: these functions **minimize**, so use the negative constructs to maximize a normal likelihood*
-* **Constructor functions** = functions to be fed into the optimization routines
+* optimization routines in R (`optim`, `nlm`, `optimize`) require you to pass a function whose argument is a vector of parameters
+    * ***Note**: these functions **minimize**, so use the negative constructs to maximize a normal likelihood *
+* **constructor functions** = functions to be fed into the optimization routines
 * ***example***
+
 ```{r}
 # write constructor function
 make.NegLogLik <- function(data, fixed=c(FALSE,FALSE)) {
@@ -844,7 +845,7 @@ $\pagebreak$
     * `stop()` = generate error
 * `condition`: generic concept for indicating something unexpected can occur
 * `invisible()` = suppresses auto printing
-* ***Note**: random number generator must be controlled to reproduce problems (`set.seed` to pinpoint problem)*
+* ***Note**: random number generator must be controlled to reproduce problems (`set.seed` to pinpoint problem) *
 * `traceback`: prints out function call stack after error occurs
     * must be called right after error
 * `debug`: flags function for debug mode, allows to step through function one line at a time
@@ -853,11 +854,11 @@ $\pagebreak$
     - embedded in code and when the code is run, the browser comes up
 * `trace`: allows inserting debugging code into a function at specific places
 * `recover`: error handler, freezes at point of error
-    * `options(error = recover)` = instead of console, brings up menu (simi)
+    * `options(error = recover)` = instead of console, brings up menu (similar to `browser`)
 
 
 
-## R Profiler  
+## R Profiler
 * optimizing code cannot be done without performance analysis and profiling
 ```{r}
 # system.time example
@@ -872,7 +873,7 @@ system.time({
 ```
 * `system.time(expression)`
     * takes R expression, returns amount of time needed to execute (assuming you know where)
-    * computes time (in sec) - gives time until error if error occurs
+    * computes time (in sec) $\rightarrow$ gives time until error if error occurs
     * can wrap multiple lines of code with `{}`
     * returns object of class `proc_time`
          * **user time** = time computer experience
@@ -880,26 +881,26 @@ system.time({
          * usually close for standard computation
               * ***elapse > user*** = CPU wait around other processes in the background (read webpage)
               * ***elapsed < user*** = multiple processor/core (use multi-threaded libraries)
-    * ***Note**: R doesn’t multi-thread (performing multiple calculations at the same time) with basic package*
+    * ***Note**: R doesn’t multi-thread (performing multiple calculations at the same time) with basic package *
          * Basic Linear Algebra Standard [BLAS] libraries do, prediction, regression routines, matrix
-         * i.e. vecLib/Accelerate, ATLAS, ACML, MKL
-* `Rprof()` - useful for complex code only
+         * i.e. `vecLib`/Accelerate, `ATLAS`, `ACML`, `MKL`
+* `Rprof()` = useful for complex code only
     * keeps track of functional call stack at regular intervals and tabulates how much time is spent in each function
     * default sampling interval = 0.02 second
     * calling `Rprof()` generates `Rprof.out` file by default
         * `Rprof("output.out")` = specify the output file
+    * ***Note**: should NOT be used with `system.time()` *
 * `summaryRprof()` = summarizes `Rprof()` output, 2 methods for normalizing data
-	- loads the `Rprof.out` file by default, can specify output file `summaryRprof("output.out")`
+    - loads the `Rprof.out` file by default, can specify output file `summaryRprof("output.out")`
     * `by.total` = divide time spent in each function by total run time
     * `by.self` = first subtracts out time spent in functions above in call stack, and calculates ratio to total
-    * `$sample.interval` = 0.02 - interval
-    * `$sampling.time` = 7.41 - seconds, elapsed time
-        * ***Note**: generally user spends all time at top level function (i.e. lm()), but the function simply calls helper functions to do work so it is not useful to know about the top level function times*
-    * ***Note**: by.self = more useful as it focuses on each individual call/function*
-* Good to break code into functions so profilers can give useful information about where time is spent
+    * `$sample.interval` = 0.02 $\rightarrow$ interval
+    * `$sampling.time` = 7.41 $\rightarrow$ seconds, elapsed time
+        * ***Note**: generally user spends all time at top level function (i.e. `lm()`), but the function simply calls helper functions to do work so it is not useful to know about the top level function times *
+    * ***Note**: `by.self` = more useful as it focuses on each individual call/function *
+    * ***Note**: R must be compiled with profiles support (generally the case) *
+* good to break code into functions so profilers can give useful information about where time is spent
 * C/FORTRAN code is not profiled
-* ***Note**: R must be compiled with profiles support (generally the case)*
-* ***Note**: should NOT be used with system.time()*
 
 ### Miscellaneous
 * `unlist(rss)` = converts a list object into data frame/vector
