@@ -590,6 +590,7 @@ mode        : selfcontained # {standalone, draft}
 * advanced HTML can be added directly to the `index.Rmd` file and most of the time it should function correctly
 * interactive element (quiz questions, rCharts, shiny apps) can be embedded into slidify documents ([demos](http://slidify.github.io/dcmeetup/demos/interactive/))
 	- quiz elements
+		+ `--- &radio` before slide content for multiple choice (make sure quiz is included in widgets)
 		+ `##` = signifies title of questions
 		+ the question can be type in plain text format
 		+ the multiple choice options are listed by number (`1. a`, `2. b`, etc.)
@@ -599,6 +600,9 @@ mode        : selfcontained # {standalone, draft}
 		+ a page like the one below will be generated when processed with slidify
 
 ```Rmd
+
+--- &radio
+
 ## Question 1
 
 What is 1 + 1?
@@ -637,7 +641,7 @@ grid.raster(readPNG("figures/3.png"))
 * RStudio format/runs the code when the document is saved
 
 ### Creating Presentation
-* file --> New File --> R Presentation (`alt` + `f` + `p`)
+* file --> New File --> R Presentation (`alt-f` + `f` + `p`)
 * `class: classname` = specify slide-specific control from CSS
 * `css: file.css` = can be used to import an external CSS file
 	- alternatively, a css file that has the same name as the presentation will be automatically loaded

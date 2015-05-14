@@ -68,7 +68,7 @@ grid.raster(readPNG("figures/3.png"))
 ### Conditional Probability
 * let B = an event so that $P(B) > 0$
 * **conditional probability** of an event A, given B is defined as the probability that BOTH A and B occurring divided by the probability of B occurring $$P(A\:|\:B) = \frac{P(A \:\cap\: B)}{P(B)}$$
-* if A and B are ***independent***, then $$P(A\:|\:B) = \frac{P(A)P(B)}{P(A)} = P(A)$$
+* if A and B are ***independent***, then $$P(A\:|\:B) = \frac{P(A)P(B)}{P(B)} = P(A)$$
 * ***example***
 	* for die roll, $A = \{1\}$, $B = \{1, 3, 5\}$, then $$P(1~|~Odd) = P(A\:|\:B) = \frac{P(A \cap B)}{P(B)} = \frac{P(A)}{P(B)} = \frac{1/6}{3/6} = \frac{1}{3}$$
 
@@ -103,8 +103,8 @@ $\pagebreak$
 
 ### Probability Density Function (PDF)
 * evaluates the probability that the **continuous random variable** takes on a specific value 
-	* always $\ge$ everywhere
-	* total area under the must = 1
+	* always $\ge$ 0 everywhere
+	* total area under curve must = 1
 * **areas under PDFs** correspond to the probabilities for that random variable taking on that range of values (PMF)
 
 ```{r echo = FALSE, fig.width = 2, fig.height = 2, fig.align = 'center'}
