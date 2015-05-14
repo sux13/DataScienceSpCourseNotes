@@ -151,7 +151,7 @@ img {
 </ul></li>
 <li><strong>History of S</strong>
 <ul>
-<li>Bell labs –&gt; insightful –&gt; Lucent –&gt; Alcatel-Lucent</li>
+<li>Bell labs <span class="math">\(\rightarrow\)</span> insightful <span class="math">\(\rightarrow\)</span> Lucent <span class="math">\(\rightarrow\)</span> Alcatel-Lucent</li>
 <li>in 1998, S won the Association for computing machinery’s software system award</li>
 </ul></li>
 <li><strong>History of R</strong>
@@ -269,7 +269,7 @@ img {
 <ul>
 <li><strong>atomic vector</strong> = contains one data type, most basic object
 <ul>
-<li><code>vector &lt;- c(value1, value2, …)</code> = creates a vector with specified values</li>
+<li><code>vector &lt;- c(value1, value2, ...)</code> = creates a vector with specified values</li>
 <li><code>vector1*vector2</code> = element by element multiplication (rather than matrix multiplication)
 <ul>
 <li>if the vectors are of different lengths, shorter vector will be recycled until the longer runs out</li>
@@ -297,7 +297,7 @@ img {
 <ul>
 <li>matrix/vector can only contain one data type, so when attempting to create matrix/vector with different classes, forced coercion occurs to make every element to same class
 <ul>
-<li><em>least common denominator</em> is the approach used (basically everything is converted to a class that all values can take, numbers –&gt; characters) and <em>no errors generated</em></li>
+<li><em>least common denominator</em> is the approach used (basically everything is converted to a class that all values can take, numbers <span class="math">\(\rightarrow\)</span> characters) and <em>no errors generated</em></li>
 <li>coercion occurs to make every element to same class (implicit)</li>
 <li><code>x &lt;- c(NA, 2, &quot;D&quot;)</code> will create a vector of character class</li>
 </ul></li>
@@ -311,7 +311,7 @@ img {
 <li><code>paste(characterVector, collapse = &quot; &quot;)</code> = join together elements of the vector and separating with the <code>collapse</code> parameter</li>
 <li><code>paste(vec1, vec2, sep = &quot; &quot;)</code> = join together different vectors and separating with the <code>sep</code> parameter
 <ul>
-<li><em><strong>Note</strong>: vector recycling applies here too</em></li>
+<li><em><strong>Note</strong>: vector recycling applies here too </em></li>
 <li><code>LETTERS</code>, <code>letters</code>= predefined vectors for all 26 upper and lower letters</li>
 </ul></li>
 <li><code>unique(values)</code> = returns vector with all duplicates removed</li>
@@ -324,7 +324,7 @@ img {
 <li><code>data.frame</code> can contain <strong>multiple</strong></li>
 <li><code>matrix(values, nrow = n, ncol = m)</code> = creates a n by m matrix
 <ul>
-<li>constructed <strong>COLUMN WISE</strong> –&gt; the elements are placed into the matrix from top to bottom for each column, and by column from left to right</li>
+<li>constructed <strong>COLUMN WISE</strong> <span class="math">\(\rightarrow\)</span> the elements are placed into the matrix from top to bottom for each column, and by column from left to right</li>
 <li>matrices can also be created by adding the dimension attribute to vector
 <ul>
 <li><code>dim(m) &lt;- c(2, 5)</code></li>
@@ -413,7 +413,7 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <li><code>data</code> = data to be stored in array</li>
 <li><code>dim</code> = dimensions of the array
 <ul>
-<li><code>dim = c(2, 2, 5)</code> = 3 dimensional array –&gt; creates 5 2x2 array</li>
+<li><code>dim = c(2, 2, 5)</code> = 3 dimensional array <span class="math">\(\rightarrow\)</span> creates 5 2x2 array</li>
 </ul></li>
 <li><code>dimnames</code> = add names to the dimensions
 <ul>
@@ -505,7 +505,7 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <div id="subsetting" class="section level2">
 <h2>Subsetting</h2>
 <ul>
-<li>R uses <strong>one based index</strong> –&gt; starts counting at <span class="math">\(1\)</span>
+<li>R uses <strong>one based index</strong> <span class="math">\(\rightarrow\)</span> starts counting at <span class="math">\(1\)</span>
 <ul>
 <li><code>x[0]</code> returns <code>numeric(0)</code>, not error</li>
 <li><code>x[3000]</code> returns <code>NA</code> (not out of bounds/error)</li>
@@ -778,7 +778,7 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <li><code>factorVar1, factorVar1</code> = factor variables to split the data by</li>
 <li><em><strong>Note</strong>: order matters here in terms of how to break down the data </em></li>
 <li><code>function</code> = what is applied to the subsets of data, can be sum/mean/median/etc</li>
-<li><code>na.rm = TRUE</code> –&gt; removes NA values</li>
+<li><code>na.rm = TRUE</code> <span class="math">\(\rightarrow\)</span> removes NA values</li>
 </ul></li>
 </ul>
 </div>
@@ -798,10 +798,10 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 </ul></li>
 <li>Each probability distribution functions usually have 4 functions associated with them:
 <ul>
-<li><code>r***</code> function (for “random”) –&gt; random number generation (ex. <code>rnorm</code>)</li>
-<li><code>d***</code> function (for “density”) –&gt; calculate density (ex. <code>dunif</code>)</li>
-<li><code>p***</code> function (for “probability”) –&gt; cumulative distribution (ex. <code>ppois</code>)</li>
-<li><code>q***</code> function (for “quantile”) –&gt; quantile function (ex. <code>qbinom</code>)</li>
+<li><code>r***</code> function (for “random”) <span class="math">\(\rightarrow\)</span> random number generation (ex. <code>rnorm</code>)</li>
+<li><code>d***</code> function (for “density”) <span class="math">\(\rightarrow\)</span> calculate density (ex. <code>dunif</code>)</li>
+<li><code>p***</code> function (for “probability”) <span class="math">\(\rightarrow\)</span> cumulative distribution (ex. <code>ppois</code>)</li>
+<li><code>q***</code> function (for “quantile”) <span class="math">\(\rightarrow\)</span> quantile function (ex. <code>qbinom</code>)</li>
 </ul></li>
 <li>If <span class="math">\(\Phi\)</span> is the cumulative distribution function for a standard Normal distribution, then <code>pnorm(q)</code> = <span class="math">\(\Phi(q)\)</span> and qnorm(p) = <span class="math">\(\Phi^{-1}(q)\)</span>.</li>
 <li><code>set.seed()</code> = sets seed for randon number generator to ensure that the same data/analysis can be reproduced</li>
@@ -948,7 +948,7 @@ y &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">1
 <h3>Larger Tables</h3>
 <ul>
 <li><em><strong>Note</strong>: help page for read.table important</em></li>
-<li>need to know how much RAM is required –&gt; calculating memory requirements
+<li>need to know how much RAM is required <span class="math">\(\rightarrow\)</span> calculating memory requirements
 <ul>
 <li><code>numRow</code> x <code>numCol</code> x 8 bytes/numeric value = size required in bites</li>
 <li>double the above results and convert into GB = amount of memory recommended</li>
@@ -1298,7 +1298,7 @@ nLL &lt;-<span class="st"> </span><span class="kw">make.NegLogLik</span>(normals
 ##          b &lt;- -0.5*sum((data-mu)^2) / (sigma^2)
 ##          -(a + b)
 ##     }
-## &lt;environment: 0x7fef6462d588&gt;</code></pre>
+## &lt;environment: 0x7ff878f72bb8&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Estimating Prameters</span>
 <span class="kw">optim</span>(<span class="kw">c</span>(<span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">1</span>), nLL)$par</code></pre>
 <pre><code>##       mu    sigma 
@@ -1365,7 +1365,7 @@ nLL &lt;-<span class="st"> </span><span class="kw">make.NegLogLik</span>(normals
     }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.149   0.005   0.211</code></pre>
+##   0.155   0.004   0.191</code></pre>
 <ul>
 <li><code>system.time(expression)</code>
 <ul>

@@ -18,7 +18,7 @@ $\pagebreak$
 ## Overview
 * finding and extracting raw data
 * today any how to make data tiny
-* Raw data --> processing script --> tidy data --> data analysis --> data communication
+* Raw data $\rightarrow$ processing script $\rightarrow$ tidy data $\rightarrow$ data analysis $\rightarrow$ data communication
 
 
 
@@ -28,7 +28,7 @@ $\pagebreak$
     * **variables** = measurement of characteristic of an item
 * **Raw data** = original source of data, often hard to use, processing must be done before analysis, may need to be processed only once
 * **Processed data** = ready for analysis, processing done (merging, transforming, etc.), all steps should be recorded
-* Sequencing DNA: \$1B for Human Genome Project --> \$10,000 in a week with Illumina
+* Sequencing DNA: \$1B for Human Genome Project $\rightarrow$ \$10,000 in a week with Illumina
 
 
 
@@ -60,23 +60,23 @@ $\pagebreak$
 
 ## Download files
 * **Set working directory**
-    * ***Relative***: `setwd("./data")`, `setwd("../")` <— move up in directory
+    * ***Relative***: `setwd("./data")`, `setwd("../")` = move up in directory
     * ***Absolute***: `setwd("/User/Name/data")`
 * **Check if file exists and download file**
     * `if(!file.exists("data"){dir.create("data")}`
 * **Download file**
     * `download.file(url, destfile= "directory/filname.extension", method = "curl")`
 		* `method = "curl"` [mac only for https]
-    * `dateDownloaded <- date()` <— record the download date
+    * `dateDownloaded <- date()` = record the download date
 * **Read file and load data**
-    * `read.table()`  --> need to specify file, header, sep, row.names, nrows
-		* `read.csv()` = automatically set sep = "," and header = TRUE
-    * `quote = ""` --> no quotes (extremely helpful, common problem)
+    * `read.table()` = need to specify `file`, `header`, `sep`, `row.names`, `nrows`
+		* `read.csv()` = automatically set `sep = ","` and `header = TRUE`
+    * `quote = ""` = no quotes (extremely helpful, common problem)
     * `na.strings` = set the character that represents missing value
     * `nrows` = how many rows to read
     * `skip` = how many lines to skip
     * `col.names` = specifies column names
-    * `check.names = TRUE/FALSE` = If TRUE then the names of the variables in the data frame are checked to ensure that they are syntactically valid variable names and are not duplicated. If necessary they are adjusted so that they are
+    * `check.names = TRUE/FALSE` = If TRUE then the names of the variables in the data frame are checked to ensure that they are syntactically valid variable names and are not duplicated. If necessary they are adjusted appropriately to be syntactically valid names
 
 
 
@@ -99,7 +99,7 @@ $\pagebreak$
 * components
     * ***markup*** = labels that give text structure
     * ***content*** = actual text of document
-* tags = `<section> </section> <line-break />`
+* tags = `<section>`, `</section>`, `<line-break />`
 * elements = `<Greeting>` test `</Greeting>`
 * attributes = `<image src ="a.jpg" alt = "b">`
 * reading file into R
@@ -187,10 +187,10 @@ $\pagebreak$
 		* `setkey(dt1, x); setkey(dt2, x)` = sets the keys for both data tables to be column x
 		* `merge(dt1, dt2)` = returns a table, combine the two tables using column x, filtering to only the values that match up between common elements the two x columns (i.e. 'a') and the data is merged together
 * **fast reading of files**
-    * *example*: `big_df <- data.frame(norm(1e6), norm(1e6))` --> generates data table
-		* `file <- tempfile()` --> generates empty temp file
-		* `write.table(big.df, file=file, row.names=FALSE, col.names = TRUE, sep = "\t". quote = FALSE)` --> writes the generated data from big.df to the empty temp file
-		* `fread(file)` --> read file and load data = much faster than `read.table()`
+    * *example*: `big_df <- data.frame(norm(1e6), norm(1e6))` = generates data table
+		* `file <- tempfile()` = generates empty temp file
+		* `write.table(big.df, file=file, row.names=FALSE, col.names = TRUE, sep = "\t". quote = FALSE)` = writes the generated data from big.df to the empty temp file
+		* `fread(file)` = read file and load data = much faster than `read.table()`
 
 
 
@@ -289,7 +289,7 @@ $\pagebreak$
     * use the url to specify what data you would like to get
     * use the documentation to get information and parameters for the url and data you have access to
 * `json1 = content(homeTL)` = recognizes the data in JSON format and converts it to a structured R object [a bit hard to read]
-* `json2 = jsonlite::fromJSON(toJSON(json1))` = converts data back into JSON format and then use the fromJSON function from the jsonlite package to read the data into a data frame
+* `json2 = jsonlite::fromJSON(toJSON(json1))` = converts data back into JSON format and then use the `fromJSON` function from the `jsonlite` package to read the data into a data frame
     * each row corresponds to a line of the data you received
 * **GitHub example ([tutorial](https://github.com/hadley/httr/blob/master/demo/oauth2-github.r))**:
     * `library(httr)`

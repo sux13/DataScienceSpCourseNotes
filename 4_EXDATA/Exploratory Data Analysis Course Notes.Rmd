@@ -33,11 +33,12 @@ grid.raster(readPNG("figures/1.jpg"))
 ```
 
 * slightly negative relationship between pollution and mortality
+	* when split up by season, the relationships are all positive $\rightarrow$ season = confounding variable
 
 ```{r fig.height = 4, fig.width = 6, fig.align='center', echo=FALSE}
 grid.raster(readPNG("figures/2.jpg"))
 ```
-* when split up by season, the relationships are all positive $\rightarrow$ season = confounding variable
+
 
 * **Principle 4: Integration of evidence**
 	* use as many modes of evidence/displaying evidence as possible (modes of data presentation)
@@ -128,7 +129,7 @@ grid.raster(readPNG("figures/6.jpg"))
 * convenient, but cannot go back when started (need to plan ahead)
 * everything need to be manually set carefully to be able to achieve the desired effect (margins)
 * core plotting/graphics engine in R encapsulated in the following
-	* ***graphics***: plotting functions for vase graphing system (plot, hist, boxplot, tex.)
+	* ***graphics***: plotting functions for vase graphing system (plot, hist, boxplot, text)
 	* ***grDevices***: contains all the code implementing the various graphics devices (x11, PDF, PostScript, PNG, etc)
 
 * ***Two phase***: initialize, annotate
@@ -468,7 +469,7 @@ $\pagebreak$
 		* ***distance metric***: calculating distance between two points
 		* **continuous** - *Euclidean distance* $\rightarrow$ $\sqrt{(A_1 - A_2)^2 + (B_1 - B_2)^2 + \dots + (Z_1 -Z_2)^2 }$
 		* **continuous** - *correlation similarity* $\rightarrow$ how correlated two data points are
-		* **binary** - *manhattan distance* ("city block distance")$\rightarrow$ $|A_1 - A_2| + |B_1 - B_2| + \dots + |Z_1 -Z_2|$
+		* **binary** - *Manhattan distance* ("city block distance") $\rightarrow$ $|A_1 - A_2| + |B_1 - B_2| + \dots + |Z_1 -Z_2|$
 
 ```{r fig.height = 3, fig.width = 6, fig.align='center', echo=FALSE}
 grid.raster(readPNG("figures/25.png"))
@@ -476,7 +477,7 @@ grid.raster(readPNG("figures/25.png"))
 
 ### Procedure for Constructing Hierarchical Clusters (`hclust` function)
 1. calculate all pair wise distances between all points to see which points are closest together
-	* `dist(data.frame(x=x, y=y)` --> returns pair wise distances for all of the (x,y) coordinates
+	* `dist(data.frame(x=x, y=y)` = returns pair wise distances for all of the (x,y) coordinates
 	* ***Note**: `dist()` function uses Euclidean distance by default *
 2. group two closest points from the calculated distances and merge them to a single point
 3. find the next two closest points and merge them, and repeat
@@ -494,7 +495,7 @@ grid.raster(readPNG("figures/25.png"))
 	* change different distance metrics to see how sensitive the clustering is
 	* change merging strategy
 	* scaling of variables could affect the clustering (if one unit/measurement is much larger than another)
-* ***deterministic*** = running the hclust function with same parameters and the same data will produce the same plot
+* ***deterministic*** = running the `hclust` function with same parameters and the same data will produce the same plot
 * determining how many clusters there are (where to cut) may ***not always be clear***
 * ***primarily used for exploratory data analysis***, to see over all pattern in data if there is any at all
 
@@ -504,7 +505,7 @@ grid.raster(readPNG("figures/25.png"))
 		* order of the hierarchical cluster is derived from the distance
 	* `plot(hh)` = plots the dendrogram
 	* automatically sorts column and row according to cluster
-	* `names(hh)` = returns all parameters of the hclust object
+	* `names(hh)` = returns all parameters of the `hclust` object
 		* `hh$order` = returns the order of the rows/clusters from the dendrogram
 		* `hh$dist.method` = returns method for calculating distance/similarity
 * ***Note**: dendrogram that gets generated **DOES NOT** show how many clusters there are, so cutting (at 2.0 level for example) must be done to determine number of clusters — must be a convenient and sensible point *
@@ -521,7 +522,7 @@ plot(hClustering)
 ```
 
 ### `myplcclust` Function and Example
-* ***Note**: `myplcclust` = a function to plot hclust objects in color (clusters labelled 1 2 3 etc.), but must know how many clusters there are initially *
+* ***Note**: `myplcclust` = a function to plot `hclust` objects in color (clusters labeled 1 2 3 etc.), but must know how many clusters there are initially *
 
 ```{r fig.height = 3, fig.width = 4, fig.align='center'}
 myplclust <- function(hclust, lab = hclust$labels,
@@ -563,12 +564,12 @@ heatmap(data)
 ```
 
 ### `image` Function and Example
-* `image(x, y, t(dataMatrix)[, nrow(dataMatrix):1])` = produces similar color grid plot as the heatmap() without the dendrograms
+* `image(x, y, t(dataMatrix)[, nrow(dataMatrix):1])` = produces similar color grid plot as the `heatmap()` without the dendrograms
 	* `t(dataMatrix)[, nrow(dataMatrix)]`
 		* `t(dataMatrix)` = transpose of dataMatrix, this is such that the plot will be displayed in the same fashion as the matrix (rows as values on the y axis and columns as values on the x axis)
 			* ***example*** 40 x 10 matrix will have graph the 10 columns as x values and 40 rows as y values
 		* `[, nrow(dataMatrix)]` = subsets the data frame in reverse column order; when combined with the `t()` function, it reorders the rows of data from 40 to 1, such that the data from the matrix is displayed in order from top to bottom
-			* ***Note**: without this statemeant the rows will be displayed in order from bottom to top, as that is in line with the positive y axis *
+			* ***Note**: without this statement the rows will be displayed in order from bottom to top, as that is in line with the positive y axis *
 	* `x`, `y` = used to specify the values displayed on the x and y axis
 		* ***Note**: must be in increasing order *
 * ***example***
@@ -687,8 +688,8 @@ plot(colMeans(dataOrdered),xlab="Column",ylab="Column Mean",pch=19)
 		+ `s$d` = $1 \times m$ vector $\rightarrow$ vector of the singular/diagonal values
 			* `diag(s$d)` = $m \times m$ diagonal matrix
 		+ `s$v` = $m \times m$ matrix $\rightarrow$ vertical variation
-		+ `s$u %*% diag(s$d) %*% t(s$v)` returns the original data $\rightarrow$ $X = UDV^T$
-	- `scale(data)` = scales the original data by subtracting each datapoint by its column mean and dividing by its column standard deviation
+		+ `s$u %*% diag(s$d) %*% t(s$v)` = returns the original data $\rightarrow$ $X = UDV^T$
+	- `scale(data)` = scales the original data by subtracting each data point by its column mean and dividing by its column standard deviation
 
 ```{r fig.height=3,fig.width=7, fig.align = 'center'}
 # running svd
@@ -723,7 +724,7 @@ plot(svd1$d^2/sum(svd1$d^2),xlab="Column",ylab="Prop. of variance explained",pch
 		- `scale = TRUE` = scales the data before performing PCA
 		- returns `prcomp` object
 		- `summary(p)` = prints out the principal component's standard deviation, proportion of variance, and cumulative proportion
-	* PCA's rotation vectors are equivalent to their counterparits in the V matrix from the SVD
+	* PCA's rotation vectors are equivalent to their counterparts in the V matrix from the SVD
 
 ```{r fig.height=4,fig.width=4, fig.align='center'}
 # SVD
@@ -833,7 +834,7 @@ $\pagebreak$
 	- takes any set of colors and return a function that takes values between 0 and 1, indicating the extremes of the color palette (e.g. see the `gray` function)
 	- `pal <- colorRamp(c("red", "blue"))` = defines a `colorRamp` function
 	- `pal(0)` returns a 1 x 3 matrix containing values for RED, GREEN, and BLUE values that range from 0 to 255
-	- `pal(seq(0, 1, len = 10))` returns a 10 x 3 matrix of 10 colors that range from RED to BLUE (two ends of spectrums defined in the object)
+	- `pal(seq(0, 1, len = 10))` returns a 10 x 3 matrix of 10 colors that range from RED to BLUE (two ends of spectrum defined in the object)
 	- ***example***
 
 ```{r}
@@ -846,7 +847,7 @@ pal(0.67)
 * **`colorRampPalette` function**
 	- takes any set of colors and return a function that takes integer arguments and returns a vector of colors interpolating the palette (like `heat.colors` or `topo.colors`)
 	- `pal <- colorRampPalette(c("red", "yellow"))` defines a `colorRampPalette` function
-	- `pal(10)` returns 10 interpolated colors in hexidecimal format that range between the defined ends of spectrums
+	- `pal(10)` returns 10 interpolated colors in hexadecimal format that range between the defined ends of spectrum
 	- ***example***
 
 ```{r}
@@ -859,8 +860,8 @@ pal(10)
 * **`rgb` function**
 	- `red`, `green`, and `blue` arguments = values between 0 and 1
 	- `alpha = 0.5` = transparency control, values between 0 and 1
-	- returns hexidecimal string for color that can be used in `plot`/`image` commands
-	- `colorspace` package cna be used for different control over colors
+	- returns hexadecimal string for color that can be used in `plot`/`image` commands
+	- `colorspace` package `cna` be used for different control over colors
 	- ***example***
 
 ```{r fig.height = 4, fig.width = 6, fig.align='center'}
@@ -880,7 +881,7 @@ plot(x, y, col = rgb(0, 0, 0, 0.2), main = "With Transparency")
 	- *Diverging* = data that deviate from a value, increasing in two directions (i.e. standard deviations from the mean)
 	- *Qualitative* = categorical data/factor variables
 * palette information from the `RColorBrewer` package can be used by `colorRamp` and `colorRampPalette` functions
-* **available colors palletes**
+* **available colors palettes**
 
 ```{r fig.height = 6, fig.width = 8, fig.align='center', echo=FALSE}
 grid.raster(readPNG("figures/color.png"))
@@ -890,7 +891,7 @@ grid.raster(readPNG("figures/color.png"))
 	- `n` = number of colors to generated
 	- `"BuGn"` = name of palette
 		+ `?brewer.pal` list all available palettes to use
-	- returns list of `n` hexidecimal colors
+	- returns list of `n` hexadecimal colors
 * ***example***
 
 ```{r fig.height = 3, fig.width = 7, fig.align='center'}

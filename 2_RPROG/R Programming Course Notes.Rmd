@@ -19,7 +19,7 @@ $\pagebreak$
     * 1988 rewritten in C (version 3 of language)
     * 1998 version 4 (what we use today)
 * **History of S**
-    * Bell labs --> insightful --> Lucent --> Alcatel-Lucent
+    * Bell labs $\rightarrow$ insightful $\rightarrow$ Lucent $\rightarrow$ Alcatel-Lucent
     * in 1998, S won the Association for computing machinery’s software system award
 * **History of R**
     * 1991     created in New Zealand by Ross Ihaka & RobertGentleman
@@ -105,7 +105,7 @@ $\pagebreak$
 
 ### Vectors and Lists
 * **atomic vector** = contains one data type, most basic object
-    * `vector <- c(value1, value2, …)` = creates a vector with specified values
+    * `vector <- c(value1, value2, ...)` = creates a vector with specified values
     * `vector1*vector2` = element by element multiplication (rather than matrix multiplication)
         * if the vectors are of different lengths, shorter vector will be recycled until the longer runs out
         * computation on vectors/between vectors (`+`, `-`, `==`, `/`, etc.) are done element by element by default
@@ -122,7 +122,7 @@ $\pagebreak$
     * `as.character(list)` = converts list into a character vector
 * **implicit coercion**
     * matrix/vector can only contain one data type, so when attempting to create matrix/vector with different classes, forced coercion occurs to make every element to same class
-        * *least common denominator* is the approach used (basically everything is converted to a class that all values can take, numbers --> characters) and *no errors generated*
+        * *least common denominator* is the approach used (basically everything is converted to a class that all values can take, numbers $\rightarrow$ characters) and *no errors generated*
         * coercion occurs to make every element to same class (implicit)
         - `x <- c(NA, 2, "D")` will create a vector of character class
 * `list()` = special vector wit different classes of elements
@@ -131,7 +131,7 @@ $\pagebreak$
 * **logical vectors** = contain values `TRUE`, `FALSE`, and `NA`, values are generated as result of logical conditions comparing two objects/values
 * `paste(characterVector, collapse = " ")` = join together elements of the vector and separating with the `collapse` parameter
 * `paste(vec1, vec2, sep = " ")` = join together different vectors and separating with the `sep` parameter
-    * ***Note**: vector recycling applies here too*
+    * ***Note**: vector recycling applies here too *
     * `LETTERS`, `letters`= predefined vectors for all 26 upper and lower letters
 * `unique(values)` = returns vector with all duplicates removed
 
@@ -139,7 +139,7 @@ $\pagebreak$
 * `matrix` can contain **only 1** type of data
 * `data.frame` can contain **multiple**
 * `matrix(values, nrow = n, ncol = m)` = creates a n by m matrix
-    * constructed **COLUMN WISE** --> the elements are placed into the matrix from top to bottom for each column, and by column from left to right
+    * constructed **COLUMN WISE** $\rightarrow$ the elements are placed into the matrix from top to bottom for each column, and by column from left to right
     * matrices can also be created by adding the dimension attribute to vector
         * `dim(m) <- c(2, 5)`
     * matrices can also be created by binding columns and rows
@@ -192,7 +192,7 @@ x
 * `array(data, dim, dimnames)`
     - `data` = data to be stored in array
     - `dim` = dimensions of the array
-        + `dim = c(2, 2, 5)` = 3 dimensional array --> creates 5 2x2 array
+        + `dim = c(2, 2, 5)` = 3 dimensional array $\rightarrow$ creates 5 2x2 array
     - `dimnames` = add names to the dimensions
         + input must be a `list`
         + every element of the `list` must correspond in length to the dimensions of the array
@@ -252,7 +252,7 @@ $\pagebreak$
 
 
 ## Subsetting
-* R uses **one based index** --> starts counting at $1$
+* R uses **one based index** $\rightarrow$ starts counting at $1$
     * `x[0]` returns `numeric(0)`, not error
     * `x[3000]` returns `NA` (not out of bounds/error)
 * `[]` = always returns object of same class, can select more than one element of an object (ex. `[1:2]`)
@@ -421,7 +421,7 @@ mapply(rep, 1:4, 4:1)
     * `factorVar1, factorVar1` = factor variables to split the data by
     * ***Note**: order matters here in terms of how to break down the data *
     * `function` = what is applied to the subsets of data, can be sum/mean/median/etc
-    * `na.rm = TRUE` --> removes NA values
+    * `na.rm = TRUE` $\rightarrow$ removes NA values
 
 $\pagebreak$
 
@@ -435,10 +435,10 @@ $\pagebreak$
     * `sample(c(y, z), 100)` = select 100 random elements from combination of values y and z
     * `sample(10)` = select positive integer sample of size 10 without repeat
 * Each probability distribution functions usually have 4 functions associated with them:
-    * `r***` function (for "random") --> random number generation (ex. `rnorm`)
-    * `d***` function (for "density") --> calculate density (ex. `dunif`)
-    * `p***` function (for "probability") --> cumulative distribution (ex. `ppois`)
-    * `q***` function (for "quantile") --> quantile function (ex. `qbinom`)
+    * `r***` function (for "random") $\rightarrow$ random number generation (ex. `rnorm`)
+    * `d***` function (for "density") $\rightarrow$ calculate density (ex. `dunif`)
+    * `p***` function (for "probability") $\rightarrow$ cumulative distribution (ex. `ppois`)
+    * `q***` function (for "quantile") $\rightarrow$ quantile function (ex. `qbinom`)
 * If $\Phi$ is the cumulative distribution function for a standard Normal distribution, then `pnorm(q)` = $\Phi(q)$ and qnorm(p) = $\Phi^{-1}(q)$.
 * `set.seed()` = sets seed for randon number generator to ensure that the same data/analysis can be reproduced
 
@@ -550,7 +550,7 @@ $\pagebreak$
 
 ### Larger Tables
  * ***Note**: help page for read.table important*
- * need to know how much RAM is required --> calculating memory requirements
+ * need to know how much RAM is required $\rightarrow$ calculating memory requirements
     * `numRow` x `numCol` x 8 bytes/numeric value = size required in bites
     * double the above results and convert into GB = amount of memory recommended
  * set `comment.char = ""` to save time if there are no comments in the file
