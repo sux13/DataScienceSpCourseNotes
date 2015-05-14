@@ -277,8 +277,8 @@ grid.raster(readPNG("figures/10.png"))
 * ***considerations***
 	- must be done _without replacement_
 	- random sampling with replacement = _bootstrap_
-		+ underestimates of the error
-		+ can be corrected, but it is complicated ([0.632 Bootstrap](http://www.jstor.org/discover/10.2307/2965703?uid=2&uid=4&sid=21103054448997))
+		+ underestimates of the error, since the if we get one right and the sample appears more than once we'll get the other right
+		+ can be corrected with the ([0.632 Bootstrap](http://www.jstor.org/discover/10.2307/2965703?uid=2&uid=4&sid=21103054448997)), but it is complicated
 
 
 ### K-Fold
