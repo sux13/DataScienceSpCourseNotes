@@ -1001,7 +1001,7 @@ $H_a$ | $H_0$ | Type II error |
 
 * **$\alpha$** = Type I error rate
     * probability of ***rejecting*** the null hypothesis when the hypothesis is ***correct***
-    * $\alpha$ = 0.5 $\rightarrow$ standard for hypothesis testing
+    * $\alpha$ = 0.05 $\rightarrow$ standard for hypothesis testing
     * ***Note**: as Type I error rate increases, Type II error rate decreases and vice versa *
 
 * for large samples (large n), use the **Z Test** for $H_0:\mu = \mu_0$
@@ -1014,7 +1014,7 @@ $H_a$ | $H_0$ | Type II error |
         * $H_1: TS \leq Z_{\alpha}$ OR $-Z_{1 - \alpha}$
         * $H_2: |TS| \geq Z_{1 - \alpha / 2}$
         * $H_3: TS \geq Z_{1 - \alpha}$
-    * ***Note**: In case of $\alpha$ = 0.5 (most common), $Z_{1-\alpha}$ = 1.645 (95 percentile) *
+    * ***Note**: In case of $\alpha$ = 0.05 (most common), $Z_{1-\alpha}$ = 1.645 (95 percentile) *
     * $\alpha$ = low, so that when $H_0$ is rejected, original model $\rightarrow$ wrong or made an error (low probability)
 
 * For small samples (small n), use the **T Test** for $H_0:\mu = \mu_0$
@@ -1027,7 +1027,7 @@ $H_a$ | $H_0$ | Type II error |
         * $H_1: TS \leq T_{\alpha}$ OR $-T_{1 - \alpha}$
         * $H_2: |TS| \geq T_{1 - \alpha / 2}$
         * $H_3: TS \geq T_{1 - \alpha}$
-    * ***Note**: In case of $\alpha$ = 0.5 (most common), $T_{1-\alpha}$ = `qt(.95, df = n-1)` *
+    * ***Note**: In case of $\alpha$ = 0.05 (most common), $T_{1-\alpha}$ = `qt(.95, df = n-1)` *
     * R commands for T test:
         * `t.test(vector1 - vector2)`
         * `t.test(vector1, vector2, paired = TRUE)`
@@ -1042,7 +1042,7 @@ $H_a$ | $H_0$ | Type II error |
 
 * **two-sided tests** $\rightarrow$ $H_a: \mu \neq \mu_0$
     * reject $H_0$ only if test statistic is too larger/small
-    * for $\alpha$ = 0.5, split equally to 2.5% for upper and 2.5% for lower tails
+    * for $\alpha$ = 0.05, split equally to 2.5% for upper and 2.5% for lower tails
         * equivalent to $|TS| \geq T_{1 - \alpha / 2}$
         * example: for T test, `qt(.975, df)` and `qt(.025, df)`
     * ***Note**: failing to reject one-sided test = fail to reject two-sided*
