@@ -647,12 +647,12 @@ grid.arrange(g, p, ncol = 2)
 
 ### Example - CLT with Bernoulli Trials (Coin Flips)
 - for this example, we will simulate $n$ flips of a possibly unfair coin
-	- $X_i$ be the 0 or 1 result of the $i^{th}$ flip of a possibly unfair coin
+	- let $X_i$ be the 0 or 1 result of the $i^{th}$ flip of a possibly unfair coin
 	+ sample proportion , $\hat p$, is the average of the coin flips
 	+ $E[X_i] = p$ and $Var(X_i) = p(1-p)$
 	+ standard error of the mean is $SE = \sqrt{p(1-p)/n}$
 + in principle, normalizing the random variable $X_i$, we should get an approximately standard normal distribution $$\frac{\hat p - p}{\sqrt{p(1-p)/n}} \sim N(0,~1)$$
-- therefore, we will flip a coin $n$ times, take the sample proportion of heads (successes with probability $p$), subtract off 0.5 (ideal sample proportion) and multiply the result by divide by $\frac{1}{2 \sqrt{n}}$ and compare it to the standard normal
+- therefore, we will flip a coin $n$ times, take the sample proportion of heads (successes with probability $p$), subtract off 0.5 (ideal sample proportion) and multiply the result by $\frac{1}{2 \sqrt{n}}$ and compare it to the standard normal
 
 ```{r, echo = FALSE, fig.width=6, fig.height = 3, fig.align='center'}
 # specify number of simulations
@@ -711,7 +711,7 @@ g + facet_grid(. ~ size)
 * **95% confidence interval for the population mean $\mu$** is defined as $$\bar X \pm 2\sigma/\sqrt{n}$$ for the sample mean $\bar X \sim N(\mu, \sigma^2/n)$
 	* you can choose to use 1.96 to be more accurate for the confidence interval
 	* $P(\bar{X} > \mu + 2\sigma/\sqrt{n}~or~\bar{X} < \mu - 2\sigma/\sqrt{n}) = 5\%$
-    * **interpretation**: if we were to repeated samples of size $n$ from the population and construct this confidence interval for each case, approximately 95% of the intervals will contain $\mu$
+    * **interpretation**: if we were to repeatedly draw samples of size $n$ from the population and construct this confidence interval for each case, approximately 95% of the intervals will contain $\mu$
 * confidence intervals get **narrower** with less variability or
 larger sample sizes
 * ***Note**: Poisson and binomial distributions have exact intervals that don't require CLT *
@@ -729,9 +729,10 @@ mean(x) + c(-1, 1) * qnorm(0.975) * sd(x)/sqrt(length(x))
 ### Confidence Interval - Bernoulli Distribution/Wald Interval
 * for Bernoulli distributions, $X_i$ is 0 or 1 with success probability $p$ and the variance is $\sigma^2 = p(1 - p)$
 * the confidence interval takes the form of $$\hat{p} \pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$$
-* since the population proportion $p$ is unknown, we can use $\hat{p} = X/n$ as estimate
+* since the population proportion $p$ is unknown, we can use the sampled proportion of success $\hat{p} = X/n$ as estimate
 * $p(1-p)$ is largest when $p = 1/2$, so 95% confidence interval can be calculated by $$\begin{aligned}
-\hat{p} \pm Z_{0.95} \sqrt{\frac{0.5(1-0.5)}{n}} & = \hat{p} \pm 1.96 \sqrt{\frac{1}{4n}}\\
+\hat{p} \pm Z_{0.95} \sqrt{\frac{0.5(1-0.5)}{n}} & = \hat{p} \pm qnorm(.975) \sqrt{\frac{1}{4n}}\\
+& = \hat{p} \pm 1.96 \sqrt{\frac{1}{4n}}\\
 & = \hat{p} \pm \frac{1.96}{2} \sqrt{\frac{1}{n}}\\
 & \approx \hat{p} \pm \frac{1}{\sqrt{n}}\\
 \end{aligned}$$
@@ -948,6 +949,7 @@ t.test(g2, g1, paired = TRUE)
     * $S_p\left(\frac{1}{n_x} + \frac{1}{n_y}\right)^{1/2}$ = standard error
     * $S_p^2 = \{(n_x - 1) S_x^2 + (n_y - 1) S_y^2\}/(n_x + n_y - 2)$ = pooled variance estimator
         * this is effectively a weighted average between the two variances, such that different sample sizes are taken in to account
+        * For equal sample sizes, $n_x = n_y$, $S_p^2 = \frac{S_x^2 + S_y^2}{2}$ (average of variance of two groups)
     * ***Note:** this interval assumes **constant variance** across two groups; if variance is different, use the next interval *
 
 ### Independent Group t Intervals - Different Variance
