@@ -859,10 +859,10 @@ matlines(testFaith$waiting,pred1,type="l",,col=c(1,2,2),lty = c(1,1,1), lwd=3)
 		+ multiple predictors (dummy/indicator variables) are created for factor variables
 	- `plot(lm$finalModel)` = construct 4 diagnostic plots for evaluating the model
 		+ ***Note**: more information on these plots can be found at `?plot.lm` *
-		+ ***Residual vs Fitted***
+		+ ***Residuals vs Fitted***
 		+ ***Normal Q-Q***
 		+ ***Scale-Location***
-		+ ***Residual vs Leverage***
+		+ ***Residuals vs Leverage***
 
 ```{r fig.align = 'center'}
 # create train and test sets
@@ -878,15 +878,23 @@ par(mfrow = c(2, 2))
 plot(finMod,pch=19,cex=0.5,col="#00000010")
 ```
 
-* plotting residuals by index can be helpful in showing missing variables
+* plotting residuals by fitted values and coloring with a variable not used in the model helps spot a trend in that variable.
+
+```{r fig.width = 4, fig.height = 3, fig.align = 'center'}
+# plot fitted values by residuals 
+qplot(finMod$fitted, finMod$residuals, color=race, data=training)
+```
+
+* plotting residuals by index (ie; row numbers) can be helpful in showing missing variables
 	- `plot(finMod$residuals)` = plot the residuals against index (row number)
-	- if there's a trend/pattern in the residuals, it is highly likely that another variable (such as age/time) should be included
+	- if there's a trend/pattern in the residuals, it is highly likely that another variable (such as age/time) should be included.
 		+ residuals should not have relationship to index
 
 ```{r fig.width = 4, fig.height = 3, fig.align = 'center'}
 # plot residual by index
 plot(finMod$residuals,pch=19,cex=0.5)
 ```
+
 * here the residuals increase linearly with the index, and the highest residuals are concentrated in the higher indexes, so there must be a missing variable
 
 

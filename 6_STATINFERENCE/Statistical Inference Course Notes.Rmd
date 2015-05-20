@@ -304,7 +304,7 @@ ggplot(dat, aes(x = x, y = y, color = factor)) + geom_line(size = 2)
 ```
 
 
-* **variance** = measure of spread, the square of expected distance from the mean (expressed in $X$'s units$^2$)
+* **variance** = measure of spread or dispersion, the expected squared distance of the variable from its mean (expressed in $X$'s units$^2$)
 	- as we can see from above, higher variances $\rightarrow$ more spread, lower $\rightarrow$ smaller spread
 	* $Var(X) = E[(X-\mu)^2] = E[X^2] - E[X]^2$
 	* **standard deviation** $= \sqrt{Var(X)}$ $\rightarrow$ has same units as X
@@ -352,7 +352,7 @@ grid.raster(readPNG("figures/8.png"))
 ```
 
 * **distribution for mean of random samples**
-	* expected value of the **mean** of distribution of means = expected value of the sample = population mean
+	* expected value of the **mean** of distribution of means = expected value of the sample mean = population mean
 		* $E[\bar X]=\mu$
 	* expected value of the variance of distribution of means
 		* $Var(\bar X) = \sigma^2/n$
