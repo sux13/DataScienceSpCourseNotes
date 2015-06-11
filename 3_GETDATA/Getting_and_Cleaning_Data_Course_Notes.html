@@ -471,7 +471,7 @@ img {
 <li><strong>GitHub example (<a href="https://github.com/hadley/httr/blob/master/demo/oauth2-github.r">tutorial</a>)</strong>:
 <ul>
 <li><code>library(httr)</code></li>
-<li><code>myapp &lt;- oauth_app(&quot;github&quot;, key = &quot;clientID&quot;, secrete = &quot;clientSecret&quot;)</code>
+<li><code>myapp &lt;- oauth_app(&quot;github&quot;, key = &quot;clientID&quot;, secret = &quot;clientSecret&quot;)</code>
 <ul>
 <li>an application must be registered with GitHub first to generate the client ID and secrets</li>
 </ul></li>
@@ -588,7 +588,7 @@ img {
 </ul></li>
 <li><code>rename()</code>
 <ul>
-<li><em>example</em>: <code>rename(dataFrameTable, colName = newColName)</code> = renames the specified column with new name</li>
+<li><em>example</em>: <code>rename(dataFrameTable, newColName = colName)</code> = renames the specified column with new name</li>
 <li>capable of renaming multiple columns at the same time, no quotes needed</li>
 </ul></li>
 <li><code>mutate()</code>

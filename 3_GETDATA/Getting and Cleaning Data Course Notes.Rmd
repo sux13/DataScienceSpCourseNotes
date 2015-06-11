@@ -378,7 +378,7 @@ $\pagebreak$
 		* can specify multiple values to sort by by using `,`
 		* order listed in the call will be the order that the data is sorted by (can use in conjunction with `desc()`)
     * `rename()`
-		* *example*: `rename(dataFrameTable, colName = newColName)` = renames the specified column with new name
+		* *example*: `rename(dataFrameTable, newColName = colName)` = renames the specified column with new name
 		* capable of renaming multiple columns at the same time, no quotes needed
     * `mutate()`
 		* create a new variable based on the value of one or more existing variables in the dataset
