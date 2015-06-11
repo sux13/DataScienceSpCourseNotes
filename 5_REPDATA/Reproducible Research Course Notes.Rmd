@@ -371,7 +371,7 @@ print(xt, "html")
 ```
 
 * **setting global options**
-	* \`\`\``{r setoptions, echo = FALSE} opt_chunk$set(echo = FALSE, results = "hide")`\`\`\` = sets the default option to not print the code/results unless otherwise specified
+	* \`\`\``{r setoptions, echo = FALSE} opts_chunk$set(echo = FALSE, results = "hide")`\`\`\` = sets the default option to not print the code/results unless otherwise specified
 * **common options**
 	* **output**: `results = "asis"` OR `"hide"`
 		* `"asis"` = output to stay in original format and not compiled into HTML
