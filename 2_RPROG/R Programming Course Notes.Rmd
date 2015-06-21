@@ -169,7 +169,7 @@ x
     * data frames store tabular data
     * special type of list where every list has the same length (can be of different type)
     * data frames are usually created through `read.table()` and `read.csv()`
-    * `data.matrix()` = converts a matrix to data frame
+    * `data.matrix()` = converts a data frame to matrix.
 * `colMeans(matrix)` or `rowMeans(matrix)` = returns means of the columns/rows of a matrix/dataframe in a vector
 * `as.numeric(rownames(df))` = returns row indices for rows of a data frame with unnamed rows
 * **attributes**
