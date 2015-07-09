@@ -102,7 +102,7 @@ $\pagebreak$
 * **Big data** = now possible to collect data cheap, but not necessarily all useful (need the right data)
 
 ## Experimental Design
-* Formulate you question in advance
+* Formulate your question in advance
 * **Statistical inference** = select subset, run experiment, calculate descriptive statistics, use inferential statistics to determine if results can be applied broadly
 * ***[Inference]*** **Variability** = lower variability + clearer differences = decision
 * ***[Inference]*** **Confounding** = underlying variable might be causing the correlation (sometimes called Spurious correlation)
@@ -118,5 +118,5 @@ $\pagebreak$
     * **Accuracy** = Pr(correct outcome)
 * **Data dredging** = use data to fit hypothesis
 * **Good experiments** = have replication, measure variability, generalize problem, transparent
-* Prediction is not inference, and be ware of data dredging
+* Prediction is not inference, and beware of data dredging
 
