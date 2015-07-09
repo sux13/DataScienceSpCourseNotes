@@ -20,13 +20,14 @@ $\pagebreak$
 * `pwd` = print working directory (current directory)
 * `clear` = clear screen
 * `ls` = list stuff
-    *  `-a` = see all (hidden)
+    *  `-a` = see all (including hidden files)
     *  `-l` = details
 * `cd` = change directory
 * `mkdir` = make directory
 * `touch` = creates an empty file
 * `cp` = copy
     * `cp <file> <directory>` = copy a file to a directory
+    * `cp <file> <renamed_file>` = rename a file
     * `cp -r <directory> <newDirectory>` = copy all documents from directory to new Directory
             * `-r` = recursive
 * `rm` = remove
