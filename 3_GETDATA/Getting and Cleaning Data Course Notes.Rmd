@@ -120,7 +120,7 @@ $\pagebreak$
 		* `xpathSApply(rootNode, "//price", xmlValue)` = get the values of all elements with tag "price"
 * **extract content by attributes**
     * `doc <- htmlTreeParse(url, useInternal = True)`
-    * `scores <- xpathSApply(doc, "//li@class='score'", xmlvalue)` = look for li elements with `class = "score"` and return their value
+    * `scores <- xpathSApply(doc, "//li[@class='score']", xmlvalue)` = look for li elements with `class = "score"` and return their   value
 
 
 
