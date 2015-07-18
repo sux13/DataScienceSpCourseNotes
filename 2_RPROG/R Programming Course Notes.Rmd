@@ -2,13 +2,13 @@
 title: "R Programming Course Notes"
 author: "Xing Su"
 output:
-  pdf_document:
-    toc: yes
-    toc_depth: 3
   html_document:
     highlight: pygments
     theme: spacelab
     toc: yes
+  pdf_document:
+    toc: yes
+    toc_depth: 3
 ---
 $\pagebreak$
 
@@ -551,7 +551,7 @@ $\pagebreak$
 ### Larger Tables
  * ***Note**: help page for read.table important*
  * need to know how much RAM is required $\rightarrow$ calculating memory requirements
-    * `numRow` x `numCol` x 8 bytes/numeric value = size required in bites
+    * `numRow` x `numCol` x 8 bytes/numeric value = size required in bytes
     * double the above results and convert into GB = amount of memory recommended
  * set `comment.char = ""` to save time if there are no comments in the file
  * specifying `colClasses` can make reading data much faster
