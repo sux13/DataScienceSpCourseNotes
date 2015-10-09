@@ -202,16 +202,16 @@ $\pagebreak$
 * free/widely used open sources database software, widely used for Internet base applications
 * each row = record
 * data are structured in databases $\rightarrow$ series tables (dataset) $\rightarrow$ fields (columns in dataset)
-* `dbConnect(MySQL(), user = "genome", db = "hg19", host = "genome-mysql.cse.ucsc.edu)` = open a connection to the database
+* `con <- dbConnect(MySQL(), user = "genome", db = "hg19", host = "genome-mysql.cse.ucsc.edu)` = open a connection to the database
     * `db = "hg19"` = select specific database
     * `MySQL()` can be replaced with other arguments to use other data structures
-* `dbGetQuery(db, "show databases;")` = return the result from the specified SQL query executed through the connection
+* `dbGetQuery(con, "show databases;")` = return the result from the specified SQL query executed through the connection
     * any SQL query can be substituted here
-* `dbDisconnect(db)` = disconnects the open connection
+* `dbDisconnect(con)` = disconnects the open connection
     * crucial to disconnect as soon as all queries are performed
-* `dbListFields(db, "name")` = returns the list of fields (columns) from the specified table
-* `dbReadTable(db, "name")` = returns the the specified table
-* `query <- dbSendQuery(db, "query")` = send query to MySQL database and store it remotely
+* `dbListFields(con, "name")` = returns the list of fields (columns) from the specified table
+* `dbReadTable(con, "name")` = returns the the specified table
+* `query <- dbSendQuery(con, "query")` = send query to MySQL database and store it remotely
 * `fetch(query, n = 10)` = executes query and returns the result
     * `n = 10` = returns the first 10 rows
 * `dbClearResult(query)` = clears query from remote database, important
