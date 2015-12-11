@@ -285,7 +285,7 @@ $\pagebreak$
     * allows GET, POST, PUT, DELETE requests if you are authorized
 * `myapp = oath_app("app", key = "consumerKey", secret = "consumerSecret")` = start authorization process for the app
 * `sig = sign_oauth1.0(myapp, token = "tokenGenerated", token_secret = "tokenSecret")` = login using the token information (sets up access so you can use it to get data)
-* `homeTL = get("url", sig)` = use the established authentication (instead of username/password) to get the data (usually in JSON format)
+* `homeTL = GET("url", sig)` = use the established authentication (instead of username/password) to get the data (usually in JSON format)
     * use the url to specify what data you would like to get
     * use the documentation to get information and parameters for the url and data you have access to
 * `json1 = content(homeTL)` = recognizes the data in JSON format and converts it to a structured R object [a bit hard to read]
@@ -458,7 +458,7 @@ $\pagebreak$
     * `hms("string")` = parses hour minute second
 		* `tz = ""` = can use the "tz" argument to specify time zones  (list [here](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones))
     * ***Note**: there are a variety of functions that are available to parse different formats, all of them are capable of converting the correct information if the order of month year day is correct *
-    * ***Note**: when necessary, `//` or `—` should be added to provide clarity in date formatting *
+    * ***Note**: when necessary, `//` or `???` should be added to provide clarity in date formatting *
 * `update(POSIXct, hours = 8, minutes = 34, seconds = 55)` = updates components of a date time
     * ***Note**: does not alter the date time passed in unless explicitly assigned *
 * arithmetic can be performed on date times by using the `days()` `hours()` `minutes()`, etc. functions
@@ -699,7 +699,7 @@ $\pagebreak$
     * `m` = at least, `n` = not more than
     * `{m}` = exactly `m` matches
     * `{m, }` = at least m matches
-    * *example*: `Bush( +[^ ]+ +){1, 5}` debates matches "Bush + (at least one space + any word that doesn’t contain space + at least one space) this pattern repeated between 1 and 5 times + debates"
+    * *example*: `Bush( +[^ ]+ +){1, 5}` debates matches "Bush + (at least one space + any word that doesn???t contain space + at least one space) this pattern repeated between 1 and 5 times + debates"
 * `()` = define group as the the text in parentheses, groups will be remembered and can be referred to by `\1`, `\2`, etc.
     * *example*: `([a-zA-Z]+) +\1 +` matches "any word + at least one space + the same word repeated + at least one space" = "night night", "so so", etc.
 
