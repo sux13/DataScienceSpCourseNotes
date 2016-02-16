@@ -360,7 +360,7 @@ $\pagebreak$
 * ***examples***
     * `apply(x, 1, sum)` or `apply(x, 1, mean)` = find row sums/means
     * `apply(x, 2, sum)` or `apply(x, 2, mean)` = find column sums/means
-    * `apply(x, 1, quantile, props = c(0.25, 0.75))` = find 25% 75% percentile of each row
+    * `apply(x, 1, quantile, probs = c(0.25, 0.75))` = find 25% 75% percentile of each row
     * `a <- array(rnorm(2*2*10), c(2, 2, 10))` = create 10 2x2 matrix
     * `apply(a, c(1, 2), mean)` = returns the means of 10
 
