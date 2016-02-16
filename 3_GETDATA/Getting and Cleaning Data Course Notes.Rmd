@@ -63,7 +63,7 @@ $\pagebreak$
     * ***Relative***: `setwd("./data")`, `setwd("../")` = move up in directory
     * ***Absolute***: `setwd("/User/Name/data")`
 * **Check if file exists and download file**
-    * `if(!file.exists("data"){dir.create("data")}`
+    * `if(!file.exists("./data")) {dir.create("./data")}`
 * **Download file**
     * `download.file(url, destfile= "directory/filname.extension", method = "curl")`
 		* `method = "curl"` [mac only for https]
