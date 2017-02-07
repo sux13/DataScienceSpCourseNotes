@@ -37,7 +37,7 @@ $\pagebreak$
 
 ### General Probability Rules
 * discovered by Russian mathematician Kolmogorov, also known as "Probability Calculus"
-* probability = function of any set of outcomes and assigns it a number between 0 and 1
+* probability distribution = a function that assigns a number between 0 and 1 to any set of outcomes such that when all outcomes are summed together the total equals 1
     * $0 \le P(E) \le 1$, where $E$ = event
 * probability that nothing occurs = 0 (impossible, have to roll dice to create outcome), that something occurs is 1 (certain)
 * probability of outcome or event $E$, $P(E)$ = ratio of ways that $E$ could occur to number of all possible outcomes or events
@@ -61,7 +61,7 @@ grid.raster(readPNG("figures/2.png"))
 grid.raster(readPNG("figures/3.png"))
 ```
 
-* for independent events $A$ and $B$, $P(A \:\cup\: B) = P(A) \times P(B)$
+* for independent events $A$ and $B$, $P(A \:\cup\: B) = P(A) + P(B) - P(A) \times P(B)$
 * for outcomes that can occur with different combination of events and these combinations are mutually exclusive, the $P(E_{total}) =  \sum P(E_{part})$
 
 
