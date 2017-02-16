@@ -793,7 +793,7 @@ confusionMatrix(testing$type,predict(modelFit,testPC))
 
 ```{r message = FALSE, warning = FALSE}
 # construct model
-modelFit <- train(training$type ~ .,method="glm",preProcess="pca",data=training)
+modelFit <- train(type ~ .,method="glm",preProcess="pca",data=training)
 # print results of model
 confusionMatrix(testing$type,predict(modelFit,testing))
 ```
