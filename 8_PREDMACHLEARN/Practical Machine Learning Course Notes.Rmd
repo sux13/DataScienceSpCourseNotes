@@ -1325,6 +1325,7 @@ pred.lda
 	- ***example: `caret` package***
 
 ```{r message = F, warning = F}
+# package needed: klaR
 # using the same data from iris, run naive Bayes on training data
 nb <- train(Species ~ ., data=training,method="nb")
 # predict test outcomes using naive Bayes model
