@@ -2,13 +2,13 @@
 title: "Practical Machine Learning Course Notes"
 author: "Xing Su"
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: 3
   html_document:
     highlight: pygments
     theme: spacelab
     toc: yes
-  pdf_document:
-    toc: yes
-    toc_depth: 3
 header-includes: \usepackage{graphicx} \usepackage{mathtools}
 ---
 
