@@ -13,6 +13,10 @@ header-includes: \usepackage{graphicx} \usepackage{mathtools}
 ---
 
 
+```{r setup, include=FALSE, error=TRUE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, error = TRUE)
+```
+
 $\pagebreak$
 
 
@@ -427,7 +431,8 @@ folds$test[[1]]
 
 ```{r}
 # returns the arguments of the default train function
-args(train.default)
+# args(train.default)   <- this dosn't work anymore in caret
+args(train)
 ```
 
 * `train` function has a large set of parameters, below are the default options
@@ -774,8 +779,11 @@ testing <- spam[-inTrain,]
 preProc <- preProcess(log10(training[,-58]+1),method="pca",pcaComp=2)
 # calculate PCs for training data
 trainPC <- predict(preProc,log10(training[,-58]+1))
+# add variable `type` to trainPC
+type <- training$type
+trainPC <- data.frame(trainPC, type)             # join variable `type`
 # run model on outcome and principle components
-modelFit <- train(training$type ~ .,method="glm",data=trainPC)
+modelFit <- train(type ~ .,method="glm",data=trainPC)
 # calculate PCs for test data
 testPC <- predict(preProc,log10(testing[,-58]+1))
 # compare results
@@ -789,7 +797,7 @@ confusionMatrix(testing$type,predict(modelFit,testPC))
 
 ```{r message = FALSE, warning = FALSE}
 # construct model
-modelFit <- train(training$type ~ .,method="glm",preProcess="pca",data=training)
+modelFit <- train(type ~ .,method="glm",preProcess="pca",data=training)
 # print results of model
 confusionMatrix(testing$type,predict(modelFit,testing))
 ```
@@ -1321,6 +1329,7 @@ pred.lda
 	- ***example: `caret` package***
 
 ```{r message = F, warning = F}
+# package needed: klaR
 # using the same data from iris, run naive Bayes on training data
 nb <- train(Species ~ ., data=training,method="nb")
 # predict test outcomes using naive Bayes model
