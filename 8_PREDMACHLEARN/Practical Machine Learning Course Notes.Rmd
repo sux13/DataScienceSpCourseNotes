@@ -2,13 +2,13 @@
 title: "Practical Machine Learning Course Notes"
 author: "Xing Su"
 output:
-  pdf_document:
-    toc: yes
-    toc_depth: 3
   html_document:
     highlight: pygments
     theme: spacelab
     toc: yes
+  pdf_document:
+    toc: yes
+    toc_depth: 3
 header-includes: \usepackage{graphicx} \usepackage{mathtools}
 ---
 
@@ -427,7 +427,8 @@ folds$test[[1]]
 
 ```{r}
 # returns the arguments of the default train function
-args(train.default)
+# args(train.default)   <- this dosn't work anymore in caret
+args(train)
 ```
 
 * `train` function has a large set of parameters, below are the default options
@@ -774,8 +775,11 @@ testing <- spam[-inTrain,]
 preProc <- preProcess(log10(training[,-58]+1),method="pca",pcaComp=2)
 # calculate PCs for training data
 trainPC <- predict(preProc,log10(training[,-58]+1))
+# add variable `type` to trainPC
+type <- training$type
+trainPC <- data.frame(trainPC, type)             # join variable `type`
 # run model on outcome and principle components
-modelFit <- train(training$type ~ .,method="glm",data=trainPC)
+modelFit <- train(type ~ .,method="glm",data=trainPC)
 # calculate PCs for test data
 testPC <- predict(preProc,log10(testing[,-58]+1))
 # compare results
