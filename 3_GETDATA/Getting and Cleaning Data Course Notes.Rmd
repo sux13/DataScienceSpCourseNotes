@@ -63,7 +63,7 @@ $\pagebreak$
     * ***Relative***: `setwd("./data")`, `setwd("../")` = move up in directory
     * ***Absolute***: `setwd("/User/Name/data")`
 * **Check if file exists and download file**
-    * `if(!file.exists("data"){dir.create("data")}`
+    * `if(!file.exists("./data")) {dir.create("./data")}`
 * **Download file**
     * `download.file(url, destfile= "directory/filname.extension", method = "curl")`
 		* `method = "curl"` [mac only for https]
@@ -120,7 +120,7 @@ $\pagebreak$
 		* `xpathSApply(rootNode, "//price", xmlValue)` = get the values of all elements with tag "price"
 * **extract content by attributes**
     * `doc <- htmlTreeParse(url, useInternal = True)`
-    * `scores <- xpathSApply(doc, "//li@class='score'", xmlvalue)` = look for li elements with `class = "score"` and return their value
+    * `scores <- xpathSApply(doc, "//li[@class='score']", xmlvalue)` = look for li elements with `class = "score"` and return their   value
 
 
 
@@ -153,14 +153,14 @@ $\pagebreak$
 ## data.table
 * inherits from `data.frame` (external package) $\rightarrow$ all functions that accept `data.frame` work on `data.table`
 * can be much faster (written in C), ***much much faster*** at subsetting/grouping/updating
-* **syntax**: `dt <- data.table(x = rnorm(9), y = rep(c(a, b, c), each = 3), z = rnorm(9)`
+* **syntax**: `dt <- data.table(x = rnorm(9), y = rep(c("a","b","c"), each = 3), z = rnorm(9))`
 * `tables()` = returns all data tables in memory
     * shows name, nrow, MB, cols, key
 * some subset works like before = `dt[2, ], dt[dt$y=="a",]`
     * `dt[c(2, 3)]` = subset by rows, rows 2 and 3 in this case
 * **column subsetting** (modified for `data.table`)
     * argument after comma is called an ***expression*** (collection of statements enclosed in `{}`)
-    * `dt[, list(means(x), sum(z)]` = returns mean of x column and sum of z column (no `""` needed to specify column names, x and z in example)
+    * `dt[, list(mean(x), sum(z))]` = returns mean of x column and sum of z column (no `""` needed to specify column names, x and z in example)
     * `dt[, table(y)]` = get table of y value (perform any functions)
 * **add new columns**
     * `dt[, w:=z^2]`
@@ -176,9 +176,9 @@ $\pagebreak$
 * **special variables**
     * `.N` = returns integer, length 1, containing the number (essentially count)
 		* `dt <- data.table (x=sample(letters[1:3], 1E5, TRUE))` = generates data table
-		* `dt[, .N by =x]` = creates a table to count observations by the value of x
+		* `dt[, .N, by =x]` = creates a table to count observations by the value of x
 * **keys** (quickly filter/subset)
-    * *example*: `dt <- data.table(x = rep(c("a", "b", "c"), each 100), y = rnorm(300))` = generates data table
+    * *example*: `dt <- data.table(x = rep(c("a", "b", "c"), each = 100), y = rnorm(300))` = generates data table
 		* `setkey(dt, x)` = set the key to the x column
 		* `dt['a']` = returns a data frame, where x = 'a' (effectively filter)
 * **joins** (merging tables)
@@ -187,9 +187,9 @@ $\pagebreak$
 		* `setkey(dt1, x); setkey(dt2, x)` = sets the keys for both data tables to be column x
 		* `merge(dt1, dt2)` = returns a table, combine the two tables using column x, filtering to only the values that match up between common elements the two x columns (i.e. 'a') and the data is merged together
 * **fast reading of files**
-    * *example*: `big_df <- data.frame(norm(1e6), norm(1e6))` = generates data table
+    * *example*: `big_df <- data.frame(rnorm(1e6), rnorm(1e6))` = generates data table
 		* `file <- tempfile()` = generates empty temp file
-		* `write.table(big.df, file=file, row.names=FALSE, col.names = TRUE, sep = "\t". quote = FALSE)` = writes the generated data from big.df to the empty temp file
+		* `write.table(big_df, file=file, row.names=FALSE, col.names = TRUE, sep = "\t", quote = FALSE)` = writes the generated data from big.df to the empty temp file
 		* `fread(file)` = read file and load data = much faster than `read.table()`
 
 
@@ -202,7 +202,7 @@ $\pagebreak$
 * free/widely used open sources database software, widely used for Internet base applications
 * each row = record
 * data are structured in databases $\rightarrow$ series tables (dataset) $\rightarrow$ fields (columns in dataset)
-* `dbConnect(MySQL(), user = "genome", db = "hg19", host = "genome-mysql.cse.ucsc.edu)` = open a connection to the database
+* `dbConnect(MySQL(), user = "genome", db = "hg19", host = "genome-mysql.cse.ucsc.edu")` = open a connection to the database
     * `db = "hg19"` = select specific database
     * `MySQL()` can be replaced with other arguments to use other data structures
 * `dbGetQuery(db, "show databases;")` = return the result from the specified SQL query executed through the connection
@@ -473,7 +473,7 @@ $\pagebreak$
 ## Subsetting and Sorting
 * **subsetting**
     * `x <- data.frame("var1" = sample(1:5), "var2" = sample(6:10), "var3" = (11:15))` = initiates a data frame with three names columns
-    * `x <- x[sample(1:5)` = this scrambles the rows
+    * `x <- x[sample(1:5),]` = this scrambles the rows
     * `x$var2[c(2,3)] = NA` = setting the 2nd and 3rd element of the second column to NA
     * `x[1:2, "var2"]` = subsetting the first two row of the the second column
     * `x[(x$var1 <= 3 | x$var3 > 15), ]` = return all rows of x where the first column is less than or equal to three or where the third column is bigger than 15

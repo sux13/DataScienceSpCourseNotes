@@ -743,13 +743,14 @@ $\pagebreak$
 ### Intervals/Tests for Coefficients
 * standard errors for coefficients
 $$\begin{aligned}
-Var(\hat \beta_1) & = Var\left(\frac{\sum_{i=1}^n (Y_i - \bar Y)(X_i - \bar X)}{((X_i - \bar X)^2)}\right) \\
-(expanding) & = Var\left(\frac{\sum_{i=1}^n Y_i (X_i - \bar X) - \bar Y \sum_{i=1}^n (X_i - \bar X)}{((X_i - \bar X)^2)}\right) \\
-& Since~ \sum_{i=1}^n X_i - \bar X = 0 \\
-(simplifying) & = \frac{\sum_{i=1}^n Y_i (X_i - \bar X)}{(\sum_{i=1}^n (X_i - \bar X)^2)^2} \Leftarrow \mbox{denominator taken out of } Var\\
+Var(\hat \beta_1) & = Var\left(\frac{\sum_{i=1}^n (Y_i - \bar Y)(X_i - \bar X)}{(\sum_{i=1}^n (X_i - \bar X)^2)^2}\right) \\
+(expanding) & = Var\left(\frac{\sum_{i=1}^n Y_i (X_i - \bar X) - \bar Y \sum_{i=1}^n (X_i - \bar X)}{(\sum_{i=1}^n (X_i - \bar X)^2)^2}\right) \\
+& Since~ \sum_{i=1}^n (X_i - \bar X) = 0 \\
+(simplifying) & = \frac{Var\left(\sum_{i=1}^n Y_i (X_i - \bar X)\right)}{(\sum_{i=1}^n (X_i - \bar X)^2)^2} \Leftarrow \mbox{denominator taken out of } Var\\
+& Since~ Var\left(\sum aY\right) = \sum a^2 Var\left(Y\right) \\
 (Var(Y_i) = \sigma^2) & = \frac{\sigma^2 \sum_{i=1}^n (X_i - \bar X)^2}{(\sum_{i=1}^n (X_i - \bar X)^2)^2} \\
 \sigma_{\hat \beta_1}^2 = Var(\hat \beta_1) &= \frac{\sigma^2 }{ \sum_{i=1}^n (X_i - \bar X)^2 }\\
-\Rightarrow \sigma_{\hat \beta_1} &= \frac{\sigma}{ \sum_{i=1}^n X_i - \bar X}  \\
+\Rightarrow \sigma_{\hat \beta_1} &= \frac{\sigma}{ \sqrt {\sum_{i=1}^n (X_i - \bar X)^2}}  \\
 \\
 \mbox{by the same derivation} \Rightarrow & \\
 \sigma_{\hat \beta_0}^2 = Var(\hat \beta_0) & = \left(\frac{1}{n} + \frac{\bar X^2}{\sum_{i=1}^n (X_i - \bar X)^2 }\right)\sigma^2 \\
