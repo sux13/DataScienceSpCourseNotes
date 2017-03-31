@@ -6,16 +6,19 @@ output:
     toc: yes
     toc_depth: 3
   html_document:
+    highlight: pygments
+    theme: spacelab
     toc: yes
 header-includes: \usepackage{graphicx} \usepackage{mathtools}
 ---
+
 
 $\pagebreak$
 
 
 ## Prediction
 
-* **process for prediction** = population --> probability and sampling to pick set of data --> split into training and test set --> build prediction function --> predict for new data --> evaluate
+* **process for prediction** = population $\rightarrow$ probability and sampling to pick set of data $\rightarrow$ split into training and test set $\rightarrow$ build prediction function $\rightarrow$ predict for new data $\rightarrow$ evaluate
 	- ***Note**: choosing the right dataset and knowing what the specific question is are paramount to the success of the prediction algorithm (GoogleFlu failed to predict accurately when people's search habits changed) *
 
 ```{r fig.width = 4, fig.height = 3, fig.align = 'center', echo = FALSE, message = FALSE}
@@ -24,15 +27,15 @@ library(doMC); registerDoMC(cores = 4)
 grid.raster(readPNG("figures/1.png"))
 ```
 
-* **components of predictor** = question --> input data --> features _(extracting variables/characteristics)_ --> algorithm --> parameters _(estimate)_ --> evaluation
+* **components of predictor** = question $\rightarrow$ input data $\rightarrow$ features _(extracting variables/characteristics)_ $\rightarrow$ algorithm $\rightarrow$ parameters _(estimate)_ $\rightarrow$ evaluation
 * **relative order of importance** = question (concrete/specific) **>** data (relevant) **>** features (properly extract) **>** algorithms
 * **data selection**
-	- ***Note**: "garbage in = garbage out" --> having the correct/relevant data will decide whether the model is successful *
+	- ***Note**: "garbage in = garbage out" $\rightarrow$ having the correct/relevant data will decide whether the model is successful *
 	- data for what you are trying to predict is most helpful
-	- more data --> better models (usually)
+	- more data $\rightarrow$ better models (usually)
 * **feature selection**
-	- good features --> lead to data compression, retain relevant information, created based on expert domain knowledge
-	- common mistakes --> automated feature selection (can yield good results but likely to behave inconsistently with slightly different data), not understanding/dealing with skewed data/outliers, throwing away information unnecessarily
+	- good features $\rightarrow$ lead to data compression, retain relevant information, created based on expert domain knowledge
+	- common mistakes $\rightarrow$ automated feature selection (can yield good results but likely to behave inconsistently with slightly different data), not understanding/dealing with skewed data/outliers, throwing away information unnecessarily
 * **algorithm selection**
 	- matter less than one would expect
 	- getting a sensible approach/algorithm will be the basis for a successful prediction
@@ -78,7 +81,7 @@ rule1 <- function(x){
 	prediction[(x > 2.45 & x <= 2.70)] <- "nonspam"
 	return(prediction)
 }
-# tabulate results of prediction algorithm 1 (in sample error --> no error in this case)
+# tabulate results of prediction algorithm 1 (in sample error -> no error in this case)
 table(rule1(smallSpam$capitalAve),smallSpam$type)
 # second rule (simple, setting a threshold)
 rule2 <- function(x){
@@ -87,7 +90,7 @@ rule2 <- function(x){
 	prediction[x <= 2.8] <- "nonspam"
 	return(prediction)
 }
-# tabulate results of prediction algorithm 2(in sample error --> 10% in this case)
+# tabulate results of prediction algorithm 2(in sample error -> 10% in this case)
 table(rule2(smallSpam$capitalAve),smallSpam$type)
 # tabulate out of sample error for algorithm 1
 table(rule1(spam$capitalAve),spam$type)
@@ -135,6 +138,7 @@ $\pagebreak$
 ```{r echo = FALSE, fig.width = 3, fig.height = 4, fig.align = 'center'}
 grid.raster(readPNG("figures/2.png"))
 ```
+
 ### Sample Division Guidelines for Prediction Study Design
 * for large sample sizes
 	- 60% training
@@ -161,9 +165,10 @@ grid.raster(readPNG("figures/2.png"))
 * use like data to predict like
 * to predict a variable/process X, use the data that's as closely related to X as possible
 * weighting the data/variables by understanding and intuition can help to improve accuracy of prediction
-* data properties matter --> knowing how the data connects to what you are trying to measure
+* data properties matter $\rightarrow$ knowing how the data connects to what you are trying to measure
 * predicting on unrelated data is the most common mistake
 	- if unrelated data must be used, be careful about interpreting the model as to why it works/doesn't work
+
 
 $\pagebreak$
 
@@ -214,8 +219,9 @@ grid.raster(readPNG("figures/6.png"))
 $\pagebreak$
 
 ## Receiver Operating Characteristic Curves
+* are commonly used techniques to measure the quality of a prediction algorithm.
 * predictions for binary classification often are quantitative (i.e. probability, scale of 1 to 10)
-	- different cutoffs/threshold of classification (> 0.8 --> one outcome) yield different results/predictions
+	- different cutoffs/threshold of classification (> 0.8 $\rightarrow$ one outcome) yield different results/predictions
 	- **Receiver Operating Characteristic** curves are generated to compare the different outcomes
 
 ```{r echo = FALSE, fig.width = 4, fig.height = 4, fig.align = 'center'}
@@ -227,10 +233,10 @@ grid.raster(readPNG("figures/7.png"))
 	- ***y-axis*** = sensitivity (or, probability of true positive)
 	- ***points plotted*** = cutoff/combination
 	- ***areas under curve*** = quantifies whether the prediction model is viable or not
-		+ higher area --> better predictor
-		+ area = 0.5 --> effectively random guessing (diagonal line in the ROC curve)
-		+ area = 1 --> perfect classifier
-		+ area = 0.8 --> considered good for a prediction algorithm
+		+ higher area $\rightarrow$ better predictor
+		+ area = 0.5 $\rightarrow$ effectively random guessing (diagonal line in the ROC curve)
+		+ area = 1 $\rightarrow$ perfect classifier
+		+ area = 0.8 $\rightarrow$ considered good for a prediction algorithm
 
 ```{r echo = FALSE, fig.width = 3, fig.height = 3, fig.align = 'center'}
 grid.raster(readPNG("figures/8.png"))
@@ -242,6 +248,7 @@ grid.raster(readPNG("figures/8.png"))
 ```{r echo = FALSE, fig.width = 3, fig.height = 3, fig.align = 'center'}
 grid.raster(readPNG("figures/9.png"))
 ```
+
 
 
 $\pagebreak$
@@ -271,24 +278,26 @@ $\pagebreak$
 ```{r echo = FALSE, fig.width = 3, fig.height = 3, fig.align = 'center'}
 grid.raster(readPNG("figures/10.png"))
 ```
+
 * a randomly sampled test set is subsetted out from the original training set
 * the predictor is built on the remaining training data and applied to the test set
 * the above are ***three*** random subsamplings from the same training set
 * ***considerations***
 	- must be done _without replacement_
 	- random sampling with replacement = _bootstrap_
-		+ underestimates of the error
-		+ can be corrected, but it is complicated ([0.632 Bootstrap](http://www.jstor.org/discover/10.2307/2965703?uid=2&uid=4&sid=21103054448997))
+		+ underestimates of the error, since the if we get one right and the sample appears more than once we'll get the other right
+		+ can be corrected with the ([0.632 Bootstrap](http://www.jstor.org/discover/10.2307/2965703?uid=2&uid=4&sid=21103054448997)), but it is complicated
 
 
 ### K-Fold
 ```{r echo = FALSE, fig.width = 3, fig.height = 3, fig.align = 'center'}
 grid.raster(readPNG("figures/11.png"))
 ```
+
 * break training set into $K$ subsets (above is a 3-fold cross validation)
 * build the model/predictor on the remaining training data in each subset and applied to the test subset
 * rebuild the data $K$ times with the training and test subsets and average the findings
-* ***considerations***	
+* ***considerations***
 	- larger k = less bias, more variance
 	- smaller k = more bias, less variance
 
@@ -297,19 +306,21 @@ grid.raster(readPNG("figures/11.png"))
 ```{r echo = FALSE, fig.width = 3, fig.height = 3, fig.align = 'center'}
 grid.raster(readPNG("figures/12.png"))
 ```
+
 * leave out exactly one sample and build predictor on the rest of training data
 * predict value for the left out sample
 * repeat for each sample
+
 
 
 $\pagebreak$
 
 ## `caret` Package ([tutorial](http://www.edii.uclm.es/~useR-2013/Tutorials/kuhn/user_caret_2up.pdf))
 * **core functionality**
-	- preprocessing/cleaning data --> `preProcess()`
-	- cross validation/data splitting --> `createDataPartition()`, `createResample()`, `createTimeSlices()`
-	- train algorithms on training data and apply to test sets --> `train()`, `predict()`
-	- model comparison (evaluate the accuracy of model on new data) --> `confusionMatrix()`
+	- preprocessing/cleaning data $\rightarrow$ `preProcess()`
+	- cross validation/data splitting $\rightarrow$ `createDataPartition()`, `createResample()`, `createTimeSlices()`
+	- train algorithms on training data and apply to test sets $\rightarrow$ `train()`, `predict()`
+	- model comparison (evaluate the accuracy of model on new data) $\rightarrow$ `confusionMatrix()`
 * machine learning algorithms in `caret` package
 	- linear discriminant analysis
 	- regression
@@ -327,7 +338,7 @@ grid.raster(readPNG("figures/13.png"))
 ```
 
 ### Data Slicing
-* `createDataPartition(y=data$var, times=1, p=0.75, list=FALSE)` --> creates data partitions using given variable
+* `createDataPartition(y=data$var, times=1, p=0.75, list=FALSE)` $\rightarrow$ creates data partitions using given variable
 	- `y=data$var` = specifies what outcome/variable to split the data on
 	- `times=1` = specifies number of partitions to create (number of data splitting performed)
 	- `p=0.75` = percent of data that will be for training the model
@@ -413,11 +424,12 @@ folds$test[[1]]
 
 ### Training Options ([tutorial](http://topepo.github.io/caret/training.html))
 * `train(y ~ x, data=df, method="glm")` = function to apply the machine learning algorithm to construct model from training data
-	
+
 ```{r}
 # returns the arguments of the default train function
 args(train.default)
 ```
+
 * `train` function has a large set of parameters, below are the default options
 	- `method="rf"` = default algorithm is random forest for training a given data set; `caret` contains a large number of algorithms
 		+ `names(getModelInfo())` = returns all the options for `method` argument
@@ -436,6 +448,7 @@ args(train.default)
 # returns the default arguments for the trainControl object
 args(trainControl)
 ```
+
 * `trainControl` creates an object that sets many options for how the model will be applied to the training data
 	- ***Note**: the default values are listed below but you can use them to set the parameters to your discretion *
 	- `method="boot"` =
@@ -486,7 +499,7 @@ featurePlot(x=training[,c("age","education","jobclass")], y = training$wage,plot
 ```
 
 * `qplot(age, wage, color=eduction, data=training)` = can be used to separate data by a factor variable (by coloring the points differently)
-	- `geom_smooth()` = adds a regression line to the plots
+	- `geom_smooth(method = "lm")` = adds a regression line to the plots
 	- `geom=c("boxplot", "jitter")` = specifies what kind of plot to produce, in this case both the boxplot and the point cloud
 
 ```{r fig.width = 6, fig.height =3, fig.align = 'center'}
@@ -515,7 +528,7 @@ p2 <- qplot(cutWage,age, data=training,fill=cutWage,
 grid.arrange(p1,p2,ncol=2)
 ```
 
-* `table(cutVariable, data$var2)` = tabulates the cut factor variable vs another variable in the dataset
+* `table(cutVariable, data$var2)` = tabulates the cut factor variable vs another variable in the dataset (ie; builds a contingency table using cross-classifying factors)
 * `prop.table(table, margin=1)` = converts a table to a proportion table
 	- `margin=1` = calculate the proportions based on the rows
 	- `margin=2` = calculate the proportions based on the columns
@@ -542,10 +555,10 @@ qplot(wage,colour=education,data=training,geom="density")
 
 ### Preprocessing ([tutorial](http://caret.r-forge.r-project.org/preprocess.html))
 * some predictors may have strange distributions (i.e. skewed) and may need to be transformed to be more useful for prediction algorithm
-	- particularly true for model based algorithms --> naive Bayes, linear discriminate analysis, linear regression
+	- particularly true for model based algorithms $\rightarrow$ naive Bayes, linear discriminate analysis, linear regression
 * **centering** = subtracting the observations of a particular variable by its mean
 * **scaling** = dividing the observations of a particular variable by its standard deviation
-* **normalizing** = centering and scaling the variable --> effectively converting each observation to the number of standard deviations away from the mean
+* **normalizing** = centering and scaling the variable $\rightarrow$ effectively converting each observation to the number of standard deviations away from the mean
 	- the distribution of the normalized variable will have a mean of 0 and standard deviation of 1
 	- ***Note**: normalizing data can help remove bias and high variability, but may not be applicable in all cases *
 * ***Note**: if a predictor/variable is standardized when training the model, the same transformations must be performed on the `test` set with the mean and standard deviation of the `train` variables *
@@ -610,6 +623,7 @@ capAveTruth <- (capAveTruth-mean(capAveTruth))/sd(capAveTruth)
 quantile(capAve - capAveTruth)
 ```
 
+
 $\pagebreak$
 
 ## Covariate Creation/Feature Extraction
@@ -621,7 +635,7 @@ $\pagebreak$
 		+ _webpages_: number and type of images, position of elements, colors, videos ([A/B Testing](http://en.wikipedia.org/wiki/A/B_testing))
 		+ _people_: height, weight, hair color, sex, country of origin
 	- generally, more knowledge and understanding you have of the system/data, the easier it will be to extract the summarizing features
-		+ when in doubt, more features is always safer --> lose less information and the features can be filtered during model construction
+		+ when in doubt, more features is always safer $\rightarrow$ lose less information and the features can be filtered during model construction
 	- this process can be automated (i.e. PCA) but generally have to be very careful, as one very useful feature in the training data set may not have as much effect on the test data set
 	- ***Note**: science is the key here, Google "feature extraction for [data type]" for more guidance *
 		+ the goal is always to find the salient characteristics that are likely to be different from observation to observation
@@ -637,11 +651,11 @@ $\pagebreak$
 	- ***Note**: always be careful about over-fitting *
 
 ### Creating Dummy Variables
-* convert factor variables to indicator/dummy variable --> qualitative become quantitative
+* convert factor variables to indicator/dummy variable $\rightarrow$ qualitative become quantitative
 * `dummyVars(outcome~var, data=training)` = creates a dummy variable object that can be used through `predict` function to create dummy variables
 	- `predict(dummyObj, newdata=training)` = creates appropriate columns to represent the factor variable with appropriate 0s and 1s
-		+ 2 factor variable --> two columns which have 0 or 1 depending on the outcome
-		+ 3 factor variable --> three columns which have 0, 0, and 1 representing the outcome
+		+ 2 factor variable $\rightarrow$ two columns which have 0 or 1 depending on the outcome
+		+ 3 factor variable $\rightarrow$ three columns which have 0, 0, and 1 representing the outcome
 		+ ***Note**: only one of the columns can have values of 1 for each observation *
 
 ```{r message = FALSE}
@@ -670,7 +684,7 @@ nearZeroVar(training,saveMetrics=TRUE)
 
 ### Creating Splines (Polynomial Functions)
 * when you want to fit curves through the data, basis functions can be leveraged
-* [`splines` package] `bs(data$var, df=3)` = creates 3 new columns corresponding to the var, var^2^, and var^3^ terms	
+* [`splines` package] `bs(data$var, df=3)` = creates 3 new columns corresponding to the var, var^2^, and var^3^ terms
 * `ns()` and `poly()` can also be used to generate polynomials
 * `gam()` function can also be used and it allows for smoothing of multiple variables with different values for each variable
 * ***Note**: the same polynomial operations must be performed on the test sets using the `predict` function *
@@ -697,7 +711,8 @@ head(predict(bsBasis,age=testing$age))
 	- `doMC::registerDoMC(cores=4)` = registers 4 cores for R to utilize
 	- the number of cores you should specify depends on the CPU on your computer (system information usually contains the number of cores)
 		+ it's also possible to find the number of cores by directly searching for your CPU model number on the Internet
-	- ***Note**: once registered, you should see in your task manager/activity monitor that 4 "R Session" appear when you run your code * 
+	- ***Note**: once registered, you should see in your task manager/activity monitor that 4 "R Session" appear when you run your code *
+
 
 
 $\pagebreak$
@@ -718,14 +733,14 @@ $\pagebreak$
 
 ### `prcomp` Function
 * `pr<-prcomp(data)` = performs PCA on all variables and returns a `prcomp` object that contains information about standard deviations and rotations
-	- `pr$rotations` = returns eigenvectors for the linear combinations of all variables (coefficients that variables are multiplied by to come up with the principal components) --> how the principal components are created
+	- `pr$rotations` = returns eigenvectors for the linear combinations of all variables (coefficients that variables are multiplied by to come up with the principal components) $\rightarrow$ how the principal components are created
 	- often times, it is useful to take the `log` transformation of the variables and adding 1 before performing PCA
 		+ helps to reduce skewness or strange distribution in data
 		+ log(0) = - infinity, so we add 1 to account for zero values
 		+ makes data more Gaussian
 	- `plot(pr)` = plots the percent variation explained by the first 10 principal components (PC)
 		+ can be used to find the PCs that represent the most variation
-		
+
 
 ```{r fig.width = 4, fig.height = 3, fig.align = 'center'}
 # load  spam data
@@ -741,7 +756,7 @@ plot(prComp$x[,1],prComp$x[,2],col=typeColor,xlab="PC1",ylab="PC2")
 ```
 
 ### `caret` Package
-* `pp<-preProcess(log10(training[,-58]+1),method="pca",pcaComp=2,thresh=0.8))` = perform PCA with `preProcess` function and returns the number of principal components that can capture the majority of the variation 
+* `pp<-preProcess(log10(training[,-58]+1),method="pca",pcaComp=2,thresh=0.8))` = perform PCA with `preProcess` function and returns the number of principal components that can capture the majority of the variation
 	- creates a `preProcess` object that can be applied using `predict` function
 	- `pcaComp=2` = specifies the number of principal components to compute (2 in this case)
 	- `thresh=0.8` = threshold for variation captured by principal components
@@ -769,7 +784,7 @@ confusionMatrix(testing$type,predict(modelFit,testPC))
 
 * alternatively, PCA can be directly performed with the `train` method
 	- `train(outcome ~ ., method="glm", preProcess="pca", data=training)` = performs PCA first on the training set and then runs the specified model
-		+ effectively the same procedures as above (`preProcess` --> `predict`)
+		+ effectively the same procedures as above (`preProcess` $\rightarrow$ `predict`)
 * ***Note**: in both cases, the PCs were able to achieve 90+% accuracy *
 
 ```{r message = FALSE, warning = FALSE}
@@ -780,10 +795,11 @@ confusionMatrix(testing$type,predict(modelFit,testing))
 ```
 
 
+
 $\pagebreak$
 
 ## Predicting with Regression
-* **prediction with regression** = fitting regression model (line) to data --> multiplying each variable by coefficients to predict outcome
+* **prediction with regression** = fitting regression model (line) to data $\rightarrow$ multiplying each variable by coefficients to predict outcome
 * useful when the relationship between the variables can be modeled as linear
 * the model is easy to implement and the coefficients are easy to interpret
 * if the relationships are non-linear, the regression model may produce poor results/accuracy
@@ -802,11 +818,11 @@ $\pagebreak$
 	- $\hat Y_i$ is the ***predicted outcome***
 
 ### R Commands and Examples
-* `lm<-lm(y ~ x, data=train)` = runs a linear model of outcome y on predictor x --> univariate regression
+* `lm<-lm(y ~ x, data=train)` = runs a linear model of outcome y on predictor x $\rightarrow$ univariate regression
 	- `summary(lm)` = returns summary of the linear regression model, which will include coefficients, standard errors, $t$ statistics, and p values
 	- `lm(y ~ x1+x2+x3, data=train)` = run linear model of outcome y on predictors x1, x2, and x3
 	- `lm(y ~ ., data=train` = run linear model of outcome y on all predictors
-* `predict(lm, newdata=df)` = use the constructed linear model to predict outcomes ($\hat Y_i$)for the new values
+* `predict(lm, newdata=df)` = use the constructed linear model to predict outcomes ($\hat Y_i$) for the new values
 	- `newdata` data frame must have the same variables (factors must have the same levels) as the training data
 	- `newdata=test` = predict outcomes for the test set based on linear regression model from the training
 	- ***Note**: the regression line will not be a perfect fit on the test set since it was constructed on the training set *
@@ -853,16 +869,16 @@ plot(testFaith$waiting,testFaith$eruptions,pch=19,col="blue")
 matlines(testFaith$waiting,pred1,type="l",,col=c(1,2,2),lty = c(1,1,1), lwd=3)
 ```
 
-* `lm <- train(y ~ x, method="lm", data=train)` = run linear model on the training data --> identical to `lm` function
-	- `summary(lm$finalModel)` = returns summary of the linear regression model, which will include coefficients, standard errors, $t$ statistics, and p values --> identical to `summary(lm)` for a `lm` object
+* `lm <- train(y ~ x, method="lm", data=train)` = run linear model on the training data $\rightarrow$ identical to `lm` function
+	- `summary(lm$finalModel)` = returns summary of the linear regression model, which will include coefficients, standard errors, $t$ statistics, and p values $\rightarrow$ identical to `summary(lm)` for a `lm` object
 	- `train(y ~ ., method="lm", data=train)` = run linear model on all predictors in training data
 		+ multiple predictors (dummy/indicator variables) are created for factor variables
 	- `plot(lm$finalModel)` = construct 4 diagnostic plots for evaluating the model
 		+ ***Note**: more information on these plots can be found at `?plot.lm` *
-		+ ***Residual vs Fitted***
+		+ ***Residuals vs Fitted***
 		+ ***Normal Q-Q***
 		+ ***Scale-Location***
-		+ ***Residual vs Leverage***
+		+ ***Residuals vs Leverage***
 
 ```{r fig.align = 'center'}
 # create train and test sets
@@ -878,25 +894,34 @@ par(mfrow = c(2, 2))
 plot(finMod,pch=19,cex=0.5,col="#00000010")
 ```
 
-* plotting residuals by index can be helpful in showing missing variables
+* plotting residuals by fitted values and coloring with a variable not used in the model helps spot a trend in that variable.
+
+```{r fig.width = 4, fig.height = 3, fig.align = 'center'}
+# plot fitted values by residuals 
+qplot(finMod$fitted, finMod$residuals, color=race, data=training)
+```
+
+* plotting residuals by index (ie; row numbers) can be helpful in showing missing variables
 	- `plot(finMod$residuals)` = plot the residuals against index (row number)
-	- if there's a trend/pattern in the residuals, it is highly likely that another variable (such as age/time) should be included
+	- if there's a trend/pattern in the residuals, it is highly likely that another variable (such as age/time) should be included.
 		+ residuals should not have relationship to index
 
 ```{r fig.width = 4, fig.height = 3, fig.align = 'center'}
 # plot residual by index
 plot(finMod$residuals,pch=19,cex=0.5)
 ```
+
 * here the residuals increase linearly with the index, and the highest residuals are concentrated in the higher indexes, so there must be a missing variable
+
 
 
 $\pagebreak$
 
 ## Prediction with Trees
-* **prediction with trees** = iteratively split variables into groups (effectively constructing decision trees) --> produces nonlinear model
-	- the classification tree uses interactions between variables --> the ultimate groups/leafs may depend on many variables
+* **prediction with trees** = iteratively split variables into groups (effectively constructing decision trees) $\rightarrow$ produces nonlinear model
+	- the classification tree uses interactions between variables $\rightarrow$ the ultimate groups/leafs may depend on many variables
 * the result (tree) is easy to interpret, and generally performs better predictions than regression models when the relationships are ***non-linear***
-* transformations less important --> monotone transformations (order unchanged, such as $\log$) will produce same splits
+* transformations less important $\rightarrow$ monotone transformations (order unchanged, such as $\log$) will produce same splits
 * trees can be used for regression problems as well and use RMSE as _measure of impurity_
 * however, without proper cross-validation, the model can be ***over-fitted*** (especially with large number of variables) and results may be variable from one run to the next
 	- it is also harder to estimate the uncertainty of the model
@@ -919,7 +944,7 @@ $$\hat{p}_{mk} = \frac{\sum_{i}^m \mathbb{1}(y_i = k)}{N_m}$$
 * __Misclassification Error__ $$ 1 - \hat{p}_{m~k(m)}$$ where $k(m)$ is the most common classification/group
 	- 0 = perfect purity
 	- 0.5 = no purity
-		+ ***Note**: it is not 1 here because when $\hat{p}_{m~k(m)}$ < 0.5 or there's not predominant classification for the objects, it means the group should be further subdivided until there's a majority *
+		+ ***Note**: it is not 1 here because when $\hat{p}_{m~k(m)} < 0.5$ or there's not predominant classification for the objects, it means the group should be further subdivided until there's a majority *
 
 * __Gini Index__$$ \sum_{k \neq k'} \hat{p}_{mk} \times \hat{p}_{mk'} = \sum_{k=1}^K \hat{p}_{mk}(1-\hat{p}_{mk}) = 1 - \sum_{k=1}^K p_{mk}^2$$
 	- 0 = perfect purity
@@ -945,6 +970,7 @@ plot(x,y,xaxt="n",yaxt="n",cex=3,col=c(rep("blue",15),rep("red",1)),pch=19)
 # plot second scenario
 plot(x,y,xaxt="n",yaxt="n",cex=3,col=c(rep("blue",8),rep("red",8)),pch=19)
 ```
+
 * left graph
 	- __Misclassification:__ $\frac{1}{16} = 0.06$
 	- __Gini:__ $1 - [(\frac{1}{16})^2 + (\frac{15}{16})^2] = 0.12$
@@ -962,10 +988,10 @@ plot(x,y,xaxt="n",yaxt="n",cex=3,col=c(rep("blue",8),rep("red",8)),pch=19)
 * `plot(tree$finalModel, uniform=TRUE)` = plots the classification tree with all nodes/splits
 	- [`rattle` package] `fancyRpartPlot(tree$finalModel)` = produces more readable, better formatted classification tree diagrams
 	- each split will have the condition/node in bold and the splits/leafs on the left and right sides following the "yes" or "no" indicators
-		+ "yes" --> go left
-		+ "no" --> go right
+		+ "yes" $\rightarrow$ go left
+		+ "no" $\rightarrow$ go right
 
-```{r fig.width = 6, fig.height = 4, fig.align = 'center', message = FALSE, cache = TRUE}
+```{r fig.width = 6, fig.height = 4, fig.align = 'center', message = FALSE, cache = FALSE}
 # load iris data set
 data(iris)
 # create test/train data sets
@@ -982,13 +1008,13 @@ rattle::fancyRpartPlot(modFit$finalModel)
 predict(modFit,newdata=testing)
 ```
 
-$\pagebreak$
+
 
 ## Bagging
 * **bagging** = bootstrap aggregating
 	- resample training data set (with replacement) and recalculate predictions
 	- average the predictions together or majority vote
-	- more information can be found [here](http://stat.ethz.ch/education/semesters/FS_2008/CompStat/sk-ch8.pdf) 
+	- more information can be found [here](http://stat.ethz.ch/education/semesters/FS_2008/CompStat/sk-ch8.pdf)
 * averaging multiple complex models have ***similar bias*** as each of the models on its own, and ***reduced variance*** because of the average
 * most useful for non-linear models
 
@@ -996,7 +1022,7 @@ $\pagebreak$
 	- `loess(y ~ x, data=train, span=0.2)` = fits a smooth curve to data
 		+ `span=0.2` = controls how smooth the curve should be
 
-```{r fig.width = 5, fig.height = 4, fig.align = 'center', message = FALSE, warning = FALSE, cache = TRUE}
+```{r fig.width = 5, fig.height = 4, fig.align = 'center', message = FALSE, warning = FALSE, cache = FALSE}
 # load data
 library(ElemStatLearn); data(ozone,package="ElemStatLearn")
 # reorder rows based on ozone variable
@@ -1023,7 +1049,7 @@ lines(1:155,apply(ll,2,mean),col="red",lwd=2)
 ```
 
 ### Bagging Algorithms
-* in the `caret` package, there are three options for the `train` function to perform bagging 
+* in the `caret` package, there are three options for the `train` function to perform bagging
 	- `bagEarth` - Bagged MARS ([documentation](http://www.inside-r.org/packages/cran/caret/docs/bagEarth))
 	- `treebag` - Bagged CART ([documentation](http://www.inside-r.org/packages/cran/ipred/docs/bagging))
 	- `bagFDA` - Bagged Flexible Discriminant Analysis ([documentation](http://www.inside-r.org/packages/cran/caret/docs/bagFDA))
@@ -1037,7 +1063,7 @@ lines(1:155,apply(ll,2,mean),col="red",lwd=2)
 
 * ***example***
 
-```{r fig.width = 5, fig.height = 4, fig.align = 'center', message = FALSE, warning = FALSE, cache = TRUE}
+```{r fig.width = 5, fig.height = 4, fig.align = 'center', message = FALSE, warning = FALSE, cache = FALSE}
 # load relevant package and data
 library(party); data(ozone,package="ElemStatLearn")
 # reorder rows based on ozone variable
@@ -1060,6 +1086,7 @@ points(ozone$ozone,predict(treebag$fits[[1]]$fit,predictors),pch=19,col="red")
 points(ozone$ozone,predict(treebag,predictors),pch=19,col="blue")
 ```
 
+
 $\pagebreak$
 
 ## Random Forest
@@ -1069,6 +1096,7 @@ $\pagebreak$
 ```{r echo = FALSE, fig.width = 5, fig.height = 3, fig.align = 'center'}
 grid.raster(readPNG("figures/14.png"))
 ```
+
 * **process**
 	- bootstrap samples from training data (with replacement)
 	- split and bootstrap variables
@@ -1087,7 +1115,7 @@ grid.raster(readPNG("figures/14.png"))
 	- `prox=TRUE` = the proximity measures between observations should be calculated (used in functions such as `classCenter()` to find center of groups)
 		+ `rf$finalModel$prox` = returns matrix of proximities
 	- `ntree=500` = specify number of trees that should be constructed
-	- `do.trace=TRUE` = prints logs as the trees are being built --> useful by indicating progress to user
+	- `do.trace=TRUE` = prints logs as the trees are being built $\rightarrow$ useful by indicating progress to user
 	- ***Note**: `randomForest()` function can be used to perform random forest algorithm (syntax is the same as `train`) and is much faster *
 * `getTree(rf$finalModel, k=2)` = return specific tree from random forest model
 * `classCenters(predictors, outcome, proximity, nNbr)` = return computes the cluster centers using the `nNbr` nearest neighbors of the observations
@@ -1099,7 +1127,7 @@ grid.raster(readPNG("figures/14.png"))
 
 * ***example***
 
-```{r fig.width = 5, fig.height = 3, fig.align = 'center', message = FALSE, warning = FALSE, cache = TRUE}
+```{r fig.width = 5, fig.height = 3, fig.align = 'center', message = FALSE, warning = FALSE, cache = FALSE}
 # load data
 data(iris)
 # create train/test data sets
@@ -1129,6 +1157,7 @@ qplot(Petal.Width,Petal.Length,colour=predRight,data=testing,main="newdata Predi
 ```
 
 
+
 $\pagebreak$
 
 ## Boosting
@@ -1136,7 +1165,7 @@ $\pagebreak$
 * boosting can be done with any set of classifiers, and a well-known approach is [gradient boosting](http://en.wikipedia.org/wiki/Gradient_boosting)
 * more detail tutorial can be found [here](http://webee.technion.ac.il/people/rmeir/BoostingTutorial.pdf)
 
-* **process**: take a group of weak predictors --> weight them and add them up --> result in a stronger predictor
+* **process**: take a group of weak predictors $\rightarrow$ weight them and add them up $\rightarrow$ result in a stronger predictor
 	- start with a set of classifiers $h_1, \ldots, h_k$
   		+ examples: all possible trees, all possible regression models, all possible cutoffs (divide data into different parts)
 	- calculate a weighted sum of classifiers as the prediction value $$f(x) = \sum_i \alpha_i h_i(x)$$ where $\alpha_i$ = coefficient/weight and $h_i(x)$ = value of classifier
@@ -1150,6 +1179,7 @@ $\pagebreak$
 ```{r echo = FALSE, fig.width = 1.5, fig.height = 1.5, fig.align = 'center'}
 grid.raster(readPNG("figures/15.png"))
 ```
+
 * we start with space with **blue +** and **red -** and the goal is to classify all the object correctly
 * only straight lines will be used for classification
 
@@ -1162,6 +1192,7 @@ grid.raster(readPNG("figures/17.png"))
 ```{r echo = FALSE, fig.width = 4, fig.height = 4, fig.align = 'center'}
 grid.raster(readPNG("figures/18.png"))
 ```
+
 * from the above, we can see that a group of weak predictors (lines in this case), can be combined and weighed to become a much stronger predictor
 
 ### R Commands and Examples
@@ -1176,7 +1207,7 @@ grid.raster(readPNG("figures/18.png"))
 
 * ***example***
 
-```{r message = FALSE, warning = FALSE, cache = TRUE}
+```{r message = FALSE, warning = FALSE, cache = FALSE}
 # load data
 data(Wage)
 # remove log wage variable (we are trying to predict wage)
@@ -1227,19 +1258,19 @@ $\pagebreak$
 * to compare the probability for outcome $Y = k$ versus probability for outcome $Y = k$, we can look at the ratio of $$\frac{P(Y=k~|~X=x)}{P(Y=j~|~X=x)}$$
 * take the **log** of the ratio and apply Bayes' Theorem, we get $$\log \frac{P(Y = k~|~X=x)}{P(Y = j~|~X=x)} = \log \frac{f_k(x)}{f_j(x)} + \log \frac{\pi_k}{\pi_j}$$ which is effectively the log ratio of probability density functions plus the log ratio of prior probabilities
 	- ***Note**: $\log$ = **monotone** transformation, which means taking the $\log$ of a quantity does not affect implication of the ratio since th $\log(ratio)$ is _directly correlated_ with ratio *
-* if we substitute $f_k(x)$ and $f_l(x)$ with Gaussian probability density functions $$f(x) = \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$ so the ratio can be simplified to $$\log \frac{P(Y = k~|~X=x)}{P(Y = j~|~X=x)} = \underbracket[0.5pt]{\log \frac{\pi_k}{\pi_j}}_{\text{constant}} - \underbracket[0.5pt][6pt]{\frac{1}{2}(\mu_k + \mu_j)^T \Sigma^{-1}(\mu_k + \mu_j)}_{\text{constant}} + x^T \underbracket[0.5pt][10pt]{\Sigma^{-1} (\mu_k - \mu_j)}_{\text{slope}}$$ where $\Sigma^{-1}$ = covariance matrix for the predictor variables, $x^T$ = set of predictor variables, and $\mu_k$ / $\mu_j$ = mean of $k$, $j$ respectively 
-* as annotated above, the log-ratio is effectively an equation of a line for a set of predictor variables $x$
-	- ***Note**: the lines are also known as **decision boundaries** * 
+* if we substitute $f_k(x)$ and $f_l(x)$ with Gaussian probability density functions $$f(x) = \frac{1}{\sigma \sqrt{2 \pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$ so the ratio can be simplified to $$\log \frac{P(Y = k~|~X=x)}{P(Y = j~|~X=x)} = \log \frac{\pi_k}{\pi_j} - \frac{1}{2}(\mu_k + \mu_j)^T \Sigma^{-1}(\mu_k + \mu_j) + x^T \Sigma^{-1} (\mu_k - \mu_j)$$ where $\Sigma^{-1}$ = covariance matrix for the predictor variables, $x^T$ = set of predictor variables, and $\mu_k$ / $\mu_j$ = mean of $k$, $j$ respectively
+* as annotated above, the log-ratio is effectively an equation of a line for a set of predictor variables $x$ $\rightarrow$ the first two terms are constants and the last term is in the form of $X \beta$
+	- ***Note**: the lines are also known as **decision boundaries** *
 * therefore, we can classify values based on ***which side of the line*** the value is located ($k$ vs $j$)
 * **discriminant functions** are used to determine value of $k$, the functions are in the form of $$\delta_k(x) = x^T \Sigma^{-1} \mu_k - \frac{1}{2}\mu_k \Sigma^{-1}\mu_k + log(\mu_k)$$
-	- plugging in the set of predictor variables, $x^T$, into the discriminant function, we can find the value of $k$ that ***maximizes*** the function $\delta_k(x)$ 
+	- plugging in the set of predictor variables, $x^T$, into the discriminant function, we can find the value of $k$ that ***maximizes*** the function $\delta_k(x)$
 	- the terms of the discriminant function can be estimated using maximum likelihood
-* the predicted value for the outcome is therefore $\hat{Y}(x) = argmax_k \delta_k(x)$ 
+* the predicted value for the outcome is therefore $\hat{Y}(x) = argmax_k \delta_k(x)$
 
 * ***example***
 	- classify a group of values into 3 groups using 2 variables ($x$, $y$ coordinates)
 	- 3 lines are draw to split the data into 3 Gaussian distributions
-		+ each line splits the data into two groups --> 1 vs 2, 2 vs 3, 1 vs 3
+		+ each line splits the data into two groups $\rightarrow$ 1 vs 2, 2 vs 3, 1 vs 3
 		+ each side of the line represents a region where the probability of one group (1, 2, or 3) is the highest\
 	- the result is represented in the the following graph
 
@@ -1266,7 +1297,7 @@ pred.lda <- predict(lda,testing)
 # print results
 pred.lda
 ```
- 
+
 
 
 ### Naive Bayes
@@ -1279,9 +1310,9 @@ pred.lda
 & = \pi_k P(X_1 ~|~ Y = k) P(X_2 ~|~ X_1, Y=k) P(X_3,\ldots,X_m ~|~ X_1,X_2, Y=k) \\
 & = \pi_k P(X_1 ~|~ Y = k) P(X_2 ~|~ X_1, Y=k)\ldots P(X_m~|~X_1\ldots,X_{m-1},Y=k) \\
 \end{aligned}$$ where each variable has its own probability term that depends on all the terms before it
-	- this is effectively indicating that each of the predictors may be dependent on other predictors 
+	- this is effectively indicating that each of the predictors may be dependent on other predictors
 * however, if we make the assumption that all predictor variables are **independent** to each other, the quantity can be simplified to $$ \pi_k P(X_1,\ldots,X_m~|~ Y=k) \approx \pi_k P(X_1 ~|~ Y = k) P(X_2 ~|~ Y = k)\ldots P(X_m ~|~,Y=k)$$ which is effectively the product of the prior probability for $k$ and the probability of variables $X_1,\ldots,X_m$ given that $Y = k$
-	- ***Note**: the assumption is naive in that it is unlikely the predictors are completely independent of each other, but this model still produces **useful** results particularly with **large number of binary/categorical variables** * 
+	- ***Note**: the assumption is naive in that it is unlikely the predictors are completely independent of each other, but this model still produces **useful** results particularly with **large number of binary/categorical variables** *
 		+ text and document classification usually require large quantities of binary and categorical features
 
 * **R Commands**
@@ -1310,7 +1341,9 @@ equalPredictions <- (pred.lda==pred.nb)
 # plot the comparison
 qplot(Petal.Width,Sepal.Width,colour=equalPredictions,data=testing)
 ```
+
 * as we can see from above, only one data point, which is located inbetween the two classes is predicted differently by the two models
+
 
 
 
@@ -1324,6 +1357,7 @@ $\pagebreak$
 ```{r echo = FALSE, fig.width = 3, fig.height = 3, fig.align = 'center'}
 grid.raster(readPNG("figures/20.png"))
 ```
+
 * this is expected since as more predictors used, the model is more likely to _overfit_ the training data
 * **goal** in selecting models = ***avoid overfitting*** on training data and ***minimize error*** on test data
 * ***approaches***
@@ -1335,14 +1369,14 @@ grid.raster(readPNG("figures/20.png"))
 		+ lasso regression
 * ***problems***
 	- time/computational complexity limitations
-	- high dimensional 
+	- high dimensional
 
-### Example: Training vs Test Error for Combination of Predictors 
+### Example: Training vs Test Error for Combination of Predictors
 - ***Note**: the code for this example comes from [Hector Corrada Bravo's Practical Machine Learning Course](http://www.cbcb.umd.edu/~hcorrada/PracticalML/src/selection.R) *
 - to demonstrate the behavior of training and test errors, the `prostate` dataset from _Elements of Statistical Learning_ is used
 - all combinations of predictors are used to produce prediction models, and Residual Squared Error (RSS) is calculated for all models on both the training and test sets
 
-```{r fig.width = 5, fig.height = 4, fig.align = 'center', cache = TRUE}
+```{r fig.width = 5, fig.height = 4, fig.align = 'center', cache = FALSE}
 # load data and set seed
 data(prostate); set.seed(1)
 # define outcome y and predictors x
@@ -1380,8 +1414,8 @@ for (i in 1:p) {
     })
 }
 # set up plot with labels, title, and proper x and y limits
-plot(1:p, 1:p, type="n", ylim=range(unlist(rss)), xlim=c(0,p), 
-	xlab="Number of Predictors", ylab="Residual Sum of Squares", 
+plot(1:p, 1:p, type="n", ylim=range(unlist(rss)), xlim=c(0,p),
+	xlab="Number of Predictors", ylab="Residual Sum of Squares",
 	main="Prostate Cancer Data - Training vs Test RSS")
 # add data points for training and test residual sum squares
 for (i in 1:p) {
@@ -1401,6 +1435,7 @@ lines((1:p), minrss, col="red", lwd=1.7)
 # add legend
 legend("topright", c("Train", "Test"), col=c("blue", "red"), pch=1)
 ```
+
 * from the above, we can clearly that test RSS error approaches the minimum at around 3 predictors and increases slightly as more predictors are used
 
 
@@ -1425,13 +1460,13 @@ E\left[\left(Y - \hat{f}_{\lambda}(x^*)\right)^2\right] & = \sigma^2 + \left(E[\
 & = \mbox{Irreducible Error} + \mbox{Bias}^2 + \mbox{Variance}\\
 \end{aligned} $$
 	- **goal of prediction model** = minimize overall expected prediction error
-	- irreducible error = noise inherent to the data collection process --> cannot be reduced
+	- irreducible error = noise inherent to the data collection process $\rightarrow$ cannot be reduced
 	- bias/variance = can be traded in order to find optimal model (least error)
 
 ### Hard Thresholding
 * if there are more predictors than observations (high-dimensional data), linear regressions will only return coefficients for some of the variables because there's not enough data to estimate the rest of the parameters
 	- conceptually, this occurs because the design matrix that the model is based on cannot be inverted
-	- ***Note**: ridge regression can help address this problem * 
+	- ***Note**: ridge regression can help address this problem *
 * **hard thresholding** can help estimate the coefficients/model by taking subsets of predictors and building models
 * **process**
 	- model the outcome as $$Y_i = f(X_i) + \epsilon_i$$ where $\epsilon_i$ = error term
@@ -1441,7 +1476,7 @@ E\left[\left(Y - \hat{f}_{\lambda}(x^*)\right)^2\right] & = \sigma^2 + \left(E[\
 	- computationally intensive
 
 * ***example***
-	- as we can see from the results below, some of the coefficients have values of `NA` 
+	- as we can see from the results below, some of the coefficients have values of `NA`
 
 ```{r message = F, warning = F}
 # load prostate data
@@ -1454,7 +1489,7 @@ lm(lpsa ~ .,data =small)
 
 ### Regularized Regression Concept ([Resource](http://www.cbcb.umd.edu/~hcorrada/PracticalML/pdf/lectures/selection.pdf))
 * **regularized regression** = fit a regression model and adjust for the large coefficients in attempt to help with bias/variance trade-off or model selection
-	- when running regressions unconstrained (without specifying any criteria for coefficients), the model may be susceptible to high variance (coefficients explode --> very large values) if there are variables that are highly correlated
+	- when running regressions unconstrained (without specifying any criteria for coefficients), the model may be susceptible to high variance (coefficients explode $\rightarrow$ very large values) if there are variables that are highly correlated
 	- controlling/regularizing coefficients may slightly ***increase bias*** (lose a bit of prediction capability) but will ***reduce variance*** and improve the prediction error
 	- however, this approach may be very demanding computationally and generally does not perform as well as random forest/boosting
 * **Penalized Residual Sum of Squares (PRSS)** is calculated by adding a penalty term to the prediction squared error $$PRSS(\beta) = \sum_{j=1}^n (Y_j - \sum_{i=1}^m \beta_{1i} X_{ij})^2 + P(\lambda; \beta)$$
@@ -1480,7 +1515,7 @@ lm(lpsa ~ .,data =small)
 	- as $\lambda \rightarrow 0$, the result approaches the least square solution
 	- as $\lambda \rightarrow \infty$, all of the coefficients receive large penalties and the conditional coefficients $\hat{\beta}_{\lambda=\infty}^{ridge}$ approaches zero collectively
 	- $\lambda$ should be carefully chosen through cross-validation/other techniques to find the optimal tradeoff of bias for variance
-	- ***Note**: it is important realize that all coefficients (though they may be shrunk to very small values) will **still be included** in the model when applying ridge regression * 
+	- ***Note**: it is important realize that all coefficients (though they may be shrunk to very small values) will **still be included** in the model when applying ridge regression *
 
 * **R Commands**
 	- [`MASS` package] `ridge<-lm.ridge(outcome ~ predictors, data=training, lambda=5)` = perform ridge regression with given outcome and predictors using the provided $\lambda$ value
@@ -1493,13 +1528,13 @@ lm(lpsa ~ .,data =small)
 		+ `ridge$ym` = return mean of outcome
 	- [`caret` package] `train(outcome ~ predictors, data=training, method="ridge", lambda=5)` = perform ridge regression with given outcome and predictors
 		+ `preProcess=c("center", "scale")` = centers and scales the predictors before the model is built
-			* ***Note**: this is generally a good idea for building ridge regressions * 
+			* ***Note**: this is generally a good idea for building ridge regressions *
 		+ `lambda=5` = tuning parameter
 	- [`caret` package] `train(outcome ~ predictors, data=training, method="foba", lambda=5, k=4)` = perform ridge regression with variable selection
 		+ `lambda=5` = tuning parameter
 		+ `k=4` = number of variables that should be retained
 			* this means that `length(predictors)-k` variables will be eliminated
-	- [`caret` package] `predict(model,test)` = use the model to predict on test set --> similar to all other `caret` algorithms
+	- [`caret` package] `predict(model,test)` = use the model to predict on test set $\rightarrow$ similar to all other `caret` algorithms
 
 * ***example: ridge coefficient paths vs $\lambda$***
 	- using the same `prostate` dataset, we will run ridge regressions with different values of $\lambda$ and find the optimum $\lambda$ value that minimizes test RSS
@@ -1545,7 +1580,7 @@ plot(lambdas,test.rss,type="l",col="red",lwd=2,ylab="RSS",ylim=range(train.rss,t
 lines(lambdas,train.rss,col="blue",lwd=2,lty=2)
 # find the best lambda that minimizes test RSS
 best.lambda <- lambdas[which.min(test.rss)]
-# plot vertical line marking the best lambda 
+# plot vertical line marking the best lambda
 abline(v=best.lambda)
 # add text label
 text(best.lambda+5, min(test.rss)-2, paste("best lambda=", round(best.lambda, 2)))
@@ -1569,7 +1604,7 @@ legend("topright",covnames,pch=as.character(1:8), cex = 0.5)
 * this is equivalent to solving the equation $$PRSS(\beta_j) = \sum_{i=1}^N \left(y_i - \beta_0 - \sum_{j=1}^p x_{ij}\beta_j \right)^2$$ subject to constraint $\sum_{j=1}^p |\beta_j| \leq s$ where $s$ is inversely proportional to $\lambda$
 * $\lambda$ = tuning parameter
 	- controls size of coefficients or the amount of regularization
-	- large values of $\lambda$ will set some coefficient equal to zero 
+	- large values of $\lambda$ will set some coefficient equal to zero
 		+ ***Note**: LASSO effectively performs model selection (choose subset of predictors) while shrinking other coefficients, where as Ridge only shrinks the coefficients *
 
 * **R Commands**
@@ -1577,29 +1612,29 @@ legend("topright",covnames,pch=as.character(1:8), cex = 0.5)
 		+ ***Note**: the predictors are **centered and scaled first** before the regression is run *
 		+ `as.matrix(x)` = the predictors must be in matrix/dataframe format
 		+ `trace=TRUE` = prints progress of the lasso regression
-		+ `lasso$lambda` = return the $\lambda$s used for each step of the lasso regression 
+		+ `lasso$lambda` = return the $\lambda$s used for each step of the lasso regression
 		+ `plot(lasso)` = prints plot that shows the progression of the coefficients as they are set to zero one by one
 		+ `predit.lars(lasso, test)` = use the lasso model to predict on test data
-			* ***Note**: more information/documentation can be found in `?predit.lars` * 
+			* ***Note**: more information/documentation can be found in `?predit.lars` *
 	- [`lars` package] `cv.lars(as.matrix(x), y, K=10, type="lasso", trace=TRUE)` = computes K-fold cross-validated mean squared prediction error for lasso regression
-		+ effectively the `lars` function is run `K` times with each of the folds to estimate the 
+		+ effectively the `lars` function is run `K` times with each of the folds to estimate the
 		+ `K=10` = create 10-fold cross validation
 		+ `trace=TRUE` = prints progress of the lasso regression
 	- [`enet` package] `lasso<-enet(predictors, outcome, lambda = 0)` = perform elastic net regression on given predictors and outcome
 		+ `lambda=0` = default value for $\lambda$
-			* ***Note**: lasso regression is a special case of elastic net regression, and forcing `lambda=0` tells the function to fit a lasso regression * 
+			* ***Note**: lasso regression is a special case of elastic net regression, and forcing `lambda=0` tells the function to fit a lasso regression *
 		+ `plot(lasso)` = prints plot that shows the progression of the coefficients as they are set to zero one by one
 		+ `predict.ent(lasso, test)`= use the lasso model to predict on test data
 	- [`caret` package] `train(outcome ~ predictors, data=training, method="lasso")` = perform lasso regression with given outcome and predictors
 		+ ***Note**: outcome and predictors must be in the same dataframe *
 		+ `preProcess=c("center", "scale")` = centers and scales the predictors before the model is built
-			* ***Note**: this is generally a good idea for building lasso regressions * 
+			* ***Note**: this is generally a good idea for building lasso regressions *
 	- [`caret` package] `train(outcome~predictors,data=train,method="relaxo",lambda=5,phi=0.3)` = perform relaxed lasso regression on given predictors and outcome
 		+ `lambda=5` = tuning parameter
-		+ `phi=0.3` = relaxation parameter 
+		+ `phi=0.3` = relaxation parameter
 			* `phi=1` corresponds to the regular Lasso solutions
 			* `phi=0` computes the OLS estimates on the set of variables selected by the Lasso
-	- [`caret` package] `predict(model,test)` = use the model to predict on test set --> similar to all other `caret` algorithms
+	- [`caret` package] `predict(model,test)` = use the model to predict on test set $\rightarrow$ similar to all other `caret` algorithms
 
 * ***example: `lars` package***
 
@@ -1611,12 +1646,13 @@ lasso.fit <- lars(as.matrix(x), y, type="lasso", trace=TRUE)
 # plot lasso regression model
 plot(lasso.fit, breaks=FALSE, cex = 0.75)
 # add legend
-legend("topleft", covnames, pch=8, lty=1:length(covnames), 
+legend("topleft", covnames, pch=8, lty=1:length(covnames),
 	col=1:length(covnames), cex = 0.6)
 # plots the cross validation curve
 lasso.cv <- cv.lars(as.matrix(x), y, K=10, type="lasso", trace=TRUE)
 ```
- 
+
+
 
 
 
@@ -1658,8 +1694,8 @@ $\pagebreak$
 * **majority vote accuracy (mva)** = probability of the majority of the models achieving 70% at the same time
 
 $$\begin{aligned}
-\mbox{majority vote accuracy} & = probability(3~correct,~2~wrong) + probability(4~correct,~1~wrong) \\
-&\qquad+ probability(5~correct) \\
+\mbox{majority vote accuracy} & = p(3~correct,~2~wrong) + p(4~correct,~1~wrong) \\
+&\qquad+ p(5~correct) \\
 & = {5 \choose 3} \times(0.7)^3(0.3)^2 + {5 \choose 4} \times(0.7)^4(0.3)^1 - {5 \choose 5} (0.7)^5 \\
 & = 10 \times(0.7)^3(0.3)^2 + 5 \times(0.7)^4(0.3)^2 - 1 \times (0.7)^5 \\
 & = 83.7% \\
@@ -1669,7 +1705,7 @@ $$\begin{aligned}
 
 ### Example - Model Ensembling
 
-```{r warning = FALSE, message = FALSE, cache = TRUE}
+```{r warning = FALSE, message = FALSE, cache = FALSE}
 # set up data
 inBuild <- createDataPartition(y=Wage$wage,p=0.7, list=FALSE)
 validation <- Wage[-inBuild,]; buildData <- Wage[inBuild,]
@@ -1705,6 +1741,7 @@ rbind(test = c(glm = sqrt(sum((glm.pred.test-testing$wage)^2)),
 		sqrt(sum((rf.pred.val-validation$wage)^2)),
 		sqrt(sum((comb.pred.val-validation$wage)^2))))
 ```
+
 
 
 
@@ -1760,7 +1797,7 @@ $\pagebreak$
 	- `googOpen<-Op(GOOG)` = returns the opening price from the stock data frame
 		+ `Cl(), Hi(), Lo()` = returns the close, high and low price from the stock data frame
 	- `ts(googOpen, frequency=12)` = convert data to a time series with `frequency` observations per time unit
-		+ `frequency=12` = number of observations per unit time (12 in this case because there are 12 months in each year --> converts data into ***yearly*** time series)
+		+ `frequency=12` = number of observations per unit time (12 in this case because there are 12 months in each year $\rightarrow$ converts data into ***yearly*** time series)
 * `decompose(ts)` = decomposes time series into trend, seasonal, and irregular components by using moving averages
 	- `ts` = time series object
 * `window(ts, start=1, end=6)` = subsets the time series at the specified starting and ending points
@@ -1779,10 +1816,9 @@ $\pagebreak$
 		+ `plot(forecast)` = plots the forecast object, which includes the training data, forecast values for test periods, as well as the 80 and 95 percent confidence interval regions
 	- `accuracy(forecast, testData)` = returns the accuracy metrics (RMSE, etc.) for the forecast model
 * `quandl` package is also used for finance-related predictions
-
 * ***example: decomposed time series***
 
-```{r fig.width = 5, fig.height = 4.5, fig.align = 'center', message = FALSE, warning = FALSE, cache = TRUE}
+```{r fig.width = 5, fig.height = 4.5, fig.align = 'center', message = FALSE, warning = FALSE, cache = FALSE}
 # load quantmod package
 library(quantmod);
 # specify to and from dates
@@ -1824,6 +1860,7 @@ accuracy(fcast,ts.test)
 ```
 
 
+
 $\pagebreak$
 
 ## Unsupervised Prediction
@@ -1863,12 +1900,13 @@ kMeans1 <- kmeans(subset(training,select=-c(Species)),centers=3)
 # add clusters as new variable to training set
 training$clusters <- as.factor(kMeans1$cluster)
 # plot clusters vs Species classification
-p1 <- qplot(Petal.Width,Petal.Length,colour=clusters,data=training) + 
+p1 <- qplot(Petal.Width,Petal.Length,colour=clusters,data=training) +
 	ggtitle("Clusters Classification")
-p2 <- qplot(Petal.Width,Petal.Length,colour=Species,data=training) + 
+p2 <- qplot(Petal.Width,Petal.Length,colour=Species,data=training) +
 	ggtitle("Species Classification (Truth)")
 grid.arrange(p1, p2, ncol = 2)
 ```
+
 * as we can see, there are three clear groups that emerge from the data
 	- this is fairly close to the actual results from Species
 	- we can compare the results from the clustering and Species classification by tabulating the values
@@ -1877,21 +1915,25 @@ grid.arrange(p1, p2, ncol = 2)
 # tabulate the results from clustering and actual species
 table(kMeans1$cluster,training$Species)
 ```
+
 * with the clusters determined, the training data can be trained on all predictors with the clusters from k-means as outcome
 
 ```{r message = F, warning = F}
 # build classification trees using the k-means cluster
 clustering <- train(clusters ~.,data=subset(training,select=-c(Species)),method="rpart")
 ```
+
 * we can compare the prediction results on training set vs truth
 
 ```{r message = F, warning = F}
 # tabulate the prediction results on training set vs truth
 table(predict(clustering,training),training$Species)
 ```
+
 * similarly, we can compare the prediction results on test set vs truth
 
 ```{r message = F, warning = F}
 # tabulate the prediction results on test set vs truth
 table(predict(clustering,testing),testing$Species)
 ```
+

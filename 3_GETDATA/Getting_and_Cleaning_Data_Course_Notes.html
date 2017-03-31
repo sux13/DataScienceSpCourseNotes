@@ -60,9 +60,9 @@ img {
 <li><a href="#reading-xml">Reading XML</a></li>
 <li><a href="#reading-json">Reading JSON</a></li>
 <li><a href="#data.table">data.table</a></li>
-<li><a href="#reading-from-mysql-install.packagesrmysql-libraryrmysql">Reading from MySQL [install.packages(“RMySQL”); library(RMySQL)]</a></li>
+<li><a href="#reading-from-mysql">Reading from MySQL</a></li>
 <li><a href="#hdf5">HDF5</a></li>
-<li><a href="#web-scraping-tutorial">Web (Scraping) (<a href="http://www.r-bloggers.com/?=Web+Scraping">tutorial</a>)</a></li>
+<li><a href="#web-scraping-tutorial">Web Scraping (<a href="http://www.r-bloggers.com/?=Web+Scraping">tutorial</a>)</a></li>
 <li><a href="#working-with-api">Working with API</a></li>
 <li><a href="#reading-from-other-sources">Reading from Other Sources</a></li>
 <li><a href="#dplyr">dplyr</a></li>
@@ -80,13 +80,12 @@ img {
 </ul>
 </div>
 
-
 <div id="overview" class="section level2">
 <h2>Overview</h2>
 <ul>
 <li>finding and extracting raw data</li>
 <li>today any how to make data tiny</li>
-<li>Raw data –&gt; processing script –&gt; tidy data –&gt; data analysis –&gt; data communication</li>
+<li>Raw data <span class="math">\(\rightarrow\)</span> processing script <span class="math">\(\rightarrow\)</span> tidy data <span class="math">\(\rightarrow\)</span> data analysis <span class="math">\(\rightarrow\)</span> data communication</li>
 </ul>
 </div>
 <div id="raw-and-processed-data" class="section level2">
@@ -94,11 +93,11 @@ img {
 <ul>
 <li><strong>Data</strong> = values of qualitative/quantitative, variables, belonging to a set of items
 <ul>
-<li><strong>variables</strong> = measurement of characteristic of an item<br /></li>
+<li><strong>variables</strong> = measurement of characteristic of an item</li>
 </ul></li>
 <li><strong>Raw data</strong> = original source of data, often hard to use, processing must be done before analysis, may need to be processed only once</li>
 <li><strong>Processed data</strong> = ready for analysis, processing done (merging, transforming, etc.), all steps should be recorded</li>
-<li>Sequencing DNA: $1B for Human Genome Project –&gt; $10,000 in a week with Illumina</li>
+<li>Sequencing DNA: $1B for Human Genome Project <span class="math">\(\rightarrow\)</span> $10,000 in a week with Illumina</li>
 </ul>
 </div>
 <div id="tidy-data" class="section level2">
@@ -145,7 +144,7 @@ img {
 <ul>
 <li><strong>Set working directory</strong>
 <ul>
-<li><strong><em>Relative</em></strong>: <code>setwd(&quot;./data&quot;)</code>, <code>setwd(&quot;../&quot;)</code> &lt;— move up in directory</li>
+<li><strong><em>Relative</em></strong>: <code>setwd(&quot;./data&quot;)</code>, <code>setwd(&quot;../&quot;)</code> = move up in directory</li>
 <li><strong><em>Absolute</em></strong>: <code>setwd(&quot;/User/Name/data&quot;)</code></li>
 </ul></li>
 <li><strong>Check if file exists and download file</strong>
@@ -158,20 +157,20 @@ img {
 <ul>
 <li><code>method = &quot;curl&quot;</code> [mac only for https]</li>
 </ul></li>
-<li><code>dateDownloaded &lt;- date()</code> &lt;— record the download date</li>
+<li><code>dateDownloaded &lt;- date()</code> = record the download date</li>
 </ul></li>
 <li><strong>Read file and load data</strong>
 <ul>
-<li><code>read.table()</code> –&gt; need to specify file, header, sep, row.names, nrows
+<li><code>read.table()</code> = need to specify <code>file</code>, <code>header</code>, <code>sep</code>, <code>row.names</code>, <code>nrows</code>
 <ul>
-<li><code>read.csv()</code> = automatically set sep = “,” and header = TRUE</li>
+<li><code>read.csv()</code> = automatically set <code>sep = &quot;,&quot;</code> and <code>header = TRUE</code></li>
 </ul></li>
-<li><code>quote = &quot;&quot;</code> –&gt; no quotes (extremely helpful, common problem)</li>
+<li><code>quote = &quot;&quot;</code> = no quotes (extremely helpful, common problem)</li>
 <li><code>na.strings</code> = set the character that represents missing value</li>
 <li><code>nrows</code> = how many rows to read</li>
 <li><code>skip</code> = how many lines to skip</li>
 <li><code>col.names</code> = specifies column names</li>
-<li><code>check.names = TRUE/FALSE</code> = If TRUE then the names of the variables in the data frame are checked to ensure that they are syntactically valid variable names and are not duplicated. If necessary they are adjusted so that they are</li>
+<li><code>check.names = TRUE/FALSE</code> = If TRUE then the names of the variables in the data frame are checked to ensure that they are syntactically valid variable names and are not duplicated. If necessary they are adjusted appropriately to be syntactically valid names</li>
 </ul></li>
 </ul>
 </div>
@@ -183,8 +182,8 @@ img {
 <li><code>colIndex</code>, <code>rowIndex</code> = can be used to read certain rows and columns</li>
 </ul></li>
 <li><code>write.xlsx()</code> = write out excel file</li>
-<li><code>read.xlsx2()</code> = faster than read.xlsx() but unstable for reading subset of rows</li>
-<li><code>XLConnect</code> packaage has more options for writing/manipulating Excel files</li>
+<li><code>read.xlsx2()</code> = faster than <code>read.xlsx()</code> but unstable for reading subset of rows</li>
+<li><code>XLConnect</code> package has more options for writing/manipulating Excel files</li>
 <li>generally good to store data in database/csv/tab separated files (.tab/.txt), easier to distribute</li>
 </ul>
 </div>
@@ -192,23 +191,23 @@ img {
 <h2>Reading XML</h2>
 <ul>
 <li><strong>XML</strong> = extensible markup language</li>
-<li>frequented used to store structured data, widely used in internet apps</li>
+<li>frequented used to store structured data, widely used in Internet apps</li>
 <li>extracting XML = basis for most of web scraping</li>
 <li>components
 <ul>
 <li><strong><em>markup</em></strong> = labels that give text structure</li>
 <li><strong><em>content</em></strong> = actual text of document</li>
 </ul></li>
-<li>tags = <code>&lt;section&gt; &lt;/section&gt; &lt;line-break /&gt;</code></li>
+<li>tags = <code>&lt;section&gt;</code>, <code>&lt;/section&gt;</code>, <code>&lt;line-break /&gt;</code></li>
 <li>elements = <code>&lt;Greeting&gt;</code> test <code>&lt;/Greeting&gt;</code></li>
 <li>attributes = <code>&lt;image src =&quot;a.jpg&quot; alt = &quot;b&quot;&gt;</code></li>
 <li>reading file into R
 <ul>
 <li><code>library(XML)</code></li>
-<li><code>doc &lt;- xmlTreeParse(fileUrl, useInternal = TRUE)</code> &lt;— loads data</li>
+<li><code>doc &lt;- xmlTreeParse(fileUrl, useInternal = TRUE)</code> = loads data</li>
 <li><code>rootNode &lt;- xmlRoot(doc)</code> = wrapper element for entire document</li>
-<li><code>xmlName(rootNode)</code> &lt;- returns name of the document</li>
-<li><code>names(rootNode)</code> &lt;- return names of elements</li>
+<li><code>xmlName(rootNode)</code> = returns name of the document</li>
+<li><code>names(rootNode)</code> = return names of elements</li>
 <li><code>rootNode[[1]]</code> = access first elements, similar to list</li>
 <li><code>rootNode[[1]][[1]]</code> = first sub component in the first element</li>
 <li><code>xmlSApply(rootNode, xmlValue)</code> = returns every single tagged element in the doc</li>
@@ -237,17 +236,17 @@ img {
 <li><strong>JSON</strong> = JavaScript Object Notation</li>
 <li>lightweight data storage, common format for data from application programming interfaces (API)</li>
 <li>similar to XML in structure but different in syntax/format</li>
-<li>data stored as:
+<li>data can be stored as:
 <ul>
 <li>numbers (double)</li>
 <li>strings (double quoted)</li>
 <li>boolean (true/false)</li>
-<li>array (ordered, comma separated enclosed in [])</li>
-<li>object (unordered, comma separated collection of key/value pairs enclosed in {})</li>
+<li>array (ordered, comma separated enclosed in <code>[]</code>)</li>
+<li>object (unordered, comma separated collection of key/value pairs enclosed in <code>{}</code>)</li>
 </ul></li>
-<li><code>jsonlite</code> package (json vignette)
+<li><code>jsonlite</code> package (json vignette can be found in help)
 <ul>
-<li><code>library(jsonlite)</code> &lt;— loads package</li>
+<li><code>library(jsonlite)</code> = loads package</li>
 <li><code>data &lt;- fromJSON(url)</code> = strips data
 <ul>
 <li><code>names(data$owner)</code> = returns list of names of all columns of owner data frame</li>
@@ -255,7 +254,7 @@ img {
 </ul></li>
 <li><code>data &lt;- toJSON(dataframe, pretty = TRUE)</code> = converts data frame into JSON format
 <ul>
-<li><code>pretty = TRUE</code> &lt;- formats the code nicely</li>
+<li><code>pretty = TRUE</code> = formats the code nicely</li>
 </ul></li>
 <li><code>cat(data)</code> = prints out JSON code from the converted data frame</li>
 <li><code>fromJSON()</code> = converts from JSON object/code back to data frame</li>
@@ -265,21 +264,21 @@ img {
 <div id="data.table" class="section level2">
 <h2>data.table</h2>
 <ul>
-<li>inherits from data.frame (external package) –&gt; all functions that accept data.frame work on data.table</li>
+<li>inherits from <code>data.frame</code> (external package) <span class="math">\(\rightarrow\)</span> all functions that accept <code>data.frame</code> work on <code>data.table</code></li>
 <li>can be much faster (written in C), <strong><em>much much faster</em></strong> at subsetting/grouping/updating</li>
 <li><strong>syntax</strong>: <code>dt &lt;- data.table(x = rnorm(9), y = rep(c(a, b, c), each = 3), z = rnorm(9)</code></li>
 <li><code>tables()</code> = returns all data tables in memory
 <ul>
 <li>shows name, nrow, MB, cols, key</li>
 </ul></li>
-<li>some subset works like before –&gt; <code>dt[2, ], dt[dt$y==&quot;a&quot;,]</code>
+<li>some subset works like before = <code>dt[2, ], dt[dt$y==&quot;a&quot;,]</code>
 <ul>
 <li><code>dt[c(2, 3)]</code> = subset by rows, rows 2 and 3 in this case</li>
 </ul></li>
 <li><strong>column subsetting</strong> (modified for <code>data.table</code>)
 <ul>
-<li>argument after comma is called an <strong><em>expression</em></strong> (collection of statements enclosed in {})</li>
-<li><code>dt[, list(means(x), sum(z)]</code> = returns mean of x column and sum of z column (no “” needed to specify column names, x and z in example)</li>
+<li>argument after comma is called an <strong><em>expression</em></strong> (collection of statements enclosed in <code>{}</code>)</li>
+<li><code>dt[, list(means(x), sum(z)]</code> = returns mean of x column and sum of z column (no <code>&quot;&quot;</code> needed to specify column names, x and z in example)</li>
 <li><code>dt[, table(y)]</code> = get table of y value (perform any functions)</li>
 </ul></li>
 <li><strong>add new columns</strong>
@@ -291,82 +290,83 @@ img {
 <li><code>dt2 &lt;- dt; dt[, y:= 2]</code>
 <ul>
 <li>when changes are made to dt, changes get translated to dt2</li>
-<li><em><strong>Note</strong>: if copy must be made, use the copy() function instead</em></li>
+<li><em><strong>Note</strong>: if copy must be made, use the <code>copy()</code> function instead </em></li>
 </ul></li>
 </ul></li>
 <li><strong>multiple operations</strong>
 <ul>
-<li><code>dt[, m:= {temp &lt;- (x+z); log2(temp +5)}]</code> –&gt; adds a column that equals log2(x+z + 5)</li>
+<li><code>dt[, m:= {temp &lt;- (x+z); log2(temp +5)}]</code> <span class="math">\(\rightarrow\)</span> adds a column that equals log2(x+z + 5)</li>
 </ul></li>
 <li><strong>plyr like operations</strong>
 <ul>
-<li><code>dt[,a:=x&gt;0]</code> = creates a new column a that returns TRUE if x&gt;0, and FALSE other wise</li>
-<li><code>dt[,b:=mean(x+w), by=a]</code> = creates a new column b that calculates the aggregated mean for x+w for when a = TRUE/FALSE, meaning every b value is gonna be the same for TRUE, and others are for FALSE</li>
+<li><code>dt[,a:=x&gt;0]</code> = creates a new column a that returns TRUE if x &gt; 0, and FALSE other wise</li>
+<li><code>dt[,b:=mean(x+w), by=a]</code> = creates a new column b that calculates the aggregated mean for <code>x + w</code> for when a = TRUE/FALSE, meaning every b value is gonna be the same for TRUE, and others are for FALSE</li>
 </ul></li>
 <li><strong>special variables</strong>
 <ul>
 <li><code>.N</code> = returns integer, length 1, containing the number (essentially count)
 <ul>
-<li><code>dt &lt;- data.table (x=sample(letters[1:3], 1E5, TRUE))</code> –&gt; generates data table</li>
-<li><code>dt[, .N by =x]</code> –&gt; creates a table to count observations by the value of x</li>
+<li><code>dt &lt;- data.table (x=sample(letters[1:3], 1E5, TRUE))</code> = generates data table</li>
+<li><code>dt[, .N by =x]</code> = creates a table to count observations by the value of x</li>
 </ul></li>
 </ul></li>
 <li><strong>keys</strong> (quickly filter/subset)
 <ul>
-<li><em>example</em>: <code>dt &lt;- data.table(x = rep(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), each 100), y = rnorm(300))</code> –&gt; generates data table
+<li><em>example</em>: <code>dt &lt;- data.table(x = rep(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;), each 100), y = rnorm(300))</code> = generates data table
 <ul>
-<li><code>setkey(dt, x)</code> –&gt; set the key to the x column</li>
-<li><code>dt['a']</code> –&gt; returns a data frame, where x = ‘a’ (effectively filter)</li>
+<li><code>setkey(dt, x)</code> = set the key to the x column</li>
+<li><code>dt['a']</code> = returns a data frame, where x = ‘a’ (effectively filter)</li>
 </ul></li>
 </ul></li>
 <li><strong>joins</strong> (merging tables)
 <ul>
-<li><em>example</em>: <code>dt1 &lt;- data.table(x = c('a', 'b', ...), y = 1:4)</code> –&gt; generates data table
+<li><em>example</em>: <code>dt1 &lt;- data.table(x = c('a', 'b', ...), y = 1:4)</code> = generates data table
 <ul>
-<li><code>dt2 &lt;- data.table(x= c('a', 'd', ...), z = 5:7)</code> –&gt; generates data table</li>
-<li><code>setkey(dt1, x); setkey(dt2, x)</code> –&gt; sets the keys for both data tables to be column x</li>
+<li><code>dt2 &lt;- data.table(x= c('a', 'd', ...), z = 5:7)</code> = generates data table</li>
+<li><code>setkey(dt1, x); setkey(dt2, x)</code> = sets the keys for both data tables to be column x</li>
 <li><code>merge(dt1, dt2)</code> = returns a table, combine the two tables using column x, filtering to only the values that match up between common elements the two x columns (i.e. ‘a’) and the data is merged together</li>
 </ul></li>
 </ul></li>
-<li><strong>Fast reading of files</strong>
+<li><strong>fast reading of files</strong>
 <ul>
-<li><em>example</em>: <code>big_df &lt;- data.frame(norm(1e6), norm(1e6))</code> –&gt; generates data table
+<li><em>example</em>: <code>big_df &lt;- data.frame(norm(1e6), norm(1e6))</code> = generates data table
 <ul>
-<li><code>file &lt;- tempfile()</code> –&gt; generates empty temp file</li>
-<li><code>write.table(big.df, file=file, row.names=FALSE, col.names = TRUE, sep = &quot;\t&quot;. quote = FALSE)</code> –&gt; writes the generated data from big.df to the empty temp file</li>
-<li><code>fread(file)</code> –&gt; read file and load data = much faster than <code>read.table()</code></li>
+<li><code>file &lt;- tempfile()</code> = generates empty temp file</li>
+<li><code>write.table(big.df, file=file, row.names=FALSE, col.names = TRUE, sep = &quot;\t&quot;. quote = FALSE)</code> = writes the generated data from big.df to the empty temp file</li>
+<li><code>fread(file)</code> = read file and load data = much faster than <code>read.table()</code></li>
 </ul></li>
 </ul></li>
 </ul>
 </div>
-<div id="reading-from-mysql-install.packagesrmysql-libraryrmysql" class="section level2">
-<h2>Reading from MySQL [install.packages(“RMySQL”); library(RMySQL)]</h2>
+<div id="reading-from-mysql" class="section level2">
+<h2>Reading from MySQL</h2>
 <ul>
-<li>free/widely used open sources database software, widely used for internet base applications</li>
+<li><code>install.packages(&quot;RMySQL&quot;); library(RMySQL)</code> = load MySQL package</li>
+<li>free/widely used open sources database software, widely used for Internet base applications</li>
 <li>each row = record</li>
-<li>data are structured in databases –&gt; series tables (dataset) –&gt; fields (columns in dataset)</li>
-<li><code>dbConnect(MySQL(), user = &quot;genome&quot;, db = &quot;hg19&quot;, host = &quot;genome-mysql.cse.ucsc.edu)</code> –&gt; open a connection to the database
+<li>data are structured in databases <span class="math">\(\rightarrow\)</span> series tables (dataset) <span class="math">\(\rightarrow\)</span> fields (columns in dataset)</li>
+<li><code>dbConnect(MySQL(), user = &quot;genome&quot;, db = &quot;hg19&quot;, host = &quot;genome-mysql.cse.ucsc.edu)</code> = open a connection to the database
 <ul>
-<li><code>db = &quot;hg19&quot;</code> –&gt; select specific database</li>
+<li><code>db = &quot;hg19&quot;</code> = select specific database</li>
 <li><code>MySQL()</code> can be replaced with other arguments to use other data structures</li>
 </ul></li>
-<li><code>dbGetQuery(db, &quot;show databases;&quot;)</code> –&gt; return the result from the specified SQL query executed through the connection
+<li><code>dbGetQuery(db, &quot;show databases;&quot;)</code> = return the result from the specified SQL query executed through the connection
 <ul>
 <li>any SQL query can be substituted here</li>
 </ul></li>
-<li><code>dbDisconnect(db)</code> –&gt; disconnects the open connection
+<li><code>dbDisconnect(db)</code> = disconnects the open connection
 <ul>
 <li>crucial to disconnect as soon as all queries are performed</li>
 </ul></li>
-<li><code>dbListFields(db, &quot;name&quot;)</code> –&gt; returns the list of fields (columns) from the specified table</li>
-<li><code>dbReadTable(db, &quot;name&quot;)</code> –&gt; returns the the specified table</li>
-<li><code>query &lt;- dbSendQuery(db, &quot;query&quot;)</code> –&gt; send query to MySQL database and store it remotely</li>
-<li><code>fetch(query, n = 10)</code> –&gt; executes query and returns the result
+<li><code>dbListFields(db, &quot;name&quot;)</code> = returns the list of fields (columns) from the specified table</li>
+<li><code>dbReadTable(db, &quot;name&quot;)</code> = returns the the specified table</li>
+<li><code>query &lt;- dbSendQuery(db, &quot;query&quot;)</code> = send query to MySQL database and store it remotely</li>
+<li><code>fetch(query, n = 10)</code> = executes query and returns the result
 <ul>
-<li><code>n = 10</code> –&gt; returns the first 10 rows</li>
+<li><code>n = 10</code> = returns the first 10 rows</li>
 </ul></li>
-<li><code>dbClearResult(query)</code> –&gt; clears query from remote database, important</li>
-<li>sqldf package example</li>
+<li><code>dbClearResult(query)</code> = clears query from remote database, important</li>
+<li><code>sqldf</code> package example</li>
 </ul>
 </div>
 <div id="hdf5" class="section level2">
@@ -381,39 +381,39 @@ img {
 <li>each group has group header with group name and list of attributes</li>
 <li>each group has group symbol table with a list of objection in the group</li>
 </ul></li>
-<li>datasets –&gt; multidimensional array of data elements with metadata
+<li>datasets = multidimensional array of data elements with metadata
 <ul>
 <li>each dataset has a header with name, datatype, data space, storage layout</li>
 <li>each dataset has a data array (similar to data frame) with the data</li>
 </ul></li>
 </ul></li>
-<li><code>h5createFile(&quot;filename&quot;)</code> –&gt; creates HDF5 file and returns TRUE/FALSE</li>
-<li><code>h5createGroup(&quot;filename&quot;, &quot;group1/subgroup1/...&quot;)</code> –&gt; creates group within the specified file
+<li><code>h5createFile(&quot;filename&quot;)</code> = creates HDF5 file and returns TRUE/FALSE</li>
+<li><code>h5createGroup(&quot;filename&quot;, &quot;group1/subgroup1/...&quot;)</code> = creates group within the specified file
 <ul>
-<li>groups are created at the root “/” by default, but subgroups can be created by providing the path AFTER the parent group is created</li>
+<li>groups are created at the root <code>/</code> by default, but subgroups can be created by providing the path AFTER the parent group is created</li>
 </ul></li>
-<li><code>h5ls(&quot;filename&quot;)</code> –&gt; prints out contents of the file by group, name, otype, etc</li>
-<li><code>h5write(A, &quot;filename&quot;, &quot;groupname&quot;)</code> –&gt; writes A (could be array, matrix, etc.) to the file under the specific group
+<li><code>h5ls(&quot;filename&quot;)</code> = prints out contents of the file by group, name, otype, etc</li>
+<li><code>h5write(A, &quot;filename&quot;, &quot;groupname&quot;)</code> = writes A (could be array, matrix, etc.) to the file under the specific group
 <ul>
-<li><code>h5write(A, &quot;filename&quot;, &quot;A&quot;)</code> –&gt; writes A directly at the top level</li>
-<li><code>h5write(values, &quot;filename&quot;, &quot;group/subgroupname/obj&quot;, index = list(1:3, 1))</code> –&gt; writes values in the specified obj at the specific location
+<li><code>h5write(A, &quot;filename&quot;, &quot;A&quot;)</code> = writes A directly at the top level</li>
+<li><code>h5write(values, &quot;filename&quot;, &quot;group/subgroupname/obj&quot;, index = list(1:3, 1))</code> = writes values in the specified obj at the specific location
 <ul>
-<li><em>example</em>: <code>h5write(c(12, 13, 14), &quot;ex.h5&quot;, &quot;foo/A&quot;, index = list(1:3, 1))</code> –&gt; writes values 12, 13, 14 in the object A at the first 3 rows of the first column in the /foo group</li>
+<li><em>example</em>: <code>h5write(c(12, 13, 14), &quot;ex.h5&quot;, &quot;foo/A&quot;, index = list(1:3, 1))</code> = writes values 12, 13, 14 in the object A at the first 3 rows of the first column in the /foo group</li>
 </ul></li>
 </ul></li>
-<li><code>h5read(&quot;filename&quot;, &quot;groupname/A&quot;)</code> –&gt; reads A from specified group of the file
+<li><code>h5read(&quot;filename&quot;, &quot;groupname/A&quot;)</code> = reads A from specified group of the file
 <ul>
-<li><code>h5read(&quot;filename&quot;, &quot;A&quot;)</code> –&gt; reads A directly from the top level of the file</li>
-<li><code>h5read(&quot;filename&quot;, &quot;group/subgroupname/obj&quot;, index = list(1:3, 1))</code> –&gt; writes specified values in the specified obj at the group within the file</li>
+<li><code>h5read(&quot;filename&quot;, &quot;A&quot;)</code> = reads A directly from the top level of the file</li>
+<li><code>h5read(&quot;filename&quot;, &quot;group/subgroupname/obj&quot;, index = list(1:3, 1))</code> = writes specified values in the specified obj at the group within the file</li>
 </ul></li>
 </ul>
 </div>
 <div id="web-scraping-tutorial" class="section level2">
-<h2>Web (Scraping) (<a href="http://www.r-bloggers.com/?=Web+Scraping">tutorial</a>)</h2>
+<h2>Web Scraping (<a href="http://www.r-bloggers.com/?=Web+Scraping">tutorial</a>)</h2>
 <ul>
-<li><strong>Webscraping</strong> = programmatically extracting data from the HTML code of websites</li>
-<li><code>con = url(&quot;website&quot;)</code> –&gt; opens connection from URL</li>
-<li><code>htmlCode = readLines(con)</code> –&gt; reads the html code from the URL
+<li><strong>webscraping</strong> = programmatically extracting data from the HTML code of websites</li>
+<li><code>con = url(&quot;website&quot;)</code> = opens connection from URL</li>
+<li><code>htmlCode = readLines(con)</code> = reads the HTML code from the URL
 <ul>
 <li>always remember to <code>close(con)</code> after using it</li>
 <li>the htmlCode return here is a bit unreadable</li>
@@ -421,25 +421,25 @@ img {
 <li><strong>Parsing with XML</strong>
 <ul>
 <li><code>library(XML)</code></li>
-<li><code>url &lt;- &quot;http://...&quot;</code> –&gt; sets the desired url as a character variable</li>
-<li><code>html &lt;- htmlTreeParse(url, useInternalNodes = T)</code> –&gt; reads and parses the html code</li>
-<li><code>xpathSApply(html, &quot;//title&quot;, xmlValue)</code> –&gt; returns the value of the <code>//title node</code>/element</li>
-<li><code>xpathSApply(html, &quot;//td[@id='col-citedBy']&quot;, xmlValue)</code> –&gt; returns the value of the <code>//td</code> element where the <code>id = 'col-citedBy'</code> in the html code</li>
+<li><code>url &lt;- &quot;http://...&quot;</code> = sets the desired URL as a character variable</li>
+<li><code>html &lt;- htmlTreeParse(url, useInternalNodes = T)</code> = reads and parses the html code</li>
+<li><code>xpathSApply(html, &quot;//title&quot;, xmlValue)</code> = returns the value of the <code>//title node</code>/element</li>
+<li><code>xpathSApply(html, &quot;//td[@id='col-citedBy']&quot;, xmlValue)</code> = returns the value of the <code>//td</code> element where the <code>id = 'col-citedBy'</code> in the html code</li>
 </ul></li>
 <li><strong>Parsing with <code>httr</code> package</strong> (<a href="http://cran.r-project.org/web/packages/httr/httr.pdf">tutorial</a>)
 <ul>
 <li><code>library(httr)</code></li>
-<li><code>html2 &lt;- GET(url)</code> –&gt; reads the html code from the url</li>
-<li><code>cont = content(html2, as = &quot;text&quot;)</code> –&gt; extracts the html code as a long string</li>
-<li><code>parsedHtml = htmlParse(cont, asText = TRUE)</code> –&gt; parses the text into HTML (same output as the XML package function htmlTreeParse)</li>
-<li><code>xpathSApply(html, &quot;//title&quot;, xmlValue)</code> –&gt; returns the value of the //title node/element</li>
-<li>Accessing websites with passwords
+<li><code>html2 &lt;- GET(url)</code> = reads the HTML code from the URL</li>
+<li><code>cont = content(html2, as = &quot;text&quot;)</code> = extracts the HTML code as a long string</li>
+<li><code>parsedHtml = htmlParse(cont, asText = TRUE)</code> = parses the text into HTML (same output as the XML package function htmlTreeParse)</li>
+<li><code>xpathSApply(html, &quot;//title&quot;, xmlValue)</code> = returns the value of the //title node/element</li>
+<li>accessing websites with passwords
 <ul>
-<li><code>pg = GET(&quot;url&quot;)</code> –&gt; this would return a status 401 if the website requires log in without authenticating</li>
-<li><code>pg2 = GET(&quot;url&quot;, authenticate(&quot;username&quot;, &quot;password&quot;))</code> –&gt; this authenticates before attempting to access the website, and the result would return a status 200 if authentication was successful</li>
-<li><code>names2(pg2)</code> –&gt; returns names of different components</li>
+<li><code>pg = GET(&quot;url&quot;)</code> = this would return a status 401 if the website requires log in without authenticating</li>
+<li><code>pg2 = GET(&quot;url&quot;, authenticate(&quot;username&quot;, &quot;password&quot;))</code> = this authenticates before attempting to access the website, and the result would return a status 200 if authentication was successful</li>
+<li><code>names2(pg2)</code> = returns names of different components</li>
 </ul></li>
-<li>Using handles (username/login information)
+<li>using handles (username/login information)
 <ul>
 <li>using handles allows you to save authentication across multiple parts of the website (only authenticate once for different requests)</li>
 <li><em>example</em>: <code>google = handle(&quot;http://google.com&quot;)</code></li>
@@ -456,35 +456,35 @@ img {
 <ul>
 <li>allows GET, POST, PUT, DELETE requests if you are authorized</li>
 </ul></li>
-<li><code>myapp = oath_app(&quot;app&quot;, key = &quot;consumerKey&quot;, secret = &quot;consumerSecret&quot;)</code> –&gt; start authorization process for the app</li>
-<li><code>sig = sign_oauth1.0(myapp, token = &quot;tokenGenerated&quot;, token_secret = &quot;tokenSecret&quot;)</code> –&gt; login using the token information (sets up access so you can use it to get data)</li>
-<li><code>homeTL = get(&quot;url&quot;, sig)</code> –&gt; use the established authentication (instead of username/password) to get the data (usually in JSON format)
+<li><code>myapp = oath_app(&quot;app&quot;, key = &quot;consumerKey&quot;, secret = &quot;consumerSecret&quot;)</code> = start authorization process for the app</li>
+<li><code>sig = sign_oauth1.0(myapp, token = &quot;tokenGenerated&quot;, token_secret = &quot;tokenSecret&quot;)</code> = login using the token information (sets up access so you can use it to get data)</li>
+<li><code>homeTL = get(&quot;url&quot;, sig)</code> = use the established authentication (instead of username/password) to get the data (usually in JSON format)
 <ul>
 <li>use the url to specify what data you would like to get</li>
 <li>use the documentation to get information and parameters for the url and data you have access to</li>
 </ul></li>
-<li><code>json1 = content(homeTL)</code> –&gt; recognizes the data in JSON format and converts it to a structured R object [a bit hard to read]</li>
-<li><code>json2 = jsonlite::fromJSON(toJSON(json1))</code> –&gt; converts data back into JSON format and then use the fromJSON function from the jsonlite package to read the data into a data frame
+<li><code>json1 = content(homeTL)</code> = recognizes the data in JSON format and converts it to a structured R object [a bit hard to read]</li>
+<li><code>json2 = jsonlite::fromJSON(toJSON(json1))</code> = converts data back into JSON format and then use the <code>fromJSON</code> function from the <code>jsonlite</code> package to read the data into a data frame
 <ul>
 <li>each row corresponds to a line of the data you received</li>
 </ul></li>
-<li><strong>github example (<a href="https://github.com/hadley/httr/blob/master/demo/oauth2-github.r">tutorial</a>)</strong>:
+<li><strong>GitHub example (<a href="https://github.com/hadley/httr/blob/master/demo/oauth2-github.r">tutorial</a>)</strong>:
 <ul>
 <li><code>library(httr)</code></li>
-<li><code>myapp &lt;- oauth_app(&quot;github&quot;, key = &quot;clientID&quot;, secrete = &quot;clientSecret&quot;)</code>
+<li><code>myapp &lt;- oauth_app(&quot;github&quot;, key = &quot;clientID&quot;, secret = &quot;clientSecret&quot;)</code>
 <ul>
-<li>an application must be registered with github first to generate the client ID and secrets</li>
+<li>an application must be registered with GitHub first to generate the client ID and secrets</li>
 </ul></li>
 <li><code>github_token &lt;- oauth2.0_token(oauth_endpoints(&quot;github&quot;), myapp)</code>
 <ul>
-<li><code>oauth_endpoints()</code> –&gt; returns the the authorize/access url/endpoints for some common web applications (github, Facebook, google, etc)</li>
-<li><code>oauth2.0_token(endPoints, app)</code> –&gt; generates an oauth2.0 token with the credentials provided</li>
+<li><code>oauth_endpoints()</code> = returns the the authorize/access url/endpoints for some common web applications (GitHub, Facebook, google, etc)</li>
+<li><code>oauth2.0_token(endPoints, app)</code> = generates an oauth2.0 token with the credentials provided</li>
 </ul></li>
-<li><code>gtoken &lt;- config(token = github_token)</code> –&gt; sets up the configuration with the token for authentication</li>
-<li><code>req &lt;- with_config(gtoken, GET(&quot;https://api.github.com/rate_limit&quot;))</code> –&gt; executes the configuration set to send a get request from the specified URL, and returns a response object</li>
-<li><code>library(jsonlite); json1 &lt;- fromJSON(toJSON(content(req)))</code> –&gt; converts the content of the response object, to JSON format, and converts it again to data frame format</li>
-<li><code>names(json1)</code> –&gt; returns all the column names for the data frame</li>
-<li><code>json1[json1$name == &quot;datasharing&quot;,]$created_at</code> –&gt; returns the create date for the data sharing repo</li>
+<li><code>gtoken &lt;- config(token = github_token)</code> = sets up the configuration with the token for authentication</li>
+<li><code>req &lt;- with_config(gtoken, GET(&quot;https://api.github.com/rate_limit&quot;))</code> = executes the configuration set to send a get request from the specified URL, and returns a response object</li>
+<li><code>library(jsonlite); json1 &lt;- fromJSON(toJSON(content(req)))</code> = converts the content of the response object, to JSON format, and converts it again to data frame format</li>
+<li><code>names(json1)</code> = returns all the column names for the data frame</li>
+<li><code>json1[json1$name == &quot;datasharing&quot;,]$created_at</code> = returns the create date for the data sharing repo</li>
 </ul></li>
 </ul>
 </div>
@@ -493,10 +493,10 @@ img {
 <ul>
 <li><strong>interacting directly with files</strong>
 <ul>
-<li><code>file</code> –&gt; open a connection to a text file</li>
-<li><code>url</code> –&gt; opens a connection to a url</li>
-<li><code>gzfile/bzfile</code> –&gt; opens a connection to a .gz/.bz2 file</li>
-<li><code>?connections</code> –&gt; for more information about opening/closing connections in R</li>
+<li><code>file</code> = open a connection to a text file</li>
+<li><code>url</code> = opens a connection to a URL</li>
+<li><code>gzfile/bzfile</code> = opens a connection to a .gz/.bz2 file</li>
+<li><code>?connections</code> = for more information about opening/closing connections in R</li>
 </ul></li>
 <li><strong><code>foreign</code> package</strong>
 <ul>
@@ -511,27 +511,27 @@ img {
 <li><code>read.xport</code> (SAS)</li>
 <li><code>read.fwf</code> (fixed width files, [.for])</li>
 <li><em>example</em>: <code>data &lt;- read.fwf(file = &quot;quiz02q5.for&quot;, skip = 4, widths = c(-1, 9,-5, 4, 4, -5, 4, 4,-5, 4, 4,-5, 4, 4))</code></li>
-<li><code>widths = c()</code> –&gt; specifies the width of each variable</li>
+<li><code>widths = c()</code> = specifies the width of each variable</li>
 <li>the negative numbers indicate the space to disregard/take out</li>
 </ul></li>
 </ul></li>
 <li><strong>Other packages/functions</strong>
 <ul>
-<li><code>RPostresSQL</code> –&gt; provides DBI-compliant database connection from R</li>
-<li><code>RODBC</code> –&gt; provides interfaces to multiple databases including PostgreQL, MySQL, Microsoft Access, SQLite</li>
-<li><code>RMongo/rmongodb</code> –&gt; provides interfaces to MongoDb
+<li><code>RPostresSQL</code> = provides DBI-compliant database connection from R</li>
+<li><code>RODBC</code> = provides interfaces to multiple databases including PostgreQL, MySQL, Microsoft Access, SQLite</li>
+<li><code>RMongo/rmongodb</code> = provides interfaces to MongoDb
 <ul>
 <li>similar to MySQL, except send queries in the database’s syntax</li>
 </ul></li>
-<li>Reading Images (functions)
+<li>reading images (functions)
 <ul>
 <li><code>jpeg</code>, <code>readbitmap</code>, <code>png</code>, <code>EBImage</code> (Bioconductor)</li>
 </ul></li>
-<li>Reading (GIS Geographical Information Systems) data (packages)
+<li>reading (GIS Geographical Information Systems) data (packages)
 <ul>
 <li><code>rdgal</code>, <code>rgeos</code>, <code>raster</code></li>
 </ul></li>
-<li>Reading music data (packages)
+<li>reading music data (packages)
 <ul>
 <li><code>tuneR</code>, <code>seewave</code></li>
 </ul></li>
@@ -551,7 +551,7 @@ img {
 <li>load data into <code>tbl_df</code> (data frame table) by <code>data &lt;- tbl_df(rawData)</code>
 <ul>
 <li>main advantage to using a <code>tbl_df</code> over a regular data frame is printing</li>
-<li>more compact output/informative –&gt; similar to a combination of head/str
+<li>more compact output/informative = similar to a combination of <code>head</code>/<code>str</code>
 <ul>
 <li>displays class, dimension, preview of data (10 rows and as many columns as it can fit), undisplayed variables and their class</li>
 </ul></li>
@@ -561,57 +561,57 @@ img {
 <li><em><strong>Note</strong>: for all functions, first argument always the data frame, and result is always a data frame </em></li>
 <li><code>select()</code>
 <ul>
-<li><em>example</em>: <code>select(dataFrameTable, var1, var2, var3)</code> –&gt; returns a table (similar in format as calling the actual data frame table)</li>
+<li><em>example</em>: <code>select(dataFrameTable, var1, var2, var3)</code> = returns a table (similar in format as calling the actual data frame table)</li>
 <li>no need to use <code>$</code> as we would normally, since <code>select()</code> understands that the variables are from the dataFrameTable</li>
 <li>columns are returns in order specified</li>
-<li><code>&quot;:&quot;</code> operator (normally reserved for numbers) can be used to select a range of columns (from this column to that column), works in reverse order as well –&gt; <code>select(dataFrameTable, var1:var5)</code></li>
-<li><code>&quot;-column&quot;</code> can be used to specify columns to throw away –&gt; <code>select(dataFrameTable, -var1)</code> –&gt; but this does not modify original dataFrameTable</li>
+<li><code>:</code> operator (normally reserved for numbers) can be used to select a range of columns (from this column to that column), works in reverse order as well = <code>select(dataFrameTable, var1:var5)</code></li>
+<li><code>&quot;-column&quot;</code> can be used to specify columns to throw away = <code>select(dataFrameTable, -var1)</code> = but this does not modify original dataFrameTable</li>
 <li><code>-(var1:size)</code> = eliminate all columns</li>
 <li>normally this can be accomplished by finding the indices of names using the <code>match(&quot;value&quot;, vector)</code> function</li>
 </ul></li>
 <li><code>filter()</code>
 <ul>
-<li><em>example</em>: <code>filter(cran, package == &quot;swirl&quot;)</code> –&gt; returns a table (similar in format as calling the actual data frame table)</li>
+<li><em>example</em>: <code>filter(cran, package == &quot;swirl&quot;)</code> = returns a table (similar in format as calling the actual data frame table)</li>
 <li>returns all rows where the condition evaluates to TRUE</li>
-<li>automatically recognized that package is a column without “<code>$</code>”</li>
-<li>able to specify as many conditions as you want, separated by “,”, “|” and “&amp;” work here as well</li>
-<li>multiple conditions specified by “,” is equivalent to “&amp;”</li>
+<li>automatically recognized that package is a column without <code>$</code></li>
+<li>able to specify as many conditions as you want, separated by <code>,</code>, <code>|</code> and <code>&amp;</code> work here as well</li>
+<li>multiple conditions specified by <code>,</code> is equivalent to <code>&amp;</code></li>
 <li><code>is.na(var1)</code> also works here</li>
-<li><em><strong>Note</strong>: “?Comparison” brings up relevant documentation for relational comparators</em></li>
+<li><em><strong>Note</strong>: <code>?Comparison</code> brings up relevant documentation for relational comparators </em></li>
 </ul></li>
 <li><code>arrange()</code>
 <ul>
-<li><em>example</em>: <code>arrange(dataFrameTable, var)</code> –&gt; order the data frame table by specified column/variable</li>
-<li><code>desc(var)</code> –&gt; arrange in descending order by column value</li>
-<li>can specify multiple values to sort by by using “,”</li>
-<li>order listed in the call will be the order that the data is sorted by (can use in conjunction with desc())</li>
+<li><em>example</em>: <code>arrange(dataFrameTable, var)</code> = order the data frame table by specified column/variable</li>
+<li><code>desc(var)</code> = arrange in descending order by column value</li>
+<li>can specify multiple values to sort by by using <code>,</code></li>
+<li>order listed in the call will be the order that the data is sorted by (can use in conjunction with <code>desc()</code>)</li>
 </ul></li>
 <li><code>rename()</code>
 <ul>
-<li><em>example</em>: <code>rename(dataFrameTable, colName = newColName)</code> –&gt; renames the specified column with new name</li>
+<li><em>example</em>: <code>rename(dataFrameTable, newColName = colName)</code> = renames the specified column with new name</li>
 <li>capable of renaming multiple columns at the same time, no quotes needed</li>
 </ul></li>
 <li><code>mutate()</code>
 <ul>
 <li>create a new variable based on the value of one or more existing variables in the dataset</li>
 <li>capable of modifying existing columns/variables as well</li>
-<li><em>example</em>: <code>mutate(dataFrameTable, newColumn = size / 2^20)</code> –&gt; create a new column with specified name and the method of calculating</li>
-<li>multiple columns can be created at the same time by using “,” as separator, new variables can even reference each other in terms of calculation</li>
+<li><em>example</em>: <code>mutate(dataFrameTable, newColumn = size / 2^20)</code> = create a new column with specified name and the method of calculating</li>
+<li>multiple columns can be created at the same time by using <code>,</code> as separator, new variables can even reference each other in terms of calculation</li>
 </ul></li>
 <li><code>summarize()</code>
 <ul>
 <li>collapses the dataset into a single row</li>
-<li><em>example</em>: <code>summarize(dataFrameTable, avg = mean(size))</code>–&gt; returns the mean from the column in a single variable with the specified name</li>
+<li><em>example</em>: <code>summarize(dataFrameTable, avg = mean(size))</code> = returns the mean from the column in a single variable with the specified name</li>
 <li>summarize(can return the requested value for each group in the dataset</li>
 </ul></li>
 <li><code>group_by()</code>
 <ul>
-<li><em>example</em>: <code>by_package &lt;- group_by(cran, package)</code> –&gt; creates a grouped data frame table by specified variable</li>
-<li><p><code>summarize(by_package, mean(size))</code> –&gt; returns the mean size of each group (instead of 1 value from the <code>summarize()</code> example above)</p></li>
-<li><em><strong>Note</strong>: `n()`` –&gt; counts number of observation in the current group</em></li>
-<li><em><strong>Note</strong>: <code>n_distinct()</code> –&gt; Efficiently count the number of unique values in a vector</em></li>
-<li><em><strong>Note</strong>: <code>quantile(variable, probs = 0.99)</code> –&gt; returns the 99% percentile from the data</em></li>
-<li><em><strong>Note</strong>: by default, dplyr prints the first 10 rows of data if there are more than 100 rows; if there are not, it will print everything</em></li>
+<li><em>example</em>: <code>by_package &lt;- group_by(cran, package)</code> = creates a grouped data frame table by specified variable</li>
+<li><code>summarize(by_package, mean(size))</code> = returns the mean size of each group (instead of 1 value from the <code>summarize()</code> example above)</li>
+<li><em><strong>Note</strong>: <code>n()</code> = counts number of observation in the current group </em></li>
+<li><em><strong>Note</strong>: <code>n_distinct()</code> = efficiently count the number of unique values in a vector </em></li>
+<li><em><strong>Note</strong>: <code>quantile(variable, probs = 0.99)</code> = returns the 99% percentile from the data </em></li>
+<li><em><strong>Note</strong>: by default, <code>dplyr</code> prints the first 10 rows of data if there are more than 100 rows; if there are not, it will print everything </em></li>
 </ul></li>
 <li><code>rbind_list()</code>
 <ul>
@@ -623,11 +623,11 @@ img {
 <ul>
 <li>allows stringing together multiple function calls in a way that is compact and readable, while still accomplishing the desired result
 <ul>
-<li><em><strong>Note</strong>: all variable calls refer to the tbl_df specified at the same level of the call</em></li>
+<li><em><strong>Note</strong>: all variable calls refer to the tbl_df specified at the same level of the call </em></li>
 </ul></li>
-<li><code>%&gt;%</code> –&gt; chaining operator
+<li><code>%&gt;%</code> = chaining operator
 <ul>
-<li><em><strong>Note</strong>: <code>?chain</code> brings up relevant documentation for the chaining operator</em></li>
+<li><em><strong>Note</strong>: <code>?chain</code> brings up relevant documentation for the chaining operator </em></li>
 <li>Code on the right of the operator operates on the result from the code on the left</li>
 <li><code>exp1 %&gt;% exp2 %&gt;% exp3 ...</code>
 <ul>
@@ -635,8 +635,8 @@ img {
 <li><code>exp2</code> is then applied on exp1 to achieve a result</li>
 <li><code>exp3</code> is then applied to the result of that operation, etc.</li>
 </ul></li>
-<li><em><strong>Note</strong>: the chaining aspect is done with the data frame table that is being passed from one call to the next</em></li>
-<li><em><strong>Note</strong>: if the last call has no additional arguments, print() for example, then it is possible to <code>leave()</code> off</em></li>
+<li><em><strong>Note</strong>: the chaining aspect is done with the data frame table that is being passed from one call to the next </em></li>
+<li><em><strong>Note</strong>: if the last call has no additional arguments, <code>print()</code> for example, then it is possible to <code>leave()</code> off </em></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -647,75 +647,75 @@ img {
 <li><code>gather()</code>
 <ul>
 <li>gather columns into key value pairs</li>
-<li><em>example</em>: <code>gather(students, sex, count, -grade)</code> –&gt; gather each key (in this case named sex), value (in this case count) pair into one row
+<li><em>example</em>: <code>gather(students, sex, count, -grade)</code> = gather each key (in this case named sex), value (in this case count) pair into one row
 <ul>
-<li>effectively translates to (columnName, value) withe new names imposed on both –&gt; all combinations of column name and value</li>
-<li><code>-grade</code> –&gt; signifies that the column does not need to be remapped, so that column is preserved</li>
-<li><code>class1:class5</code> –&gt; can be used instead to specify where to gather the key values</li>
+<li>effectively translates to (columnName, value) with new names imposed on both = all combinations of column name and value</li>
+<li><code>-grade</code> = signifies that the column does not need to be remapped, so that column is preserved</li>
+<li><code>class1:class5</code> = can be used instead to specify where to gather the key values</li>
 </ul></li>
 </ul></li>
 <li><code>separate()</code>
 <ul>
 <li>separate one column into multiple column</li>
-<li><em>example</em>: separate(data = res, col = sex_class, into = c(“sex”, “class”)–&gt; split the specified column in the data frame into two columns
+<li><em>example</em>: <code>separate(data = res, col = sex_class, into = c(&quot;sex&quot;, &quot;class&quot;)</code> = split the specified column in the data frame into two columns
 <ul>
-<li><em><strong>Note</strong>: the new columns are created in place, and the other columns are pushed to the right</em></li>
-<li><em><strong>Note</strong>: <code>separate()</code> is able to automatically split non-alphanumeric values by finding the logical separator; it is also possible to specify the separator by using the “sep” argument</em></li>
+<li><em><strong>Note</strong>: the new columns are created in place, and the other columns are pushed to the right </em></li>
+<li><em><strong>Note</strong>: <code>separate()</code> is able to automatically split non-alphanumeric values by finding the logical separator; it is also possible to specify the separator by using the <code>sep</code> argument </em></li>
 </ul></li>
 </ul></li>
 <li><code>spread()</code>
 <ul>
-<li>spread key-value pairs across multiple columns –&gt; turn values of a column into column headers/variables/new columns</li>
-<li><em>example</em>: <code>spread(students3, test, grade)</code>–&gt; splits “test” column into variables by using it as a key, and “grade” as values
+<li>spread key-value pairs across multiple columns = turn values of a column into column headers/variables/new columns</li>
+<li><em>example</em>: <code>spread(students3, test, grade)</code> = splits “test” column into variables by using it as a key, and “grade” as values
 <ul>
-<li><em><strong>Note</strong>: no need to specify what the columns are going to be called, since they are going to be generated using the values in the specified column</em></li>
-<li><em><strong>Note</strong>: the value will be matched and split up according their alignment with the key (“test”) –&gt; midterm, A</em></li>
+<li><em><strong>Note</strong>: no need to specify what the columns are going to be called, since they are going to be generated using the values in the specified column </em></li>
+<li><em><strong>Note</strong>: the value will be matched and split up according their alignment with the key (“test”) = midterm, A </em></li>
 </ul></li>
 </ul></li>
 <li><code>extract_numeric()</code>
 <ul>
 <li>extract numeric component of variable</li>
-<li><em>example</em>: <code>extract_numeric(&quot;class5&quot;)</code> –&gt; returns 5</li>
-<li><em>example</em>: <code>mutate(class = extract_numeric(class))</code> –&gt; changes the class name to numbers only</li>
+<li><em>example</em>: <code>extract_numeric(&quot;class5&quot;)</code> = returns 5</li>
+<li><em>example</em>: <code>mutate(class = extract_numeric(class))</code> = changes the class name to numbers only</li>
 </ul></li>
-<li><code>unique()</code> –&gt; general R function, not specific to tidyr
+<li><code>unique()</code> = general R function, not specific to tidyr
 <ul>
 <li>returns a vector with the duplicates removed</li>
 </ul></li>
-<li><em><strong>Note</strong>: when there are redundant information, it’s better to split up the info into multiple tables; however, each table should also contain primary keys, which identify observations and link data from one table to the next</em></li>
+<li><em><strong>Note</strong>: when there are redundant information, it’s better to split up the info into multiple tables; however, each table should also contain primary keys, which identify observations and link data from one table to the next </em></li>
 </ul>
 </div>
 <div id="lubridate" class="section level2">
 <h2>lubridate</h2>
 <ul>
 <li>consistent, memorable syntax for working with dates</li>
-<li><code>wday(date, label = TRUE)</code> –&gt; returns number 1 - 7 representing Sunday - Saturday, or returns three letter day of the week if label = TRUE</li>
-<li><code>today()</code>, <code>now()</code> –&gt; returns the current date and time, with extractable parts (hour(), month())
+<li><code>wday(date, label = TRUE)</code> = returns number 1 - 7 representing Sunday - Saturday, or returns three letter day of the week if label = TRUE</li>
+<li><code>today()</code>, <code>now()</code> = returns the current date and time, with extractable parts (hour(), month())
 <ul>
-<li><code>tzone = &quot;America/New_York&quot;</code> –&gt; can use the “tzone” argument to specify time zones (list <a href="http://en.wikipedia.org/wiki/List_of_tz_database_time_zones">here</a>)</li>
+<li><code>tzone = &quot;America/New_York&quot;</code> = used to specify time zones (list <a href="http://en.wikipedia.org/wiki/List_of_tz_database_time_zones">here</a>)</li>
 </ul></li>
-<li><code>ymd(&quot;string&quot;)</code> –&gt; converts string in to year month day format to a POSIXct time variable
+<li><code>ymd(&quot;string&quot;)</code> = converts string in to year month day format to a POSIXct time variable
 <ul>
-<li><code>mdy(&quot;string&quot;)</code> –&gt; parses date in month day year format</li>
-<li><code>dmy(2508195)</code> –&gt; parses date in day month year format using a number</li>
-<li><code>ymd_hms(&quot;string&quot;)</code> –&gt; parses the year month day, hour minute second</li>
-<li><code>hms(&quot;string&quot;)</code> –&gt; parses hour minute second
+<li><code>mdy(&quot;string&quot;)</code> = parses date in month day year format</li>
+<li><code>dmy(2508195)</code> = parses date in day month year format using a number</li>
+<li><code>ymd_hms(&quot;string&quot;)</code> = parses the year month day, hour minute second</li>
+<li><code>hms(&quot;string&quot;)</code> = parses hour minute second
 <ul>
-<li><code>tz = &quot;&quot;</code> –&gt; can use the “tz” argument to specify time zones (list <a href="http://en.wikipedia.org/wiki/List_of_tz_database_time_zones">here</a>)</li>
+<li><code>tz = &quot;&quot;</code> = can use the “tz” argument to specify time zones (list <a href="http://en.wikipedia.org/wiki/List_of_tz_database_time_zones">here</a>)</li>
 </ul></li>
-<li><em><strong>Note</strong>: there are a variety of functions that are available to parse different formats, all of them are capable of converting the correct information if the order of month year day is correct</em></li>
-<li><em><strong>Note</strong>: when necessary, “//” or “—” should be added to provide clarity in date formatting</em></li>
+<li><em><strong>Note</strong>: there are a variety of functions that are available to parse different formats, all of them are capable of converting the correct information if the order of month year day is correct </em></li>
+<li><em><strong>Note</strong>: when necessary, <code>//</code> or <code>—</code> should be added to provide clarity in date formatting </em></li>
 </ul></li>
-<li><code>update(POSIXct, hours = 8, minutes = 34, seconds = 55)</code> –&gt; updates components of a date time
+<li><code>update(POSIXct, hours = 8, minutes = 34, seconds = 55)</code> = updates components of a date time
 <ul>
-<li><em><strong>Note</strong>: does not alter the date time passed in unless explicitly assigned</em></li>
+<li><em><strong>Note</strong>: does not alter the date time passed in unless explicitly assigned </em></li>
 </ul></li>
 <li>arithmetic can be performed on date times by using the <code>days()</code> <code>hours()</code> <code>minutes()</code>, etc. functions
 <ul>
-<li><em>example</em>: <code>now() + hours(5) + minutes(2)</code> –&gt; returns the date time for 5 hours and 2 minutes from now</li>
+<li><em>example</em>: <code>now() + hours(5) + minutes(2)</code> = returns the date time for 5 hours and 2 minutes from now</li>
 </ul></li>
-<li><code>with_tz(time, tone =&quot;&quot;)</code> –&gt; return date-time in a different time zone</li>
-<li><code>as.period(new_interval(last_time, arrive))</code> –&gt; return the properly formatted difference between the two date times</li>
+<li><code>with_tz(time, tone =&quot;&quot;)</code> = return date-time in a different time zone</li>
+<li><code>as.period(new_interval(last_time, arrive))</code> = return the properly formatted difference between the two date times</li>
 </ul>
 </div>
 <div id="subsetting-and-sorting" class="section level2">
@@ -723,33 +723,33 @@ img {
 <ul>
 <li><strong>subsetting</strong>
 <ul>
-<li><code>x &lt;- data.frame(&quot;var1&quot; = sample(1:5), &quot;var2&quot; = sample(6:10), &quot;var3&quot; = (11:15))</code> –&gt; initiates a data frame with three names columns</li>
-<li><code>x &lt;- x[sample(1:5)</code> –&gt; this scrambles the rows</li>
-<li><code>x$var2[c(2,3)] = NA</code> –&gt; setting the 2nd and 3rd element of the second column to NA</li>
-<li><code>x[1:2, &quot;var2&quot;]</code> –&gt; subsetting the first two row of the the second column</li>
-<li><code>x[(x$var1 &lt;= 3 | x$var3 &gt; 15), ]</code> –&gt; return all rows of x where the first column is less than or equal to three or where the third column is bigger than 15</li>
-<li><code>x[which(x$var2 &gt;8), ]</code> –&gt; returns the rows where the second column value is larger than 8
+<li><code>x &lt;- data.frame(&quot;var1&quot; = sample(1:5), &quot;var2&quot; = sample(6:10), &quot;var3&quot; = (11:15))</code> = initiates a data frame with three names columns</li>
+<li><code>x &lt;- x[sample(1:5)</code> = this scrambles the rows</li>
+<li><code>x$var2[c(2,3)] = NA</code> = setting the 2nd and 3rd element of the second column to NA</li>
+<li><code>x[1:2, &quot;var2&quot;]</code> = subsetting the first two row of the the second column</li>
+<li><code>x[(x$var1 &lt;= 3 | x$var3 &gt; 15), ]</code> = return all rows of x where the first column is less than or equal to three or where the third column is bigger than 15</li>
+<li><code>x[which(x$var2 &gt;8), ]</code> = returns the rows where the second column value is larger than 8
 <ul>
-<li><em><strong>Note</strong>: <code>which(condition)</code> –&gt; useful in dealing with NA values as it returns the indices of the values where the condition holds true (returns FALSE for NA)</em></li>
+<li><em><strong>Note</strong>: <code>which(condition)</code> = useful in dealing with NA values as it returns the indices of the values where the condition holds true (returns FALSE for NA) </em></li>
 </ul></li>
 </ul></li>
 <li><strong>sorting/ordering</strong>
 <ul>
-<li><code>sort(x$var1)</code> –&gt; sort the vector in increasing/alphabetical order
+<li><code>sort(x$var1)</code> = sort the vector in increasing/alphabetical order
 <ul>
-<li><code>decreasing = TRUE</code> –&gt; use decreasing argument to sort vector in decreasing order</li>
-<li><code>na.last = TRUE</code> –&gt; use na.last argument to sort the vector such that all the NA values will be listed last</li>
+<li><code>decreasing = TRUE</code> = use decreasing argument to sort vector in decreasing order</li>
+<li><code>na.last = TRUE</code> = use na.last argument to sort the vector such that all the NA values will be listed last</li>
 </ul></li>
-<li><code>x[order(x$var1, x$var2), ]</code> –&gt; order the x data frame according to var1 first and var2 second</li>
-<li><code>plyr</code> package: <code>arrange(data.farme, var1, desc(var2)</code> –&gt; see dplyr sections</li>
+<li><code>x[order(x$var1, x$var2), ]</code> = order the x data frame according to var1 first and var2 second</li>
+<li><code>plyr</code> package: <code>arrange(data.farme, var1, desc(var2)</code> = see dplyr sections</li>
 </ul></li>
 <li><strong>adding row/columns</strong>
 <ul>
-<li><code>x$var4 &lt;-rnorm(5)</code> –&gt; adds a new column to the end called var4</li>
-<li><code>cbind(X, rnorm(5))</code> –&gt; combines data frame with vector (as a column on the right)
+<li><code>x$var4 &lt;-rnorm(5)</code> = adds a new column to the end called var4</li>
+<li><code>cbind(X, rnorm(5))</code> = combines data frame with vector (as a column on the right)
 <ul>
-<li><code>rbind()</code> –&gt; combines two objects by putting them on top of each other (as a row on the bottom)</li>
-<li><em><strong>Note</strong>: order specified in the argument is the order in which the operation is performed</em></li>
+<li><code>rbind()</code> = combines two objects by putting them on top of each other (as a row on the bottom)</li>
+<li><em><strong>Note</strong>: order specified in the argument is the order in which the operation is performed </em></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -757,40 +757,42 @@ img {
 <div id="summarizing-data" class="section level2">
 <h2>Summarizing Data</h2>
 <ul>
-<li><code>head(data.frame, n = 10) /  tail(data.frame, n = 10)</code> –&gt; prints top/bottom 10 rows of data</li>
-<li><code>summary(data.frame)</code> –&gt; displays summary information
+<li><code>head(data.frame, n = 10) /  tail(data.frame, n = 10)</code> = prints top/bottom 10 rows of data</li>
+<li><code>summary(data.frame)</code> = displays summary information
 <ul>
 <li>for factors variables, the summary table will display count of the top 6 values</li>
 <li>for numeric variables, the summary table will display min, 1st quantile, median, mean, 3rd quantile, max</li>
 </ul></li>
-<li><code>str(data.frame)</code> –&gt; displays class of the object, dimensions, variables (name, class, preview of data)</li>
-<li><code>quantile(variable, na.rm = TRUE, probs = c(0.5, 0.75, 0.9))</code> –&gt; displays the specified quantile of the variable
+<li><code>str(data.frame)</code> = displays class of the object, dimensions, variables (name, class, preview of data)</li>
+<li><code>quantile(variable, na.rm = TRUE, probs = c(0.5, 0.75, 0.9))</code> = displays the specified quantile of the variable
 <ul>
 <li>default returns 0, .25, .5, .75, 1 quantiles</li>
 </ul></li>
-<li><code>table(variable, useNA = &quot;ifany&quot;)</code> –&gt; tabulates the values of the variable by listing all possible values and the number of occurrences
+<li><code>table(variable, useNA = &quot;ifany&quot;)</code> = tabulates the values of the variable by listing all possible values and the number of occurrences
 <ul>
-<li><code>useNA = &quot;ifany&quot;</code> –&gt; this will add another column if there are any NA values in the variable and displays how many as well</li>
-<li><code>table(var1, var2)</code> –&gt; tabulate the data against each other to see if theres an relationship between them</li>
+<li><code>useNA = &quot;ifany&quot;</code> = this will add another column if there are any NA values in the variable and displays how many as well</li>
+<li><code>table(var1, var2)</code> = tabulate the data against each other to see if theres an relationship between them</li>
 </ul></li>
 <li><strong>check for missing values</strong>
 <ul>
-<li><code>sum(is.na(variable))</code> –&gt; TRUE = 1, FALSE = 0, so if this sum = 0, then there’s no missing values</li>
-<li><code>any(is.na(variable))</code> –&gt; returns TRUE/FALSE of if there is any NA values in the variable</li>
-<li><code>all(variable &gt;0)</code> –&gt; check all values of a variable against some condition and return TRUE/FALSE</li>
+<li><code>sum(is.na(variable))</code> = TRUE = 1, FALSE = 0, so if this sum = 0, then there’s no missing values</li>
+<li><code>any(is.na(variable))</code> = returns TRUE/FALSE of if there is any NA values in the variable</li>
+<li><code>all(variable &gt;0)</code> = check all values of a variable against some condition and return TRUE/FALSE</li>
 </ul></li>
 <li><strong>row/column sums</strong>
 <ul>
-<li><code>colSums/rowSums(is.na(data.frame))</code> –&gt; column sum of is.na check for every column; works the exact same way with rowSums</li>
+<li><code>colSums/rowSums(is.na(data.frame))</code> = column sum of is.na check for every column; works the exact same way with rowSums</li>
 </ul></li>
 <li><strong>values with specific characteristics</strong>
 <ul>
-<li><code>table(data.frame$var1 %in% c(&quot;str1&quot;, &quot;str2&quot;))</code> –&gt; returns a FALSE/TRUE table that counts how many values from the data frame variable contains the specified values in the subsequent vector</li>
-<li><code>x[x$var1 %in% c(&quot;str1&quot;, &quot;str2&quot;), ]</code> –&gt; subsets rows from the data frame where the var1 == str1 or str2</li>
+<li><code>table(data.frame$var1 %in% c(&quot;str1&quot;, &quot;str2&quot;))</code> = returns a FALSE/TRUE table that counts how many values from the data frame variable contains the specified values in the subsequent vector</li>
+<li><code>x[x$var1 %in% c(&quot;str1&quot;, &quot;str2&quot;), ]</code> = subsets rows from the data frame where the var1 == str1 or str2</li>
 </ul></li>
 <li><strong>cross tabs</strong>
 <ul>
-<li><code>xt &lt;- xtabs(Freq ~ Gender + Admit, data = data.frame)</code> –&gt; displays a cross table of Gender and Admit variables, where the values of frequency is displayed</li>
+<li><code>xt &lt;- xtabs(Freq ~ Gender + Admit, data = data.frame)</code> = displays a cross table of Gender and Admit variables, where the values of frequency is displayed</li>
+<li><code>xt2 &lt;- xtabs(var1 ~ ., data = data.frame)</code> = cross-tabulate variable 1 with all other variables, creates multiple two dimensional tables</li>
+<li><code>ftable(xt2)</code> = compacts the different tables and prints out a more compacted version</li>
 </ul></li>
 </ul>
 <table>
@@ -814,13 +816,11 @@ img {
 </tr>
 </tbody>
 </table>
-<pre><code>* `xt2 &lt;- xtabs(var1 ~ ., data = data.frame)` --&gt; cross-tabulate variable 1 with all other variables, creates multiple two dimensional tables
-* `ftable(xt2)` --&gt; compacts the different tables and prints out a more compacted version</code></pre>
 <ul>
 <li><strong>size of data set</strong>
 <ul>
-<li><code>object.size(obj)</code> –&gt; returns size of object in bytes</li>
-<li><code>print(object.size(obj), units = &quot;Mb&quot;</code> –&gt; prints size of object in Mb</li>
+<li><code>object.size(obj)</code> = returns size of object in bytes</li>
+<li><code>print(object.size(obj), units = &quot;Mb&quot;</code> = prints size of object in Mb</li>
 </ul></li>
 </ul>
 </div>
@@ -829,43 +829,43 @@ img {
 <ul>
 <li><strong>sequences</strong>
 <ul>
-<li><code>s &lt;- seq(1, 10, by = 2)</code> –&gt; creates a sequence from 1 to 10 by intervals of 2</li>
-<li><code>length = 3</code> –&gt; use the length argument to specify how many numbers to generate</li>
-<li><code>seq(along = x)</code> –&gt; create as many elements as vector x</li>
+<li><code>s &lt;- seq(1, 10, by = 2)</code> = creates a sequence from 1 to 10 by intervals of 2</li>
+<li><code>length = 3</code> = use the length argument to specify how many numbers to generate</li>
+<li><code>seq(along = x)</code> = create as many elements as vector x</li>
 </ul></li>
 <li><strong>subsetting variables</strong>
 <ul>
-<li><code>restData$nearMe = restData$neighborhood %in% c(&quot;Roland&quot;, &quot;Homeland&quot;)</code> –&gt; creates a new variable “nearMe” that returns TRUE if the neighborhood value is Roland or Homeland, and FALSE otherwise</li>
+<li><code>restData$nearMe = restData$neighborhood %in% c(&quot;Roland&quot;, &quot;Homeland&quot;)</code> = creates a new variable <code>nearMe</code> that returns TRUE if the neighborhood value is Roland or Homeland, and FALSE otherwise</li>
 </ul></li>
 <li><strong>binary variables</strong>
 <ul>
-<li><code>restData$zipWrong = ifelse(restData$zipCode&lt;0, TRUE, FALSE)</code> –&gt; creates a new variable “zipWrong” that returns TRUE if the zipcode is less than 0, and FALSE otherwise</li>
-<li><code>ifelse(condition, result1, result2)</code> –&gt; this function is the same as a if-else statement</li>
+<li><code>restData$zipWrong = ifelse(restData$zipCode&lt;0, TRUE, FALSE)</code> = creates a new variable <code>zipWrong</code> that returns TRUE if the <code>zipcode</code> is less than 0, and FALSE otherwise</li>
+<li><code>ifelse(condition, result1, result2)</code> = this function is the same as a if-else statement</li>
 </ul></li>
 <li><strong>categorical variables</strong>
 <ul>
-<li><code>restData$zipGroups = cut(restData$zipCode, breaks = quantile(restData$zipCode)</code> –&gt; creates new variable “zipGroups” that specify ranges for the zip code data such that the observations are divided into groups created by the quantile function
+<li><code>restData$zipGroups = cut(restData$zipCode, breaks = quantile(restData$zipCode)</code> = creates new variable <code>zipGroups</code> that specify ranges for the zip code data such that the observations are divided into groups created by the quantile function
 <ul>
-<li><code>cut(variable, breaks)</code> –&gt; cuts a variable/vector into groups at the specified breaks</li>
-<li><em><strong>Note</strong>: class of resultant variable = factor</em></li>
-<li><code>quantile(variable)</code> –&gt; returns 0, .25, .5, .75, 1 by default and thus provides for ranges/groups for the data to be divided in</li>
+<li><code>cut(variable, breaks)</code> = cuts a variable/vector into groups at the specified breaks</li>
+<li><em><strong>Note</strong>: class of resultant variable = factor </em></li>
+<li><code>quantile(variable)</code> = returns 0, .25, .5, .75, 1 by default and thus provides for ranges/groups for the data to be divided in</li>
 </ul></li>
 <li>using <code>Hmisc</code> package
 <ul>
 <li><code>library(Hmisc)</code></li>
 <li><code>restData$zipGroups = cut2(restData$zipCode, g = 4)</code></li>
-<li><code>cut2(variable, g=4)</code> –&gt; automatically divides the variable values into 4 groups according the quantiles</li>
-<li><em><strong>Note</strong>: class of resultant variable = factor</em></li>
+<li><code>cut2(variable, g=4)</code> = automatically divides the variable values into 4 groups according the quantiles</li>
+<li><em><strong>Note</strong>: class of resultant variable = factor </em></li>
 </ul></li>
 </ul></li>
 <li><strong>factor variables</strong>
 <ul>
-<li><code>restData$zcf &lt;- factor(restData$zipCode)</code> –&gt; coverts an existing vector to factor variable
+<li><code>restData$zcf &lt;- factor(restData$zipCode)</code> = coverts an existing vector to factor variable
 <ul>
-<li><code>levels = c(&quot;yes&quot;, &quot;no&quot;)</code> –&gt; use the levels argument to specify the order of the different factors</li>
-<li><em><strong>Note</strong>: by default, converting variables to the factor class, the levels will be structured alphabetically unless otherwise specified</em></li>
+<li><code>levels = c(&quot;yes&quot;, &quot;no&quot;)</code> = use the levels argument to specify the order of the different factors</li>
+<li><em><strong>Note</strong>: by default, converting variables to the factor class, the levels will be structured alphabetically unless otherwise specified </em></li>
 </ul></li>
-<li><code>as.numeric(factorVariable)</code> –&gt; converts factor variable values into numeric by assigning the lowest (first) level 1, the second lowest level 2, …, etc.</li>
+<li><code>as.numeric(factorVariable)</code> = converts factor variable values into numeric by assigning the lowest (first) level 1, the second lowest level 2, …, etc.</li>
 </ul></li>
 <li><strong>category + factor split</strong>
 <ul>
@@ -878,14 +878,14 @@ img {
 </ul></li>
 <li><strong>common transforms</strong>
 <ul>
-<li><code>abs(x)</code> –&gt; absolute value</li>
-<li><code>sqrt(x)</code> –&gt; square root</li>
-<li><code>ceiling(x)</code>, <code>floor()</code> –&gt; round up/down to integer</li>
-<li><code>round(x, digits = n)</code> –&gt; round to the number of digits after the decimal point</li>
-<li><code>signif(x, digits = n)</code> –&gt; round to the number of significant digits</li>
-<li><code>cos(x)</code>, <code>sin(x)</code>, <code>tan(x)</code> … etc –&gt; trigonometric functions</li>
-<li><code>log(x)</code>, <code>log2(x)</code>, <code>log10(x)</code> –&gt; natural log, log 2, log 10</li>
-<li><code>exp(x)</code> –&gt; exponential of x</li>
+<li><code>abs(x)</code> = absolute value</li>
+<li><code>sqrt(x)</code> = square root</li>
+<li><code>ceiling(x)</code>, <code>floor()</code> = round up/down to integer</li>
+<li><code>round(x, digits = n)</code> = round to the number of digits after the decimal point</li>
+<li><code>signif(x, digits = n)</code> = round to the number of significant digits</li>
+<li><code>cos(x)</code>, <code>sin(x)</code>, <code>tan(x)</code> … etc = trigonometric functions</li>
+<li><code>log(x)</code>, <code>log2(x)</code>, <code>log10(x)</code> = natural log, log 2, log 10</li>
+<li><code>exp(x)</code> = exponential of x</li>
 </ul></li>
 </ul>
 </div>
@@ -894,20 +894,20 @@ img {
 <ul>
 <li><strong>melting data frames</strong>
 <ul>
-<li><code>library(reshape2)</code> –&gt; loads the reshape2 package</li>
-<li><code>mtcars$carname &lt;- rownames(mtcars)</code> –&gt; takes the row names/name of each observation and makes a new variable called “carname”</li>
-<li><code>carMelt &lt;- melt(mtcars, id=c(&quot;carname&quot;, &quot;gear&quot;, &quot;cyl&quot;), measure.vars = c(&quot;mpg&quot;, &quot;hp&quot;))</code> –&gt; converts dataframe into a castable melted data frame by reshaping the data
+<li><code>library(reshape2)</code> = loads the reshape2 package</li>
+<li><code>mtcars$carname &lt;- rownames(mtcars)</code> = takes the row names/name of each observation and makes a new variable called “carname”</li>
+<li><code>carMelt &lt;- melt(mtcars, id=c(&quot;carname&quot;, &quot;gear&quot;, &quot;cyl&quot;), measure.vars = c(&quot;mpg&quot;, &quot;hp&quot;))</code> = converts dataframe into a castable melted data frame by reshaping the data
 <ul>
-<li>ID variables and measured variables are defined separately through “id” and “measure.vars” arguments</li>
+<li>ID variables and measured variables are defined separately through <code>id</code> and <code>measure.vars</code> arguments</li>
 <li>ID variables (identifiers) are kept in rows, while all measured variables have been split into variable and value columns</li>
-<li>variable column = “mpg”, “hp” to qualify for the corresponding value column</li>
-<li>value column = contains the numeric value from previous measured variable columns like “mpg” “hp”</li>
+<li>variable column = <code>mpg</code>, <code>hp</code> to qualify for the corresponding value column</li>
+<li>value column = contains the numeric value from previous measured variable columns like <code>mpg</code> <code>hp</code></li>
 <li>ID variables are repeated when a new measured variable begins such that each row is an unique observation (long/tall table)</li>
 </ul></li>
 </ul></li>
 <li><strong>casting data frames</strong>
 <ul>
-<li><code>cylData &lt;- dcast(carMetl, cyl ~ variable)</code> –&gt; tabulate the data by rows (left hand side variable, cyl in this case) by columns (right hand side variable, variable in this case), so this is a table of cylinder vs mpg and hp
+<li><code>cylData &lt;- dcast(carMetl, cyl ~ variable)</code> = tabulate the data by rows (left hand side variable, cyl in this case) by columns (right hand side variable, variable in this case), so this is a table of cylinder vs mpg and hp
 <ul>
 <li>by default, <code>dcast()</code> summarizes the data set by providing the length argument (count)</li>
 <li>can add argument (mean) to specify the value of the table produced</li>
@@ -915,24 +915,23 @@ img {
 </ul></li>
 <li><strong>calculating factor sums</strong>
 <ul>
-<li><strong>method 1</strong>: <code>tapply(InsectSprays$count, InsectSpray$spray, sum)</code> –&gt; splits the InsectSpray count values by spray groups and calculates the sum of each group</li>
+<li><strong>method 1</strong>: <code>tapply(InsectSprays$count, InsectSpray$spray, sum)</code> = splits the InsectSpray count values by spray groups and calculates the sum of each group</li>
 <li><strong>method 2</strong>: split-apply-combine
 <ul>
-<li><code>s &lt;- split(InsectSprays$count, InsectSpray$spray)</code> –&gt; splits InsectSpray count values into groups by spray</li>
-<li><code>sprCount &lt;- lapply(s, sum)</code> –&gt; apply sum for all of the groups and return a list</li>
-<li><code>unlist(sprCount)</code> –&gt; converts a list into a vector with names</li>
-<li><code>sapply(s, sum)</code> –&gt; apply sum for all of the groups and return a vector</li>
+<li><code>s &lt;- split(InsectSprays$count, InsectSpray$spray)</code> = splits InsectSpray count values into groups by spray</li>
+<li><code>sprCount &lt;- lapply(s, sum)</code> = apply sum for all of the groups and return a list</li>
+<li><code>unlist(sprCount)</code> = converts a list into a vector with names</li>
+<li><code>sapply(s, sum)</code> = apply sum for all of the groups and return a vector</li>
 </ul></li>
 <li><strong>method 3</strong>: plyr package
 <ul>
-<li><code>ddply(dataframe, .(variables), method, function)</code> –&gt; for each subset of a data frame, apply function then combine results into a data frame</li>
-<li><code>dataframe</code> –&gt; data being processed</li>
-<li>.(variables) –&gt; variables to group/summarize by</li>
-<li><code>method</code> –&gt; can be a variety of different functions defined within the ply package, mutate, summarize, arrange, filter, select, etc.</li>
-<li><code>function</code> –&gt; how the data is going to be calculated</li>
-<li><em>example</em>: <code>ddply(InsectSprays, .(spray), summarize, sum = sum(count))</code> –&gt; summarize spray groups by providing the same of counts for each group</li>
-<li>creating new variable</li>
-<li><code>spraySums&lt;- ddply(InsectSprays, .(spray), summarize, sum = ave(count, FUN = sum))</code> –&gt; creates a data fram (2 columns) where each row is filled with the corresponding spray and sum (repeated multiple times for each group)</li>
+<li><code>ddply(dataframe, .(variables), method, function)</code> = for each subset of a data frame, apply function then combine results into a data frame</li>
+<li><code>dataframe</code> = data being processed</li>
+<li><code>.(variables)</code> = variables to group/summarize by</li>
+<li><code>method</code> = can be a variety of different functions defined within the ply package, mutate, summarize, arrange, filter, select, etc.</li>
+<li><code>function</code> = how the data is going to be calculated</li>
+<li><em>example</em>: <code>ddply(InsectSprays, .(spray), summarize, sum = sum(count))</code> = summarize spray groups by providing the same of counts for each group</li>
+<li><code>spraySums&lt;- ddply(InsectSprays, .(spray), summarize, sum = ave(count, FUN = sum))</code> = creates a data frame (2 columns) where each row is filled with the corresponding spray and sum (repeated multiple times for each group)</li>
 <li>the result can then be used and added to the dataset for analysis</li>
 </ul></li>
 </ul></li>
@@ -941,62 +940,62 @@ img {
 <div id="merging-data" class="section level2">
 <h2>Merging Data</h2>
 <ul>
-<li><code>merge(df1, df2, by/by.x/by.y, all = TRUE)</code> –&gt; merges two data frames
+<li><code>merge(df1, df2, by/by.x/by.y, all = TRUE)</code> = merges two data frames
 <ul>
-<li><code>df1</code>, <code>df2</code> –&gt; data frames to be merged</li>
-<li><code>by = &quot;col1&quot;/c(&quot;col1&quot;, &quot;col2&quot;)</code> –&gt; merge the two data frames by columns of the specified names
+<li><code>df1</code>, <code>df2</code> = data frames to be merged</li>
+<li><code>by = &quot;col1&quot;/c(&quot;col1&quot;, &quot;col2&quot;)</code> = merge the two data frames by columns of the specified names
 <ul>
-<li><em><strong>Note</strong>: if “by” argument is not specified, the two data frames will be merged with all columns with the same name [default behavior]</em></li>
-<li><em><strong>Note</strong>: columns must have the same names for this to work</em></li>
+<li><em><strong>Note</strong>: if <code>by</code> argument is not specified, the two data frames will be merged with all columns with the same name [default behavior] </em></li>
+<li><em><strong>Note</strong>: columns must have the same names for this to work </em></li>
 </ul></li>
-<li><code>by.x/by.y = &quot;col.x&quot;/&quot;col.y&quot;</code> –&gt; specifies which columns from x and y should be used to perform the merge operation</li>
-<li><code>all = TRUE</code> –&gt; if there are values that exist in one but not the other, new rows should be created with NA as values for the missing data</li>
+<li><code>by.x/by.y = &quot;col.x&quot;/&quot;col.y&quot;</code> = specifies which columns from x and y should be used to perform the merge operation</li>
+<li><code>all = TRUE</code> = if there are values that exist in one but not the other, new rows should be created with NA as values for the missing data</li>
 </ul></li>
-<li><code>plyr</code> package: <code>join(df1, df2)</code> –&gt; merges the columns by columns in common
+<li><code>plyr</code> package: <code>join(df1, df2)</code> = merges the columns by columns in common
 <ul>
 <li>faster but only works with columns that have the same name</li>
-<li><code>dfList = list(df1, df2, df3); join_all(dfList)</code> –&gt; joins together a list of data frames using the common columns</li>
+<li><code>dfList = list(df1, df2, df3); join_all(dfList)</code> = joins together a list of data frames using the common columns</li>
 </ul></li>
 </ul>
 </div>
 <div id="editing-text-variables" class="section level2">
 <h2>Editing Text Variables</h2>
 <ul>
-<li><code>tolower()</code> –&gt; make all character values lowercase letters</li>
-<li><code>toupper()</code> –&gt; make all character values uppercase letters</li>
-<li><code>strsplit(value, &quot;\\.&quot;)</code> –&gt; splits string into character vector by specified separator
+<li><code>tolower()</code> = make all character values lowercase letters</li>
+<li><code>toupper()</code> = make all character values uppercase letters</li>
+<li><code>strsplit(value, &quot;\\.&quot;)</code> = splits string into character vector by specified separator
 <ul>
 <li><em><strong>Note</strong>: <code>\\</code> must be added for the reserved operators in R </em></li>
 </ul></li>
-<li><code>sapply(list, function)</code> –&gt; can specify custom functions to return the part of the character desired
+<li><code>sapply(list, function)</code> = can specify custom functions to return the part of the character desired
 <ul>
 <li><em>example</em>: <code>fElement &lt;- function(x){x[1]}; sapply(vector, fElement)</code></li>
 </ul></li>
-<li><code>sub(pattern, replacement, object)</code> –&gt; replaces the first occurrence of pattern and replaces it with the replacement string
+<li><code>sub(pattern, replacement, object)</code> = replaces the first occurrence of pattern and replaces it with the replacement string
 <ul>
-<li><em>example</em>: <code>sub(&quot;_&quot;, &quot;&quot;, nameVector)</code> –&gt; removes first “_&quot; from the character vector</li>
+<li><em>example</em>: <code>sub(&quot;_&quot;, &quot;&quot;, nameVector)</code> = removes first “_&quot; from the character vector</li>
 </ul></li>
-<li><code>gsub(pattern, replacement, object)</code> –&gt; replaces all occurrences of the specified pattern and replaces it with the replacement string</li>
-<li><code>grep(&quot;text&quot;, object, value = FALSE)</code> –&gt; searches through object to return the indices of where the text is found
+<li><code>gsub(pattern, replacement, object)</code> = replaces all occurrences of the specified pattern and replaces it with the replacement string</li>
+<li><code>grep(&quot;text&quot;, object, value = FALSE)</code> = searches through object to return the indices of where the text is found
 <ul>
-<li><code>value = TRUE</code> –&gt; returns the values instead of the indices</li>
-<li><em><strong>Note</strong>: <code>grep()</code> returns <code>integer(0)</code> if no value appears (length of the result = 0)</em></li>
+<li><code>value = TRUE</code> = returns the values instead of the indices</li>
+<li><em><strong>Note</strong>: <code>grep()</code> returns <code>integer(0)</code> if no value appears (length of the result = 0) </em></li>
 </ul></li>
-<li><code>grepl(&quot;text&quot;, object)</code> –&gt; searches through object and returns the T/F logical vector for if the text has been found
+<li><code>grepl(&quot;text&quot;, object)</code> = searches through object and returns the T/F logical vector for if the text has been found
 <ul>
 <li><em>example</em>: <code>data2 &lt;- data1![grepl(&quot;test&quot;, data$intersection), ]</code></li>
 </ul></li>
 <li><code>string</code> package [<code>library(stringr)</code>]
 <ul>
-<li><code>nchar(object/string)</code> –&gt; returns number of characters in each element of object/string, works on matrix/data frames as well</li>
-<li><code>substr(&quot;text&quot;, 1, 7)</code> –&gt; returns a substring of the specified beginning and ending characters
+<li><code>nchar(object/string)</code> = returns number of characters in each element of object/string, works on matrix/data frames as well</li>
+<li><code>substr(&quot;text&quot;, 1, 7)</code> = returns a substring of the specified beginning and ending characters
 <ul>
-<li><em><strong>Note</strong>: R is uses 1 based indexing system, which means the first character of the string = 1</em></li>
-<li><em><strong>Note</strong>: substring returns a string that includes both first AND last letters and everything inbetween</em></li>
+<li><em><strong>Note</strong>: R is uses 1 based indexing system, which means the first character of the string = 1 </em></li>
+<li><em><strong>Note</strong>: substring returns a string that includes both first AND last letters and everything inbetween </em></li>
 </ul></li>
-<li><code>paste(&quot;str1&quot;, &quot;str2&quot;, sep = &quot; &quot;)</code> –&gt; combines two strings together into one by using the specified separator (<code>default = &quot; &quot;</code>)</li>
-<li><code>paste0((&quot;str1&quot;, &quot;str2&quot;)</code> –&gt; combines series of strings together with no separator</li>
-<li><code>str_trim(&quot;  text   &quot;)</code> –&gt; trims off whitespace from start and end of string</li>
+<li><code>paste(&quot;str1&quot;, &quot;str2&quot;, sep = &quot; &quot;)</code> = combines two strings together into one by using the specified separator (<code>default = &quot; &quot;</code>)</li>
+<li><code>paste0(&quot;str1&quot;, &quot;str2&quot;)</code> = combines series of strings together with no separator</li>
+<li><code>str_trim(&quot;  text   &quot;)</code> = trims off whitespace from start and end of string</li>
 </ul></li>
 <li><strong>General Rules</strong>
 <ul>
@@ -1049,23 +1048,23 @@ img {
 <li><code>|</code> = or, used to combine subexpressions called alternatives (metacharacter)
 <ul>
 <li><em>example</em>: <code>^([Gg}ood | [Bb]ad)</code> matches any lines that start with lower/upper “Good…” and “Bad …”</li>
-<li><em><strong>Note</strong>: <code>()</code> limits the scope of alternatives divided by “|” here</em></li>
+<li><em><strong>Note</strong>: <code>()</code> limits the scope of alternatives divided by “|” here </em></li>
 </ul></li>
-<li><code>?</code> = expression is optional –&gt; 0/1 of some character/expression (metacharacter)
+<li><code>?</code> = expression is optional = 0/1 of some character/expression (metacharacter)
 <ul>
 <li><em>example</em>: <code>[Gg]eorge( [Ww]\.)?</code> [Bb]ush matches “george bush”, “George W. Bush”</li>
-<li><em><strong>Note</strong>: “&quot; was added before”.&quot; because “.” is a metacharacter, “.” called escape dot, tells the expression to read it as an actual period instead of an operator</em></li>
+<li><em><strong>Note</strong>: “&quot; was added before”.&quot; because “.” is a metacharacter, “.” called escape dot, tells the expression to read it as an actual period instead of an operator </em></li>
 </ul></li>
-<li><code>*</code> = any number of repetition, including none –&gt; 0 or more of some character/expression (metacharacter)
+<li><code>*</code> = any number of repetition, including none = 0 or more of some character/expression (metacharacter)
 <ul>
 <li><em>example</em>: <code>.*</code> matches anything combination of characters</li>
-<li><em><strong>Note</strong>: <code>*</code> is greedy = always matches the longest possible string that satisfies the regular expression</em>
+<li><em><strong>Note</strong>: <code>*</code> is greedy = always matches the longest possible string that satisfies the regular expression </em>
 <ul>
 <li>greediness of <code>*</code> can be turned off with the <code>?</code></li>
 <li><em>example</em>: <code>s.*?s</code> matches the shortest “s…s” text</li>
 </ul></li>
 </ul></li>
-<li><code>+</code> = 1 or more repetitions –&gt; 1 or more of some character/expression (metacharacter)
+<li><code>+</code> = 1 or more repetitions = 1 or more of some character/expression (metacharacter)
 <ul>
 <li><em>example</em>: <code>[0-9]+</code> matches matches many at least digit 1 numbers such as “0”, “90”, or “021442132”</li>
 </ul></li>
@@ -1078,7 +1077,7 @@ img {
 </ul></li>
 <li><code>()</code> = define group as the the text in parentheses, groups will be remembered and can be referred to by <code>\1</code>, <code>\2</code>, etc.
 <ul>
-<li><em>example</em>: <code>([a-zA-Z]+) +\1 +</code> matches “any word + at least one space + the same word repeated + at least one space” –&gt; “night night”, “so so”, etc.</li>
+<li><em>example</em>: <code>([a-zA-Z]+) +\1 +</code> matches “any word + at least one space + the same word repeated + at least one space” = “night night”, “so so”, etc.</li>
 </ul></li>
 </ul>
 </div>
@@ -1115,7 +1114,7 @@ img {
 <ul>
 <li><code>attr(, &quot;origin&quot;)</code> = prints out the origin for the julian date format, which is 1970-01-01</li>
 </ul></li>
-<li><code>lubridate</code> package [<code>library(lubridate)</code>] –&gt; see lubridate section
+<li><code>lubridate</code> package [<code>library(lubridate)</code>] = see lubridate section
 <ul>
 <li><code>?Sys.timezone</code> = documentation on how to determine/set timezones</li>
 </ul></li>

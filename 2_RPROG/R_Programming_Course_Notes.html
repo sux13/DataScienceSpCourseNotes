@@ -139,7 +139,6 @@ img {
 </ul>
 </div>
 
-
 <div id="overview-and-history-of-r" class="section level2">
 <h2>Overview and History of R</h2>
 <ul>
@@ -152,7 +151,7 @@ img {
 </ul></li>
 <li><strong>History of S</strong>
 <ul>
-<li>Bell labs –&gt; insightful –&gt; Lucent –&gt; Alcatel-Lucent</li>
+<li>Bell labs <span class="math">\(\rightarrow\)</span> insightful <span class="math">\(\rightarrow\)</span> Lucent <span class="math">\(\rightarrow\)</span> Alcatel-Lucent</li>
 <li>in 1998, S won the Association for computing machinery’s software system award</li>
 </ul></li>
 <li><strong>History of R</strong>
@@ -191,12 +190,11 @@ img {
 <ul>
 <li><strong>base R</strong> contains core functionality and fundamental functions</li>
 <li>other utility packages included in the base install: <code>util</code>, <code>stats</code>, <code>datasets</code>, …</li>
-<li>Recommended packages: boot class, KernSmooth, etc</li>
+<li>Recommended packages: <code>bootclass</code>, <code>KernSmooth</code>, etc</li>
 </ul></li>
 <li>5000+ packages available</li>
 </ul></li>
 </ul>
-
 </div>
 <div id="coding-standards" class="section level2">
 <h2>Coding Standards</h2>
@@ -214,7 +212,7 @@ img {
 <li><code>setwd()</code> = set current working directory</li>
 <li><code>?function</code> = brings up help for that function</li>
 <li><code>dir.create(&quot;path/foldername&quot;, recursive = TRUE)</code> = create directories/subdirectories</li>
-<li><code>unlink(directory, recursive = TRUE)</code> = delete directory and subdirectories``</li>
+<li><code>unlink(directory, recursive = TRUE)</code> = delete directory and subdirectories</li>
 <li><code>ls()</code> = list all objects in the local workspace</li>
 <li><code>list.files(recursive = TRUE)</code> = list all, including subdirectories</li>
 <li><code>args(function)</code> = returns arguments for the function</li>
@@ -237,11 +235,10 @@ img {
 <li>expression is evaluated after hitting <code>enter</code> and result is returned</li>
 <li>autoprinting occurs when you call a variable
 <ul>
-<li>print(x) = explicitly printing</li>
+<li><code>print(x)</code> = explicitly printing</li>
 </ul></li>
 <li><code>[1]</code> at the beginning of the output = which element of the vector is being shown</li>
 </ul>
-
 </div>
 <div id="r-objects-and-data-structures" class="section level2">
 <h2>R Objects and Data Structures</h2>
@@ -257,7 +254,7 @@ img {
 <li><strong>Numbers</strong>
 <ul>
 <li>numbers generally treated as <code>numeric</code> objects (double precision real numbers - decimals)</li>
-<li>Integer objects can be created by adding <code>L</code> to the end of a number(ex. 1L)</li>
+<li>Integer objects can be created by adding <code>L</code> to the end of a number(ex. <code>1L</code>)</li>
 <li><code>Inf</code> = infinity, can be used in calculations</li>
 <li><code>NaN</code> = not a number/undefined</li>
 <li><code>sqrt(value)</code> = square root of value</li>
@@ -272,11 +269,11 @@ img {
 <ul>
 <li><strong>atomic vector</strong> = contains one data type, most basic object
 <ul>
-<li><code>vector &lt;- c(value1, value2, …)</code> = creates a vector with specified values</li>
+<li><code>vector &lt;- c(value1, value2, ...)</code> = creates a vector with specified values</li>
 <li><code>vector1*vector2</code> = element by element multiplication (rather than matrix multiplication)
 <ul>
 <li>if the vectors are of different lengths, shorter vector will be recycled until the longer runs out</li>
-<li>computation on vectors/between vectors (+, -, ==, /, etc.) are done element by element by default</li>
+<li>computation on vectors/between vectors (<code>+</code>, <code>-</code>, <code>==</code>, <code>/</code>, etc.) are done element by element by default</li>
 <li><code>%*%</code> = force matrix multiplication between vectors/matrices</li>
 </ul></li>
 <li><code>vector(&quot;class&quot;, n)</code> = creates empty vector of length n and specified class
@@ -286,21 +283,21 @@ img {
 </ul></li>
 <li><code>c()</code> = concatenate
 <ul>
-<li><code>T, F</code> = shorthand for TRUE and FALSE</li>
+<li><code>T, F</code> = shorthand for <code>TRUE</code> and <code>FALSE</code></li>
 <li><code>1+0i</code> = complex numbers</li>
 </ul></li>
 <li><strong>explicit coercion</strong>
 <ul>
 <li><code>as.numeric(x)</code>, <code>as.logical(x)</code>, <code>as.character(x)</code>, <code>as.complex(x)</code> = convert object from one class to another</li>
-<li>nonsensible coercion will result in NA (ex. as.numeric(c(“a”, “b”))</li>
+<li>nonsensible coercion will result in NA (ex. <code>as.numeric(c(&quot;a&quot;, &quot;b&quot;)</code>)</li>
 <li><code>as.list(data.frame)</code> = converts a <code>data.frame</code> object into a <code>list</code> object</li>
-<li><code>as.characters(list)</code> = converts list into a character vector</li>
+<li><code>as.character(list)</code> = converts list into a character vector</li>
 </ul></li>
 <li><strong>implicit coercion</strong>
 <ul>
 <li>matrix/vector can only contain one data type, so when attempting to create matrix/vector with different classes, forced coercion occurs to make every element to same class
 <ul>
-<li><em>least common denominator</em> is the approach used (basically everything is converted to a class that all values can take, numbers –&gt; characters) and <em>no errors generated</em></li>
+<li><em>least common denominator</em> is the approach used (basically everything is converted to a class that all values can take, numbers <span class="math">\(\rightarrow\)</span> characters) and <em>no errors generated</em></li>
 <li>coercion occurs to make every element to same class (implicit)</li>
 <li><code>x &lt;- c(NA, 2, &quot;D&quot;)</code> will create a vector of character class</li>
 </ul></li>
@@ -308,13 +305,13 @@ img {
 <li><code>list()</code> = special vector wit different classes of elements
 <ul>
 <li><code>list</code> = vector of objects of different classes</li>
-<li>elements of list use [[]], elements of other vectors use []</li>
+<li>elements of list use <code>[[]]</code>, elements of other vectors use <code>[]</code></li>
 </ul></li>
 <li><strong>logical vectors</strong> = contain values <code>TRUE</code>, <code>FALSE</code>, and <code>NA</code>, values are generated as result of logical conditions comparing two objects/values</li>
 <li><code>paste(characterVector, collapse = &quot; &quot;)</code> = join together elements of the vector and separating with the <code>collapse</code> parameter</li>
 <li><code>paste(vec1, vec2, sep = &quot; &quot;)</code> = join together different vectors and separating with the <code>sep</code> parameter
 <ul>
-<li><em><strong>Note</strong>: vector recycling applies here too</em></li>
+<li><em><strong>Note</strong>: vector recycling applies here too </em></li>
 <li><code>LETTERS</code>, <code>letters</code>= predefined vectors for all 26 upper and lower letters</li>
 </ul></li>
 <li><code>unique(values)</code> = returns vector with all duplicates removed</li>
@@ -327,7 +324,7 @@ img {
 <li><code>data.frame</code> can contain <strong>multiple</strong></li>
 <li><code>matrix(values, nrow = n, ncol = m)</code> = creates a n by m matrix
 <ul>
-<li>constructed <strong>COLUMN WISE</strong> –&gt; the elements are placed into the matrix from top to bottom for each column, and by column from left to right</li>
+<li>constructed <strong>COLUMN WISE</strong> <span class="math">\(\rightarrow\)</span> the elements are placed into the matrix from top to bottom for each column, and by column from left to right</li>
 <li>matrices can also be created by adding the dimension attribute to vector
 <ul>
 <li><code>dim(m) &lt;- c(2, 5)</code></li>
@@ -376,7 +373,7 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <li><code>as.data.frame(obj)</code> = converts object to data frame</li>
 <li>data frames store tabular data</li>
 <li>special type of list where every list has the same length (can be of different type)</li>
-<li>data frames are usually created through <code>read.table()</code> and <code>read.cvs()</code></li>
+<li>data frames are usually created through <code>read.table()</code> and <code>read.csv()</code></li>
 <li><code>data.matrix()</code> = converts a matrix to data frame</li>
 </ul></li>
 <li><code>colMeans(matrix)</code> or <code>rowMeans(matrix)</code> = returns means of the columns/rows of a matrix/dataframe in a vector</li>
@@ -386,14 +383,14 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <li>objects can have attributes: <code>names</code>, <code>dimnames</code>, <code>row.names</code>, <code>dim</code> (matrices, arrays), <code>class</code>, <code>length</code>, or any user-defined ones</li>
 <li><code>attributes(obj)</code>, <code>class(obj)</code> = return attributes/class for an R object</li>
 <li><code>attr(object, &quot;attribute&quot;) &lt;- &quot;value&quot;</code> = creates/assigns a value to a new/existing attribute for the object</li>
-<li><strong><code>names</code> attribute</strong>
+<li><code>names</code> attribute
 <ul>
 <li>all objects can have names</li>
-<li><code>names(x)</code> = returns names (NULL if no name exists)
+<li><code>names(x)</code> = returns names (<code>NULL</code> if no name exists)
 <ul>
 <li><code>names(x) &lt;- c(&quot;a&quot;, …)</code> = can be used to assign names to vectors</li>
 </ul></li>
-<li><code>lists(a = 1, b = 2, …)</code> = a, b are names</li>
+<li><code>list(a = 1, b = 2, …)</code> = <code>a</code>, <code>b</code> are names</li>
 <li><code>dimnames(matrix) &lt;- list(c(&quot;a&quot;, &quot;b&quot;), c(&quot;c&quot; , &quot;d&quot;))</code> = assign names to matrices
 <ul>
 <li>use list of two vectors: row, column in that order</li>
@@ -416,7 +413,7 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <li><code>data</code> = data to be stored in array</li>
 <li><code>dim</code> = dimensions of the array
 <ul>
-<li><code>dim = c(2, 2, 5)</code> = 3 dimensional array –&gt; creates 5 2x2 array</li>
+<li><code>dim = c(2, 2, 5)</code> = 3 dimensional array <span class="math">\(\rightarrow\)</span> creates 5 2x2 array</li>
 </ul></li>
 <li><code>dimnames</code> = add names to the dimensions
 <ul>
@@ -434,7 +431,7 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <div id="factors" class="section level3">
 <h3>Factors</h3>
 <ul>
-<li>Factors are used to represent categorical data (integer vector where each value has a label)</li>
+<li>factors are used to represent <em>categorical data</em> (integer vector where each value has a label)</li>
 <li>2 types: <strong>unordered</strong> vs <strong>ordered</strong></li>
 <li>treated specially by <code>lm()</code>, <code>glm()</code></li>
 <li>Factors easier to understand because they self describe (vs. 1 and 2)</li>
@@ -447,7 +444,6 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <li><code>table(factorVar)</code> = how many of each are in the factor</li>
 </ul></li>
 </ul>
-
 </div>
 </div>
 <div id="missing-values" class="section level2">
@@ -463,18 +459,18 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 </ul></li>
 <li><em><strong>Note</strong>: NaN is an NA value, but NA is not NaN</em></li>
 </ul></li>
-<li><code>is.na(), is.nan()</code> = use to test if each element of the vector is NA and NaN
+<li><code>is.na()</code>, <code>is.nan()</code> = use to test if each element of the vector is <code>NA</code> and <code>NaN</code>
 <ul>
-<li><em><strong>Note</strong>: cannot compare NA (with ==) as it is not a value but a <strong>placeholder</strong> for a quantity that is not available</em><br /></li>
+<li><em><strong>Note</strong>: cannot compare <code>NA</code> (with <code>==</code>) as it is not a value but a <strong>placeholder</strong> for a quantity that is not available</em></li>
 </ul></li>
 <li><p><code>sum(my_na)</code> = sum of a logical vector (<code>TRUE</code> = 1 and <code>FALSE</code> = 0) is effectively the number of <code>TRUE</code>s</p></li>
-<li><strong>Removing NA Values</strong>
+<li><strong>Removing <code>NA</code> Values</strong>
 <ul>
-<li><code>is.na()</code> = creates logical vector where T is where value exists, F is NA
+<li><code>is.na()</code> = creates logical vector where T is where value exists, F is <code>NA</code>
 <ul>
 <li>subsetting with the above result can return only the non NA elements</li>
 </ul></li>
-<li><code>complete.cases(obj1, obj2)</code> = creates logical vector where <code>TRUE</code> is where both values exist, and <code>FALSE</code> is where any is NA
+<li><code>complete.cases(obj1, obj2)</code> = creates logical vector where <code>TRUE</code> is where both values exist, and <code>FALSE</code> is where any is <code>NA</code>
 <ul>
 <li>can be used on data frames as well</li>
 <li><code>complete.cases(data.frame)</code> = creates logical vectors indicating which observation/row is good</li>
@@ -483,7 +479,6 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 </ul></li>
 <li><p><strong>Imputing Missing Values</strong> = replacing missing values with estimates (can be averages from all other data with the similar conditions)</p></li>
 </ul>
-
 </div>
 <div id="sequence-of-numbers" class="section level2">
 <h2>Sequence of Numbers</h2>
@@ -510,12 +505,12 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <div id="subsetting" class="section level2">
 <h2>Subsetting</h2>
 <ul>
-<li>R uses <strong>one based index</strong> –&gt; starts counting at <span class="math">\(1\)</span>
+<li>R uses <strong>one based index</strong> <span class="math">\(\rightarrow\)</span> starts counting at <span class="math">\(1\)</span>
 <ul>
 <li><code>x[0]</code> returns <code>numeric(0)</code>, not error</li>
 <li><code>x[3000]</code> returns <code>NA</code> (not out of bounds/error)</li>
 </ul></li>
-<li><code>[]</code> = always returns object of same class, can select more than one element of an object [1;2]</li>
+<li><code>[]</code> = always returns object of same class, can select more than one element of an object (ex. <code>[1:2]</code>)</li>
 <li><code>[[]]</code> = can extract one element from list or data frame, returned object not necessarily list/dataframe</li>
 <li><code>$</code> = can extract elements from list/dataframe that have names associated with it, not necessarily same class</li>
 </ul>
@@ -545,12 +540,12 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <ul>
 <li><code>x &lt;- list(foo = 1:4, bar = 0.6)</code></li>
 <li><code>x[1]</code> or <code>x[&quot;foo&quot;]</code> = returns the list object <code>foo</code></li>
-<li><code>x[[2]]</code> or <code>x[[&quot;bar&quot;]]</code> or <code>x$bar</code> = returns the content of the second element from the list (in this case vector without name attribute)</li>
-<li><code>x[c(1, 3)]</code> = extract multiple elements of list ([[]]
+<li><code>x[[2]]</code> or <code>x[[&quot;bar&quot;]]</code> or <code>x$bar</code> = returns the content of the second element from the list (in this case vector without name attribute)
 <ul>
-<li><em><strong>Note</strong>: <code>$</code> can’t extract multiple</em></li>
+<li><em><strong>Note</strong>: <code>$</code> can’t extract multiple elements </em></li>
 </ul></li>
-<li><code>x[[name]]</code> = extract using variable, where as $ must match name of element</li>
+<li><code>x[c(1, 3)]</code> = extract multiple elements of list</li>
+<li><code>x[[name]]</code> = extract using variable, where as <code>$</code> must match name of element</li>
 <li><code>x[[c(1, 3)]]</code> or <code>x[[1]][[3]]</code> = extracted nested elements of list third element of the first object extracted from the list</li>
 </ul>
 </div>
@@ -578,25 +573,24 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <li><code>$</code> automatically partial matches the name (<code>x$a</code>)</li>
 <li><code>[[]]</code> can partial match by adding exact = <code>FALSE</code>
 <ul>
-<li>x[[“a”, exact = false]]</li>
+<li><code>x[[&quot;a&quot;, exact = false]]</code></li>
 </ul></li>
 </ul>
-
 </div>
 </div>
 <div id="logic" class="section level2">
 <h2>Logic</h2>
 <ul>
-<li><code>&lt;</code>, <code>&gt;=</code> –&gt; less than, greater or equal to</li>
-<li><code>==</code> –&gt; exact equality</li>
-<li><code>!=</code> –&gt; inequality</li>
+<li><code>&lt;</code>, <code>&gt;=</code> = less than, greater or equal to</li>
+<li><code>==</code> = exact equality</li>
+<li><code>!=</code> = inequality</li>
 <li><code>A | B</code> = union</li>
 <li><code>A &amp; B</code> = intersection</li>
 <li><code>!</code> = negation</li>
 <li><code>&amp;</code> or <code>|</code> evaluates every instance/element in vector</li>
 <li><code>&amp;&amp;</code> or <code>||</code> evaluate only first element
 <ul>
-<li>All AND operators are evaluated before PR operators</li>
+<li><em><strong>Note</strong>: All AND operators are evaluated before OR operators </em></li>
 </ul></li>
 <li><code>isTRUE(condition)</code> = returns <code>TRUE</code> or <code>FALSE</code> of the condition</li>
 <li><code>xor(arg1, arg2)</code> = exclusive OR, one argument must equal <code>TRUE</code> one must equal <code>FALSE</code></li>
@@ -624,13 +618,12 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 </ul></li>
 <li><code>str(data.frame)</code> = structure of data, provides data class, num of observations vs variables, and name of class of each variable and preview of its contents
 <ul>
-<li>compactly display the internal structure of an R object<br /></li>
+<li>compactly display the internal structure of an R object</li>
 <li>“What’s in this object”</li>
 <li>well-suited to compactly display the contents of lists</li>
 </ul></li>
-<li><code>View(data.frame)</code> = opens and view the content of the data frame</li>
+<li><code>view(data.frame)</code> = opens and view the content of the data frame</li>
 </ul>
-
 </div>
 <div id="split-apply-combine-funtions" class="section level2">
 <h2>Split-Apply-Combine Funtions</h2>
@@ -672,7 +665,7 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <li><code>x</code> = array</li>
 <li><code>MARGIN</code> = 2 (column), 1 (row)</li>
 <li><code>FUN</code> = function</li>
-<li><code>…</code> = other arguments that need to be passed to other functions<br /></li>
+<li><code>…</code> = other arguments that need to be passed to other functions</li>
 </ul></li>
 <li><strong><em>examples</em></strong>
 <ul>
@@ -783,12 +776,11 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 <ul>
 <li><code>dataToCompute</code> = this is what the function will be applied on</li>
 <li><code>factorVar1, factorVar1</code> = factor variables to split the data by</li>
-<li>**<em>Note</em>: order matters here in terms of how to break down the data*</li>
+<li><em><strong>Note</strong>: order matters here in terms of how to break down the data </em></li>
 <li><code>function</code> = what is applied to the subsets of data, can be sum/mean/median/etc</li>
-<li><code>na.rm = TRUE</code> –&gt; removes NA values</li>
+<li><code>na.rm = TRUE</code> <span class="math">\(\rightarrow\)</span> removes NA values</li>
 </ul></li>
 </ul>
-
 </div>
 </div>
 <div id="simulation" class="section level2">
@@ -806,13 +798,13 @@ x &lt;-<span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">1<
 </ul></li>
 <li>Each probability distribution functions usually have 4 functions associated with them:
 <ul>
-<li><code>r***</code> function (for “random”) –&gt; random number generation</li>
-<li><code>d***</code> function (for “density”) –&gt; calculate density</li>
-<li><code>p***</code> function (for “probability”) –&gt; cumulative distribution</li>
-<li><code>q***</code> function (for “quantile”) –&gt; quantile function</li>
+<li><code>r***</code> function (for “random”) <span class="math">\(\rightarrow\)</span> random number generation (ex. <code>rnorm</code>)</li>
+<li><code>d***</code> function (for “density”) <span class="math">\(\rightarrow\)</span> calculate density (ex. <code>dunif</code>)</li>
+<li><code>p***</code> function (for “probability”) <span class="math">\(\rightarrow\)</span> cumulative distribution (ex. <code>ppois</code>)</li>
+<li><code>q***</code> function (for “quantile”) <span class="math">\(\rightarrow\)</span> quantile function (ex. <code>qbinom</code>)</li>
 </ul></li>
 <li>If <span class="math">\(\Phi\)</span> is the cumulative distribution function for a standard Normal distribution, then <code>pnorm(q)</code> = <span class="math">\(\Phi(q)\)</span> and qnorm(p) = <span class="math">\(\Phi^{-1}(q)\)</span>.</li>
-<li><code>set.seed()</code> = reproduce same data</li>
+<li><code>set.seed()</code> = sets seed for randon number generator to ensure that the same data/analysis can be reproduced</li>
 </ul>
 <div id="simulation-examples" class="section level3">
 <h3>Simulation Examples</h3>
@@ -868,12 +860,12 @@ y = \beta_0 + \beta_1 x + \epsilon \\
 \]</span></li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">20</span>)
-x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)          <span class="co"># normal </span>
+x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)          <span class="co"># normal</span>
 x &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">100</span>, <span class="dv">1</span>, <span class="fl">0.5</span>) <span class="co"># binomial</span>
 e &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">2</span>)
 y &lt;-<span class="st"> </span><span class="fl">0.5</span> +<span class="st"> </span><span class="dv">2</span>*<span class="st"> </span>x +<span class="st"> </span>e</code></pre>
 <ul>
-<li>Poisson model<br /><span class="math">\[
+<li>Poisson model <span class="math">\[
 Y ~ Poisson(\mu) \\
 log(\mu) = \beta_0 + \beta_1 x  \\
 ~\mbox{where}~ \beta_0 = 0.5,  \beta_1 = 2
@@ -882,7 +874,6 @@ log(\mu) = \beta_0 + \beta_1 x  \\
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>)
 log.mu &lt;-<span class="st"> </span><span class="fl">0.5</span> +<span class="st"> </span><span class="fl">0.3</span>*<span class="st"> </span>x
 y &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">100</span>, <span class="kw">exp</span>(log.mu))</code></pre>
-
 </div>
 </div>
 <div id="dates-and-times" class="section level2">
@@ -923,7 +914,6 @@ y &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">1
 <li><code>break = 100</code> = split data into 100 bins</li>
 </ul></li>
 </ul>
-
 </div>
 <div id="reading-tabular-data" class="section level2">
 <h2>Reading Tabular Data</h2>
@@ -951,21 +941,21 @@ y &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">1
 <li><code>read.table</code> can be used without any other argument to create data.frame
 <ul>
 <li>telling R what type of variables are in each column is helpful for larger datasets (efficiency)</li>
-<li><code>read.csv()</code> = <code>read.table</code> except default sep is comma (read.table is &quot; “) and header` = TRUE</li>
+<li><code>read.csv()</code> = <code>read.table</code> except default sep is comma (<code>read.table</code> default is <code>sep = &quot; &quot;</code> and <code>header = TRUE</code>)</li>
 </ul></li>
 </ul>
 <div id="larger-tables" class="section level3">
 <h3>Larger Tables</h3>
 <ul>
 <li><em><strong>Note</strong>: help page for read.table important</em></li>
-<li>need to know how much RAM is required –&gt; calculating memory requirements
+<li>need to know how much RAM is required <span class="math">\(\rightarrow\)</span> calculating memory requirements
 <ul>
-<li>numRow x numCol x 8 bytes/numeric value = size required in bites</li>
+<li><code>numRow</code> x <code>numCol</code> x 8 bytes/numeric value = size required in bites</li>
 <li>double the above results and convert into GB = amount of memory recommended</li>
 </ul></li>
-<li><code>set comment.char</code> = “” to save time if there are no comments in the file</li>
-<li>specifying colClasses can make reading data much faster</li>
-<li><code>nrow</code> = n, number of rows to read in (can help with memory usage)
+<li>set <code>comment.char = &quot;&quot;</code> to save time if there are no comments in the file</li>
+<li>specifying <code>colClasses</code> can make reading data much faster</li>
+<li><code>nrow = n</code> = number of rows to read in (can help with memory usage)
 <ul>
 <li><code>initial &lt;- read.table(&quot;file&quot;, rows = 100)</code> = read first 100 lines</li>
 <li><code>classes &lt;- sapply(initial, class)</code> = determine what classes the columns are</li>
@@ -1003,15 +993,14 @@ y &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">1
 <li><code>fileURL</code> = url of the file that needs to be downloaded</li>
 <li><code>destfile = &quot;fileName&quot;</code> = specifies where the file is to be saved
 <ul>
-<li>“dir/fileName” = directories can be referenced here</li>
+<li><code>dir/fileName</code> = directories can be referenced here</li>
 </ul></li>
-<li><code>method = &quot;curl&quot;</code> = necessary for downloading files from “<a href="https://">https://</a>” links on Macs
+<li><code>method = &quot;curl&quot;</code> = necessary for downloading files from “<a href="https://" class="uri">https://</a>” links on Macs
 <ul>
 <li><code>method = &quot;auto&quot;</code> = should work on all other machines</li>
 </ul></li>
 </ul></li>
 </ul>
-
 </div>
 </div>
 <div id="control-structures" class="section level2">
@@ -1019,7 +1008,7 @@ y &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">1
 <ul>
 <li>Common structures are
 <ul>
-<li><code>if, else</code> = testing a condition</li>
+<li><code>if</code>, <code>else</code> = testing a condition</li>
 <li><code>for</code> = execute a loop a fixed number of times</li>
 <li><code>while</code> = execute a loop while a condition is true</li>
 <li><code>repeat</code> = execute an infinite loop</li>
@@ -1027,7 +1016,7 @@ y &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">1
 <li><code>next</code> = skip an interation of a loop</li>
 <li><code>return</code> = exit a function</li>
 </ul></li>
-<li><em><strong>Note</strong>: Control structures are primarily useful for writing programs; for command-line interactive work, the <code>apply</code> functions are more useful</em></li>
+<li><em><strong>Note</strong>: Control structures are primarily useful for writing programs; for command-line interactive work, the <code>apply</code> functions are more useful </em></li>
 </ul>
 <div id="if---else" class="section level3">
 <h3><code>if - else</code></h3>
@@ -1065,9 +1054,9 @@ for(i in <span class="kw">seq_len</span>(<span class="kw">nrow</span>(x))) {
     }
 }</code></pre>
 <ul>
-<li><code>seq_along()</code> = to length of the vector</li>
 <li><code>for(letter in x)</code> = loop through letter in character vector</li>
-<li><code>seq_len()</code> = 1:length of vector</li>
+<li><code>seq_along(vector)</code> = create a number sequence from 1 to length of the vector</li>
+<li><code>seq_len(length)</code> = create a number sequence that starts at 1 and ends at length specified</li>
 </ul>
 </div>
 <div id="while" class="section level3">
@@ -1084,22 +1073,22 @@ while(count &lt;<span class="st"> </span><span class="dv">10</span>) {
 <div id="repeat-and-break" class="section level3">
 <h3><code>repeat</code> and <code>break</code></h3>
 <ul>
-<li>Repeat initiates an infinite loop</li>
+<li><code>repeat</code> initiates an infinite loop</li>
 <li>not commonly used in statistical applications but they do have their uses</li>
 <li>The only way to exit a <code>repeat</code> loop is to call <code>break</code></li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r">x0 &lt;-<span class="st"> </span><span class="dv">1</span>
 tol &lt;-<span class="st"> </span><span class="fl">1e-8</span>
 repeat {
-        x1 &lt;-<span class="st"> </span><span class="kw">computeEstimate</span>()
-        if(<span class="kw">abs</span>(x1 -<span class="st"> </span>x0) &lt;<span class="st"> </span>tol) {
-            break
-        } else {
-            x0 &lt;-<span class="st"> </span>x1 <span class="co"># requires algorithm to converge</span>
-        }
+    x1 &lt;-<span class="st"> </span><span class="kw">computeEstimate</span>()
+    if(<span class="kw">abs</span>(x1 -<span class="st"> </span>x0) &lt;<span class="st"> </span>tol) {
+        break
+    } else {
+        x0 &lt;-<span class="st"> </span>x1 <span class="co"># requires algorithm to converge</span>
+    }
 }</code></pre>
 <ul>
-<li><em><strong>Note</strong>: The above loop is a bit dangerous because there’s no guarantee it will stop</em>
+<li><em><strong>Note</strong>: The above loop is a bit dangerous because there’s no guarantee it will stop </em>
 <ul>
 <li>Better to set a hard limit on the number of iterations (e.g. using a <code>for</code> loop) and then report whether convergence was achieved or not.</li>
 </ul></li>
@@ -1118,7 +1107,6 @@ repeat {
     }
     ## Do something here
 }</code></pre>
-
 </div>
 </div>
 <div id="functions" class="section level2">
@@ -1139,7 +1127,7 @@ repeat {
 <ul>
 <li>functions can be nested, so that you can define a function inside of another function</li>
 </ul></li>
-<li>function have named arguments (i.e. x = mydata) which can be used to specifiy <strong>default values</strong>
+<li>function have named arguments (i.e. <code>x = mydata</code>) which can be used to specifiy <strong>default values</strong>
 <ul>
 <li><code>sd(x = mydata)</code> (matching by name)</li>
 </ul></li>
@@ -1148,32 +1136,31 @@ repeat {
 <li><code>formals()</code> = returns all formal arguments</li>
 <li>not all functional call specifies all arguments, some can be missing and may have default values</li>
 <li><code>args()</code> = return all arguments you can specify</li>
-<li>multiple arguments inputted in random orders (R performs positional matching) –&gt; not recommended</li>
-<li>argument matching order: exact —&gt; partial —&gt; positional
+<li>multiple arguments inputted in random orders (R performs positional matching) <span class="math">\(\rightarrow\)</span> not recommended</li>
+<li>argument matching order: exact <span class="math">\(\rightarrow\)</span> partial <span class="math">\(\rightarrow\)</span> positional
 <ul>
 <li><em>partial</em> = instead of typing <code>data = x</code>, use <code>d = x</code></li>
 </ul></li>
 </ul></li>
-<li>Lazy Evaluation
+<li><strong>Lazy Evaluation</strong>
 <ul>
 <li>R will evaluate as needed, so everything executes until an error occurs
 <ul>
-<li><code>f &lt;- function (a, b) {a^2}</code><br /></li>
+<li><code>f &lt;- function (a, b) {a^2}</code></li>
 <li>if b is not used in the function, calling <code>f(5)</code> will not produce an error</li>
 </ul></li>
 </ul></li>
-<li>“…” argument
+<li><code>...</code> argument
 <ul>
 <li>used to extend other functions by representing the rest of the arguments</li>
-<li>generic functions use … to pass extra arguments (i.e. mean = 1, sd = 2)</li>
+<li>generic functions use <code>...</code> to pass extra arguments (i.e. mean = 1, sd = 2)</li>
 <li>necessary when the number of arguments passed can not be known in advance
 <ul>
-<li>functions that use “…” = <code>paste()</code>, <code>cat()</code></li>
+<li>functions that use <code>...</code> = <code>paste()</code>, <code>cat()</code></li>
 </ul></li>
-<li><em><strong>Note</strong>: arguments coming after … must be explicitly matched and cannot be partially matched</em></li>
+<li><em><strong>Note</strong>: arguments coming after <code>...</code> must be explicitly matched and cannot be partially matched </em></li>
 </ul></li>
 </ul>
-
 </div>
 <div id="scoping" class="section level2">
 <h2>Scoping</h2>
@@ -1199,7 +1186,7 @@ repeat {
 <li>parent environment</li>
 <li>… (repeat if multiple parent environments)</li>
 <li>top level environment: global environment (worspace) or namespace package</li>
-<li>empty environment –&gt; produce error</li>
+<li>empty environment <span class="math">\(\rightarrow\)</span> produce error</li>
 </ol></li>
 <li>when a function/variable is called, R searches through the following list to match the first result
 <ol style="list-style-type: decimal">
@@ -1257,20 +1244,20 @@ g &lt;-<span class="st"> </span>function(x) {
 <ul>
 <li><strong>Lexical Scoping</strong>
 <ol style="list-style-type: decimal">
-<li>f(3) —&gt; calls g(x)</li>
-<li>y isn’t defined locally in g(x) —&gt; searches in parent environment (working environment/global workspace)</li>
-<li>finds y —&gt; y = 10</li>
+<li><code>f(3)</code> <span class="math">\(\rightarrow\)</span> calls <code>g(x)</code></li>
+<li><code>y</code> isn’t defined locally in <code>g(x)</code> <span class="math">\(\rightarrow\)</span> searches in parent environment (working environment/global workspace)</li>
+<li>finds <code>y</code> <span class="math">\(\rightarrow\)</span> <code>y = 10</code></li>
 </ol></li>
 <li><strong>Dynamic Scoping</strong>
 <ol style="list-style-type: decimal">
-<li>f(3) —&gt; calls g(x)</li>
-<li>y isn’t defined locally in g(x) —&gt; searches in calling environment (f function)</li>
-<li>find y —&gt; 2</li>
+<li><code>f(3)</code> <span class="math">\(\rightarrow\)</span> calls <code>g(x)</code></li>
+<li><code>y</code> isn’t defined locally in <code>g(x)</code> <span class="math">\(\rightarrow\)</span> searches in calling environment (f function)</li>
+<li>find <code>y</code> <span class="math">\(\rightarrow\)</span> <code>y &lt;- 2</code></li>
 </ol>
 <ul>
 <li><strong>parent frame</strong> = refers to calling environment in R, environment from which the function was called</li>
 </ul></li>
-<li><em><strong>Note</strong>: when the defining environment and calling environment is the same, lexical and dynamic scoping produces the same result</em></li>
+<li><em><strong>Note</strong>: when the defining environment and calling environment is the same, lexical and dynamic scoping produces the same result </em></li>
 <li><strong>Consequences of Lexical Scoping</strong>
 <ul>
 <li>all objects must be carried in memory</li>
@@ -1281,11 +1268,11 @@ g &lt;-<span class="st"> </span>function(x) {
 <div id="optimization" class="section level3">
 <h3>Optimization</h3>
 <ul>
-<li>Optimization routines in R (<code>optim</code>, <code>nlm</code>, <code>optimize</code>) require you to pass a function whose argument is a vector of parameters
+<li>optimization routines in R (<code>optim</code>, <code>nlm</code>, <code>optimize</code>) require you to pass a function whose argument is a vector of parameters
 <ul>
-<li><em><strong>Note</strong>: these functions <strong>minimize</strong>, so use the negative constructs to maximize a normal likelihood</em></li>
+<li><em><strong>Note</strong>: these functions <strong>minimize</strong>, so use the negative constructs to maximize a normal likelihood </em></li>
 </ul></li>
-<li><strong>Constructor functions</strong> = functions to be fed into the optimization routines</li>
+<li><strong>constructor functions</strong> = functions to be fed into the optimization routines</li>
 <li><strong><em>example</em></strong></li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># write constructor function</span>
@@ -1311,7 +1298,7 @@ nLL &lt;-<span class="st"> </span><span class="kw">make.NegLogLik</span>(normals
 ##          b &lt;- -0.5*sum((data-mu)^2) / (sigma^2)
 ##          -(a + b)
 ##     }
-## &lt;environment: 0x7fb85d0fac68&gt;</code></pre>
+## &lt;environment: 0x7ff878f72bb8&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Estimating Prameters</span>
 <span class="kw">optim</span>(<span class="kw">c</span>(<span class="dt">mu =</span> <span class="dv">0</span>, <span class="dt">sigma =</span> <span class="dv">1</span>), nLL)$par</code></pre>
 <pre><code>##       mu    sigma 
@@ -1324,7 +1311,6 @@ nLL &lt;-<span class="st"> </span><span class="kw">make.NegLogLik</span>(normals
 nLL &lt;-<span class="st"> </span><span class="kw">make.NegLogLik</span>(normals, <span class="kw">c</span>(<span class="dv">1</span>, <span class="ot">FALSE</span>))
 <span class="kw">optimize</span>(nLL, <span class="kw">c</span>(<span class="fl">1e-6</span>, <span class="dv">10</span>))$minimum</code></pre>
 <pre><code>## [1] 1.800596</code></pre>
-
 </div>
 </div>
 <div id="debugging" class="section level2">
@@ -1344,7 +1330,7 @@ nLL &lt;-<span class="st"> </span><span class="kw">make.NegLogLik</span>(normals
 </ul></li>
 <li><code>condition</code>: generic concept for indicating something unexpected can occur</li>
 <li><code>invisible()</code> = suppresses auto printing</li>
-<li><em><strong>Note</strong>: random number generator must be controlled to reproduce problems (<code>set.seed</code> to pinpoint problem)</em></li>
+<li><em><strong>Note</strong>: random number generator must be controlled to reproduce problems (<code>set.seed</code> to pinpoint problem) </em></li>
 <li><code>traceback</code>: prints out function call stack after error occurs
 <ul>
 <li>must be called right after error</li>
@@ -1360,7 +1346,7 @@ nLL &lt;-<span class="st"> </span><span class="kw">make.NegLogLik</span>(normals
 <li><code>trace</code>: allows inserting debugging code into a function at specific places</li>
 <li><code>recover</code>: error handler, freezes at point of error
 <ul>
-<li><code>options(error = recover)</code> = instead of console, brings up menu (simi)</li>
+<li><code>options(error = recover)</code> = instead of console, brings up menu (similar to <code>browser</code>)</li>
 </ul></li>
 </ul>
 </div>
@@ -1379,12 +1365,12 @@ nLL &lt;-<span class="st"> </span><span class="kw">make.NegLogLik</span>(normals
     }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.152   0.004   0.162</code></pre>
+##   0.155   0.004   0.191</code></pre>
 <ul>
 <li><code>system.time(expression)</code>
 <ul>
 <li>takes R expression, returns amount of time needed to execute (assuming you know where)</li>
-<li>computes time (in sec) - gives time until error if error occurs</li>
+<li>computes time (in sec) <span class="math">\(\rightarrow\)</span> gives time until error if error occurs</li>
 <li>can wrap multiple lines of code with <code>{}</code></li>
 <li>returns object of class <code>proc_time</code>
 <ul>
@@ -1396,13 +1382,13 @@ nLL &lt;-<span class="st"> </span><span class="kw">make.NegLogLik</span>(normals
 <li><strong><em>elapsed &lt; user</em></strong> = multiple processor/core (use multi-threaded libraries)</li>
 </ul></li>
 </ul></li>
-<li><em><strong>Note</strong>: R doesn’t multi-thread (performing multiple calculations at the same time) with basic package</em>
+<li><em><strong>Note</strong>: R doesn’t multi-thread (performing multiple calculations at the same time) with basic package </em>
 <ul>
 <li>Basic Linear Algebra Standard [BLAS] libraries do, prediction, regression routines, matrix</li>
-<li>i.e. vecLib/Accelerate, ATLAS, ACML, MKL</li>
+<li>i.e. <code>vecLib</code>/Accelerate, <code>ATLAS</code>, <code>ACML</code>, <code>MKL</code></li>
 </ul></li>
 </ul></li>
-<li><code>Rprof()</code> - useful for complex code only
+<li><code>Rprof()</code> = useful for complex code only
 <ul>
 <li>keeps track of functional call stack at regular intervals and tabulates how much time is spent in each function</li>
 <li>default sampling interval = 0.02 second</li>
@@ -1410,23 +1396,23 @@ nLL &lt;-<span class="st"> </span><span class="kw">make.NegLogLik</span>(normals
 <ul>
 <li><code>Rprof(&quot;output.out&quot;)</code> = specify the output file</li>
 </ul></li>
+<li><em><strong>Note</strong>: should NOT be used with <code>system.time()</code> </em></li>
 </ul></li>
 <li><code>summaryRprof()</code> = summarizes <code>Rprof()</code> output, 2 methods for normalizing data
 <ul>
 <li>loads the <code>Rprof.out</code> file by default, can specify output file <code>summaryRprof(&quot;output.out&quot;)</code></li>
 <li><code>by.total</code> = divide time spent in each function by total run time</li>
 <li><code>by.self</code> = first subtracts out time spent in functions above in call stack, and calculates ratio to total</li>
-<li><code>$sample.interval</code> = 0.02 - interval</li>
-<li><code>$sampling.time</code> = 7.41 - seconds, elapsed time
+<li><code>$sample.interval</code> = 0.02 <span class="math">\(\rightarrow\)</span> interval</li>
+<li><code>$sampling.time</code> = 7.41 <span class="math">\(\rightarrow\)</span> seconds, elapsed time
 <ul>
-<li><em><strong>Note</strong>: generally user spends all time at top level function (i.e. lm()), but the function simply calls helper functions to do work so it is not useful to know about the top level function times</em></li>
+<li><em><strong>Note</strong>: generally user spends all time at top level function (i.e. <code>lm()</code>), but the function simply calls helper functions to do work so it is not useful to know about the top level function times </em></li>
 </ul></li>
-<li><em><strong>Note</strong>: by.self = more useful as it focuses on each individual call/function</em></li>
+<li><em><strong>Note</strong>: <code>by.self</code> = more useful as it focuses on each individual call/function </em></li>
+<li><em><strong>Note</strong>: R must be compiled with profiles support (generally the case) </em></li>
 </ul></li>
-<li>Good to break code into functions so profilers can give useful information about where time is spent</li>
+<li>good to break code into functions so profilers can give useful information about where time is spent</li>
 <li>C/FORTRAN code is not profiled</li>
-<li><em><strong>Note</strong>: R must be compiled with profiles support (generally the case)</em></li>
-<li><em><strong>Note</strong>: should NOT be used with system.time()</em></li>
 </ul>
 <div id="miscellaneous" class="section level3">
 <h3>Miscellaneous</h3>

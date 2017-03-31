@@ -12,15 +12,15 @@ header-includes: \usepackage{graphicx} \usepackage{color} \usepackage{mathtools}
 $\pagebreak$
 
 ## Introduction to Regression
-* linear regression/linear models --> go to procedure to analyze data
+* linear regression/linear models $\rightarrow$ go to procedure to analyze data
 * *Francis Galton* invented the term and concepts of regression and correlation
 	* he predicted child's height from parents height
 * questions that regression can help answer
 	* prediction of one thing from another
 	* find simple, interpretable, meaningful model to predict the data
-	* quantify and investigate variations that are unexplained or unrelated to the predictor --> **residual variation**
+	* quantify and investigate variations that are unexplained or unrelated to the predictor $\rightarrow$ **residual variation**
 	* quantify the effects of other factors may have on the outcome
-	* assumptions to generalize findings beyond data we have --> **statistical inference**
+	* assumptions to generalize findings beyond data we have $\rightarrow$ **statistical inference**
 	* **regression to the mean** (see below)
 
 
@@ -68,7 +68,7 @@ $$
 	- $Cor(X,Y) = 1$ and $Cor(X, Y) = -1$ only when the $X$ or $Y$ observations fall perfectly on a positive or negative sloped line, respectively
 	- $Cor(X, Y)$ measures the strength of the linear relationship between the $X$ and $Y$ data, with stronger relationships as $Cor(X,Y)$ heads towards -1 or 1
 	- $Cor(X, Y) = 0$ implies no linear relationship
-	
+
 
 $\pagebreak$
 
@@ -77,13 +77,13 @@ $\pagebreak$
 * predicting children's heights from parents' height
 * observations from the marginal/individual parent/children distributions
 * looking only at the children's dataset to find the best predictor
-	* "middle" of children's dataset --> best predictor
-	* "middle" --> center of mass --> mean of the dataset
+	* "middle" of children's dataset $\rightarrow$ best predictor
+	* "middle" $\rightarrow$ center of mass $\rightarrow$ mean of the dataset
 		- Let $Y_i$ = height of child $i$ for $i = 1, \ldots, n = 928$, the "middle" = $\mu$ such that $$\sum_{i=1}^n (Y_i - \mu)^2$$
-		- $\mu = \bar Y$ for the above sum to be the smallest --> **least squares = empirical mean**
+		- $\mu = \bar Y$ for the above sum to be the smallest $\rightarrow$ **least squares = empirical mean**
 	* ***Note**: `manipulate` function can help to show this *
 
-```{r fig.height = 2.5, fig.width = 7, message = FALSE}
+```{r fig.height = 2.5, fig.width = 7, message = FALSE, fig.align = 'center'}
 # load necessary packages/install if needed
 library(ggplot2); library(UsingR); data(galton)
 # function to plot the histograms
@@ -123,7 +123,7 @@ g <- g + scale_size(range = c(2, 20), guide = "none" )
 g <- g + geom_point(colour="grey50", aes(size = freq+10, show_guide = FALSE))
 # plot the accurate data points
 g <- g + geom_point(aes(colour=freq, size = freq))
-# change the color gradient from default to lightblue-->white
+# change the color gradient from default to lightblue -> $white
 g <- g + scale_colour_gradient(low = "lightblue", high="white")
 g
 ```
@@ -131,7 +131,7 @@ g
 $\pagebreak$
 
 ### Derivation for Least Squares = Empirical Mean (Finding the Minimum)
-* Let $X_i = **regressor**/**predictor**, and $Y_i =$ **outcome**/**result** so we want to minimize the the squares: $$\sum_{i=1}^n (Y_i - \mu)^2$$
+* Let $X_i =$ **regressor**/**predictor**, and $Y_i =$ **outcome**/**result** so we want to minimize the the squares: $$\sum_{i=1}^n (Y_i - \mu)^2$$
 * Proof is as follows $$
 \begin{aligned}
 \sum_{i=1}^n (Y_i - \mu)^2 & = \sum_{i=1}^n (Y_i - \bar Y + \bar Y - \mu)^2 \Leftarrow \mbox{added}  \pm \bar Y \mbox{which is adding 0 to the original equation}\\
@@ -202,7 +202,7 @@ $$
 \Rightarrow \hat \beta = \frac{\sum_{i=1}^n Y_i X_i}{\sum_{i=1}^n X_i^2} = \frac{\sum_{i=1}^n Y_i}{\sum_{i=1}^n 1} = \frac{\sum_{i=1}^n Y_i}{n} = \bar Y
 \end{aligned}
 $$
-    * ***Note**:this is the result from our previous derivation for least squares = empirical mean *
+    * ***Note**: this is the result from our previous derivation for least squares = empirical mean *
 
 
 $\pagebreak$
@@ -213,12 +213,13 @@ $\pagebreak$
 ```{r fig.height = 2.5, fig.width = 3, fig.align='center', echo=FALSE}
 grid.raster(readPNG("figures/3.png"))
 ```
-* each of the data point contributes equally to the error between the their locations and the regression line --> goal of regression is to ***minimize*** this error
+
+* each of the data point contributes equally to the error between the their locations and the regression line $\rightarrow$ goal of regression is to ***minimize*** this error
 
 ### Least Squares Model Fit
-* model fit --> $Y = \beta_0 + \beta_1 X$ through the data pairs $(X_i, Y_i)$ where $Y_i$ as the outcome
+* model fit = $Y = \beta_0 + \beta_1 X$ through the data pairs $(X_i, Y_i)$ where $Y_i$ as the outcome
 	- ***Note**: this is the model that we use to guide our **estimated** best fit (see below) *
-* best fit line with estimated slope and intercept ($X$ as predictor, $Y$ as outcome) --> $$Y = \hat \beta_0 + \hat \beta_1 X$$ where $$\hat \beta_1 = Cor(Y, X) \frac{Sd(Y)}{Sd(X)} ~~~ \hat \beta_0 = \bar Y - \hat \beta_1 \bar X$$
+* best fit line with estimated slope and intercept ($X$ as predictor, $Y$ as outcome) $\rightarrow$ $$Y = \hat \beta_0 + \hat \beta_1 X$$ where $$\hat \beta_1 = Cor(Y, X) \frac{Sd(Y)}{Sd(X)} ~~~ \hat \beta_0 = \bar Y - \hat \beta_1 \bar X$$
 	- [***slope***] $\hat \beta_1$ has the units of $Y / X$
 		+ $Cor(Y, X)$ = unit-less
 		+ $Sd(Y)$ = has units of $Y$
@@ -304,7 +305,7 @@ results
 ```
 
 * `geom_smooth(method = "lm", formula = y~x)` function in `ggplot2` = adds regression line and confidence interval to graph
-	- `formula = y~x` = default for the line (argument can be eliminated if y~x produces the line you want)
+	- `formula = y~x` = default for the line (argument can be eliminated if `y~x` produces the line you want)
 
 ```{r fig.height = 3.5,fig.width = 5, fig.align='center'}
 # constructs table for different combination of parent-child height
@@ -317,10 +318,10 @@ g <- ggplot(filter(freqData, freq > 0), aes(x = parent, y = child))
 g <- g + scale_size(range = c(2, 20), guide = "none" )
 g <- g + geom_point(colour="grey50", aes(size = freq+10, show_guide = FALSE))
 g <- g + geom_point(aes(colour=freq, size = freq))
-g <- g + scale_colour_gradient(low = "lightblue", high="white") 
+g <- g + scale_colour_gradient(low = "lightblue", high="white")
 g <- g + geom_smooth(method="lm", formula=y~x)
 g
-```   
+```
 
 $\pagebreak$
 
@@ -381,7 +382,7 @@ g
 $\pagebreak$
 
 ## Statistical Linear Regression Models
-* goal is use statistics to draw inferences --> generalize from data to population through models
+* goal is use statistics to draw inferences $\rightarrow$ generalize from data to population through models
 * **probabilistic model for linear regression** $$Y_i = \beta_0 + \beta_1 X_i + \epsilon_{i}$$ where $\epsilon_{i}$ represents the sampling errors and is assumed to be iid $N(0, \sigma^2)$
 * this model has the following properties
 	- $E[Y_i ~|~ X_i = x_i] = E[\beta_0] + E[\beta_1 x_i] + E[\epsilon_{i}] = \mu_i = \beta_0 + \beta_1 x_i$
@@ -390,7 +391,7 @@ $\pagebreak$
 * it can then be said to have $Y_i$ as independent $N(\mu, \sigma^2)$, where $\mu = \beta_0 + \beta_1 x_i$ <-- likelihood equivalent model
 	- **likelihood** = given the outcome, what is the probability?
 		+ in this case, the likelihood is as follows $$\mathcal{L}(\beta_0, \beta_1, \sigma) = \prod_{i=1}^{n} \left\{(2\pi \sigma^2)^{-1/2}\exp \left(- \frac{1}{2\sigma^2}(y_i - \mu_i)^2\right)\right\}$$ where $\mu_i = \beta_0 + \beta_1 x_i$
-		+ above is the **probability density function ** of $n$ samples from the normal distribution --> this is because the regression line is normally distributed due to $\epsilon_{i}$
+		+ above is the **probability density function ** of $n$ samples from the normal distribution $\rightarrow$ this is because the regression line is normally distributed due to $\epsilon_{i}$
 	- **maximum likelihood estimator (MLE)** = most likely estimate of the population parameter/probability
 		+ in this case, the maximum likelihood = -2 minimum natural log ($ln$, base $e$) likelihood $$-2 \log{\mathcal{L}(\beta_0, \beta_1, \sigma)} = n\log(2\pi \sigma^2) + \frac{1}{\sigma^2}\sum_{i=1}^n (y_i - \mu_i)^2$$
 			* since everything else is constant, minimizing this function would only depend on $\sum_{i=1}^n (y_i - \mu_i)^2$, which from our previous derivations yields $\hat \mu_i = \beta_0 + \beta_1 \hat x_i$
@@ -429,8 +430,8 @@ $$
 		+ $X$ = height in $m$
 		+ $Y$ = weight in $kg$
 		+ $\beta_1$ has units of $kg/m$
-		+ converting $X$ to $cm$ $\Longrightarrow$ multiplying $X$ by $100 cm/m$
-		+ this mean $\beta_1$ has to be divided by $100 cm/m$ for the correct units.
+		+ converting $X$ to $cm$ $\Longrightarrow$ multiplying $X$ by $100 \frac{cm}{m}$
+		+ this mean $\beta_1$ has to be divided by $100 \frac{cm}{m}$ for the correct units.
 $$
 X~m \times 100\frac{cm}{m} = (100~X) cm
 ~~\mbox{and}~~
@@ -445,7 +446,7 @@ $$
 
 ### Example and R Commands
 * `diamond` dataset from `UsingR` package
-	- diamond prices in Singapore Dollars, diamond weight in carats (standard measure of diamond mass, 0.2$g$)
+	- diamond prices in Singapore Dollars, diamond weight in carats (standard measure of diamond mass, 0.2g)
 * `lm(price ~ I(carat - mean(carat)), data=diamond)` = mean centered linear regression
 	- ***Note**: arithmetic operations must be enclosed in `I()` to work *
 * `predict(fitModel, newdata=data.frame(carat=c(0, 1, 2)))` = returns predicted outcome from the given model (linear in our case) at the provided points within the `newdata` data frame
@@ -512,9 +513,10 @@ $\pagebreak$
 ```{r fig.height = 3, fig.width = 4, fig.align='center', echo=FALSE}
 grid.raster(readPNG("figures/4.png"))
 ```
+
 * the **probability density function (pdf)** for an outcome $x$ from the normal distribution is defined as $$f(x~|~\mu, \sigma^2) = (2\pi \sigma^2)^{-1/2}\exp \left(- \frac{1}{2\sigma^2}(y_i - \mu_i)^2\right)$$
 * the corresponding pdf for $n$ iid normal random outcomes $x_1, \ldots, x_n$ is defined as $$f(x_1, \ldots, x_n~|~\mu, \sigma^2) = \prod_{i=1}^n (2\pi \sigma^2)^{-1/2}\exp \left(- \frac{1}{2\sigma^2}(y_i - \mu_i)^2\right)$$ which is also known as the **likelihood function**, denoted in this case as $\mathcal{L}(\mu, \sigma)$
-* to find the **maximum likelihood estimator (MLE)** of the mean, $\mu$, we take the derivative of the likelihood $\mathcal{L}$ with respect to $\mu$ --> $\frac{\partial \mathcal{L}}{\partial \mu}$
+* to find the **maximum likelihood estimator (MLE)** of the mean, $\mu$, we take the derivative of the likelihood $\mathcal{L}$ with respect to $\mu$ $\rightarrow$ $\frac{\partial \mathcal{L}}{\partial \mu}$
 * since derivatives of products are quite complex to compute, taking the $\log$ (base $e$) makes the calculation much simpler
 	- $\log$ properties:
 		+ $\log(AB) = \log(A) + \log(B)$
@@ -555,10 +557,10 @@ $\pagebreak$
 * $e_i$ can be interpreted as estimates of the regression error, $\epsilon_i$
 * $e_i$ can also be interpreted as the outcome ($Y$) with the linear association of the predictor ($X$) removed
 	- or, "Y adjusted for X"
-* $E[e_i] = 0$ --> this is because the mean of the residuals is expected to be 0 (assumed Gaussian distribution)
+* $E[e_i] = 0$ $\rightarrow$ this is because the mean of the residuals is expected to be 0 (assumed Gaussian distribution)
 	- the Gaussian distribution assumption also implies that the error is **NOT** correlated with any predictors
-	- `mean(fitModel$residuals)` = returns mean of residuals --> should equal to 0
-	- `cov(fit$residuals, predictors)` = returns the covariance (measures correlation) of residuals and predictors --> should also equal to 0
+	- `mean(fitModel$residuals)` = returns mean of residuals $\rightarrow$ should equal to 0
+	- `cov(fit$residuals, predictors)` = returns the covariance (measures correlation) of residuals and predictors $\rightarrow$ should also equal to 0
 * $\sum_{i=1}^n e_i = 0$ (if an intercept is included) and $\sum_{i=1}^n e_i X_i = 0$ (if a regressor variable $X_i$ is included)
 * for standard linear regression model
 	- positive residuals = above the line
@@ -571,7 +573,7 @@ $\pagebreak$
 * **MLE of variance**, $\sigma^2$, of the linear model = $\frac{1}{n}\sum_{i=1}^n e_i^2$ or the ***average squared residual/mean squared error***
 	- the square root of the estimate, $\sigma$, = **root mean squared error (RMSE)**
 * however, a more common approach is to use $$\hat \sigma^2 = \frac{1}{n-2}\sum_{i=1}^n e_i^2$$
-	- $n-2$ is used instead of $n$ to make the estimator ***unbiased*** --> $E[\hat \sigma^2] = \sigma^2$
+	- $n-2$ is used instead of $n$ to make the estimator ***unbiased*** $\rightarrow$ $E[\hat \sigma^2] = \sigma^2$
 	- ***Note**: the -2 is accounting for the degrees of freedom for intercept and slope, which had to be estimated *
 * `deviance(fitModel)` = calculates sum of the squared error/residual for the linear model/residual variation
 * `summary(fitModel)$sigma` = returns the residual variation of a fit model or the **unbiased RMSE**
@@ -597,12 +599,12 @@ R^2 & = \frac{\mbox{regression variation}}{\mbox{total variation}} = \frac{\sum_
 $$
 * $0 \leq R^2 \leq 1$
 * $R^2$ = sample correlation squared
-	- `cor(outcome, predictor` = calculates the correlation between predictor and outcome --> the same as calculating $R^2$
+	- `cor(outcome, predictor` = calculates the correlation between predictor and outcome $\rightarrow$ the same as calculating $R^2$
 * $R^2$ can be a ***misleading*** summary of model fit
-	- deleting data --> inflate $R^2$.
-	- adding terms to a regression model --> always increases $R^2$
+	- deleting data $\rightarrow$ inflate $R^2$
+	- adding terms to a regression model $\rightarrow$ always increases $R^2$
 	- `example(anscombe)` demonstrates the fallacy of $R^2$ through the following
-		+ basically same mean and variance of X and Y.
+		+ basically same mean and variance of X and Y
 		+ identical correlations (hence same $R^2$)
   		+ same linear regression relationship
 
@@ -655,7 +657,7 @@ $$
 
 
 ### Example and R Commands
-* `resid(fitModel)` or `fitModel$residuals` = extracts model residuals from the fit model (lm in our case) --> list of residual values for every value of X
+* `resid(fitModel)` or `fitModel$residuals` = extracts model residuals from the fit model (lm in our case) $\rightarrow$ list of residual values for every value of X
 * `summary(fitModel)$r.squared` = return $R^2$ value of the regression model
 
 ```{r fig.height=3.5, fig.width=7, fig.align = 'center'}
@@ -689,7 +691,7 @@ for (i in 1 : n){lines(c(x[i], x[i]), c(e[i], 0), col = "red" , lwd = 2)}
 
 * non-linear data/patterns can be more easily revealed through residual plots
 
-```{r fig.height=4, fig.width=8, fig.align='center'}
+```{r fig.height=3.5, fig.width=7, fig.align='center'}
 # create sin wave pattern
 x <- runif(100, -3, 3); y <- x + sin(x) + rnorm(100, sd = .2);
 # plot data + regression
@@ -707,9 +709,9 @@ f <- ggplot(data.frame(x = x, y = resid(lm(y ~ x))), aes(x = x, y = y))+
 multiplot(g, f, cols = 2)
 ```
 
-* **heteroskedasticity** --> heteroskedastic model's variance is not constant and is a function of x
+* **heteroskedasticity** = heteroskedastic model's variance is not constant and is a function of x
 
-```{r fig.height=4, fig.width=8, fig.align='center'}
+```{r fig.height=3.5, fig.width=7, fig.align='center'}
 # create heteroskedastic data
 x <- runif(100, 0, 6); y <- x + rnorm(100,  mean = 0, sd = .001 * x)
 # plot data + regression
@@ -817,7 +819,7 @@ $$
 		- interval has ***varying width***
 		- interval is narrow as we are quite confident in the regression line
 		- as $n$ increases, the interval becomes ***narrower***, which makes sense because as more data is collected, we are able to get a better regression line
-			+ ***Note**: if we knew $\beta_0$ and $\beta_1$, this interval would have zero width **
+			+ ***Note**: if we knew $\beta_0$ and $\beta_1$, this interval would have zero width *
 
 	2. interval for the **predicted value**, $\hat y_0$, at $x_0$ $$
 \begin{aligned}
@@ -857,6 +859,7 @@ g <- g + geom_ribbon(aes(ymin = lwr, ymax = upr, fill = interval), alpha = 0.2)
 g <- g + geom_line()
 g + geom_point(data = data.frame(x = x, y=y), aes(x = x, y = y), size = 4)
 ```
+
 * ***example (`base`)***
 
 ```{r fig.height=4, fig.width=5, fig.align='center'}
@@ -969,7 +972,7 @@ $$
 = & \beta_1 \\
 \end{aligned}
 $$
-* therefore, interpretation of a multivariate regression coefficient --> expected change in the response per unit change in the regressor, holding all of the other regressors fixed
+* therefore, interpretation of a multivariate regression coefficient $\rightarrow$ expected change in the response per unit change in the regressor, holding all of the other regressors fixed
 * all of the SLR properties/calculations extend to generalized linear model
 	- ***model*** = $Y_i = \sum_{k=1}^p X_{ik} \beta_{k} + \epsilon_{i}$ where $\epsilon_i \sim N(0, \sigma^2)$
 	- ***fitted response*** = $\hat Y_i = \sum_{k=1}^p X_{ik} \hat \beta_{k}$
@@ -1001,10 +1004,10 @@ coef(lm(y ~ x + x2 + x3))
 ```
 
 ### Example: Coefficients that Reverse Signs
-* ***Note**: more information can be found at '?swiss' *
+* ***Note**: more information can be found at `?swiss` *
 * data set is composed of standardized fertility measure and socio-economic indicators for each of 47 French-speaking provinces of Switzerland at about 1888
 * data frame has 47 observations on 6 variables, each of which is in percent [0, 100]
-	- ***Fertility*** = common standardized fertility measure --> outcome
+	- ***Fertility*** = common standardized fertility measure $\rightarrow$ outcome
 	- ***Agriculture***	= % of males involved in agriculture as occupation
 	- ***Examination***	= % draftees receiving highest mark on army examination
 	- ***Education*** = % education beyond primary school for draftees
@@ -1038,7 +1041,7 @@ summary(lm(Fertility ~ Agriculture, data = swiss))$coefficients
 
 * to see intuitively how a **sign change** is possible, we can look at the following simulated example
 
-```{r fig.height = 3.5, fig.width=8, message = F, warning = F, fig.align = 'center'}
+```{r fig.height = 3.5, fig.width=7, message = F, warning = F, fig.align = 'center'}
 # simulate data
 n <- 100; x2 <- 1 : n; x1 <- .01 * x2 + runif(n, -.1, .1); y = -x1 + x2 + rnorm(n, sd = .01)
 # print coefficients
@@ -1072,7 +1075,7 @@ multiplot(g, g2, cols = 2)
 	- correlation between Agriculture and Examination: `r round(cor(swiss$Examination,swiss$Agriculture),2)`
 	- correlation between Education and Examination: `r round(cor(swiss$Education, swiss$Examination),2)`
 		+ this means that the two variables are likely to be measuring the same things
-* ***Note**: it is **difficult to interpret** and determine which one is the correct model --> one **should not** claim positive correlation between Agriculture and Fertility simply based on marginal regression `lm(Fertility ~ Agriculture, data=swiss)` *
+* ***Note**: it is **difficult to interpret** and determine which one is the correct model $\rightarrow$ one **should not** claim positive correlation between Agriculture and Fertility simply based on marginal regression `lm(Fertility ~ Agriculture, data=swiss)` *
 
 ### Example: Unnecessary Variables
 * **unnecessary predictors** = variables that don't provide any new linear information, meaning that the variable are simply ***linear combinations*** (multiples, sums) of other predictors/variables
@@ -1084,7 +1087,7 @@ z <- swiss$Agriculture + swiss$Education
 # run linear regression with unnecessary variables
 lm(Fertility ~ . + z, data = swiss)$coef
 ```
-* as we can see above, the R dropped the unnecessary variable `z` by excluding it from the linear regression --> `z`'s coefficient is `NA`
+* as we can see above, the R dropped the unnecessary variable `z` by excluding it from the linear regression $\rightarrow$ `z`'s coefficient is `NA`
 
 
 $\pagebreak$
@@ -1155,7 +1158,7 @@ lm(count ~ I(1 * (spray == 'B')) + I(1 * (spray == 'C')) +
 
 ```{r}
 # linear fit with 6 dummy variables
-lm(count ~ I(1 * (spray == 'B')) + I(1 * (spray == 'C')) + 
+lm(count ~ I(1 * (spray == 'B')) + I(1 * (spray == 'C')) +
    		   I(1 * (spray == 'D')) + I(1 * (spray == 'E')) +
    		   I(1 * (spray == 'F')) + I(1 * (spray == 'A')),
    		   data = InsectSprays)$coefficients
@@ -1192,9 +1195,9 @@ spray2 <- relevel(InsectSprays$spray, "C")
 summary(lm(count ~ spray2, data = InsectSprays))$coef
 ```
 * it is important to note in this example that
-	- counts are bounded from below by 0 --> ***violates*** the assumption of normality of the errors
-  	- there are counts near zero --> ***violates*** intent of the assumption --> not acceptable in assuming normal distribution
-	- variance does not appear to be constant across different type of groups --> violates assumption
+	- counts are bounded from below by 0 $\rightarrow$ ***violates*** the assumption of normality of the errors
+  	- there are counts near zero $\rightarrow$ ***violates*** intent of the assumption $\rightarrow$ not acceptable in assuming normal distribution
+	- variance does not appear to be constant across different type of groups $\rightarrow$ violates assumption
 		+ taking log(counts) + 1 may help (+1 since there are the zero values)
 	- ***Poisson GLMs*** are better (don't have to worry about the assumptions) for fitting count data
 
@@ -1202,7 +1205,7 @@ summary(lm(count ~ spray2, data = InsectSprays))$coef
 $\pagebreak$
 
 ## Interactions
-* **interactions** between variables can be added to a regression model to test how the outcomes change under different conditions 
+* **interactions** between variables can be added to a regression model to test how the outcomes change under different conditions
 * we will use the data set from the Millennium Development Goal from the UN which can be found [here](https://github.com/bcaffo/courses/blob/master/07_RegressionModels/02_02_multivariateExamples/hunger.csv)
 	- `Numeric` = values for children aged <5 years underweight (%)
 	- `Sex` = records whether
@@ -1220,7 +1223,7 @@ str(hunger)
 
 ### Model: % Hungry ~ Year by Sex
 * this will include 2 models with 2 separate lines
-* model for % hungry ($H_F$) vs year ($Y_F$) for females is $$H_{Fi} = \beta_{F0} + \beta_{F1} Y_{Fi} + \epsilon_{Fi}$$ 
+* model for % hungry ($H_F$) vs year ($Y_F$) for females is $$H_{Fi} = \beta_{F0} + \beta_{F1} Y_{Fi} + \epsilon_{Fi}$$
 	- $\beta_{F0}$ = % of females hungry at year 0
 	- $\beta_{F1}$ = decrease in % females hungry per year
 	- $\epsilon_{Fi}$ = standard error (or everything we didn't measure)
@@ -1231,7 +1234,7 @@ str(hunger)
 * each line has **different** residuals, standard errors, and variances
 * ***Note**: $\beta_{F0}$ and $\beta_{M0}$ are the interpolated intercept at year 0, which does hold any interpretable value for the model *
 	- it's possible to subtract the model by a meaningful value (% hungry at 1970, or average), which moves the intercept of the lines to something interpretable
-* ***Note**: we are also assuming the error terms $\epsilon_{Fi}$ and $\epsilon_{Mi}$ are Gaussian distributions --> mean = 0 * 
+* ***Note**: we are also assuming the error terms $\epsilon_{Fi}$ and $\epsilon_{Mi}$ are Gaussian distributions $\rightarrow$ mean = 0 *
 
 ```{r fig.width = 5, fig.height = 4.5, fig.align = 'center', message = F, warning = F}
 # run linear model with Numeric vs Year for male and females
@@ -1246,12 +1249,12 @@ abline(female.fit, lwd = 3, col = "red")
 
 ### Model: % Hungry ~ Year + Sex (Binary Variable)
 * this will include 1 model with 2 separate lines with the ***same*** slope
-* model for % hungry ($H$) vs year ($Y$) and dummy variable for sex ($X$) is 
+* model for % hungry ($H$) vs year ($Y$) and dummy variable for sex ($X$) is
 $$H_{i} = \beta_{0} + \beta_{1}X_i + \beta_{2} Y_{i} + \epsilon_{i}^*$$
 
 	- $\beta_{0}$ = % of females hungry at year 0
 	- $\beta_{0} + \beta_{1}$ = % of males hungry at year 0
-		+ ***Note**: the term $\beta_{1}X_i$ is effectively an **adjustment** for the intercept for males and DOES NOT alter the slope in anyway * 
+		+ ***Note**: the term $\beta_{1}X_i$ is effectively an **adjustment** for the intercept for males and DOES NOT alter the slope in anyway *
 		+ $\beta_{1}$ = difference in means of males vs females
 	- $\beta_{2}$ = decrease in % hungry (males and females) per year
 		+ this means that the slope is ***constant*** for both females and males
@@ -1286,7 +1289,7 @@ abline(both.fit$coef[1]+both.fit$coef[3], both.fit$coef[2], lwd = 3, col = "red"
 	- $\epsilon_{i}^+$ = standard error (or everything we didn't measure)
 * expected value for males is $E[H_i]_M = (\beta_0 + \beta_1) + (\beta_2 + \beta_3) Y_i$
 * expected value for females is $E[H_i]_F = \beta_0 + \beta_2 Y_i$
-	- $\beta_1$	and $\beta_3$ are effectively adjusting the intercept and slope for males 
+	- $\beta_1$	and $\beta_3$ are effectively adjusting the intercept and slope for males
 * `lm(outcome ~ var1*var2)` = whenever an interaction is specified in `lm` function using the `*` operator, the individual terms are added automatically
 	- `lm(outcome ~ var1+var2+var1*var2)` = builds the exact same model
 	- `lm(outcome ~ var1:var2)` = builds linear model with ***only*** the interaction term (specified by `:` operator)
@@ -1300,7 +1303,7 @@ interaction.fit$coef
 plot(Numeric ~ Year, data = hunger, pch = 19, col=(Sex=="Male")*1+1)
 # plot regression lines for both (different slope)
 abline(interaction.fit$coef[1], interaction.fit$coef[2], lwd = 3, col = "black")
-abline(interaction.fit$coef[1]+interaction.fit$coef[3], 
+abline(interaction.fit$coef[1]+interaction.fit$coef[3],
 	interaction.fit$coef[2]+interaction.fit$coef[4], lwd = 3, col = "red")
 ```
 
@@ -1328,15 +1331,15 @@ abline(interaction.fit$coef[1]+interaction.fit$coef[3],
 * coming back to the hunger data, model for % hungry ($H$) vs year ($Y$), income ($I$), and interaction between year and income ($Y \times I$) is $$H_{i} = \beta_{0} + \beta_{1}I_i + \beta_{2} Y_{i} + \beta_{3}I_i Y_{i} + \epsilon_{i}^+$$
 	- $\beta_{0}$ = % hungry children (whose parents have no income) at year 0
 	- $\beta_{1}$ = change in % hungry children for **each dollar in income** in year 0
-	- $\beta_{2}$ = change in % hungry children (whose parents have no income) **per year** 
+	- $\beta_{2}$ = change in % hungry children (whose parents have no income) **per year**
 	- $\beta_{3}$ = change in % hungry children **per year** and for **each dollar in income**
 		+ if income is $\$10,000$, then the change in % hungry children **per year** will be $\beta_1 - 10000 \times \beta_3$
 	- $\epsilon_{i}^+$ = standard error (or everything we didn't measure)
-* ***Note**: much care needs to be taken when interpreting these coefficients * 
+* ***Note**: much care needs to be taken when interpreting these coefficients *
 
 ```{r fig.width = 5, fig.height = 4.5, fig.align = 'center', message = F, warning = F}
-# generate some income data 
-hunger$Income <- 1:nrow(hunger)*10 + 500*runif(nrow(hunger), 0, 10) + 
+# generate some income data
+hunger$Income <- 1:nrow(hunger)*10 + 500*runif(nrow(hunger), 0, 10) +
     runif(nrow(hunger), 0, 500)^1.5
 # run linear model with Numeric vs Year and Income and interaction term
 lm(Numeric ~ Year*Income, data = hunger)$coef
@@ -1349,14 +1352,14 @@ $\pagebreak$
 * **treatment effect** = effect of adding the treatment variable $t$ to the regression model (i.e. how adding $t$ changes the regression lines)
 	- effectively measures how much the regression lines for the two groups separate with regression `lm(y ~ x + t)`
 * **adjustment effect** = adjusting the regression for effects of $x$ such that we just look at how $t$ is ***marginally related*** to $Y$
-	- ignore all variation of $x$ and simply look at the group means of $t = 1$ vs $t = 0$	 
+	- ignore all variation of $x$ and simply look at the group means of $t = 1$ vs $t = 0$
 
 ### Simulation 1 - Treatment = Adjustment Effect
-* the following code simulates the linear model, $$Y_i = \beta_0 + \beta_1 x_i + \beta_2 t_i + \epsilon_i$$ where $t = {0, 1}$ --> binary variable
+* the following code simulates the linear model, $$Y_i = \beta_0 + \beta_1 x_i + \beta_2 t_i + \epsilon_i$$ where $t = \{0, 1\} \rightarrow$ binary variable
 
 ```{r, fig.height=4, fig.width=5, message = F, warning = F, fig.align = 'center'}
-# simulate data 
-n <- 100; t <- rep(c(0, 1), c(n/2, n/2)); x <- c(runif(n/2), runif(n/2)); 
+# simulate data
+n <- 100; t <- rep(c(0, 1), c(n/2, n/2)); x <- c(runif(n/2), runif(n/2));
 # define parameters/coefficients
 beta0 <- 0; beta1 <- 2; beta2 <- 1; sigma <- .2
 # generate outcome using linear model
@@ -1380,9 +1383,9 @@ points(x[(n/2 + 1) : n], y[(n/2 + 1) : n], pch = 21, col = "black", bg = "salmon
 rbind("Treatment Effect" = lm(y~t+x)$coef[2], "Adjustment Effect" = lm(y~t)$coef[2])
 ```
 * in the above graph, the elements are as follows:
-	- $\textcolor{red}{red}$ lines = means for two groups ($t = 0$ vs $t = 1$) --> two lines representing `lm(y ~ t)`
-	- $black$ lines = regression lines for two groups ($t = 0$ vs $t = 1$) --> two lines representing `lm(y ~ t + x)`
-	- $\textcolor{blue}{blue}$ line = overall regression of $y$ vs $x$ --> line representing `lm(y ~ x)`
+	- $red$ lines = means for two groups ($t = 0$ vs $t = 1$) $\rightarrow$ two lines representing `lm(y ~ t)`
+	- $black$ lines = regression lines for two groups ($t = 0$ vs $t = 1$) $\rightarrow$ two lines representing `lm(y ~ t + x)`
+	- $blue$ line = overall regression of $y$ vs $x$ $\rightarrow$ line representing `lm(y ~ x)`
 * from the graph, we can see that
 	- $x$ variable is ***unrelated*** to group status $t$
 		+ distribution of each group (salmon vs light blue) of $Y$ vs $X$ is effectively the same
@@ -1394,12 +1397,12 @@ rbind("Treatment Effect" = lm(y~t+x)$coef[2], "Adjustment Effect" = lm(y~t)$coef
 
 
 ### Simulation 2 - No Treatment Effect
-* the following code simulates the linear model, $$Y_i = \beta_0 + \beta_1 x_i + \beta_2 t_i + \epsilon_i$$ where $t = {0, 1} --> binary variable
+* the following code simulates the linear model, $$Y_i = \beta_0 + \beta_1 x_i + \beta_2 t_i + \epsilon_i$$ where $t = \{0, 1\} \rightarrow$ binary variable
 * in this case, $\beta_2$ is set to $0$
 
 ```{r, fig.height=4, fig.width=5, message = F, warning = F, fig.align = 'center'}
-# simulate data 
-n <- 100; t <- rep(c(0, 1), c(n/2, n/2)); x <- c(runif(n/2), 1.5 + runif(n/2)); 
+# simulate data
+n <- 100; t <- rep(c(0, 1), c(n/2, n/2)); x <- c(runif(n/2), 1.5 + runif(n/2));
 # define parameters/coefficients
 beta0 <- 0; beta1 <- 2; beta2 <- 0; sigma <- .2
 # generate outcome using linear model
@@ -1424,10 +1427,10 @@ rbind("Treatment Effect" = lm(y~t+x)$coef[2], "Adjustment Effect" = lm(y~t)$coef
 ```
 
 * in the above graph, the elements are as follows:
-	- $\textcolor{red}{red}$ lines = means for two groups ($t = 0$ vs $t = 1$) --> two lines representing `lm(y ~ t)`
-	- $black$ lines = regression lines for two groups ($t = 0$ vs $t = 1$) --> two lines representing `lm(y ~ t + x)`
-		+ in this case, both lines correspond to `lm(y ~ x)` since coefficient of $t$ or $\beta_2 = 0$ 
-	- $\textcolor{blue}{blue}$ line = overall regression of $y$ vs $x$ --> line representing `lm(y ~ x)`
+	- $red$ lines = means for two groups ($t = 0$ vs $t = 1$) $\rightarrow$ two lines representing `lm(y ~ t)`
+	- $black$ lines = regression lines for two groups ($t = 0$ vs $t = 1$) $\rightarrow$ two lines representing `lm(y ~ t + x)`
+		+ in this case, both lines correspond to `lm(y ~ x)` since coefficient of $t$ or $\beta_2 = 0$
+	- $blue$ line = overall regression of $y$ vs $x$ $\rightarrow$ line representing `lm(y ~ x)`
 		+ this is overwritten by the $black$ lines
 * from the graph, we can see that
 	- $x$ variable is ***highly related*** to group status $t$
@@ -1446,12 +1449,12 @@ rbind("Treatment Effect" = lm(y~t+x)$coef[2], "Adjustment Effect" = lm(y~t)$coef
   		+ this conclusion is based on the constructed alone
 
 ### Simulation 3 - Treatment Reverses Adjustment Effect
-* the following code simulates the linear model, $$Y_i = \beta_0 + \beta_1 x_i + \beta_2 t_i + \epsilon_i$$ where $t = {0, 1} --> binary variable
-* in this case, $\beta_0$ is set to $0$ --> no intercept
+* the following code simulates the linear model, $$Y_i = \beta_0 + \beta_1 x_i + \beta_2 t_i + \epsilon_i$$ where $t = \{0, 1\} \rightarrow$ binary variable
+* in this case, $\beta_0$ is set to $0$ $\rightarrow$ no intercept
 
 ```{r, fig.height=4, fig.width=5, message = F, warning = F, fig.align = 'center'}
-# simulate data 
-n <- 100; t <- rep(c(0, 1), c(n/2, n/2)); x <- c(runif(n/2), .9 + runif(n/2)); 
+# simulate data
+n <- 100; t <- rep(c(0, 1), c(n/2, n/2)); x <- c(runif(n/2), .9 + runif(n/2));
 # define parameters/coefficients
 beta0 <- 0; beta1 <- 2; beta2 <- -1; sigma <- .2
 # generate outcome using linear model
@@ -1476,23 +1479,23 @@ rbind("Treatment Effect" = lm(y~t+x)$coef[2], "Adjustment Effect" = lm(y~t)$coef
 ```
 
 * in the above graph, the elements are as follows:
-	- $\textcolor{red}{red}$ lines = means for two groups ($t = 0$ vs $t = 1$) --> two lines representing `lm(y ~ t)`
-	- $black$ lines = regression lines for two groups ($t = 0$ vs $t = 1$) --> two lines representing `lm(y ~ t + x)`
-	- $\textcolor{blue}{blue}$ line = overall regression of $y$ vs $x$ --> line representing `lm(y ~ x)`
+	- $red$ lines = means for two groups ($t = 0$ vs $t = 1$) $\rightarrow$ two lines representing `lm(y ~ t)`
+	- $black$ lines = regression lines for two groups ($t = 0$ vs $t = 1$) $\rightarrow$ two lines representing `lm(y ~ t + x)`
+	- $blue$ line = overall regression of $y$ vs $x$ $\rightarrow$ line representing `lm(y ~ x)`
 * from the graph, we can see that
 	- disregarding/adjusting for $x$, the mean for salmon group is ***higher*** than the mean of the blue group (***adjustment effect*** is positive)
-	- when adding $t$ into the linear model, the treatment actually reverses the orders of the group --> the mean for salmon group is ***lower*** than the mean of the blue group (***treatment effect*** is negative)
+	- when adding $t$ into the linear model, the treatment actually reverses the orders of the group $\rightarrow$ the mean for salmon group is ***lower*** than the mean of the blue group (***treatment effect*** is negative)
 	- group variable $t$ is ***related*** to $x$
 	- some points overlap so it is possible to compare the subsets two groups holding $x$ fixed
 
 
 ### Simulation 4 - No Adjustment Effect
-* the following code simulates the linear model, $$Y_i = \beta_0 + \beta_1 x_i + \beta_2 t_i + \epsilon_i$$ where $t = {0, 1} --> binary variable
-* in this case, $\beta_0$ is set to $0$ --> no intercept
+* the following code simulates the linear model, $$Y_i = \beta_0 + \beta_1 x_i + \beta_2 t_i + \epsilon_i$$ where $t = \{0, 1\} \rightarrow$ binary variable
+* in this case, $\beta_0$ is set to $0$ $\rightarrow$ no intercept
 
 ```{r, fig.height=4, fig.width=5, message = F, warning = F, fig.align = 'center'}
-# simulate data 
-n <- 100; t <- rep(c(0, 1), c(n/2, n/2)); x <- c(.5 + runif(n/2), runif(n/2)); 
+# simulate data
+n <- 100; t <- rep(c(0, 1), c(n/2, n/2)); x <- c(.5 + runif(n/2), runif(n/2));
 # define parameters/coefficients
 beta0 <- 0; beta1 <- 2; beta2 <- 1; sigma <- .2
 # generate outcome using linear model
@@ -1516,9 +1519,9 @@ points(x[(n/2 + 1) : n], y[(n/2 + 1) : n], pch = 21, col = "black", bg = "salmon
 rbind("Treatment Effect" = lm(y~t+x)$coef[2], "Adjustment Effect" = lm(y~t)$coef[2])
 ```
 * in the above graph, the elements are as follows:
-	- $\textcolor{red}{red}$ lines = means for two groups ($t = 0$ vs $t = 1$) --> two lines representing `lm(y ~ t)`
-	- $black$ lines = regression lines for two groups ($t = 0$ vs $t = 1$) --> two lines representing `lm(y ~ t + x)`
-	- $\textcolor{blue}{blue}$ line = overall regression of $y$ vs $x$ --> line representing `lm(y ~ x)`
+	- $red$ lines = means for two groups ($t = 0$ vs $t = 1$) $\rightarrow$ two lines representing `lm(y ~ t)`
+	- $black$ lines = regression lines for two groups ($t = 0$ vs $t = 1$) $\rightarrow$ two lines representing `lm(y ~ t + x)`
+	- $blue$ line = overall regression of $y$ vs $x$ $\rightarrow$ line representing `lm(y ~ x)`
 * from the graph, we can see that
 	- no ***clear relationship*** between group variable $t$ and $Y$
 		+ two groups have similar distributions with respect to $Y$
@@ -1531,12 +1534,12 @@ rbind("Treatment Effect" = lm(y~t+x)$coef[2], "Adjustment Effect" = lm(y~t)$coef
 
 
 ### Simulation 5 - Binary Interaction
-* the following code simulates the linear model, $$Y_i = \beta_0 + \beta_1 x_i + \beta_2 t_i + \beta_3 x_i t_i + \epsilon_i$$ where $t = {0, 1} --> binary variable
+* the following code simulates the linear model, $$Y_i = \beta_0 + \beta_1 x_i + \beta_2 t_i + \beta_3 x_i t_i + \epsilon_i$$ where $t = \{0, 1\} \rightarrow$ binary variable
 * in this case, $\beta_0$ and $\beta_2$ are set to $0$
 
 ```{r, fig.height=4, fig.width=5, message = F, warning = F, fig.align = 'center'}
-# simulate data 
-n <- 100; t <- rep(c(0, 1), c(n/2, n/2)); x <- c(runif(n/2, -1, 1), runif(n/2, -1, 1)); 
+# simulate data
+n <- 100; t <- rep(c(0, 1), c(n/2, n/2)); x <- c(runif(n/2, -1, 1), runif(n/2, -1, 1));
 # define parameters/coefficients
 beta0 <- 0; beta1 <- 2; beta2 <- 0; beta3 <- -4; sigma <- .2
 # generate outcome using linear model
@@ -1559,12 +1562,12 @@ points(x[(n/2 + 1) : n], y[(n/2 + 1) : n], pch = 21, col = "black", bg = "salmon
 ```
 
 * in the above graph, the elements are as follows:
-	- $\textcolor{red}{red}$ lines = means for two groups ($t = 0$ vs $t = 1$) --> two lines representing `lm(y ~ t)`
-	- $black$ lines = regression lines for two groups ($t = 0$ vs $t = 1$) --> two lines representing `lm(y ~ t + x + t*x)`
-	- $\textcolor{blue}{blue}$ line = overall regression of $y$ vs $x$ --> line representing `lm(y ~ x)`
+	- $red$ lines = means for two groups ($t = 0$ vs $t = 1$) $\rightarrow$ two lines representing `lm(y ~ t)`
+	- $black$ lines = regression lines for two groups ($t = 0$ vs $t = 1$) $\rightarrow$ two lines representing `lm(y ~ t + x + t*x)`
+	- $blue$ line = overall regression of $y$ vs $x$ $\rightarrow$ line representing `lm(y ~ x)`
 		+ this is completely meaningless in this case
 * from the graph, we can see that
-	- ***treatment effect*** does not apply since it varies with $x$ 
+	- ***treatment effect*** does not apply since it varies with $x$
   		+ impact of treatment/group variable **reverses itself** depending on $x$
   	- ***adjustment effect*** is effectively zero as the means of the two groups are very similar
   	- both intercept and slope of the two lines depend on the group variable $t$
@@ -1573,11 +1576,11 @@ points(x[(n/2 + 1) : n], y[(n/2 + 1) : n], pch = 21, col = "black", bg = "salmon
 
 
 ### Simulation 6 - Continuous Adjustment
-* the following code simulates the linear model, $$Y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \epsilon_i$$ 
+* the following code simulates the linear model, $$Y_i = \beta_0 + \beta_1 x_{1i} + \beta_2 x_{2i} + \epsilon_i$$
 
 ```{r, fig.height=4, fig.width=5, message = F, warning = F, fig.align = 'center'}
-# simulate data 
-p <- 1; n <- 100; x2 <- runif(n); x1 <- p * runif(n) - (1 - p) * x2 
+# simulate data
+p <- 1; n <- 100; x2 <- runif(n); x1 <- p * runif(n) - (1 - p) * x2
 # define parameters/coefficients
 beta0 <- 0; beta1 <- 1; beta2 <- 4 ; sigma <- .01
 # generate outcome using linear model
@@ -1615,16 +1618,16 @@ grid.raster(readPNG("figures/7.png"))
 
 ```{r, fig.height=4, fig.width=5, message = F, warning = F, fig.align = 'center'}
 # plot the residuals for y and x1 with x2 removed
-plot(resid(lm(x1 ~ x2)), resid(lm(y ~ x2)), frame = FALSE, 
+plot(resid(lm(x1 ~ x2)), resid(lm(y ~ x2)), frame = FALSE,
 	col = "black", bg = "lightblue", pch = 21, cex = 1)
 # add linear fit line
 abline(lm(I(resid(lm(y ~ x2))) ~ I(resid(lm(x1 ~ x2)))), lwd = 2)
 ```
 
-* from the generated plots above, we can see that 
+* from the generated plots above, we can see that
 	- $x_{1}$ is ***unrelated*** to $x_{2}$
 	- $x_{2}$ ***strongly correlated*** to $y$
-	- relationship between $x_{1}$ and $y$ (loosely correlated  --> $R^2$ = `r round(summary(lm(y ~ x1))$r.squared,2)`) ***largely unchanged*** by when $x_{2}$ is considered
+	- relationship between $x_{1}$ and $y$ (loosely correlated  $\rightarrow$ $R^2$ = `r round(summary(lm(y ~ x1))$r.squared,2)`) ***largely unchanged*** by when $x_{2}$ is considered
 		+ $x_{2}$ captures the vast majority of variation in data
   		+ there exists almost no residual variability after removing $x_{2}$
 
@@ -1633,7 +1636,7 @@ abline(lm(I(resid(lm(y ~ x2))) ~ I(resid(lm(x1 ~ x2)))), lwd = 2)
 	- modeling for prediction is fairly straight forward
 	- interpreting the regression lines is much harder, as adjusting for variables can have profound effect on variables of interest
 * it is often recommended to explore with simulations to see how inclusion or exclusion of another variable affects the relationship of variable of interest and the outcome
-* variable selection simply affects associations between outcome and predictors, using the model to formulate causal relationship are even more difficult (entire field dedicated to this --> ***causal inference***) 
+* variable selection simply affects associations between outcome and predictors, using the model to formulate causal relationship are even more difficult (entire field dedicated to this $\rightarrow$ ***causal inference***)
 
 
 $\pagebreak$
@@ -1643,18 +1646,18 @@ $\pagebreak$
 * the **predicted outcome**, $\hat Y_i$, is defined as $$\hat Y_i =  \sum_{k=1}^p X_{ik} \hat \beta_j$$
 * the **residuals**, $e_i$, is defined as $$e_i = Y_i -  \hat Y_i =  Y_i - \sum_{k=1}^p X_{ik} \hat \beta_j$$
 * the unbiased estimate for **residual variation** is defined as $$\hat \sigma^2_{resid} = \frac{\sum_{i=1}^n e_i^2}{n-p}$$ where the denominator is $n-p$ so that $E[\hat \sigma^2] = \sigma^2$
-* to evaluate the fit and residuals of a linear model generated by R (i.e. `fit <- lm(y~x)`, we can use the `plot(fit)` to produce a series of ***4 diagnostic plots*** 
-	- ***Residuals vs Fitted*** = plots ordinary residuals vs fitted values --> used to detect patterns for missing variables, heteroskedasticity, etc
-	- ***Scale-Location*** = plots standardized residuals vs fitted values --> similar residual plot, used to detect patterns in residuals 
-	- ***Normal Q-Q*** = plots theoretical quantiles for standard normal vs actual quantiles of standardized residuals --> used to evaluate normality of the errors
-	- ***Residuals vs Leverage*** = plots cooks distances comparison of fit at that point vs potential for influence of that point --> used to detect any points that have substantial influence on the regression model
-  
+* to evaluate the fit and residuals of a linear model generated by R (i.e. `fit <- lm(y~x)`, we can use the `plot(fit)` to produce a series of ***4 diagnostic plots***
+	- ***Residuals vs Fitted*** = plots ordinary residuals vs fitted values $\rightarrow$ used to detect patterns for missing variables, heteroskedasticity, etc
+	- ***Scale-Location*** = plots standardized residuals vs fitted values $\rightarrow$ similar residual plot, used to detect patterns in residuals
+	- ***Normal Q-Q*** = plots theoretical quantiles for standard normal vs actual quantiles of standardized residuals $\rightarrow$ used to evaluate normality of the errors
+	- ***Residuals vs Leverage*** = plots cooks distances comparison of fit at that point vs potential for influence of that point $\rightarrow$ used to detect any points that have substantial influence on the regression model
+
 * ***example***
 
 ```{r fig.width = 6, fig.height = 5, fig.align = 'center', message = F, warning = F}
-# load swiss data and 
+# load swiss data and
 data(swiss)
-# run linear regression on Fertility vs all other predictors 
+# run linear regression on Fertility vs all other predictors
 fit <- lm(Fertility ~ . , data = swiss)
 # generate diagnostic plots in 2 x 2 panels
 par(mfrow = c(2, 2)); plot(fit)
@@ -1667,11 +1670,11 @@ par(mfrow = c(2, 2)); plot(fit)
   	- can conform to the regression relationship (i.e being marginally outlying in X or Y, but not outlying given the regression relationship)
 
 ```{r fig.width = 4, fig.height = 4, fig.align = 'center', message = F, warning = F}
-# generate data 
+# generate data
 n <- 100; x <- rnorm(n); y <- x + rnorm(n, sd = .3)
 # set up axes
 plot(c(-3, 6), c(-3, 6), type = "n", frame = FALSE, xlab = "X", ylab = "Y")
-# plot regression line for y vs x 
+# plot regression line for y vs x
 abline(lm(y ~ x), lwd = 2)
 # plot actual (x, y) pairs
 points(x, y, cex = 1, bg = "lightblue", col = "black", pch = 21)
@@ -1697,9 +1700,9 @@ points(5, 0, cex = 1.5, bg = "darkorange", col = "black", pch = 21)
 ### Influence Measures
 * there exists many pre-written functions to measure influence of observations already in the `stats` package in R
 	- ***Note**: typing in `?influence.measures` in R will display the detailed documentation on all available functions to measure influence *
-	- ***Note**: the `model` argument referenced in the following functions is simply the linear fit model generated by the `lm` function (i.e. `model <- lm(y~x`) * 
-	- `rstandard(model)` = standardized residuals --> residuals divided by their standard deviations
-	- `rstudent(model)` = standardized residuals --> residuals divided by their standard deviations, where the $i^{th}$ data point was deleted in the calculation of the standard deviation for the residual to follow a t distribution
+	- ***Note**: the `model` argument referenced in the following functions is simply the linear fit model generated by the `lm` function (i.e. `model <- lm(y~x`) *
+	- `rstandard(model)` = standardized residuals $\rightarrow$ residuals divided by their standard deviations
+	- `rstudent(model)` = standardized residuals $\rightarrow$ residuals divided by their standard deviations, where the $i^{th}$ data point was deleted in the calculation of the standard deviation for the residual to follow a t distribution
 	- `hatvalues(model)` = measures of leverage
 	- `dffits(model)` = change in the predicted response when the $i^{th}$ point is deleted in fitting the model
 		+ effectively measures influence of a point on prediction
@@ -1712,12 +1715,12 @@ points(5, 0, cex = 1.5, bg = "darkorange", col = "black", pch = 21)
 		+ effectively measures the prediction error based on model constructed with every other point but the one of interest
 
 ### Using Influence Measures
-* the purpose of these functions are to probe the given data in different ways to ***diagnose*** different problems 
-	- patterns in **residual plots** (most important tool) --> generally indicate some poor aspect of model fit 
-		+ heteroskedasticity --> non-constant variance
-		+ missing model terms 
-		+ temporal patterns --> residuals versus collection order/index exhibit pattern
-	- **residual Q-Q plots** plots theoretical quantile vs actual quantiles of residuals 
+* the purpose of these functions are to probe the given data in different ways to ***diagnose*** different problems
+	- patterns in **residual plots** (most important tool) $\rightarrow$ generally indicate some poor aspect of model fit
+		+ heteroskedasticity $\rightarrow$ non-constant variance
+		+ missing model terms
+		+ temporal patterns $\rightarrow$ residuals versus collection order/index exhibit pattern
+	- **residual Q-Q plots** plots theoretical quantile vs actual quantiles of residuals
 		+ investigates whether the errors follow the standard normal distribution
 	- **leverage measures** (hat values) measures the potential to influence the regression model
 		+ only depend on $x$ or predictor variables
@@ -1725,14 +1728,14 @@ points(5, 0, cex = 1.5, bg = "darkorange", col = "black", pch = 21)
 	- **influence measures** (i.e. dfbetas) measures actual influence of points on the regression model
 		+ evaluates how deleting or including this point impact a particular aspect of the model
 * it is important to to understand these functions/tools and use carefully in the ***appropriate context***
-* not all measures have ***meaningful absolute scales***, so it may be useful to apply these measures to different values in the same data set but ***almost never*** to different datasets 
+* not all measures have ***meaningful absolute scales***, so it may be useful to apply these measures to different values in the same data set but ***almost never*** to different datasets
 
 ### Example - Outlier Causing Linear Relationship
 
 ```{r fig.width = 4, fig.height = 4, fig.align = 'center', message = F, warning = F}
-# generate random data and point (10, 10) 
+# generate random data and point (10, 10)
 x <- c(10, rnorm(n)); y <- c(10, c(rnorm(n)))
-# plot y vs x 
+# plot y vs x
 plot(x, y, frame = FALSE, cex = 1, pch = 21, bg = "lightblue", col = "black")
 # perform linear regression
 fit <- lm(y ~ x)
@@ -1749,18 +1752,18 @@ abline(fit)
 	- a single point has created a strong regression relationship where there shouldn't be one
 		+ point (10, 10) has high leverage and high influence
 	- we can use diagnostics to detect this kind of behavior
-  
+
 * `dfbetas(fit)` = difference in coefficients for including vs excluding each data point
 	- the function will return a `n x m` dataframe, where n = number of values in the original dataset, and m = number of coefficients
 	- for this example, the coefficients are $\beta_0$ (intercept), and $\beta_1$ (slope), and we are interested in the slope
 
 ```{r message = F, warning = F}
-# calculate the dfbetas for the slope the first 10 points 
+# calculate the dfbetas for the slope the first 10 points
 round(dfbetas(fit)[1 : 10, 2], 3)
 ```
 
 * as we can see from above, the slope coefficient would ***change dramatically*** if the first point (10, 10) is left out
-  
+
 * `hatvalues(fit)` = measures the potential for influence for each point
 
 ```{r message = F, warning = F}
@@ -1774,7 +1777,7 @@ round(hatvalues(fit)[1 : 10], 3)
 ### Example - Real Linear Relationship
 
 ```{r fig.width = 4, fig.height = 4, fig.align = 'center', message = F, warning = F}
-# generate data 
+# generate data
 x <- rnorm(n); y <- x + rnorm(n, sd = .3)
 # add an outlier that fits the relationship
 x <- c(5, x); y <- c(5, y)
@@ -1794,7 +1797,7 @@ abline(fit2)
 	- point (5, 5) has high leverage and low influence
 
 ```{r, echo = TRUE}
-# calculate the dfbetas for the slope the first 10 points 
+# calculate the dfbetas for the slope the first 10 points
 round(dfbetas(fit2)[1 : 10, 2], 3)
 # calculate the hat values for the first 10 points
 round(hatvalues(fit2)[1 : 10], 3)
@@ -1807,12 +1810,12 @@ round(hatvalues(fit2)[1 : 10], 3)
 ### Example - Stefanski TAS 2007
 
 * taken from Leonard A. Stefanski's paper [Residual (Sur)Realism](http://www4.stat.ncsu.edu/~stefanski/NSF_Supported/Hidden_Images/Residual_Surrealism_TAS_2007.pdf)
-* data set can be found [here](http://www4.stat.ncsu.edu/~stefanski/NSF_Supported/Hidden_Images/orly_owl_files/orly_owl_Lin_4p_5_flat.txt) 
+* data set can be found [here](http://www4.stat.ncsu.edu/~stefanski/NSF_Supported/Hidden_Images/orly_owl_files/orly_owl_Lin_4p_5_flat.txt)
 * the data itself exhibit no sign of correlation between the variables
 
 ```{r, fig.height=4, fig.width=4, fig.align='center', cache=TRUE}
 # read data
-data <- read.table('http://www4.stat.ncsu.edu/~stefanski/NSF_Supported/Hidden_Images/orly_owl_files/orly_owl_Lin_4p_5_flat.txt', 
+data <- read.table('http://www4.stat.ncsu.edu/~stefanski/NSF_Supported/Hidden_Images/orly_owl_files/orly_owl_Lin_4p_5_flat.txt',
 	header = FALSE)
 # construct pairwise plot
 pairs(data)
@@ -1833,12 +1836,12 @@ plot(predict(fit), resid(fit), pch = '.')
 $\pagebreak$
 
 ## Model Selection
+
+> "A model is a lense through which to look at your data" -- **Scott Zeger**
+
+> "There's no such thing as a correct model" -- **Brian Caffo**
+
 * **goal for modeling** = find ***parsimonious, interpretable representations*** of data that enhance our understanding
-
-> "A model is a lense through which to look at your data" -- Scott Zeger
-
-> "There's no such thing as a correct model" -- Brian Caffo
-
 * whichever model connects data to a true, parsimonious statement would be ***best*** model
 * like nearly all aspects of statistics, good modeling decisions are context dependent
 * good model for prediction $\neq$ model to establish causal effects
@@ -1846,7 +1849,7 @@ $\pagebreak$
 
 ### Rumsfeldian Triplet
 
-> "There are known knowns. These are things we know that we know. There are known unknowns. That is to say, there are things that we know we don't know. But there are also unknown unknowns. There are things we don't know we don't know." -- Donald Rumsfeld
+> "There are known knowns. These are things we know that we know. There are known unknowns. That is to say, there are things that we know we don't know. But there are also unknown unknowns. There are things we don't know we don't know." -- **Donald Rumsfeld**
 
 * **known knowns** = regressors that we know and have, which will be evaluated to be included in the model
 * **known unknowns** = regressors that we but don't have but would like to include in the model
@@ -1855,19 +1858,19 @@ $\pagebreak$
 
 
 ### General Rules
-* **omitting variables** --> generally results in ***increased bias*** in coefficients of interest
+* **omitting variables** $\rightarrow$ generally results in ***increased bias*** in coefficients of interest
 	- exceptions are when the omitted variables are uncorrelated with the regressors (variables of interest/included in model)
 		+ ***Note**: this is why randomize treatments/trials/experiments are the norm; it's the best strategy to balance confounders, or maximizing the probability that the treatment variable is uncorrelated with variables not in the model *
 		+ often times, due to experiment conditions or data availability, we cannot randomize
 		+ however, if there are too many unobserved confounding variables, even randomization won't help
 
-* **including irrelevant/unnecessary variables** --> generally ***increases standard errors*** (estimated standard deviation) of the coefficients
+* **including irrelevant/unnecessary variables** $\rightarrow$ generally ***increases standard errors*** (estimated standard deviation) of the coefficients
 	- ***Note**: including **any** new variables increases true standard errors of other regressors, so it is not wise to idly add variables into model *
 
-* whenever highly correlated variables are included in the same model --> the standard error and therefore the***variance*** of the model ***increases*** --> this is known as **variance inflation**
+* whenever highly correlated variables are included in the same model $\rightarrow$ the standard error and therefore the***variance*** of the model ***increases*** $\rightarrow$ this is known as **variance inflation**
 	- actual increase in standard error of coefficients for adding a regressor = estimated by the ratio of the estimated standard errors minus 1, or in other words $$\Delta_{\sigma~|~adding~x_2} = \frac{\hat \sigma_{y \sim x_1+x_2}}{\hat \sigma_{y \sim x_1}} - 1$$ for all coefficients for the regression model
 		+ ***example***: if standard error of the $\beta_1$ of `y~x1+x2` = 1.5 and standard error for the $\beta_1$ of `y~x1` = 0.5, then the actual increase in standard error of the $\beta_1$ = 1.5/0.5 - 1 = 200%
-	- ***Note**: when the regressors added are orthogonal (statistically independent) to the regressor of interest, then there is no variance inflation * 
+	- ***Note**: when the regressors added are orthogonal (statistically independent) to the regressor of interest, then there is no variance inflation *
 		+ **variance inflation factor** (VIF) = the increase in the variance for the $i_{th}$ regressor compared to the ideal setting where it is orthogonal to the other regressors
   		+ $\sqrt{VIF}$ = increase in standard error
 	- ***Note**: variance inflation is only part of the picture in that sometimes we will **include variables** even though they dramatically inflate the variation because it is an **empirical part of the relationship** we are attempting to model *
@@ -1881,17 +1884,17 @@ $\pagebreak$
 - it is clear, however, that as $p$, the number of regressors included in the model, approaches $n$, the $R^2$ value approaches 1.0, which signifies perfect fit
 
 ```{r fig.height=4, fig.width=4, fig.align = 'center'}
-# set number of measurements 
+# set number of measurements
 n <- 100
 # set up the axes of the plot
-plot(c(1, n), 0 : 1, type = "n", xlab = "p", ylab = expression(R^2), 
+plot(c(1, n), 0 : 1, type = "n", xlab = "p", ylab = expression(R^2),
 	main = expression(paste(R^2, " vs n")))
 # for each value of p from 1 to n
 r <- sapply(1 : n, function(p){
 	# create outcome and p regressors
 	y <- rnorm(n); x <- matrix(rnorm(n * p), n, p)
 	# calculate the R^2
-	summary(lm(y ~ x))$r.squared 
+	summary(lm(y ~ x))$r.squared
 })
 # plot the R^2 values and connect them with a line
 lines(1 : n, r, lwd = 2)
@@ -1908,25 +1911,25 @@ lines(1 : n, r, lwd = 2)
 
 ### Example - Unrelated Regressors
 * in the simulation below, outcome $y$ is only related to $x_1$
-	- $x_2$ and $x_3$ are random noise 
+	- $x_2$ and $x_3$ are random noise
 * we will run 1000 simulations of 3 linear regression models, and calculate the ***standard error of the slope***
 	- $y$ vs $x_1$
 	- $y$ vs $x_1 + x_2$
 	- $y$ vs $x_1 + x_2 + x_3$
 
 ```{r}
-# simulate data 
+# simulate data
 n <- 100; nosim <- 1000
-# generate 3 random noise, unrelated variables 
-x1 <- rnorm(n); x2 <- rnorm(n); x3 <- rnorm(n); 
+# generate 3 random noise, unrelated variables
+x1 <- rnorm(n); x2 <- rnorm(n); x3 <- rnorm(n);
 # calculate beta1s of three different regression
 betas <- sapply(1 : nosim, function(i){
 	# generate outcome as only related to x1
 	y <- x1 + rnorm(n, sd = .3)
 	# store beta1 of linear regression on y vs x1
-	c(coef(lm(y ~ x1))[2], 
+	c(coef(lm(y ~ x1))[2],
 		# store beta1 of linear regression on y vs x1 and x2
-		coef(lm(y ~ x1 + x2))[2], 
+		coef(lm(y ~ x1 + x2))[2],
 		# store beta1 of linear regression on y vs x1 x2 and x3
 		coef(lm(y ~ x1 + x2 + x3))[2])
 })
@@ -1944,7 +1947,7 @@ rbind("y ~ x1" = c("beta1SE" = beta1.se[1]),
 * in the simulation below, outcome $y$ is related to $x_1$
 	- $x_2$ and $x_3$ are highly correlated with $x_1$
 	- $x_3$ is more correlated with $x_1$ than $x_2$
-* we will run 1000 simulations of 3 linear regression models, and calculate the ***standard error of $beta_1$***, the coefficient of $x_1$
+* we will run 1000 simulations of 3 linear regression models, and calculate the ***standard error of $\beta_1$***, the coefficient of $x_1$
 	- $y$ vs $x_1$
 	- $y$ vs $x_1 + x_2$
 	- $y$ vs $x_1 + x_2 + x_3$
@@ -1954,15 +1957,15 @@ rbind("y ~ x1" = c("beta1SE" = beta1.se[1]),
 n <- 100; nosim <- 1000
 # generate random variables that are correlated with each other
 x1 <- rnorm(n); x2 <- x1/sqrt(2) + rnorm(n) /sqrt(2)
-x3 <- x1 * 0.95 + rnorm(n) * sqrt(1 - 0.95^2); 
+x3 <- x1 * 0.95 + rnorm(n) * sqrt(1 - 0.95^2);
 # calculate the beta1s for 1000 trials
 betas <- sapply(1 : nosim, function(i){
 	# generate outcome as only related to x1
 	y <- x1 + rnorm(n, sd = .3)
 	# store beta1 of linear regression on y vs x1
-	c(coef(lm(y ~ x1))[2], 
+	c(coef(lm(y ~ x1))[2],
 		# store beta1 of linear regression on y vs x1 and x2
-		coef(lm(y ~ x1 + x2))[2], 
+		coef(lm(y ~ x1 + x2))[2],
 		# store beta1 of linear regression on y vs x1 x2 and x3
 		coef(lm(y ~ x1 + x2 + x3))[2])
 })
@@ -1975,7 +1978,7 @@ rbind("y ~ x1" = c("beta1SE" = beta1.se[1]),
 ```
 
 * as we can see from above, adding highly correlated regressors ***drastically increases*** the standard errors of the coefficients
-  
+
 * to estimate the actual change in variance, we can use the ratio of estimated variances for the $\beta_1$ coefficient for the different models
 	- `summary(fit)$cov.unscaled` = returns p x p covariance matrix for p coefficients, with the diagonal values as the true variances of coefficients
 		+ `summary(fit)$cov.unscaled[2,2]` = true variance for the $\beta_1$
@@ -1983,7 +1986,7 @@ rbind("y ~ x1" = c("beta1SE" = beta1.se[1]),
 ```{r}
 # generate outcome that is correlated with x1
 y <- x1 + rnorm(n, sd = .3)
-# store the variance of beta1 for the 1st model 
+# store the variance of beta1 for the 1st model
 a <- summary(lm(y ~ x1))$cov.unscaled[2,2]
 # calculate the ratio of variances of beta1 for 2nd and 3rd models with respect to 1st model
 c(summary(lm(y ~ x1 + x2))$cov.unscaled[2,2],
@@ -1993,14 +1996,14 @@ temp <- apply(betas, 1, var); temp[2 : 3] / temp[1] - 1
 ```
 
 * as we can see from the above results
-	- adding $x_2$ increases the variance by approximately `r round(temp[2]/ temp[1] - 1)` fold 
+	- adding $x_2$ increases the variance by approximately `r round(temp[2]/ temp[1] - 1)` fold
 	- adding $x_2$ and $x_3$ increases the variance by approximately `r round(temp[3]/ temp[1] - 1)` folds
 * the estimated values from the 1000 trials are ***different but close*** to the true increases, and they will approach the true values as the number of trials increases
 
 
 ### Example: Variance Inflation Factors
 * we will use the `swiss` data set for this example, and compare the following models
-	- Fertility vs Agriculture 
+	- Fertility vs Agriculture
 	- Fertility vs Agriculture + Examination
 	- Fertility vs Agriculture + Examination + Education
 
@@ -2028,7 +2031,7 @@ c(summary(fit2)$cov.unscaled[2,2], summary(fit3)$cov.unscaled[2,2]) / a - 1
 ```{r message = F, warning = F}
 # load car library
 library(car)
-# run linear regression on Fertility vs all other predictors 
+# run linear regression on Fertility vs all other predictors
 fit <- lm(Fertility ~ . , data = swiss)
 # calculate the variance inflation factors
 vif(fit)
@@ -2041,9 +2044,9 @@ sqrt(vif(fit))
 
 ### Residual Variance Estimates
 * assuming that the model is linear with additive iid errors (with finite variance), we can mathematically describe the impact of omitting necessary variables or including unnecessary ones
-	- **underfitting** the model --> variance estimate is ***biased*** --> $E[\hat \sigma^2] \neq \sigma^2$
-	- **correctly fitting** or **overfitting** the model --> variance estimate is ***unbiased*** --> $E[\hat \sigma^2] = \sigma^2$
-		+ however, if unnecessary variables are included, the variance estimate is ***larger*** than that of the correctly fitted variables --> $Var(\hat \sigma_{overfitted}) \geq Var(\hat \sigma_{correct})$
+	- **underfitting** the model $\rightarrow$ variance estimate is ***biased*** $\rightarrow ~ E[\hat \sigma^2] \neq \sigma^2$
+	- **correctly fitting** or **overfitting** the model $\rightarrow$ variance estimate is ***unbiased*** $\rightarrow ~ E[\hat \sigma^2] = \sigma^2$
+		+ however, if unnecessary variables are included, the variance estimate is ***larger*** than that of the correctly fitted variables $\rightarrow$ $Var(\hat \sigma_{overfitted}) \geq Var(\hat \sigma_{correct})$
 		+ in other words, adding unnecessary variables increases the variability of estimate for the true model
 
 ### Covariate Model Selection
@@ -2066,14 +2069,14 @@ sqrt(vif(fit))
 * another alternative to search through different models is the **step-wise search** algorithm that repeatedly adds/removes regressors one at a time to find the best model with the least [Akaike Information Criterion (AIC)](http://en.wikipedia.org/wiki/Akaike_information_criterion)
 	- `step(lm, k=df)` = performs step wise regression on a given linear model to find and return best linear model
 		+ `k=log(n)` = specifying the value of `k` as the log of the number of observation will force the step-wise regression model to use Bayesian Information Criterion (BIC) instead of the AIC
-		+ ***Note**: both BIC and AIC penalizes adding parameters to the regression model with an additional penalty term; the penalty is **larger** for BIC than AIC * 
+		+ ***Note**: both BIC and AIC penalizes adding parameters to the regression model with an additional penalty term; the penalty is **larger** for BIC than AIC *
 	- `MASS::stepAIC(lm, k = df)` = more versatile, rigorous implementation of the step wise regression
 	- an example can be found [here](#example-step-wise-model-search)
 
 
 ### Example: ANOVA
 * we will use the `swiss` data set for this example, and compare the following nested models
-	- Fertility vs Agriculture 
+	- Fertility vs Agriculture
 	- Fertility vs Agriculture + Examination + Education
 	- Fertility vs Agriculture + Examination + Education + Catholic + Infant.Mortality
 
@@ -2091,7 +2094,7 @@ anova(fit1, fit3, fit5)
 	- `RSS` = residual sum of squares for the models, measure of fit
 	- `Df` = change in degrees of freedom from one model to the next
 	- `Sum of Sq` = difference/change in residual sum of squares from one model to the next
-	- `F` = F statistic, measures the ratio of two scaled sums of squares reflecting different sources of variability $$F = \frac{\frac{RSS_1 - RSS_2}{p_2 - p_1}}{\frac{RSS_2}{n-p_2}}$$ where $p_1$ and $p_2$ = number of parameters in the two models for comparison, and $n$ = number of observations 
+	- `F` = F statistic, measures the ratio of two scaled sums of squares reflecting different sources of variability $$F = \frac{\frac{RSS_1 - RSS_2}{p_2 - p_1}}{\frac{RSS_2}{n-p_2}}$$ where $p_1$ and $p_2$ = number of parameters in the two models for comparison, and $n$ = number of observations
 	- `Pr(>F)` = p-value for the F statistic to indicate whether the change in model is significant or not
 
 * from the above result, we can see that both going from first to second, and second to third models result in significant reductions in RSS and ***better model fits***
@@ -2112,14 +2115,14 @@ $\pagebreak$
 
 ## General Linear Models Overview
 * limitations of linear models:
-	- response can be discrete (i.e. 0, 1, etc.) or strictly positive --> linear response models don't make much sense
+	- response can be discrete (i.e. 0, 1, etc.) or strictly positive $\rightarrow$ linear response models don't make much sense
 	- if outcome must be positive, Gaussian errors ($\pm$ errors) don't make sense as negative outcomes are possible
 	- transformations on predictors (log + 1) are often hard to interpret
 		+ modeling the data on the scale that it was collected is most ideal
 		+ even for interpretable transformations, _natural logarithms_ specifically, aren't applicable for negative/zero values
 * **general linear models** = introduced in 1972 RSSB paper by Nelder and Wedderburn and has ***3*** parts
 	1. exponential family model for response/outcome (i.e. Gaussian, Bernoulli distribution)
-	2. systematic component for linear predictor --> incorporates the information about the independent variables into the model
+	2. systematic component for linear predictor $\rightarrow$ incorporates the information about the independent variables into the model
 		- denoted by $\eta = X \beta$ where $X$ is a matrix of independent variables/predictors and $\beta$ is the coefficients
 	3. link function that connects means of the outcome/distribution to linear predictor
 		- the relationship is defined as $\eta = g(\mu)$, or the linear predictor $\eta$ is a function of the mean of the distribution $\mu$
@@ -2127,14 +2130,14 @@ $\pagebreak$
 ### Simple Linear Model
 * _exponential family distribution_: Gaussian distribution, assumed $Y_i \sim N(\mu_i, \sigma^2)$
 * _linear predictor_: $\eta_i = \sum_{k=1}^p X_{ik} \beta_k$
-* _link function_ : $g(\mu) = \eta = \mu$ 
+* _link function_ : $g(\mu) = \eta = \mu$
 	- for linear models, $g(\mu) = \mu$, so $\eta_i = \mu_i$
 * **result**: the same likelihood model (see [derivation](#derivation-for-maximum-likelihood-estimator))as the additive Gaussian error linear model $$Y_i = \sum_{k=1}^p X_{ik} \beta_k + \epsilon_{i}$$ where $\epsilon_i \stackrel{iid}{\sim} N(0, \sigma^2)$
 
 
 ### Logistic Regression
 * _exponential family distribution_: binomial/Bernoulli distribution, assumed $Y_i \sim Bernoulli(\mu_i)$ where the probability of success is $\mu_i$
-	- due to the properties of the binomial/Bernoulli distribution, $E[Y_i] = \mu_i$ where $0 \leq \mu_i \leq 1$ 
+	- due to the properties of the binomial/Bernoulli distribution, $E[Y_i] = \mu_i$ where $0 \leq \mu_i \leq 1$
 * _linear predictor_: $\eta_i = \sum_{k=1}^p X_{ik} \beta_k$
 * _link function_ : $g(\mu) = \eta = \log\left(\frac{\mu}{1 - \mu}\right)$
 	- **odds** for success for a binomial/Bernoulli distribution is defined as  $$\mbox{odds} = \frac{p}{1-p}$$
@@ -2151,7 +2154,7 @@ L(\beta) & = \prod_{i=1}^n \mu_i^{y_i} (1 - \mu_i)^{1-y_i}  \\
 (simplify) & = \prod_{i=1}^n \frac{\exp(\eta_i)^{y_i}}{1 + \exp(\eta_i)} \\
 (change~form~of~numerator) & = \exp\left(\sum_{i=1}^n y_i \eta_i \right)\prod_{i=1}^n \frac{1}{1 + \exp(\eta_i)}\\
 (substitute~\eta_i) \Rightarrow L(\beta) & = \exp\left(\sum_{i=1}^n y_i \big(\sum_{k=1}^p X_{ik} \beta_k \big) \right)\prod_{i=1}^n \frac{1}{1 + \exp\big(\sum_{k=1}^p X_{ik} \beta_k \big)}\\
-\end{aligned}$$ 
+\end{aligned}$$
 	- maximizing the likelihood $L(\beta)$ (solving for $\frac{\partial L}{\partial \beta} = 0)$ would return a set of optimized coefficients $\beta$ that will fit the data
 
 
@@ -2173,14 +2176,14 @@ L(\beta) & = \prod_{i=1}^n (y_i !)^{-1} \mu_i^{y_i}e^{-\mu_i}\\
 
 
 ### Variances and Quasi-Likelihoods
-* in each of the linear/Bernoulli/Poisson cases, the ***only*** term in the likelihood functions that depend on the ***data*** is  
+* in each of the linear/Bernoulli/Poisson cases, the ***only*** term in the likelihood functions that depend on the ***data*** is
 $$\sum_{i=1}^n y_i \eta_i =\sum_{i=1}^n y_i\sum_{k=1}^p X_{ik} \beta_k = \sum_{k=1}^p \beta_k\sum_{i=1}^n X_{ik} y_i$$
 - this means that we don't need need all of the data collected to maximize the likelihoods/find the coefficients $\beta$, but ***only*** need $\sum_{i=1}^n X_{ik} y_i$
 	+ ***Note**: this simplification is a consequence of choosing "**canonical**" link functions, $g(\mu)$, to be in specific forms *
 * [Derivation needed] all models achieve their ***maximum*** at the root of the **normal equations** $$\sum_{i=1}^n \frac{(Y_i - \mu_i)}{Var(Y_i)}W_i = 0$$ where $W_i = \frac{\partial g^{-1}(\mu_i)}{\mu_i}$ or the derivative of the inverse of the link function
-	- ***Note**: this is similar to deriving the least square equation where the middle term must be set to 0 to find the solution (see [Derivation for $\beta$](#derivation-for-)) * 
-	- ***Note**: $\mu_i = g^{-1}(\eta_i) =g^{-1}\left(\sum_{k=1}^p X_{ik} \beta_k\right)$, the normal functions are really functions of $\beta$ * 
-* the variance, $Var(Y_i)$, is defined as 
+	- ***Note**: this is similar to deriving the least square equation where the middle term must be set to 0 to find the solution (see [Derivation for $\beta$](#derivation-for-)) *
+	- ***Note**: $\mu_i = g^{-1}(\eta_i) =g^{-1}\left(\sum_{k=1}^p X_{ik} \beta_k\right)$, the normal functions are really functions of $\beta$ *
+* the variance, $Var(Y_i)$, is defined as
 	- ***linear model***:  $Var(Y_i) = \sigma^2$, where $\sigma$ is constant
 	- ***binomial model***: $Var(Y_i) = \mu_i (1 - \mu_i)$
 	- ***Poisson model***: $Var(Y_i) = \mu_i$
@@ -2216,27 +2219,26 @@ $\pagebreak$
   	- success vs failure
   	- disease vs healthy
 * **binomial outcomes** = collection of exchangeable binary outcomes (i.e. flipping coins repeatedly) for the same covariate data
-	- in other words, we are interested in the count of predicted $1$s vs $0$s rather individual outcomes of $1$ or $0$ 
+	- in other words, we are interested in the count of predicted $1$s vs $0$s rather individual outcomes of $1$ or $0$
 
 ### Odds
 * [**odds**](http://en.wikipedia.org/wiki/Odds_ratio) are useful in constructing logistic regression models and fairly easy to interpret
 	- imagine flipping a coin with success probability $p$
 		+ if heads, you win $X$
 		+ if tails, you lose $Y$
-	- how should $X$ and $Y$ be set so that the game is ***fair***?
-    - $$E[earnings]= X p - Y (1 - p) = 0 \Rightarrow \underbracket[0.5pt]{\frac{Y}{X}}_{\text{payout ratio}} = \underbracket[0.5pt]{\frac{p}{1 - p}}_{\text{odds}}$$
-	+ odds can be interpretted as "How much should you be willing to pay for a $p$ probability of winning a dollar?"
+	- how should $X$ and $Y$ be set so that the game is ***fair***? $$E[earnings]= X p - Y (1 - p) = 0 \Rightarrow \frac{Y}{X} = \frac{p}{1 - p}$$
+	+ odds can be interpreted as "How much should you be willing to pay for a $p$ probability of winning a dollar?"
     	+ if $p > 0.5$, you have to pay more if you lose than you get if you win
     	+ if $p < 0.5$, you have to pay less if you lose than you get if you win
 
 * odds are **NOT** probabilities
 * odds ratio of 1 = no difference in odds or 50% - 50%
-	- $p = 0.5 \Rightarrow odds = \frac{0.5}{1-0.5} = 1$ 
+	- $p = 0.5 \Rightarrow odds = \frac{0.5}{1-0.5} = 1$
 	- log odds ratio of 0 = no difference in odds
 		+ $p = 0.5 \Rightarrow odds = \log\left(\frac{0.5}{1-0.5}\right) = \log(1) = 0$
 * odds ratio < 0.5 or > 2 commonly a "moderate effect"
 * **relative risk** = ratios of probabilities instead of odds, and are often easier to interpret but harder to estimate $$\frac{Pr(W_i | S_i = 10)}{Pr(W_i | S_i = 0)}$$
-	- ***Note**: relative risks often have **boundary problems** as the range of $\log(p)$ is $(-\infty,~0]$ where as the range of logit $\frac{p}{1-p}$ is $(-\infty,\infty)$ * 
+	- ***Note**: relative risks often have **boundary problems** as the range of $\log(p)$ is $(-\infty,~0]$ where as the range of logit $\frac{p}{1-p}$ is $(-\infty,\infty)$ *
 	- for small probabilities Relative Risk $\approx$ Odds Ratio but __they are not the same__!
 
 
@@ -2250,7 +2252,7 @@ $\pagebreak$
 		+ `opponentScore` = score of the Raven team during the match
 
 ```{r message = F, warning = F}
-# load the data 
+# load the data
 load("ravensData.rda")
 head(ravensData)
 ```
@@ -2287,7 +2289,7 @@ summary(lm(ravenWinNum ~ ravenScore, data = ravensData))
 g(\mu_i) & = \log \left(\frac{\mu_i}{1 - \mu_i} \right) = \eta_i\\
 (substitute~\mu_i = Pr(W_i | S_i, \beta_0, \beta_1))~g(\mu_i) & = \log\left(\frac{Pr(W_i | S_i, \beta_0, \beta_1)}{1-Pr(W_i | S_i, \beta_0, \beta_1)}\right) = \eta_i \\
 (substitute~\eta_i=\beta_0 + \beta_1 S_i) \Rightarrow ~g(\mu_i) & = \log\left(\frac{Pr(W_i | S_i, \beta_0, \beta_1)}{1-Pr(W_i | S_i, \beta_0, \beta_1)}\right) = \beta_0 + \beta_1 S_i\\
-\end{aligned} 
+\end{aligned}
  $$ which can also be written as $$Pr(W_i | S_i, \beta_0, \beta_1 ) = \frac{\exp(\beta_0 + \beta_1 S_i)}{1 + \exp(\beta_0 + \beta_1 S_i)}$$
 * for the model $$\log\left(\frac{Pr(W_i | S_i, \beta_0, \beta_1)}{1-Pr(W_i | S_i, \beta_0, \beta_1)}\right) = \beta_0 + \beta_1 S_i$$
 	- $\beta_0$ = log odds of a Ravens win if they score zero points
@@ -2302,9 +2304,9 @@ x <- seq(-10, 10, length = 1000)
 # "library(manipulate)" is needed to use the manipulate function
 manipulate(
 	# plot the logistic regression curve
-    plot(x, exp(beta0 + beta1 * x) / (1 + exp(beta0 + beta1 * x)), 
+    plot(x, exp(beta0 + beta1 * x) / (1 + exp(beta0 + beta1 * x)),
          type = "l", lwd = 3, frame = FALSE),
-    # slider for beta1     
+    # slider for beta1
     beta1 = slider(-2, 2, step = .1, initial = 2),
     # slider for beta0
     beta0 = slider(-2, 2, step = .1, initial = 0)
@@ -2314,7 +2316,8 @@ manipulate(
 ```{r echo = FALSE, fig.width = 4, fig.height = 3, fig.align = 'center'}
 grid.raster(readPNG("figures/8.png"))
 ```
-* we can use the `glm(outcome ~ predictor, family = "binomial")` to fit a logistic regression to the data 
+
+* we can use the `glm(outcome ~ predictor, family = "binomial")` to fit a logistic regression to the data
 
 ```{r}
 # run logistic regression on data
@@ -2336,8 +2339,8 @@ exp(confint(logRegRavens))
 * ***Note**: $\exp(x) \approx 1 + x$ for small values (close to 0) of x, this can be a quick way to estimate the coefficients *
 * we can interpret the slope, $\beta_1$ as `r round((exp(logRegRavens$coeff)[2]-1)*100, 3)` % increase in probability of winning for every point scored
 * we can interpret the intercept, $\beta_0$ as `r round(exp(logRegRavens$coeff)[1], 3)` is the odds for Ravens winning if they scored 0 points
-	- ***Note**: similar to the intercept of a simple linear regression model, the intercept should be interpreted carefully as it is an extrapolated value from the model and may not hold practical meaning * 
-* to calculate specific probability of winning for a given number of points $$Pr(W_i | S_i, \hat \beta_0, \hat \beta_1) = \frac{\exp(\hat \beta_0 + \hat \beta_1 S_i)}{1 + \exp(\hat \beta_0 + \hat \beta_1 S_i)}$$ 
+	- ***Note**: similar to the intercept of a simple linear regression model, the intercept should be interpreted carefully as it is an extrapolated value from the model and may not hold practical meaning *
+* to calculate specific probability of winning for a given number of points $$Pr(W_i | S_i, \hat \beta_0, \hat \beta_1) = \frac{\exp(\hat \beta_0 + \hat \beta_1 S_i)}{1 + \exp(\hat \beta_0 + \hat \beta_1 S_i)}$$
 * the resulting logistic regression curve can be seen below
 
 ```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
@@ -2359,7 +2362,7 @@ anova(logRegRavens,test="Chisq")
 	- `Resid. Dev` = residual deviance for current model
 	- `Pr(>Chi)` = used to evaluate the significance of the added parameter
 		+ in this case, the `Deviance` value of 3.54 is used to find the corresponding p-value from the Chi Squared distribution, which is 0.06
-			* ***Note**: Chi Squared distribution with 1 degree of freedom is simply the squared of normal distribution, so z statistic of 2 corresponds to 95% for normal distribution indicates that deviance of 4 corresponds to approximately 5% in the Chi Squared distribution (which is what our result shows) * 
+			* ***Note**: Chi Squared distribution with 1 degree of freedom is simply the squared of normal distribution, so z statistic of 2 corresponds to 95% for normal distribution indicates that deviance of 4 corresponds to approximately 5% in the Chi Squared distribution (which is what our result shows) *
 
 ### Further resources
 * [Wikipedia on Logistic Regression](http://en.wikipedia.org/wiki/Logistic_regression)
@@ -2404,7 +2407,7 @@ plot(0 : 10, dpois(0 : 10, lambda = 2), type = "h", frame = FALSE)
 # Poisson distribution for t = 1, and lambda = 10
 plot(0 : 20, dpois(0 : 20, lambda = 10), type = "h", frame = FALSE)
 # Poisson distribution for t = 1, and lambda = 100
-plot(0 : 200, dpois(0 : 200, lambda = 100), type = "h", frame = FALSE) 
+plot(0 : 200, dpois(0 : 200, lambda = 100), type = "h", frame = FALSE)
 ```
 
 * as we can see from above, for large values of $\lambda$, the distribution looks like the Gaussian
@@ -2428,13 +2431,13 @@ plot(gaData$julian,gaData$visits,pch=19,col="darkgrey",xlab="Julian",ylab="Visit
 ```
 
 ### Example - Linear Regression
-* the traffic can be modeled using linear model as follows $$ NH_i = \beta0 + \beta1 JD_i + \epsilon_i $$
+* the traffic can be modeled using linear model as follows $$ NH_i = \beta_0 + \beta_1 JD_i + \epsilon_i $$
 	- $NH_i$ = number of hits to the website
 	- $JD_i$ = day of the year (Julian day)
-	- $\beta0$ = number of hits on Julian day 0 (1970-01-01)
-	- $\beta1$ = increase in number of hits per unit day
+	- $\beta_0$ = number of hits on Julian day 0 (1970-01-01)
+	- $\beta_1$ = increase in number of hits per unit day
 	- $\epsilon_i$ = variation due to everything we didn't measure
-* the expected outcome is defined as $$ E[NH_i | JD_i, \beta0, \beta1] = \beta0 + \beta1 JD_i$$
+* the expected outcome is defined as $$ E[NH_i | JD_i, \beta_0, \beta_1] = \beta_0 + \beta_1 JD_i$$
 
 ```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
 # plot the visits vs dates
@@ -2446,11 +2449,11 @@ abline(lm1,col="red",lwd=3)
 ```
 
 ### Example - log Outcome
-- if we are interested in relative increases in web traffic, we can the natural log of the outcome, so the linear model becomes $$ \log(NH_i) = \beta0 + \beta1 JD_i + \epsilon_i$$
+- if we are interested in relative increases in web traffic, we can the natural log of the outcome, so the linear model becomes $$ \log(NH_i) = \beta_0 + \beta_1 JD_i + \epsilon_i$$
 	- $\log(NH_i)$ = number of hits to the website
 	- $JD_i$ = day of the year (Julian day)
-	- $\beta0$ = log number of hits on Julian day 0 (1970-01-01)
-	- $\beta1$ = increase in log number of hits per unit day
+	- $\beta_0$ = log number of hits on Julian day 0 (1970-01-01)
+	- $\beta_1$ = increase in log number of hits per unit day
 	- $\epsilon_i$ = variation due to everything we didn't measure
 - when we take the natural log of outcomes and fit a regression model, the exponentiated coefficients estimate quantities based on the geometric means rather than the measured values
 	+ $e^{E[\log(Y)]}$ = geometric mean of $Y$
@@ -2461,7 +2464,7 @@ abline(lm1,col="red",lwd=3)
 	+ ***Note**: not we can not take the natural log of zero counts, so often we need to adding a constant (i.e. 1) to construct the log model *
 		* adding the constant changes the interpretation of coefficient slightly
 		* $e^{\beta_1}$ is now the relative increase or decrease in geometric mean hits **+ 1** per day
-* the expected outcome is $$E[\log(NH_i | JD_i, \beta0, \beta1)] = \beta0 + \beta1 JD_i $$  
+* the expected outcome is $$E[\log(NH_i | JD_i, \beta_0, \beta_1)] = \beta_0 + \beta_1 JD_i $$
 
 ```{r}
 round(exp(coef(lm(I(log(gaData$visits + 1)) ~ gaData$julian))), 5)
@@ -2469,14 +2472,14 @@ round(exp(coef(lm(I(log(gaData$visits + 1)) ~ gaData$julian))), 5)
 * as we can see from above, the daily increase in hits is 0.2%
 
 ### Example - Poisson Regression
-- the Poisson model can be constructed as log of the mean $$\log\left(E[NH_i | JD_i, \beta0, \beta1]\right) = \beta0 + \beta1 JD_i$$ or in other form  $$E[NH_i | JD_i, \beta0, \beta1] = \exp\left(\beta0 + \beta1 JD_i\right)$$
+- the Poisson model can be constructed as log of the mean $$\log\left(E[NH_i | JD_i, \beta_0, \beta_1]\right) = \beta_0 + \beta_1 JD_i$$ or in other form  $$E[NH_i | JD_i, \beta_0, \beta_1] = \exp\left(\beta_0 + \beta_1 JD_i\right)$$
 	- $NH_i$ = number of hits to the website
 	- $JD_i$ = day of the year (Julian day)
-	- $\beta0$ = expected number of hits on Julian day 0 (1970-01-01)
-	- $\beta1$ = expected increase in number of hits per unit day
-	- ***Note**: Poisson model differs from the log outcome model in that the coefficients are interpreted naturally as expected value of outcome where as the log model is interpreted on the log scale of outcome * 
-* we can transform the Poisson model to $$E[NH_i | JD_i, \beta0, \beta1] = \exp\left(\beta0 + \beta1 JD_i\right) = \exp\left(\beta0 \right)\exp\left(\beta1 JD_i\right)$$
-	- $\beta_1 = E[NH_i | JD_i+1, \beta0, \beta1] - E[NH_i | JD_i, \beta0, \beta1]$ 
+	- $\beta_0$ = expected number of hits on Julian day 0 (1970-01-01)
+	- $\beta_1$ = expected increase in number of hits per unit day
+	- ***Note**: Poisson model differs from the log outcome model in that the coefficients are interpreted naturally as expected value of outcome where as the log model is interpreted on the log scale of outcome *
+* we can transform the Poisson model to $$E[NH_i | JD_i, \beta_0, \beta_1] = \exp\left(\beta_0 + \beta_1 JD_i\right) = \exp\left(\beta_0 \right)\exp\left(\beta_1 JD_i\right)$$
+	- $\beta_1 = E[NH_i | JD_i+1, \beta_0, \beta_1] - E[NH_i | JD_i, \beta_0, \beta_1]$
 	- $\beta_1$ can therefore be interpreted as the **relative** increase/decrease in web traffic hits per one day increase
 * `glm(outcome~predictor, family = "poisson")` = performs Poisson regression
 
@@ -2487,11 +2490,11 @@ plot(gaData$julian,gaData$visits,pch=19,col="darkgrey",xlab="Julian",ylab="Visit
 glm1 <- glm(gaData$visits ~ gaData$julian,family="poisson")
 # plot linear regression line in red
 abline(lm1,col="red",lwd=3)
-# plot Poisson regression line in 
+# plot Poisson regression line in
 lines(gaData$julian,glm1$fitted,col="blue",lwd=3)
 ```
 
-* ***Note**: the Poisson fit is non-linear since it is linear only on the log of the mean scale * 
+* ***Note**: the Poisson fit is non-linear since it is linear only on the log of the mean scale *
 
 ### Example - Robust Standard Errors with Poisson Regression
 * variance of the Poisson distribution is defined to be the mean of the distribution, so we would expect the variance to increase with higher values of $X$
@@ -2506,7 +2509,7 @@ plot(glm1$fitted,glm1$residuals,pch=19,col="grey",ylab="Residuals",xlab="Fitted"
 * even if the mean model is correct in principle, there could always be a certain degree of ***model mis-specification***
 * to account for mis-specifications for the model, we can use
 	1. `glm(outcome~predictor, family = "quasi-poisson")` = introduces an additional multiplicative factor $\phi$ to denominator of model so that the variance is $\phi \mu$ rather than just $\mu$ (see [Variances and Quasi-Likelihoods](#variances-and-quasi-likelihoods))
-	2. more generally, _robust standard errors_ (effectively constructing wider confidence intervals) can be used 
+	2. more generally, _robust standard errors_ (effectively constructing wider confidence intervals) can be used
 * **model agnostic standard errors**, implemented through the `sandwich` package, is one way to calculate the robust standard errors
 	- algorithm assumes the mean relationship is specified correctly and attempts to get a general estimates the variance that isn't highly dependent on the model
 	- it uses assumption of large sample sizes and asymptotics to estimate the confidence intervals that is robust to model mis-specification
@@ -2515,7 +2518,7 @@ plot(glm1$fitted,glm1$residuals,pch=19,col="grey",ylab="Residuals",xlab="Fitted"
 ```{r message = F, warning = F}
 # load sandwich package
 library(sandwich)
-# compute 
+# compute
 confint.agnostic <- function (object, parm, level = 0.95, ...)
 {
     cf <- coef(object); pnames <- names(cf)
@@ -2540,20 +2543,20 @@ confint.agnostic(glm1)
 
 * as we can see from above, the robust standard error produced slightly wider confidence intervals
 
-### Example - Rates 
+### Example - Rates
 * if we were to model the percentage of total web hits that are coming from the _Simply Statistics_ blog, we could construct the following model $$\begin{aligned}
-E[NHSS_i | JD_i, \beta0, \beta1]/NH_i & = \exp\left(\beta0 + \beta1 JD_i\right) \\
-(take~\log~of~both~sides)~\log\left(E[NHSS_i | JD_i, \beta0, \beta1]\right) - \log(NH_i) & = \beta0 + \beta1 JD_i \\
-(move~\log(NH_i)~to~right~side)~\log\left(E[NHSS_i | JD_i, \beta0, \beta1]\right) & = \underbracket[0.5pt]{\log(NH_i)}_{\text{offset}} + \beta0 + \beta1 JD_i \\
+E[NHSS_i | JD_i, \beta_0, \beta_1]/NH_i & = \exp\left(\beta_0 + \beta_1 JD_i\right) \\
+(take~\log~of~both~sides)~\log\left(E[NHSS_i | JD_i, \beta_0, \beta_1]\right) - \log(NH_i) & = \beta_0 + \beta_1 JD_i \\
+(move~\log(NH_i)~to~right~side)~\log\left(E[NHSS_i | JD_i, \beta_0, \beta_1]\right) & = \log(NH_i) + \beta_0 + \beta_1 JD_i \\
 \end{aligned}$$
-	- when **offset** term is present in the Poisson model, the interpretation of the coefficients will be relative to the offset quantity
+	- when **offset** term, $\log(NH_i)$, is present in the Poisson model, the interpretation of the coefficients will be relative to the offset quantity
 	- it's important to recognize that the fitted response doesn't change
 	- ***example***: to convert the outcome from daily data to hourly, we can add a factor 24 so that the model becomes $$\begin{aligned}
-E[NHSS_i | JD_i, \beta0, \beta1]/24 & = \exp\left(\beta0 + \beta1 JD_i\right) \\
-(take~\log~of~both~sides)~\log\left(E[NHSS_i | JD_i, \beta0, \beta1]\right) - \log(24) & = \beta0 + \beta1 JD_i \\
-(move~\log(24)~to~right~side)~\log\left(E[NHSS_i | JD_i, \beta0, \beta1]\right) & = \log(24) + \log(NH_i) + \beta0 + \beta1 JD_i \\
+E[NHSS_i | JD_i, \beta_0, \beta_1]/24 & = \exp\left(\beta_0 + \beta_1 JD_i\right) \\
+(take~\log~of~both~sides)~\log\left(E[NHSS_i | JD_i, \beta_0, \beta_1]\right) - \log(24) & = \beta_0 + \beta_1 JD_i \\
+(move~\log(24)~to~right~side)~\log\left(E[NHSS_i | JD_i, \beta_0, \beta_1]\right) & = \log(24) + \log(NH_i) + \beta_0 + \beta_1 JD_i \\
 \end{aligned}$$
- 
+
 * back to the rates model, we fit the Poisson model now with an offset so that the model is interpreted with respect to the number of visits
 	- `glm(outcome ~ predictor, offset = log(offset), family = "poisson")` = perform Poisson regression with offset
 	- `glm(outcome ~ predictor + log(offset))` = produces the same result
@@ -2573,7 +2576,7 @@ plot(julian(gaData$date),gaData$simplystats/(gaData$visits+1),col="grey",xlab="D
 lines(julian(gaData$date),glm2$fitted/(gaData$visits+1),col="blue",lwd=3)
 ```
 
-* ***Note**: we added 1 to the `log(visits)` to address 0 values * 
+* ***Note**: we added 1 to the `log(visits)` to address 0 values *
 
 ### Further Resources
 
@@ -2581,7 +2584,7 @@ lines(julian(gaData$date),glm2$fitted/(gaData$visits+1),col="blue",lwd=3)
 * [Wikipedia on Poisson Regression](http://en.wikipedia.org/wiki/Poisson_regression)
 * [Wikipedia on Overdispersion](http://en.wikipedia.org/wiki/Overdispersion)
 * [Regression Models for count data in R](http://cran.r-project.org/web/packages/pscl/vignettes/countreg.pdf)
-* [`pscl` package](http://cran.r-project.org/web/packages/pscl/index.html) - 
+* [`pscl` package](http://cran.r-project.org/web/packages/pscl/index.html) -
 	- often time in modeling counts, they maybe more zero counts in the data than anticipated, which the regular Poisson model doesn't account for
 	- the function `zeroinfl` fits zero inflated Poisson (ziP) models to such data
 
@@ -2599,9 +2602,10 @@ E[Y_i]_{\xi = 5 | left} & = \beta_0 + \beta_1 x_i + (x_i - 5)_+ \gamma_k \\
 	- the expected value for $Y_i$ as $x_i$ approaches 5 from the right is $$\begin{aligned}
 E[Y_i]_{\xi = 5 | right} & = \beta_0 + \beta_1 x_i + (x_i - 5)_+ \gamma_k \\
 (since~x_i>5)~ E[Y_i]_{\xi = 5 | right} & = \beta_0 + \beta_1 x_i + (x_i - 5) \gamma_k\\
-(simplify)~ E[Y_i]_{\xi = 5 | right} & = \underbracket[0.5pt]{\beta_0 - 5 \gamma_k}_{\text{intercept}} + \underbracket[0.5pt]{(\beta_1 + \gamma_k)}_{\text{slope}} x_i \\
+(simplify)~ E[Y_i]_{\xi = 5 | right} & = \beta_0 - 5 \gamma_k + (\beta_1 + \gamma_k) x_i \\
 \end{aligned}$$
-	- as we can see from above, the right side is just another line with different intercept and slope so as $x$ approaches 5, both sides converge
+	- as we can see from above, the right side is just another line with different intercept ($\beta_0 - 5 \gamma_k$) and slope ($\beta_1 + \gamma_k$)
+	- so as $x$ approaches 5, both sides converge
 
 ### Considerations
 * **basis** = the collection of regressors
@@ -2614,15 +2618,15 @@ E[Y_i]_{\xi = 5 | right} & = \beta_0 + \beta_1 x_i + (x_i - 5)_+ \gamma_k \\
 ### Example - Fitting Piecewise Linear Function
 
 ```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
-# simulate data 
+# simulate data
 n <- 500; x <- seq(0, 4 * pi, length = n); y <- sin(x) + rnorm(n, sd = .3)
 # define 20 knot points
-knots <- seq(0, 8 * pi, length = 20); 
+knots <- seq(0, 8 * pi, length = 20);
 # define the ()+ function to only take the values that are positive after the knot pt
 splineTerms <- sapply(knots, function(knot) (x > knot) * (x - knot))
 # define the predictors as X and spline term
 xMat <- cbind(x, splineTerms)
-# fit linear models for y vs predictors 
+# fit linear models for y vs predictors
 yhat <- predict(lm(y ~ xMat))
 # plot data points (x, y)
 plot(x, y, frame = FALSE, pch = 21, bg = "lightblue")
@@ -2639,7 +2643,7 @@ lines(x, yhat, col = "red", lwd = 2)
 splineTerms <- sapply(knots, function(knot) (x > knot) * (x - knot)^2)
 # define the predictors as x, x^2 and knot terms
 xMat <- cbind(x, x^2, splineTerms)
-# fit linear models for y vs predictors 
+# fit linear models for y vs predictors
 yhat <- predict(lm(y ~ xMat))
 # plot data points (x, y)
 plot(x, y, frame = FALSE, pch = 21, bg = "lightblue")
@@ -2648,7 +2652,7 @@ lines(x, yhat, col = "red", lwd = 2)
 ```
 
 ### Example - Harmonics using Linear Models
-* **discrete Fourier transforms** = instance of linear regression model, use sin and cosine functions as basis to fit data  
+* **discrete Fourier transforms** = instance of linear regression model, use sin and cosine functions as basis to fit data
 * to demonstrate this, we will generate 2 seconds of sound data using sin waves, simulate a chord, and apply linear regression to find out which notes are playing
 
 ```{r}
@@ -2656,8 +2660,8 @@ lines(x, yhat, col = "red", lwd = 2)
 notes4 <- c(261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25)
 # generate sequence for 2 seconds
 t <- seq(0, 2, by = .001); n <- length(t)
-# define data for c4 e4 g4 using sine waves with their frequencies 
-c4 <- sin(2 * pi * notes4[1] * t); e4 <- sin(2 * pi * notes4[3] * t); 
+# define data for c4 e4 g4 using sine waves with their frequencies
+c4 <- sin(2 * pi * notes4[1] * t); e4 <- sin(2 * pi * notes4[3] * t);
 g4 <- sin(2 * pi * notes4[5] * t)
 # define data for a chord and add a bit of noise
 chord <- c4 + e4 + g4 + rnorm(n, 0, 0.3)
@@ -2675,7 +2679,7 @@ plot(c(0, 9), c(0, 1.5), xlab = "Note", ylab = "Coef^2", axes = FALSE, frame = T
 # set up axes
 axis(2)
 axis(1, at = 1 : 8, labels = c("c4", "d4", "e4", "f4", "g4", "a4", "b4", "c5"))
-# add vertical lines for each note 
+# add vertical lines for each note
 for (i in 1 : 8) abline(v = i, lwd = 3, col = grey(.8))
 # plot the linear regression fits
 lines(c(0, 1 : 8, 9), c(0, coef(fit)^2, 0), type = "l", lwd = 3, col = "red")
@@ -2687,11 +2691,11 @@ lines(c(0, 1 : 8, 9), c(0, coef(fit)^2, 0), type = "l", lwd = 3, col = "red")
 	- `Re(data)` = subset to only the real components of the complex data
 
 ```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
-# perform fast fourier transforms on the chord matrix 
+# perform fast fourier transforms on the chord matrix
 a <- fft(chord)
 # plot only the real components of the fft
 plot(Re(a)^2, type = "l")
 ```
 
-* ***Note**: the algorithm checks for all possible notes at all frequencies it can detect, which is why the peaks are very high in magnitude * 
+* ***Note**: the algorithm checks for all possible notes at all frequencies it can detect, which is why the peaks are very high in magnitude *
 * ***Note**: the symmetric display of the notes are due to periodic symmetries of the sine functions *

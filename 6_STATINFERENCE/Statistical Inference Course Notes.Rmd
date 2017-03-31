@@ -19,11 +19,11 @@ $\pagebreak$
 * **Statistical Inference** = generating conclusions about a population from a noisy sample
 * Goal = extend beyond data to population
 * Statistical Inference = only formal system of inference we have
-* many different modes, but **two** broad flavors of inference (inferential paradigms): ***Bayesian*** vs ***Frequencist*** 
-    * **Frequencist** --> uses long run proportion of times an event occurs independent identically distributed repetitions 
+* many different modes, but **two** broad flavors of inference (inferential paradigms): ***Bayesian*** vs ***Frequencist***
+    * **Frequencist** = uses long run proportion of times an event occurs independent identically distributed repetitions
 		* frequentist is what this class is focused on
 		* believes if an experiment is repeated many many times, the resultant percentage of success/something happening defines that population parameter
-	* **Bayesian** --> probability estimate for a hypothesis is updated as additional evidence is acquired
+	* **Bayesian** = probability estimate for a hypothesis is updated as additional evidence is acquired
 * **statistic** = number computed from a sample of data
 	* statistics are used to infer information about a population
 * **random variable** = outcome from an experiment
@@ -31,26 +31,26 @@ $\pagebreak$
 
 
 ## Probability
-* **Probability** = the study of quantifying the likelihood of particular events occurring 
+* **Probability** = the study of quantifying the likelihood of particular events occurring
     * given a random experiment, ***probability*** = population quantity that summarizes the randomness
 	    * not in the data at hand, but a conceptual quantity that exist in the population that we want to estimate
 
 ### General Probability Rules
-* discovered by Russian mathematician Kolmogorov, also known as "Probability Calculus" 
+* discovered by Russian mathematician Kolmogorov, also known as "Probability Calculus"
 * probability = function of any set of outcomes and assigns it a number between 0 and 1
-    * $0 \le P(E) \le 1$, where E = event
+    * $0 \le P(E) \le 1$, where $E$ = event
 * probability that nothing occurs = 0 (impossible, have to roll dice to create outcome), that something occurs is 1 (certain)
-* probability of outcome or event E, ***P(E)*** = ratio of ways that E could occur to number of all possible outcomes or events
-* probability of something = 1 - probability of the opposite occurring 
+* probability of outcome or event $E$, $P(E)$ = ratio of ways that $E$ could occur to number of all possible outcomes or events
+* probability of something = 1 - probability of the opposite occurring
 * probability of the **union** of any two sets of outcomes that have nothing in common (mutually exclusive) = sum of respective probabilities
-    
+
 ```{r echo = FALSE, fig.width = 4, fig.height = 3, fig.align = 'center'}
 library(grid);library(png)
 grid.raster(readPNG("figures/1.png"))
 ```
-    
-* if A implies occurrence of B, then P(A) occurring < P(B) occurring
-    
+
+* if $A$ implies occurrence of $B$, then $P(A)$ occurring $< P(B)$ occurring
+
 ```{r echo = FALSE, fig.width = 4, fig.height = 3, fig.align = 'center'}
 grid.raster(readPNG("figures/2.png"))
 ```
@@ -61,14 +61,14 @@ grid.raster(readPNG("figures/2.png"))
 grid.raster(readPNG("figures/3.png"))
 ```
 
-* for independent events A and B, $P(A \:\cup\: B) = P(A) \times P(B)$
+* for independent events $A$ and $B$, $P(A \:\cup\: B) = P(A) \times P(B)$
 * for outcomes that can occur with different combination of events and these combinations are mutually exclusive, the $P(E_{total}) =  \sum P(E_{part})$
 
 
 ### Conditional Probability
 * let B = an event so that $P(B) > 0$
 * **conditional probability** of an event A, given B is defined as the probability that BOTH A and B occurring divided by the probability of B occurring $$P(A\:|\:B) = \frac{P(A \:\cap\: B)}{P(B)}$$
-* if A and B are ***independent***, then $$P(A\:|\:B) = \frac{P(A)P(B)}{P(A)} = P(A)$$
+* if A and B are ***independent***, then $$P(A\:|\:B) = \frac{P(A)P(B)}{P(B)} = P(A)$$
 * ***example***
 	* for die roll, $A = \{1\}$, $B = \{1, 3, 5\}$, then $$P(1~|~Odd) = P(A\:|\:B) = \frac{P(A \cap B)}{P(B)} = \frac{P(A)}{P(B)} = \frac{1/6}{3/6} = \frac{1}{3}$$
 
@@ -79,32 +79,32 @@ $\pagebreak$
 
 ## Random Variables
 * **random variable** = numeric outcome of experiment
-* **discrete** (what you can count/categories) = assign probabilities to every number/value the variable can take 
+* **discrete** (what you can count/categories) = assign probabilities to every number/value the variable can take
 	* coin flip, rolling a die, web traffic in a day
 * **continuous** (any number within a continuum) = assign probabilities to the range the variable can take
 	* BMI index, intelligence quotients
 	* ***Note**: limitations of precision in taking the measurements may imply that the values are discrete, but we in fact consider them continuous *
-+ `rbinom()`, `rnorm()`, `rgamma()`, `rpois()`, `runif()` = functions to generate random variables from the binomial, normal, Gamma, Poisson, and uniform distributions 
++ `rbinom()`, `rnorm()`, `rgamma()`, `rpois()`, `runif()` = functions to generate random variables from the binomial, normal, Gamma, Poisson, and uniform distributions
 * density and mass functions (population quantities, not what occurs in data) for random variables = best starting point to model/think about probabilities for numeric outcome of experiments (variables)
-	* use data to estimate properties of population --> linking sample to population
+	* use data to estimate properties of population $\rightarrow$ linking sample to population
 
 ### Probability Mass Function (PMF)
-* evaluates the probability that the **discrete random variable** takes on a specific value 
+* evaluates the probability that the **discrete random variable** takes on a specific value
 	- measures the chance of a particular outcome happening
 	* always $\ge$ 0 for every possible outcome
 	* $\sum$ possible values that the variable can take = 1
 * ***Bernoulli distribution example***
-	* X = 0 --> tails, X = 1 --> heads
+	* X = 0 $\rightarrow$ tails, X = 1 $\rightarrow$ heads
         * X here represents potential outcome
-	* $p(X = x) = (\frac{1}{2})^x(\frac{1}{2})^{1-x}$ for $X = 0, 1$
+	* $P(X = x) = (\frac{1}{2})^x(\frac{1}{2})^{1-x}$ for $X = 0, 1$
         * $x$ here represents a value we can plug into the PMF
-		* general form --> $p(x) = (\theta)^x(1-\theta)^{1-x}$
+		* general form $\rightarrow$ $p(x) = (\theta)^x(1-\theta)^{1-x}$
 * `dbinom(k, n, p)` = return the probability of getting `k` successes out of `n` trials, given probability of success is `p`
 
 ### Probability Density Function (PDF)
 * evaluates the probability that the **continuous random variable** takes on a specific value 
-	* always $\ge$ everywhere
-	* total area under the must = 1
+	* always $\ge$ 0 everywhere
+	* total area under curve must = 1
 * **areas under PDFs** correspond to the probabilities for that random variable taking on that range of values (PMF)
 
 ```{r echo = FALSE, fig.width = 2, fig.height = 2, fig.align = 'center'}
@@ -118,27 +118,27 @@ grid.raster(readPNG("figures/4-2.png"))
 ```
 * ***Note**: the above is true because it is modeling random variables as if they have infinite precision, when in reality they do not *
 
-* `dnorm()`, `dgamma()`, `dpois()`, `dunif()` = return probability of a certain value from the normal, Gamma, Poisson, and uniform distributions 
+* `dnorm()`, `dgamma()`, `dpois()`, `dunif()` = return probability of a certain value from the normal, Gamma, Poisson, and uniform distributions
 
 ### Cumulative Distribution Function (CDF)
-* CDF of a random variable X = probability that the random variable is $\le$ value x
-	* $F(x) = P(X \le x)$ <- applies when X is discrete/continuous
+* CDF of a random variable $X$ = probability that the random variable is $\le$ value $x$
+	* $F(x) = P(X \le x)$ = applies when $X$ is discrete/continuous
 * PDF = derivative of CDF
-	* integrate PDF --> CDF
-		* `integrate(function, lower=0, upper=1)` --> can be used to evaluate integrals for a specified range
-* `pbinom()`, `pnorm()`, `pgamma()`, `ppois()`, `punif()` = returns the cumulative probabilities from 0 up to a specified value from the binomial, normal, Gamma, Poisson, and uniform distributions 
+	* integrate PDF $\rightarrow$ CDF
+		* `integrate(function, lower=0, upper=1)` $\rightarrow$ can be used to evaluate integrals for a specified range
+* `pbinom()`, `pnorm()`, `pgamma()`, `ppois()`, `punif()` = returns the cumulative probabilities from 0 up to a specified value from the binomial, normal, Gamma, Poisson, and uniform distributions
 
 
 ### Survival Function
-* survival function of a random variable X = probability the random variable > x, complement of CDF 
+* survival function of a random variable $X$ = probability the random variable $> x$, complement of CDF
     * $S(x) = P(X > x) = 1 - F(x)$, where $F(x) =$ CDF
 
 
 ### Quantile
-* the $\alpha^{th}$ quantile of a distribution with distribution function F = point x$_{\alpha}$ 
-	* F(x$_{\alpha}$) =  $\alpha$
+* the $\alpha^{th}$ quantile of a distribution with distribution function F = point $x_{\alpha}$
+	* $F(x_{\alpha}) = \alpha$
 	* percentile = quantile with $\alpha$ expressed as a percent
-	* median = 50th percentile
+	* median = 50^th^ percentile
 	* $\alpha$% of the possible outcomes lie below it
 
 ```{r echo = FALSE, fig.width = 3, fig.height = 3, fig.align = 'center'}
@@ -148,20 +148,20 @@ grid.raster(readPNG("figures/5.png"))
 * `qbeta(quantileInDecimals, 2, 1)` = returns quantiles for beta distribution
     * works for `qnorm()`, `qbinom()`, `qgamma()`, `qpois()`, etc.
 * median estimated in this fashion = a population median
-* probability model connects data to population using assumptions 
+* probability model connects data to population using assumptions
 	* population median = ***estimand***, sample median = ***estimator***
 
 ### Independence
-* two events A and B are ***independent*** if the following is true
+* two events $A$ and $B$ are ***independent*** if the following is true
 	* $P(A\:\cap\:B) = P(A)P(B)$
 	* $P(A\:|\:B) = P(A)$
-* two random variables X and Y are ***independent***, if for any two sets, **A** and **B**, the following is true
+* two random variables $X$ and $Y$ are ***independent***, if for any two sets, **A** and **B**, the following is true
 	* $P([X \in A]\cap[Y \in B]) = P(X \in A)P(Y \in B)$
 * **independence** = statistically unrelated from one another
-* if A is ***independent*** of B, then the following are true
-	* A$^c$ is independent of B
-	* A is independent of B$^c$
-	* A$^c$ is independent of B$^c$
+* if $A$ is ***independent*** of $B$, then the following are true
+	* $A^c$ is independent of $B$
+	* $A$ is independent of $B^c$
+	* $A^c$ is independent of $B^c$
 
 
 ### IID Random Variables
@@ -184,14 +184,14 @@ $\pagebreak$
 ### Example
 * specificity of 98.5%, sensitivity = 99.7%, prevalence of disease = .1%
 $$\begin{aligned}
-P(D ~|~ +) & = \frac{P(+~|~D)P(D)}{P(+~|~D)P(D) + P(+~|~D^c)P(D^c)}\\ 
-& = \frac{P(+~|~D)P(D)}{P(+~|~D)P(D) + \{1-P(-~|~D^c)\}\{1 - P(D)\}} \\ 
-& = \frac{.997\times .001}{.997 \times .001 + .015 \times .999}\\ 
+P(D ~|~ +) & = \frac{P(+~|~D)P(D)}{P(+~|~D)P(D) + P(+~|~D^c)P(D^c)}\\
+& = \frac{P(+~|~D)P(D)}{P(+~|~D)P(D) + \{1-P(-~|~D^c)\}\{1 - P(D)\}} \\
+& = \frac{.997\times .001}{.997 \times .001 + .015 \times .999}\\
 & =  .062
 \end{aligned}$$
-* low positive predictive value --> due to low prevalence of disease and somewhat modest specificity
+* low positive predictive value $\rightarrow$ due to low prevalence of disease and somewhat modest specificity
 	* suppose it was know that the subject uses drugs and has regular intercourse with an HIV infect partner (his probability of being + is higher than suspected)
-	* evidence implied by a positive test result  
+	* evidence implied by a positive test result
 
 
 ### Likelihood Ratios
@@ -216,21 +216,21 @@ $\pagebreak$
 ## Expected Values/Mean
 * useful for characterizing a distribution (properties of distributions)
 * **mean** = characterization of the center of the distribution = *expected value*
-* expected value operation = ***linear*** --> $E(aX +bY) = aE(X) + bE(Y)$
+* expected value operation = ***linear*** $\rightarrow$ $E(aX +bY) = aE(X) + bE(Y)$
 * **variance/standard deviation** = characterization of how spread out the distribution is
 * _sample_ expected values for sample mean and variance will estimate the _population_ counterparts
 
 * **population mean**
 	* expected value/mean of a random variable = center of its distribution (center of mass)
 	* ***discrete variables***
-		* for X with PMF $p(x)$, the population mean is defined as $$E[X] = \sum_{x} xp(x)$$ where the sum is taken over ***all*** possible values of $x$
-		* $E[X]$ = center of mass of a collection of location and weights ${x, p(x)}$
+		* for $X$ with PMF $p(x)$, the population mean is defined as $$E[X] = \sum_{x} xp(x)$$ where the sum is taken over ***all*** possible values of $x$
+		* $E[X]$ = center of mass of a collection of location and weights ${x,~p(x)}$
         * *coin flip example*: $E[X] = 0 \times (1-p) + 1 \times p = p$
 	* ***continuous variable***
-		* for X with PDF $f(x)$, the expected value = the center of mass of the density
+		* for $X$ with PDF $f(x)$, the expected value = the center of mass of the density
 		* instead of summing over discrete values, the expectation ***integrates*** over a continuous function
 			* PDF = $f(x)$
-			* $\int xf(x)$ = area under the PDF curve = mean/expected value of X
+			* $\int xf(x)$ = area under the PDF curve = mean/expected value of $X$
 
 * **sample mean**
 	* sample mean estimates the population mean
@@ -251,10 +251,10 @@ g <- g + geom_vline(xintercept = mean(galton$child), size = 2)
 # print graph
 g
 ```
- 
 
-* **average of random variables** = a new random variable where its distribution has an expected value that is the **same** as the original distribution (centers are the same) 
-	* the mean of the averages = average of the original data --> estimates average of the population
+
+* **average of random variables** = a new random variable where its distribution has an expected value that is the **same** as the original distribution (centers are the same)
+	* the mean of the averages = average of the original data $\rightarrow$ estimates average of the population
 	* if $E[sample~mean]$ = population mean, then estimator for the sample mean is **unbiased**
 		* [**derivation**] let $X_1$, $X_2$, $X_3$, ... $X_n$ be a collection of $n$ samples from the population with mean $\mu$
 		* mean of this sample $$\bar X = \frac{X_1 + X_2 + X_3 +  .  + X_n}{n}$$
@@ -278,10 +278,10 @@ dat <- data.frame(
         apply(matrix(sample(1 : 6, nosim * 4, replace = TRUE), nosim), 1, mean)),
 	size = factor(rep(1 : 4, rep(nosim, 4))))
 # plot histograms of means by sample size
-g <- ggplot(dat, aes(x = x, fill = size)) + geom_histogram(alpha = .20, binwidth=.25, colour = "black") 
+g <- ggplot(dat, aes(x = x, fill = size)) + geom_histogram(alpha = .20, binwidth=.25, colour = "black")
 g + facet_grid(. ~ size)
 ```
- 
+
 
 $\pagebreak$
 
@@ -302,15 +302,15 @@ dat <- data.frame(
 # plot 4 lines for the different standard deviations
 ggplot(dat, aes(x = x, y = y, color = factor)) + geom_line(size = 2)
 ```
- 
 
-* **variance** = measure of spread, the square of expected distance from the mean (expressed in X's units$^2$)
-	- as we can see from above, higher variances --> more spread, lower --> smaller spread
+
+* **variance** = measure of spread or dispersion, the expected squared distance of the variable from its mean (expressed in $X$'s units$^2$)
+	- as we can see from above, higher variances $\rightarrow$ more spread, lower $\rightarrow$ smaller spread
 	* $Var(X) = E[(X-\mu)^2] = E[X^2] - E[X]^2$
-	* **standard deviation** $= \sqrt{Var(X)}$ --> has same units as X
+	* **standard deviation** $= \sqrt{Var(X)}$ $\rightarrow$ has same units as X
 	* ***example***
         * for die roll, $E[X] = 3.5$
-		* $E[X^2] = 12 \times 1/6 + 22 \times 1/6 + 32 \times 1/6 + . + 62 \times 1/6 = 15.17$
+		* $E[X^2] = 1^2 \times 1/6 + 2^2 \times 1/6 + 3^2 \times 1/6 + 4^2 \times 1/6 + 5^2 \times 1/6 + 6^2 \times 1/6 = 15.17$
 		* $Var(X) = E[X^2] - E[X]^2 \approx 2.92$
 	* ***example***
         * for coin flip, $E[X] = p$
@@ -325,14 +325,14 @@ grid.raster(readPNG("figures/6.png"))
 ```
 
 * on the above line representing the population (in magenta), any subset of data (3 of 14 selected, marked in blue) will most likely have a variance that is ***lower than*** the population variance
-* dividing by $n - 1$ will make the variance estimator ***larger*** to adjust for this fact --> leads to more accurate estimation --> $S^2$ = so called ***unbiased estimate of population variance*** 
+* dividing by $n - 1$ will make the variance estimator ***larger*** to adjust for this fact $\rightarrow$ leads to more accurate estimation $\rightarrow$ $S^2$ = so called ***unbiased estimate of population variance***
     * $S^2$ is a random variable, and therefore has an associated population distribution
 		* $E[S^2]$ = population variance, where $S$ = sample standard deviation
 		* as we see from the simulation results below, with more data, the distribution for $S^2$ gets more concentrated around population variance
-        
+
 ```{r fig.width = 4, fig.height = 3, fig.align = 'center'}
 # specify number of simulations
-nosim <- 10000; 
+nosim <- 10000;
 # simulate data for various sample sizes
 dat <- data.frame(
     x = c(apply(matrix(rnorm(nosim * 10), nosim), 1, var),
@@ -340,8 +340,8 @@ dat <- data.frame(
           apply(matrix(rnorm(nosim * 30), nosim), 1, var)),
     n = factor(rep(c("10", "20", "30"), c(nosim, nosim, nosim))) )
 # plot density function for different sample size data
-ggplot(dat, aes(x = x, fill = n)) + geom_density(size = 1, alpha = .2) + 
-	geom_vline(xintercept = 1, size = 1) 
+ggplot(dat, aes(x = x, fill = n)) + geom_density(size = 1, alpha = .2) +
+	geom_vline(xintercept = 1, size = 1)
 ```
 
 * ***Note**: for any variable, properties of the population = **parameter**, estimates of properties for samples = **statistic** *
@@ -352,16 +352,16 @@ grid.raster(readPNG("figures/8.png"))
 ```
 
 * **distribution for mean of random samples**
-	* expected value of the **mean** of distribution of means = expected value of the sample = population mean
+	* expected value of the **mean** of distribution of means = expected value of the sample mean = population mean
 		* $E[\bar X]=\mu$
 	* expected value of the variance of distribution of means
 		* $Var(\bar X) = \sigma^2/n$
-		* as **n** becomes larger, the mean of random sample --> more concentrated around the population mean --> variance approaches 0
+		* as **n** becomes larger, the mean of random sample $\rightarrow$ more concentrated around the population mean $\rightarrow$ variance approaches 0
 			* this again confirms that sample mean estimates population mean
-	* ***Note**: normally we only have 1 sample mean (from collected sample) and can estimate the variance $\sigma^2$ --> so we know a lot about the **distribution of the means** from the data observed *
+	* ***Note**: normally we only have 1 sample mean (from collected sample) and can estimate the variance $\sigma^2$ $\rightarrow$ so we know a lot about the **distribution of the means** from the data observed *
 
 * **standard error (SE)**
-	* the standard error of the mean is defined as $$SE_{mean} = \sigma/\sqrt{n}$$ 
+	* the standard error of the mean is defined as $$SE_{mean} = \sigma/\sqrt{n}$$
 	* this quantity is effectively the standard deviation of the distribution of a statistic (i.e. mean)
 	* represents variability of means
 
@@ -379,7 +379,7 @@ grid.raster(readPNG("figures/8.png"))
 		* more concentrated around $\mu$ as $n$ increases
 		* variance of distribution of $\bar X = \sigma^2/n$
 		* estimate of variance = $S^2/n$
-		* estimate of standard error = $S/\sqrt{n}$ --> "sample standard error of the mean"
+		* estimate of standard error = $S/\sqrt{n}$ $\rightarrow$ "sample standard error of the mean"
 			- estimates how variable sample means ($n$ size) from the population are
 
 ### Example - Standard Normal
@@ -395,13 +395,13 @@ sd(apply(matrix(rnorm(nosim * n), nosim), 1, mean))
 1 / sqrt(n)
 ```
 
-* `rnorm()` --> generate samples from the standard normal
-* `matrix()` --> puts all samples into a nosim by $n$ matrix, so that each row represents a simulation with `nosim` observations
-* `apply()` --> calculates the mean of the $n$ samples
-* `sd()` --> returns standard deviation
+* `rnorm()` = generate samples from the standard normal
+* `matrix()` = puts all samples into a nosim by $n$ matrix, so that each row represents a simulation with `nosim` observations
+* `apply()` = calculates the mean of the $n$ samples
+* `sd()` = returns standard deviation
 
 ### Example - Standard Uniform
-* standard uniform --> triangle straight line distribution --> mean = 1/2 and variance = 1/12
+* standard uniform $\rightarrow$ triangle straight line distribution $\rightarrow$ mean = 1/2 and variance = 1/12
 * means of random samples of $n$ uniforms have have standard deviation of $1/\sqrt{12 \times n}$
 
 
@@ -440,24 +440,24 @@ sd(apply(matrix(sample(0 : 1, nosim * n, replace = TRUE), nosim), 1, mean))
 
 ```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
 # load data
-library(UsingR); data(father.son); 
+library(UsingR); data(father.son);
 # define son height as the x variable
 x <- father.son$sheight
 # n is the length
 n<-length(x)
 # plot histogram for son's heights
-g <- ggplot(data = father.son, aes(x = sheight)) 
+g <- ggplot(data = father.son, aes(x = sheight))
 g <- g + geom_histogram(aes(y = ..density..), fill = "lightblue", binwidth=1, colour = "black")
 g <- g + geom_density(size = 2, colour = "black")
 g
-# we calculate the parameters for variance of distribution and sample mean, 
-round(c(sampleVar = var(x), 
-	sampleMeanVar = var(x) / n, 
+# we calculate the parameters for variance of distribution and sample mean,
+round(c(sampleVar = var(x),
+	sampleMeanVar = var(x) / n,
 	# as well as standard deviation of distribution and sample mean
-	sampleSd = sd(x), 
+	sampleSd = sd(x),
 	sampleMeanSd = sd(x) / sqrt(n)),2)
 ```
- 
+
 
 
 $\pagebreak$
@@ -467,7 +467,7 @@ $\pagebreak$
 	* PMF is defined as $$P(X=x) = {n \choose x}p^x(1-p)^{n-x}$$ where ${n \choose x}$ = number of ways selecting $x$ items out of $n$ options without replacement or regard to order and for $x=0,\ldots,n$
 	* **combination** or "$n$ choose $x$" is defined as $${n \choose x} = \frac{n!}{x!(n-x)!}$$
 	* the base cases are $${n \choose n} = {n \choose 0} = 1$$
-* **Bernoulli distribution** --> binary outcome
+* **Bernoulli distribution** = binary outcome
 	* only possible outcomes
 		* 1 = "success" with probability of $p$
 		* 0 = "failure" with probability of $1 - p$
@@ -481,7 +481,7 @@ $${8 \choose 7}.5^7(1-.5)^{1} + {8 \choose 8}.5^8(1-.5)^{0} \approx 0.04$$
 
 ```{r message = F, warning = F}
 # calculate probability using PMF
-choose(8, 7) * .5 ^ 8 + choose(8, 8) * .5 ^ 8 
+choose(8, 7) * .5 ^ 8 + choose(8, 8) * .5 ^ 8
 # calculate probability using CMF from distribution
 pbinom(6, size = 8, prob = .5, lower.tail = FALSE)
 ```
@@ -500,31 +500,31 @@ $\pagebreak$
 	* variance = $Var(X) = \sigma^2$
 	* PMF is defined as $$f(x)=(2\pi\sigma^2)^{-1/2}e^{-(x-\mu)^2/2\sigma^2}$$
 * $X \sim N(0, 1)$ = **standard normal distribution** (standard normal random variables often denoted using $Z_1, Z_2, \ldots$)
-	- ***Note**: see below graph for reference for the following observations * 
-	* ~68% of data/normal density --> between $\pm$ 1 standard deviation from $\mu$
-	* ~95% of data/normal density --> between $\pm$ 2 standard deviation from $\mu$
-	* ~99% of data/normal density --> between $\pm$ 3 standard deviation from $\mu$
-	* $\pm$ 1.28 standard deviations from $\mu$ --> 10$^{th}$ (-) and 90$^{th}$ (+) percentiles
-	* $\pm$ 1.645 standard deviations from $\mu$ --> 5$^{th}$ (-) and 95$^{th}$ (+) percentiles
-	* $\pm$ 1.96 standard deviations from $\mu$ --> 2.5$^{th}$ (-) and 97.5$^{th}$ (+) percentiles
-	* $\pm$ 2.33 standard deviations from $\mu$ --> 1$^{st}$ (-) and 99$^{th}$ (+) percentiles
+	- ***Note**: see below graph for reference for the following observations *
+	* ~68% of data/normal density $\rightarrow$ between $\pm$ 1 standard deviation from $\mu$
+	* ~95% of data/normal density $\rightarrow$ between $\pm$ 2 standard deviation from $\mu$
+	* ~99% of data/normal density $\rightarrow$ between $\pm$ 3 standard deviation from $\mu$
+	* $\pm$ 1.28 standard deviations from $\mu$ $\rightarrow$ 10$^{th}$ (-) and 90$^{th}$ (+) percentiles
+	* $\pm$ 1.645 standard deviations from $\mu$ $\rightarrow$ 5$^{th}$ (-) and 95$^{th}$ (+) percentiles
+	* $\pm$ 1.96 standard deviations from $\mu$ $\rightarrow$ 2.5$^{th}$ (-) and 97.5$^{th}$ (+) percentiles
+	* $\pm$ 2.33 standard deviations from $\mu$ $\rightarrow$ 1$^{st}$ (-) and 99$^{th}$ (+) percentiles
 
 ```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
 # plot standard normal
 x <- seq(-3, 3, length = 1000)
-g <- ggplot(data.frame(x = x, y = dnorm(x)), 
+g <- ggplot(data.frame(x = x, y = dnorm(x)),
             aes(x = x, y = y)) + geom_line(size = 2)
 g <- g + geom_vline(xintercept = -3 : 3, size = 2)
 g
 ```
 
-* for any $X \sim N(\mu, \sigma^2)$, calculating the number of standard deviations each observation is from the mean ***converts*** the random variable to a ***standard normal*** (denoted as $Z$ below) $$Z=\frac{X-\mu}{\sigma} \sim N(0,1)$$	
+* for any $X \sim N(\mu, \sigma^2)$, calculating the number of standard deviations each observation is from the mean ***converts*** the random variable to a ***standard normal*** (denoted as $Z$ below) $$Z=\frac{X-\mu}{\sigma} \sim N(0,1)$$
 * conversely, a standard normal can then be converted to ***any normal distribution*** by multiplying by standard deviation and adding the mean $$X = \mu + \sigma Z \sim N(\mu, \sigma^2)$$
 * `qnorm(n, mean=mu, sd=sd)` = returns the $n^{th}$ percentiles for the given normal distribution
 * `pnorm(x, mean=mu, sd=sd, lower.tail=F)` = returns the probability of an observation drawn from the given distribution is larger in value than the specified threshold $x$
 
 ### Example
-* the number of daily ad clicks for a company 
+* the number of daily ad clicks for a company
 is (approximately) normally distributed with a mean of 1020 and a standard deviation of 50
 * What's the probability of getting more than 1,160 clicks in a day?
 
@@ -537,7 +537,7 @@ pnorm(1160, mean = 1020, sd = 50, lower.tail = FALSE)
 pnorm(2.8, lower.tail = FALSE)
 ```
 
-* therefore, it is not very likely (`r pnorm(2.8, lower.tail = FALSE)*100`% chance), since 1,160 is `r (1160 - 1020) / 50` standard deviations from the mean  
+* therefore, it is not very likely (`r pnorm(2.8, lower.tail = FALSE)*100`% chance), since 1,160 is `r (1160 - 1020) / 50` standard deviations from the mean
 * What number of daily ad clicks would represent the one where 75% of days have fewer clicks (assuming days are independent and identically distributed)?
 
 ```{r}
@@ -556,30 +556,30 @@ $\pagebreak$
 	* PMF is defined as $$P(X = x; \lambda)=\frac{\lambda^xe^{-\lambda}}{x!}$$ where $X = 0, 1, 2, ... \infty$
 * modeling uses for Poisson distribution
 	* count data
-	* event-time/survival --> cancer trials, some patients never develop and some do, dealing with the data for both ("censoring")
-	* contingency tables --> record results for different characteristic measurements
-	* approximating binomials --> instances where **n** is large and **p** is small (i.e. pollution on lung disease)
+	* event-time/survival $\rightarrow$ cancer trials, some patients never develop and some do, dealing with the data for both ("censoring")
+	* contingency tables $\rightarrow$ record results for different characteristic measurements
+	* approximating binomials $\rightarrow$ instances where **n** is large and **p** is small (i.e. pollution on lung disease)
 		* $X \sim Binomial(n, p)$
 		* $\lambda = np$
-	* rates --> $X \sim Poisson(\lambda t)$
-		* $\lambda = E[X/t]$ --> expected count per unit of time
+	* rates $\rightarrow$ $X \sim Poisson(\lambda t)$
+		* $\lambda = E[X/t]$ $\rightarrow$ expected count per unit of time
 		* $t$ = total monitoring time
 - `ppois(n, lambda = lambda*t)` = returns probability of $n$ or fewer events happening given the rate $\lambda$ and time $t$
 
 ### Example
-* number of people that show up at a bus stop can be modeled with Poisson distribution with a mean of $2.5$ per hour
-* after watching the bus stop for $4$ hours, what is the probability that $3$ or fewer people show up for the whole time?
+* number of people that show up at a bus stop can be modeled with Poisson distribution with a mean of 2.5 per hour
+* after watching the bus stop for 4 hours, what is the probability that 3 or fewer people show up for the whole time?
 
 ```{r}
 # calculate using distribution
 ppois(3, lambda = 2.5 * 4)
 ```
 
-* as we can see from above, there is a `r ppois(3, lambda = 2.5 * 4)*100`% chance for $3$ or fewer people show up total at the bus stop during 4 hours of monitoring 
+* as we can see from above, there is a `r ppois(3, lambda = 2.5 * 4)*100`% chance for 3 or fewer people show up total at the bus stop during 4 hours of monitoring
 
 
 ### Example - Approximating Binomial Distribution
-* flip a coin with success probability of $0.01$ a total 500 times (low $p$, large $n$)
+* flip a coin with success probability of 0.01 a total 500 times (low $p$, large $n$)
 * what's the probability of 2 or fewer successes?
 
 ```{r}
@@ -594,7 +594,7 @@ ppois(2, lambda=500 * .01)
 $\pagebreak$
 
 ## Asymptotics
-* **asymptotics** = behavior of statistics as sample size --> $\infty$
+* **asymptotics** = behavior of statistics as sample size $\rightarrow$ $\infty$
 * useful for simple statistical inference/approximations
 * form basis for frequentist interpretation of probabilities ("Law of Large Numbers")
 
@@ -603,12 +603,12 @@ $\pagebreak$
 * IID sample statistic that estimates property of the sample (i.e. mean, variance) ***becomes*** the population statistic (i.e. population mean, population variance) as $n$ increases
 * ***Note**: an estimator is **consistent** if it converges to what it is estimating *
 * sample mean/variance/standard deviation are all ***consistent estimators*** for their population counterparts
-	- $\bar X_n$ is average of the result of $n$ coin flips (i.e. the sample proportion of heads) 
+	- $\bar X_n$ is average of the result of $n$ coin flips (i.e. the sample proportion of heads)
 	- as we flip a fair coin over and over, it ***eventually converges*** to the true probability of a head
 
 ### Example - LLN for Normal and Bernoulli Distribution
 * for this example, we will simulate 10000 samples from the normal and Bernoulli distributions respectively
-* we will plot the distribution of sample means as $n$ increases and compare it to the population means 
+* we will plot the distribution of sample means as $n$ increases and compare it to the population means
 
 ```{r fig.width = 6, fig.height = 3, fig.align = 'center', message = F, warning = F}
 # load library
@@ -618,15 +618,15 @@ n <- 10000
 # calculate sample (from normal distribution) means for different size of n
 means <- cumsum(rnorm(n)) / (1  : n)
 # plot sample size vs sample mean
-g <- ggplot(data.frame(x = 1 : n, y = means), aes(x = x, y = y)) 
-g <- g + geom_hline(yintercept = 0) + geom_line(size = 2) 
+g <- ggplot(data.frame(x = 1 : n, y = means), aes(x = x, y = y))
+g <- g + geom_hline(yintercept = 0) + geom_line(size = 2)
 g <- g + labs(x = "Number of obs", y = "Cumulative mean")
 g <- g + ggtitle("Normal Distribution")
 # calculate sample (coin flips) means for different size of n
 means <- cumsum(sample(0 : 1, n , replace = TRUE)) / (1  : n)
 # plot sample size vs sample mean
-p <- ggplot(data.frame(x = 1 : n, y = means), aes(x = x, y = y)) 
-p <- p + geom_hline(yintercept = 0.5) + geom_line(size = 2) 
+p <- ggplot(data.frame(x = 1 : n, y = means), aes(x = x, y = y))
+p <- p + geom_hline(yintercept = 0.5) + geom_line(size = 2)
 p <- p + labs(x = "Number of obs", y = "Cumulative mean")
 p <- p + ggtitle("Bernoulli Distribution (Coin Flip)")
 # combine plots
@@ -641,24 +641,24 @@ grid.arrange(g, p, ncol = 2)
 * distribution of means of IID variables approaches the standard normal as sample size $n$ increases
 * in other words, for large values of $n$, $$\frac{\mbox{Estimate} - \mbox{Mean of Estimate}}{\mbox{Std. Err. of Estimate}} = \frac{\bar X_n - \mu}{\sigma / \sqrt{n}}=\frac{\sqrt n (\bar X_n - \mu)}{\sigma} \longrightarrow N(0, 1)$$
 * this translates to the distribution of the sample mean $\bar X_n$ is approximately $N(\mu, \sigma^2/n)$
-	- distribution is centered at the population mean 
+	- distribution is centered at the population mean
 	- with standard deviation = standard error of the mean
 * typically the Central Limit Theorem can be applied when $n \geq 30$
 
 ### Example - CLT with Bernoulli Trials (Coin Flips)
-- for this example, we will simulate $n$ flips of a possibly unfair coin 
-	- $X_i$ be the $0$ or $1$ result of the $i^{th}$ flip of a possibly unfair coin
+- for this example, we will simulate $n$ flips of a possibly unfair coin
+	- let $X_i$ be the 0 or 1 result of the $i^{th}$ flip of a possibly unfair coin
 	+ sample proportion , $\hat p$, is the average of the coin flips
 	+ $E[X_i] = p$ and $Var(X_i) = p(1-p)$
 	+ standard error of the mean is $SE = \sqrt{p(1-p)/n}$
 + in principle, normalizing the random variable $X_i$, we should get an approximately standard normal distribution $$\frac{\hat p - p}{\sqrt{p(1-p)/n}} \sim N(0,~1)$$
-- therefore, we will flip a coin $n$ times, take the sample proportion of heads (successes with probability $p$), subtract off 0.5 (ideal sample proportion) and multiply the result by divide by $\frac{1}{2 \sqrt{n}}$ and compare it to the standard normal
+- therefore, we will flip a coin $n$ times, take the sample proportion of heads (successes with probability $p$), subtract off 0.5 (ideal sample proportion) and multiply the result by $\frac{1}{2 \sqrt{n}}$ and compare it to the standard normal
 
 ```{r, echo = FALSE, fig.width=6, fig.height = 3, fig.align='center'}
 # specify number of simulations
 nosim <- 1000
 # convert to standard normal
-cfunc <- function(x, n) 2 * sqrt(n) * (mean(x) - 0.5) 
+cfunc <- function(x, n) 2 * sqrt(n) * (mean(x) - 0.5)
 # simulate data for sample sizes 10, 20, and 30
 dat <- data.frame(
 	x = c(apply(matrix(sample(0:1, nosim*10, replace=TRUE), nosim), 1, cfunc, 10),
@@ -666,15 +666,15 @@ dat <- data.frame(
         apply(matrix(sample(0:1, nosim*30, replace=TRUE), nosim), 1, cfunc, 30)),
 	size = factor(rep(c(10, 20, 30), rep(nosim, 3))))
 # plot histograms for the trials
-g <- ggplot(dat, aes(x = x, fill = size)) + geom_histogram(binwidth=.3, 
-	colour = "black", aes(y = ..density..)) 
+g <- ggplot(dat, aes(x = x, fill = size)) + geom_histogram(binwidth=.3,
+	colour = "black", aes(y = ..density..))
 # plot standard normal distribution for reference
 g <- g + stat_function(fun = dnorm, size = 2)
 # plot panel plots by sample size
 g + facet_grid(. ~ size)
 ```
 
-* now, we can run the same simulation trials for an extremely unfair coin with $p = 0.9$
+* now, we can run the same simulation trials for an extremely unfair coin with $p$ = 0.9
 
 ```{r, echo = FALSE, fig.width=6, fig.height = 3, fig.align='center'}
 # specify number of simulations
@@ -683,16 +683,16 @@ nosim <- 1000
 cfunc <- function(x, n) sqrt(n) * (mean(x) - 0.9) / sqrt(.1 * .9)
 # simulate data for sample sizes 10, 20, and 30
 dat <- data.frame(
-	x = c(apply(matrix(sample(0:1, prob = c(.1,.9), nosim * 10, replace = TRUE), 
+	x = c(apply(matrix(sample(0:1, prob = c(.1,.9), nosim * 10, replace = TRUE),
                      nosim), 1, cfunc, 10),
-        apply(matrix(sample(0:1, prob = c(.1,.9), nosim * 20, replace = TRUE), 
+        apply(matrix(sample(0:1, prob = c(.1,.9), nosim * 20, replace = TRUE),
                      nosim), 1, cfunc, 20),
-        apply(matrix(sample(0:1, prob = c(.1,.9), nosim * 30, replace = TRUE), 
+        apply(matrix(sample(0:1, prob = c(.1,.9), nosim * 30, replace = TRUE),
                      nosim), 1, cfunc, 30)),
 	size = factor(rep(c(10, 20, 30), rep(nosim, 3))))
 # plot histograms for the trials
-g <- ggplot(dat, aes(x = x, fill = size)) + geom_histogram(binwidth=.3, 
-	colour = "black", aes(y = ..density..)) 
+g <- ggplot(dat, aes(x = x, fill = size)) + geom_histogram(binwidth=.3,
+	colour = "black", aes(y = ..density..))
 # plot standard normal distribution for reference
 g <- g + stat_function(fun = dnorm, size = 2)
 # plot panel plots by sample size
@@ -701,7 +701,7 @@ g + facet_grid(. ~ size)
 
 * as we can see from both simulations, the converted/standardized distribution of the samples convert to the standard normal distribution
 * ***Note**: speed at which the normalized coin flips converge to normal distribution depends on how biased the coin is (value of $p$) *
-* ***Note**: does not guarantee that the normal distribution will be a good approximation, but just that eventually it will be a good approximation as n --> $\infty$ *
+* ***Note**: does not guarantee that the normal distribution will be a good approximation, but just that eventually it will be a good approximation as n $\rightarrow \infty$ *
 
 
 
@@ -709,17 +709,17 @@ g + facet_grid(. ~ size)
 * **Z confidence interval** is defined as $$Estimate \pm ZQ \times SE_{Estimate}$$ where $ZQ$ = quantile from the standard normal distribution
 * according to CLT, the sample mean, $\bar X$, is approximately normal with mean $\mu$ and sd $\sigma / \sqrt{n}$
 * **95% confidence interval for the population mean $\mu$** is defined as $$\bar X \pm 2\sigma/\sqrt{n}$$ for the sample mean $\bar X \sim N(\mu, \sigma^2/n)$
-	* you can choose to use 1.96 to be more accurate for the confidence interval 
+	* you can choose to use 1.96 to be more accurate for the confidence interval
 	* $P(\bar{X} > \mu + 2\sigma/\sqrt{n}~or~\bar{X} < \mu - 2\sigma/\sqrt{n}) = 5\%$
-    * **interpretation**: if we were to repeated samples of size $n$ from the population and construct this confidence interval for each case, approximately 95% of the intervals will contain $\mu$
+    * **interpretation**: if we were to repeatedly draw samples of size $n$ from the population and construct this confidence interval for each case, approximately 95% of the intervals will contain $\mu$
 * confidence intervals get **narrower** with less variability or
 larger sample sizes
-* ***Note**: Poisson and binomial distributions have exact intervals that don't require CLT *  
+* ***Note**: Poisson and binomial distributions have exact intervals that don't require CLT *
 * ***example***
 	- for this example, we will compute the 95% confidence interval for sons height data in inches
 
 ```{r message = F, warning = F}
-# load son height data 
+# load son height data
 data(father.son); x <- father.son$sheight
 # calculate confidence interval for sons height in inches
 mean(x) + c(-1, 1) * qnorm(0.975) * sd(x)/sqrt(length(x))
@@ -727,16 +727,17 @@ mean(x) + c(-1, 1) * qnorm(0.975) * sd(x)/sqrt(length(x))
 
 
 ### Confidence Interval - Bernoulli Distribution/Wald Interval
-* for Bernoulli distributions, $X_i$ is $0$ or $1$ with success probability $p$ and the variance is $\sigma^2 = p(1 - p)$
-* the confidence interval takes the form of $$\hat{p} \pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$$ 
-* since the population proportion $p$ is unknown, we can use $\hat{p} = X/n$ as estimate
+* for Bernoulli distributions, $X_i$ is 0 or 1 with success probability $p$ and the variance is $\sigma^2 = p(1 - p)$
+* the confidence interval takes the form of $$\hat{p} \pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$$
+* since the population proportion $p$ is unknown, we can use the sampled proportion of success $\hat{p} = X/n$ as estimate
 * $p(1-p)$ is largest when $p = 1/2$, so 95% confidence interval can be calculated by $$\begin{aligned}
-\hat{p} \pm Z_{0.95} \sqrt{\frac{0.5(1-0.5)}{n}} & = \hat{p} \pm 1.96 \sqrt{\frac{1}{4n}}\\
+\hat{p} \pm Z_{0.95} \sqrt{\frac{0.5(1-0.5)}{n}} & = \hat{p} \pm qnorm(.975) \sqrt{\frac{1}{4n}}\\
+& = \hat{p} \pm 1.96 \sqrt{\frac{1}{4n}}\\
 & = \hat{p} \pm \frac{1.96}{2} \sqrt{\frac{1}{n}}\\
 & \approx \hat{p} \pm \frac{1}{\sqrt{n}}\\
 \end{aligned}$$
 	* this is known as the **Wald Confidence Interval** and is useful in ***roughly estimating*** confidence intervals
-	* generally need $n$ = 100 for 1 decimal place, 10,000 for 2, and 1,000,000 for 3  
+	* generally need $n$ = 100 for 1 decimal place, 10,000 for 2, and 1,000,000 for 3
 * ***example***
 	- suppose a random sample of 100 likely voters, 56 intent to vote for you, can you secure a victory?
 	- we can use the Wald interval to quickly estimate the 95% confidence interval
@@ -781,9 +782,9 @@ ggplot(data.frame(pvals, coverage), aes(x = pvals, y = coverage)) + geom_line(si
 * as we can see from above, the interval do not provide adequate coverage as 95% confidence intervals (frequently only provide 80 to 90% coverage)
 * we can construct the **Agresti-Coull Interval**, which is defined uses the adjustment $$\hat{p} = \frac{X+2}{n+4}$$ where we effectively ***add 2*** to number of successes, $X$, and ***add 2*** to number of failure
 * therefore the interval becomes $$\frac{X+2}{n+4} \pm z_{1-\alpha/2}\sqrt{\frac{p(1-p)}{n}}$$
-* ***Note**: interval tend to be **conservative** *  
+* ***Note**: interval tend to be **conservative** *
 * ***example***
-	
+
 ```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
 # simulate 1000 samples of size 20 each
 n <- 20; nosim <- 1000
@@ -805,21 +806,21 @@ ggplot(data.frame(pvals, coverage), aes(x = pvals, y = coverage)) + geom_line(si
 ````
 
 * as we can see from above, the coverage is much better for the 95% interval
-* in fact, all of the estimates are more conservative as we previously discussed, indicating the Agresti-Coull intervals are ***wider*** than the regular confidence intervals 
+* in fact, all of the estimates are more conservative as we previously discussed, indicating the Agresti-Coull intervals are ***wider*** than the regular confidence intervals
 
 
 ### Confidence Interval - Poisson Interval
 * for $X \sim Poisson(\lambda t)$
 	* estimate rate $\hat{\lambda} = X/t$
 	* $var(\hat{\lambda}) = \lambda/t$
-	* variance estimate $= \hat{\lambda}/t$ 
+	* variance estimate $= \hat{\lambda}/t$
 * so the confidence interval is defined as $$\hat \lambda \pm z_{1-\alpha/2}\sqrt{\frac{\lambda}{t}}$$
 	* however, for small values of $\lambda$ (few events larger time interval), we **should not** use the asymptotic interval estimated
 	* ***example***
-		- for this example, we will go through a specific scenario as well as a simulation exercise to demonstrate the ineffectiveness of asymptotic intervals for small values of $\lambda$ 
+		- for this example, we will go through a specific scenario as well as a simulation exercise to demonstrate the ineffectiveness of asymptotic intervals for small values of $\lambda$
 		- nuclear pump failed 5 times out of 94.32 days, give a 95% confidence interval for the failure rate per day?
 		+ `poisson.test(x, T)$conf` = returns Poisson 95% confidence interval for given `x` occurrence over `T` time period
- 
+
 ```{r fig.width = 4, fig.height = 3, fig.align = 'center', message = F, warning = F}
 # define parameters
 x <- 5; t <- 94.32; lambda <- x / t
@@ -844,7 +845,7 @@ coverage <- sapply(lambdavals, function(lambda){
 ggplot(data.frame(lambdavals, coverage), aes(x = lambdavals, y = coverage)) + geom_line(size = 2) + geom_hline(yintercept = 0.95)+ylim(0, 1.0)
 ```
 
-* as we can see above, for small values of $\lambda = X/t$, the confidence interval produced by the asymptotic interval is ***not*** an accurate estimate of the actual 95% interval (not enough coverage)  
+* as we can see above, for small values of $\lambda = X/t$, the confidence interval produced by the asymptotic interval is ***not*** an accurate estimate of the actual 95% interval (not enough coverage)
 * however, as $t \to \infty$, the interval becomes the ***true 95% interval***
 
 
@@ -876,18 +877,18 @@ ggplot(data.frame(lambdavals, coverage), aes(x = lambdavals, y = coverage)) + ge
     * $t_{n-1}$ = relevant quantile
     * $t$ interval assumes data is IID normal so that $$\frac{\bar X - \mu}{S/\sqrt{n}}$$ follows Gosset's $t$ distribution with $n-1$ degrees of freedom
     * works well with data distributions that are roughly symmetric/mound shaped, and ***does not*** work with skewed distributions
-        * skewed distribution --> meaningless to center interval around the mean $\bar X$
+        * skewed distribution $\rightarrow$ meaningless to center interval around the mean $\bar X$
         * logs/median can be used instead
     * paired observations (multiple measurements from same subjects) can be analyzed by t interval of differences
-    * as more data collected (large degrees of freedom), t interval --> z interval
-    * `qt(0.975, df=n-1)` = calculate the relevant quantile using t distribution 
+    * as more data collected (large degrees of freedom), t interval $\rightarrow$ z interval
+    * `qt(0.975, df=n-1)` = calculate the relevant quantile using t distribution
 
 ```{r fig.width = 6, fig.height = 3, fig.align = 'center', message = F, warning = F}
 # Plot normal vs t distributions
 k <- 1000; xvals <- seq(-5, 5, length = k); df <- 10
 d <- data.frame(y = c(dnorm(xvals), dt(xvals, df)),x = xvals,
               dist = factor(rep(c("Normal", "T"), c(k,k))))
-g <- ggplot(d, aes(x = x, y = y)) 
+g <- ggplot(d, aes(x = x, y = y))
 g <- g + geom_line(size = 2, aes(colour = dist)) + ggtitle("Normal vs T Distribution")
 # plot normal vs t quantiles
 d <- data.frame(n= qnorm(pvals),t=qt(pvals, df),p = pvals)
@@ -905,7 +906,7 @@ grid.arrange(g, h, ncol = 2)
 	* test = Gosset's pseudoname which he published under
 	* indexed/defined by ***degrees of freedom***, and becomes more like standard normal as degrees of freedom gets larger
 	* thicker tails centered around 0, thus confidence interval = ***wider*** than Z interval (more mass concentrated away from the center)
-	* for ***small*** sample size (value of n), normalizing the distribution by $\frac{\bar X - \mu}{S/\sqrt{n}}$  --> t distribution, ***not*** the standard normal distribution
+	* for ***small*** sample size (value of n), normalizing the distribution by $\frac{\bar X - \mu}{S/\sqrt{n}}$ $\rightarrow$ t distribution, ***not*** the standard normal distribution
 		* $S$ = standard deviation may be inaccurate, as the std of the data sample may not be truly representative of the population std
         * using the Z interval here thus may produce an interval that is too ***narrow***
 
@@ -926,11 +927,11 @@ g <- g + geom_line(size = 1, aes(colour = ID)) + geom_point(size =10, pch = 21, 
 g
 # define groups
 g1 <- sleep$extra[1 : 10]; g2 <- sleep$extra[11 : 20]
-# define difference 
+# define difference
 difference <- g2 - g1
 # calculate mean and sd of differences
 mn <- mean(difference); s <- sd(difference); n <- 10
-# calculate intervals manually 
+# calculate intervals manually
 mn + c(-1, 1) * qt(.975, n-1) * s / sqrt(n)
 # perform the same test to get confidence intervals
 t.test(difference)
@@ -944,42 +945,43 @@ t.test(g2, g1, paired = TRUE)
 * perform randomization to balance unobserved covariance that may otherwise affect the result
 * $t$ confidence interval for $\mu_y - \mu_x$ is defined as $$\bar Y - \bar X \pm t_{n_x + n_y - 2, 1 - \alpha/2}S_p\left(\frac{1}{n_x} + \frac{1}{n_y}\right)^{1/2}$$
     * $t_{n_x + n_y - 2, 1 - \alpha/2}$ = relevant quantile
-    * $n_x + n_y - 2$ = degrees of freedom 
+    * $n_x + n_y - 2$ = degrees of freedom
     * $S_p\left(\frac{1}{n_x} + \frac{1}{n_y}\right)^{1/2}$ = standard error
     * $S_p^2 = \{(n_x - 1) S_x^2 + (n_y - 1) S_y^2\}/(n_x + n_y - 2)$ = pooled variance estimator
         * this is effectively a weighted average between the two variances, such that different sample sizes are taken in to account
+        * For equal sample sizes, $n_x = n_y$, $S_p^2 = \frac{S_x^2 + S_y^2}{2}$ (average of variance of two groups)
     * ***Note:** this interval assumes **constant variance** across two groups; if variance is different, use the next interval *
 
-### Independent Group **t** Intervals - Different Variance
+### Independent Group t Intervals - Different Variance
 * confidence interval for $\mu_y - \mu_x$ is defined as $$\bar Y - \bar X \pm t_{df} \times \left(\frac{s_x^2}{n_x} + \frac{s_y^2}{n_y}\right)^{1/2}$$
     * $t_{df}$ = relevant quantile with df as defined below
     * ***Note**: normalized statistic does not follow t distribution but can be approximated through the formula with df defined below *
-        * $$df = \frac{\left(S_x^2 / n_x + S_y^2/n_y\right)^2}
+        $$df = \frac{\left(S_x^2 / n_x + S_y^2/n_y\right)^2}
         {\left(\frac{S_x^2}{n_x}\right)^2 / (n_x - 1) +
         \left(\frac{S_y^2}{n_y}\right)^2 / (n_y - 1)}$$
         * $\left(\frac{s_x^2}{n_x} + \frac{s_y^2}{n_y}\right)^{1/2}$ = standard error
 
 * Comparing other kinds of data
-    * binomial --> relative risk, risk difference, odds ratio
-    * binomial --> Chi-squared test, normal approximations, exact tests
-    * count --> Chi-squared test, exact tests
+    * binomial $\rightarrow$ relative risk, risk difference, odds ratio
+    * binomial $\rightarrow$ Chi-squared test, normal approximations, exact tests
+    * count $\rightarrow$ Chi-squared test, exact tests
 
 * R commands
-    * t Confidence Intervals 
+    * t Confidence Intervals
         * `mean + c(-1, 1) * qt(0.975, n - 1) * std / sqrt(n)`
             * ***c(-1, 1)*** = plus and minus, $\pm$
 
     * Difference Intervals (all equivalent)
         * `mean2 - mean1 + c(-1, 1) * qt(0.975, n - 1) * std / sqrt(n)`
             * ***n*** = number of paired observations
-            * ***qt(0.975, n - 1)*** =  relevant quantile for paired 
+            * ***qt(0.975, n - 1)*** =  relevant quantile for paired
             * ***qt(0.975, n$_x$ + n$_y$ - 2)*** =  relevant quantile for independent
         * `t.test(mean2 - mean1)`
         * `t.test(data2, data1, paired = TRUE, var.equal = TRUE)`
-            * ***paired*** = whether or not the two sets of data are paired (same subjects different observations for treatment) <-- `TRUE` for paired, `FALSE` for independent
-            * ***var.equal*** = whether or not the variance of the datasets should be treated as equal <-- `TRUE` for same variance, `FALSE` for unequal variances
+            * ***paired*** = whether or not the two sets of data are paired (same subjects different observations for treatment) $\rightarrow$ `TRUE` for paired, `FALSE` for independent
+            * ***var.equal*** = whether or not the variance of the datasets should be treated as equal $\rightarrow$ `TRUE` for same variance, `FALSE` for unequal variances
         * `t.test(extra ~ I(relevel(group, 2)), paired = TRUE, data = sleep)`
-            * ***relevel(factor, ref)*** = reorders the levels in the factor so that "ref" is changed to the first level --> doing this here is so that the second set of measurements come first (1, 2 --> 2, 1) in order to perform mean$_2$ - mean$_1$
+            * ***relevel(factor, ref)*** = reorders the levels in the factor so that "ref" is changed to the first level $\rightarrow$ doing this here is so that the second set of measurements come first (1, 2 $\rightarrow$ 2, 1) in order to perform mean$_2$ - mean$_1$
             * ***I(object)*** = prepend the class "AsIs" to the object
             * ***Note**: I(relevel(group, 2)) = explanatory variable, must be **factor** and have **two levels** *
 
@@ -988,10 +990,10 @@ $\pagebreak$
 ## Hypothesis Testing
 * Hypothesis testing = making decisions using data
     * **null** hypothesis (**H$_0$**) = status quo
-    * assumed to be ***true*** --> statistical evidence required to reject it for **alternative** or "research" hypothesis (**H$_a$**)
+    * assumed to be ***true*** $\rightarrow$ statistical evidence required to reject it for **alternative** or "research" hypothesis (**H$_a$**)
         * alternative hypothesis typically take form of >, < or $\ne$
-    * Results
-    
+    * **Results**
+
 Truth | Decide | Result |
 ---|---|---|
 $H_0$ | $H_0$ | Correctly accept null |
@@ -1001,33 +1003,33 @@ $H_a$ | $H_0$ | Type II error |
 
 * **$\alpha$** = Type I error rate
     * probability of ***rejecting*** the null hypothesis when the hypothesis is ***correct***
-    * $\alpha$ = 0.5 --> standard for hypothesis testing
-    * ***Note**: as Type I error rate increases, Type II error rate decreases and vice versa*
+    * $\alpha$ = 0.05 $\rightarrow$ standard for hypothesis testing
+    * ***Note**: as Type I error rate increases, Type II error rate decreases and vice versa *
 
-* for large samples (large n), use the **Z Test** for $H_0:\mu = \mu_0$ 
-    * **$H_a$:**  
+* for large samples (large n), use the **Z Test** for $H_0:\mu = \mu_0$
+    * **$H_a$:**
         * $H_1: \mu < \mu_0$
         * $H_2: \mu \neq \mu_0$
-        * $H_3: \mu > \mu_0$ 
+        * $H_3: \mu > \mu_0$
     * Test statistic $TS = \frac{\bar{X} - \mu_0}{S / \sqrt{n}}$
-    * Reject the null hypothesis $H_0$ when 
+    * Reject the null hypothesis $H_0$ when
         * $H_1: TS \leq Z_{\alpha}$ OR $-Z_{1 - \alpha}$
         * $H_2: |TS| \geq Z_{1 - \alpha / 2}$
         * $H_3: TS \geq Z_{1 - \alpha}$
-    * ***Note**: In case of $\alpha$ = 0.5 (most common), $Z_{1-\alpha}$ = 1.645 (95 percentile)*
-    * $\alpha$ = low, so that when $H_0$ is rejected, original model --> wrong or made an error (low probability)
+    * ***Note**: In case of $\alpha$ = 0.05 (most common), $Z_{1-\alpha}$ = 1.645 (95 percentile) *
+    * $\alpha$ = low, so that when $H_0$ is rejected, original model $\rightarrow$ wrong or made an error (low probability)
 
-* For small samples (small n), use the **T Test** for $H_0:\mu = \mu_0$ 
-    * **$H_a$:**  
+* For small samples (small n), use the **T Test** for $H_0:\mu = \mu_0$
+    * **$H_a$:**
         * $H_1: \mu < \mu_0$
         * $H_2: \mu \neq \mu_0$
-        * $H_3: \mu > \mu_0$ 
+        * $H_3: \mu > \mu_0$
     * Test statistic $TS = \frac{\bar{X} - \mu_0}{S / \sqrt{n}}$
-    * Reject the null hypothesis $H_0$ when 
+    * Reject the null hypothesis $H_0$ when
         * $H_1: TS \leq T_{\alpha}$ OR $-T_{1 - \alpha}$
         * $H_2: |TS| \geq T_{1 - \alpha / 2}$
         * $H_3: TS \geq T_{1 - \alpha}$
-    * ***Note**: In case of $\alpha$ = 0.5 (most common), $T_{1-\alpha}$ = `qt(.95, df = n-1)`*
+    * ***Note**: In case of $\alpha$ = 0.05 (most common), $T_{1-\alpha}$ = `qt(.95, df = n-1)` *
     * R commands for T test:
         * `t.test(vector1 - vector2)`
         * `t.test(vector1, vector2, paired = TRUE)`
@@ -1035,37 +1037,37 @@ $H_a$ | $H_0$ | Type II error |
             * `alternative` default = `two-sided`
         * prints test statistic (`t`), degrees of freedom (`df`), `p-value`, 95% confidence interval, and mean of sample
             * confidence interval in units of data, and can be used to intepret the practical significance of the results
-    
+
 * **rejection region** = region of TS values for which you reject $H_0$
 * **power** = probability of rejecting $H_0$
     * power is used to calculate sample size for experiments
-    
-* **two-sided tests** --> $H_a: \mu \neq \mu_0$
+
+* **two-sided tests** $\rightarrow$ $H_a: \mu \neq \mu_0$
     * reject $H_0$ only if test statistic is too larger/small
-    * for $\alpha$ = 0.5, split equally to 2.5% for upper and 2.5% for lower tails
+    * for $\alpha$ = 0.05, split equally to 2.5% for upper and 2.5% for lower tails
         * equivalent to $|TS| \geq T_{1 - \alpha / 2}$
         * example: for T test, `qt(.975, df)` and `qt(.025, df)`
     * ***Note**: failing to reject one-sided test = fail to reject two-sided*
-    
+
 * **tests vs confidence intervals**
     * ($1-\alpha$)% confidence interval for $\mu$ = set of all possible values that fail to reject $H_0$
     * if ($1-\alpha$)% confidence interval contains $\mu_0$, fail to reject $H_0$
-    
-* **two-group intervals/test** 
+
+* **two-group intervals/test**
     * Rejection rules the same
-    * Test $H_0$: $\mu_1 = \mu_2$ --> $\mu_1 - \mu_2 = 0$
-    * Test statistic: 
-    $$\frac{Estimate - H_0 Value}{SE_{Estimate}} = \frac{\bar X_1 - \bar X_2 - 0}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}}$$ 
+    * Test $H_0$: $\mu_1 = \mu_2$ $\rightarrow$ $\mu_1 - \mu_2 = 0$
+    * Test statistic:
+    $$\frac{Estimate - H_0 Value}{SE_{Estimate}} = \frac{\bar X_1 - \bar X_2 - 0}{\sqrt{\frac{S_1^2}{n_1} + \frac{S_2^2}{n_2}}}$$
     * R Command
         * `t.test(values ~ factor, paired = FALSE, var.equal = TRUE, data = data)`
-            * `paired = FALSE` --> independent values
+            * `paired = FALSE` = independent values
             * `factor` argument must have only two levels
-        
-* **p values** 
+
+* **p values**
     * most common measure of statistical significance
     * **p-value** = probability under the null hypothesis of obtaining evidence as extreme or more than that of the obtained
         * Given that $H_0$ is true, how likely is it to obtain the result (test statistic)?
-    * **attained significance level** = smallest value for $\alpha$ for which $H_0$ is rejected --> equivalent to p-value
+    * **attained significance level** = smallest value for $\alpha$ for which $H_0$ is rejected $\rightarrow$ equivalent to p-value
         * if p-value < $\alpha$, reject $H_0$
         * for two-sided tests, double the p-values
     * if p-value is small, either $H_0$ is true AND the obeserved is a rare event **OR** $H_0$ is false
@@ -1073,14 +1075,14 @@ $H_a$ | $H_0$ | Type II error |
         * p-value = `pt(statistic, df, lower.tail = FALSE)`
             * `lower.tail = FALSE` = returns the probability of getting a value from the t distribution that is larger than the test statistic
         * Binomial (coin flips)
-            * probability of getting x results out of n trials and event probability of p = `pbinom(x, size = n, prob = p, lower.tail = FALSE)`    
+            * probability of getting x results out of n trials and event probability of p = `pbinom(x, size = n, prob = p, lower.tail = FALSE)`
             * two-sided interval (testing for $\ne$): find the smaller of two one-sided intervals (X < value, X > value), and double the result
-            * ***Note**: `lower.tail = FALSE` = strictly greater*
+            * ***Note**: `lower.tail = FALSE` = strictly greater *
         * Poisson
             * probability of getting x results given the rate r = `ppois(x - 1, r, lower.tail = FALSE)`
             * `x - 1` is used here because the upper tail includes the specified number (since we want greater than x, we start at x - 1)
             * `r` = events that should occur given the rate (multiplied by 100 to yield an integer)
-            * ***Note**: `lower.tail = FALSE` = strictly greater*
+            * ***Note**: `lower.tail = FALSE` = strictly greater *
 
 $\pagebreak$
 
@@ -1098,12 +1100,12 @@ $\pagebreak$
 	* assuming the sample mean is normally distributed, $H_0$ is rejected when $\frac{\bar X - 30}{\sigma /\sqrt{n}} > Z_{1-\alpha}$
     * or, $\bar X > 30 + Z_{1-\alpha} \frac{\sigma}{\sqrt{n}}$
 * R commands:
-    * `alpha = 0.05; z = qnorm(1-alpha)` --> calculates $Z_{1-\alpha}$
-    * `pnorm(mu0 + z * sigma/sqrt(n), mean = mua, sd = sigma/sqrt(n), lower.tail = FALSE)` --> calculates the probability of getting a sample mean that is larger than $Z_{1-\alpha} \frac{\sigma}{\sqrt{n}}$ given that the population mean is $\mu_a$
-        * ***Note**: using `mean = mu0` in the function would = alpha*
+    * `alpha = 0.05; z = qnorm(1-alpha)` $\rightarrow$ calculates $Z_{1-\alpha}$
+    * `pnorm(mu0 + z * sigma/sqrt(n), mean = mua, sd = sigma/sqrt(n), lower.tail = FALSE)` $\rightarrow$ calculates the probability of getting a sample mean that is larger than $Z_{1-\alpha} \frac{\sigma}{\sqrt{n}}$ given that the population mean is $\mu_a$
+        * ***Note**: using `mean = mu0` in the function would = $\alpha$ *
     * Power curve behavior
-        * Power increases as $mu_a$ increases --> we are more likely to detect the difference in $mu_a$ and $mu_0$ 
-        * Power increases as **n** increases --> with more data, more likely to detect any alternative $mu_a$
+        * Power increases as $mu_a$ increases $\rightarrow$ we are more likely to detect the difference in $mu_a$ and $mu_0$
+        * Power increases as **n** increases $\rightarrow$ with more data, more likely to detect any alternative $mu_a$
 
 ```{r, fig.align='center', fig.height=4, fig.width=6}
 library(ggplot2)
@@ -1113,17 +1115,17 @@ z = qnorm(1 - alpha)
 nseq = c(8, 16, 32, 64, 128)
 mu_a = seq(30, 35, by = 0.1)
 power = sapply(nseq, function(n)
-    pnorm(mu0 + z * sigma / sqrt(n), mean = mu_a, sd = sigma / sqrt(n), 
+    pnorm(mu0 + z * sigma / sqrt(n), mean = mu_a, sd = sigma / sqrt(n),
           lower.tail = FALSE)
     )
 colnames(power) <- paste("n", nseq, sep = "")
 d <- data.frame(mu_a, power)
 library(reshape2)
 d2 <- melt(d, id.vars = "mu_a")
-names(d2) <- c("mu_a", "n", "power")    
-g <- ggplot(d2, 
+names(d2) <- c("mu_a", "n", "power")
+g <- ggplot(d2,
             aes(x = mu_a, y = power, col = n)) + geom_line(size = 2)
-g            
+g
 ```
 
 
@@ -1145,17 +1147,17 @@ g
     * Power increases as **n** increases (sample mean has less variability)
     * Power increases as $\sigma$ decreases (again less variability)
     * Power usually depends only $\frac{\sqrt{n}(\mu_a - \mu_0)}{\sigma}$, and not $\mu_a$, $\sigma$, and $n$
-        * **effect size** = $\frac{\mu_a - \mu_0}{\sigma}$ --> unit free, can be interpretted across settings
+        * **effect size** = $\frac{\mu_a - \mu_0}{\sigma}$ $\rightarrow$ unit free, can be interpretted across settings
 
 * **T-test Power**
     * for Gossett's T test,
     $$Power = P\left(\frac{\bar X - \mu_0}{S/\sqrt{n}} > t_{1-\alpha, n-1} ; \mu = \mu_a \right)$$
-        * $\frac{\bar X - \mu_0}{S/\sqrt{n}}$ does not follow a t distribution if the true mean is $\mu_a$ and NOT $\mu_0$ --> follows a non-central t distribution instead
-    * `power.t.test` --> evaluates the non-central t distribution and solves for a parameter given all others are specified
-        * `power.t.test(n = 16, delta = 0.5, sd = 1, type = "one.sample", alt = "one.sided")$power` --> calculates power with inputs of n, difference in means, and standard deviation
+        * $\frac{\bar X - \mu_0}{S/\sqrt{n}}$ does not follow a t distribution if the true mean is $\mu_a$ and NOT $\mu_0$ $\rightarrow$ follows a non-central t distribution instead
+    * `power.t.test` = evaluates the non-central t distribution and solves for a parameter given all others are specified
+        * `power.t.test(n = 16, delta = 0.5, sd = 1, type = "one.sample", alt = "one.sided")$power` = calculates power with inputs of n, difference in means, and standard deviation
             * `delta` = argument for difference in means
             * ***Note**: since effect size = `delta/sd`, as `n`, `type`, and `alt` are held constant, any distribution with the same effect size will have the same power *
-        * `power.t.test(power = 0.8, delta = 0.5, sd = 1, type = "one.sample", alt = "one.sided")$n` --> calculates size n with inputs of power, difference in means, and standard deviation
+        * `power.t.test(power = 0.8, delta = 0.5, sd = 1, type = "one.sample", alt = "one.sided")$n` = calculates size n with inputs of power, difference in means, and standard deviation
             * ***Note**: n should always be rounded up (ceiling) *
 
 $\pagebreak$
@@ -1165,7 +1167,7 @@ $\pagebreak$
 * correct for multiple testing to avoid false positives/conclusions (two key components)
     1. error measure
     2. correction
-* multiple testing is needed because of the increase in  ubiquitous data collection technology and analysis 
+* multiple testing is needed because of the increase in  ubiquitous data collection technology and analysis
     * DNA sequencing machines
     * imaging patients in clinical studies
     * electronic medical records
@@ -1173,12 +1175,12 @@ $\pagebreak$
 
 ### Type of Errors
 
-    |                 | Actual $H_0$ = True | Actual $H_a$ = True |  Total
+ | Actual $H_0$ = True | Actual $H_a$ = True |  Total
 ----------------------|--------------|--------------|---------
 Conclude $H_0$ = True (non-significant) |      $U$     |      $T$     |  $m-R$
 Conclude $H_a$ = True (significant) |      $V$     |      $S$     |   $R$
 **Total**               |     $m_0$    |    $m-m_0$   |   $m$
-    
+
 * **$m_0$** = number of true null hypotheses, or cases where $H_0$ = actually true (unknown)
 * **$m - m_0$** = number of true alternative hypotheses, or cases where $H_a$ = actually true (unknown)
 * **$R$** = number of null hypotheses rejected, or cases where $H_a$ = concluded to be true (measurable)
@@ -1187,11 +1189,11 @@ Conclude $H_a$ = True (significant) |      $V$     |      $S$     |   $R$
 * **$T$** = Type II Error / false negatives, concludes $H_0$ = True when $H_a$ = actually True
 * **$S$** = true positives, concludes $H_a$ = True when $H_a$ = actually True
 * **$U$** = true negatives, concludes $H_0$ = True when $H_0$ = actually True
-    
+
 ### Error Rates
-* ***false positive rate*** = rate at which false results are called significant $E[\frac{V}{m_0}]$ --> average fraction of times that $H_a$ is claimed to be true when $H_0$ is actually true
-	* ***Note**: mathematically equal to type I error rate --> false positive rate is associated with a post-prior result, which is the expected number of false positives divided by the total number of hypotheses under the real combination of true and non-true null hypotheses (disregarding the "global null" hypothesis). Since the false positive rate is a parameter that is not controlled by the researcher, it cannot be identified with the significance level, which is what determines the type I error rate. *
-* ***family wise error rate (FWER)*** = probabilit of at least one false positive $Pr(V \ge 1)$
+* ***false positive rate*** = rate at which false results are called significant $E[\frac{V}{m_0}]$ $\rightarrow$ average fraction of times that $H_a$ is claimed to be true when $H_0$ is actually true
+	* ***Note**: mathematically equal to type I error rate $\rightarrow$ false positive rate is associated with a post-prior result, which is the expected number of false positives divided by the total number of hypotheses under the real combination of true and non-true null hypotheses (disregarding the "global null" hypothesis). Since the false positive rate is a parameter that is not controlled by the researcher, it cannot be identified with the significance level, which is what determines the type I error rate. *
+* ***family wise error rate (FWER)*** = probability of at least one false positive $Pr(V \ge 1)$
 * ***false discovery rate (FDR)*** = rate at which claims of significance are false $E[\frac{V}{R}]$
 
 * **controlling error rates (adjusting $\alpha$)**
@@ -1207,18 +1209,18 @@ Conclude $H_a$ = True (significant) |      $V$     |      $S$     |   $R$
     * false discovery rate (FDR)
         * most popular correction = controlling FDR
         * for $m$ tests, we want $E[\frac{V}{R}] \le \alpha$
-        * calculate P-values normally and sort some from smallest to largest --> $P_{(1)},P_{(1)}, ... , P_{(m)}$
+        * calculate P-values normally and sort some from smallest to largest $\rightarrow$ $P_{(1)},P_{(1)}, ... , P_{(m)}$
         * deem the P-values significant if $P_{(i)} \le \alpha \times \frac{i}{m}$
         * easy to calculate, less conservative, but allows for more false positives and may behave strangely under dependence (related hypothesis tests/regression with different variables)
     * ***example***
         * 10 P-values with $\alpha = 0.20$
-        
+
         ![alt text](figures/9.png)
 
 * **adjusting for p-values**
     * ***Note**: changing P-values will fundamentally change their properties but they can be used directly without adjusting $/alpha$ *
     * _bonferroni_ (FWER)
-        * $P_i^{fewer} = max(mP_i, 1)$ --> since p cannot exceed value of 1
+        * $P_i^{fewer} = max(mP_i, 1)$ $\rightarrow$ since p cannot exceed value of 1
         * deem P-values significant if $P_i^{fewer} < \alpha$
         * similar to controlling FWER
 
@@ -1232,12 +1234,12 @@ for(i in 1:1000){
   # First 500 beta=0, last 500 beta=2
   if(i <= 500){y <- rnorm(20)}else{ y <- rnorm(20,mean=2*x)}
   # calculating p-values by using linear model; the [2, 4] coeff in result = pvalue
-  pValues[i] <- summary(lm(y ~ x))$coeff[2,4] 
+  pValues[i] <- summary(lm(y ~ x))$coeff[2,4]
 }
 # Controls false positive rate
 trueStatus <- rep(c("zero","not zero"),each=500)
 table(pValues < 0.05, trueStatus)
-# Controls FWER 
+# Controls FWER
 table(p.adjust(pValues,method="bonferroni") < 0.05,trueStatus)
 # Controls FDR (Benjamin Hochberg)
 table(p.adjust(pValues,method="BH") < 0.05,trueStatus)
@@ -1250,17 +1252,17 @@ $\pagebreak$
 * **Bootstrap** = useful tool for constructing confidence intervals and caclulating standard errors for difficult statistics
     * ***principle*** = if a statistic's (i.e. median) sampling distribution is unknown, then use distribution defined by the data to approximate it
     * ***procedures***
-        1. simulate $n$ observations **with replacement** from the observed data --> results in $1$ simulated complete data set
+        1. simulate $n$ observations **with replacement** from the observed data $\rightarrow$ results in $1$ simulated complete data set
         2. calculate desired statistic (i.e. median) for each simulated data set
         3. repeat the above steps $B$ times, resulting in $B$ simulated statistics
-        4. these statistics are approximately drawn from the sampling distribution of the true statistic of $n$ observations 
+        4. these statistics are approximately drawn from the sampling distribution of the true statistic of $n$ observations
         5. perform one of the following
             * plot a histogram
             * calculate standard deviation of the statistic to estimate its standard error
             * take quantiles (2.5^th^ and 97.5^th^) as a confidence interval for the statistic ("_bootstrap CI_")
     * ***example***
-        * Bootstrap procedure for calculating confidence interval for the median from a data set of $n$ observations --> approximate sampling distribution
-    
+        * Bootstrap procedure for calculating confidence interval for the median from a data set of $n$ observations $\rightarrow$ approximate sampling distribution
+
 ```{r fig.align='center', fig.height=4, fig.width=6, message = F, warning = F}
 # load data
 library(UsingR); data(father.son)
@@ -1268,12 +1270,12 @@ library(UsingR); data(father.son)
 x <- father.son$sheight
 # number of simulated statistic
 B <- 1000
-# generate samples 
+# generate samples
 resamples <- matrix(
-    sample(x,               # sample to draw frome     
+    sample(x,               # sample to draw frome
            n * B,           # draw B datasets with n observations each
            replace = TRUE), # cannot draw n*B elements from x (has n elements) without replacement
-    B, n)                   # arrange results into n x B matrix 
+    B, n)                   # arrange results into n x B matrix
                             # (every row = bootstrap sample with n observations)
 # take median for each row/generated sample
 medians <- apply(resamples, 1, median)
@@ -1290,22 +1292,22 @@ hist(medians)
 * **Permutation Tests**
     * ***procedures***
         * compare groups of data and test the null hypothesis that the distribution of the observations from each group = same
-            * ***Note**: if this is true, then group labels/divisions are irrelevant*
+            * ***Note**: if this is true, then group labels/divisions are irrelevant *
         * permute the labels for the groups
         * recalculate the statistic
             * Mean difference in counts
             * Geometric means
             * T statistic
-        * Calculate the percentage of simulations wherethe simulated statistic was more extreme (toward the alternative) than the observed
+        * Calculate the percentage of simulations where the simulated statistic was more extreme (toward the alternative) than the observed
     * ***variations***
 
-        Data type | Statistic | Test name 
+        Data type | Statistic | Test name
 ---|---|---|
 Ranks | rank sum | rank sum test
 Binary | hypergeometric prob | Fisher's exact test
 Raw data | | ordinary permutation test
 
-        * ***Note**: randomization tests are exactly permutation tests, with a different motivation*
+        * ***Note**: randomization tests are exactly permutation tests, with a different motivation *
         * For matched data, one can randomize the signs
         * For ranks, this results in the **signed rank test**
         * Permutation strategies work for regression by permuting a regressor of interest
@@ -1320,12 +1322,12 @@ data(InsectSprays)
 ggplot(InsectSprays, aes(spray, count, fill = spray)) + geom_boxplot()
 ```
 
-* we will compare groups **B** and **C** in this dataset for null hypothesis $H_0:$ there are no difference between the groups    
+* we will compare groups **B** and **C** in this dataset for null hypothesis $H_0:$ there are no difference between the groups
 
 ```{r}
 # subset to only "B" and "C" groups
 subdata <- InsectSprays[InsectSprays$spray %in% c("B", "C"),]
-# values 
+# values
 y <- subdata$count
 # labels
 group <- as.character(subdata$spray)
@@ -1335,7 +1337,7 @@ observedStat <- testStat(y, group)
 observedStat
 ```
 
-* the observed difference between the groups is `r observedStat` 
+* the observed difference between the groups is `r observedStat`
 * now we changed the resample the lables for groups **B** and **C**
 
 ```{r}
@@ -1355,5 +1357,5 @@ ggplot(data.frame(permutations = permutations),
            aes(permutations)) + geom_histogram(fill = "lightblue", color = "black", binwidth = 1) + geom_vline(xintercept = observedStat, size = 2)
 ```
 
-* as we can see from the black line, the observed difference/statistic is very far from the mean --> likely 0 is ***not*** the true difference
+* as we can see from the black line, the observed difference/statistic is very far from the mean $\rightarrow$ likely 0 is ***not*** the true difference
     * with this information, formal confidence intervals can be constructed and p-values can be calculated

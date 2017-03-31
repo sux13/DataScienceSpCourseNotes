@@ -28,7 +28,7 @@ $\pagebreak$
 * **two** scripts (in one directory) make up a Shiny project
 	- `ui.R` - controls appearance/all style elements
 		+ alternatively, a `www` directory with an `index.html` file enclosed can be used instead of `ui.R`
-			* ***Note**: output is rendered into HTML elements based on matching their id attribute to an output slot and by specifying the requisite css class for the element (in this case either `shiny-text-output`, `shiny-plot-output`, or `shiny-html-output`) *
+			* ***Note**: output is rendered into HTML elements based on matching their id attribute to an output slot and by specifying the requisite CSS class for the element (in this case either `shiny-text-output`, `shiny-plot-output`, or `shiny-html-output`) *
 			* it is possible to create highly customized user-interfaces using user-defined HTML/CSS/JavaScript
 	- `server.R` - controls functions
 * `runApp()` executes the Shiny application
@@ -151,7 +151,7 @@ shinyUI(navbarPage("Shiny Project",
         # main content
         fluidRow(
             column(12,h4("We start by generating a population of ",
-                         span(textOutput("population", inline = TRUE), 
+                         span(textOutput("population", inline = TRUE),
                          style = "color: red; font-size: 20px"),
                          " observations from values 1 to 20:"),
                    tags$hr(),htmlOutput("popHist"),
@@ -170,15 +170,15 @@ shinyUI(navbarPage("Shiny Project",
                 	# sliders
                     column(4, sliderInput("population", "Size of Population:",
                                           min = 100, max = 500, value = 250),
-                           p(strong("Population Variance: "), 
+                           p(strong("Population Variance: "),
                            textOutput("popVar", inline = TRUE))),
                     column(4, sliderInput("numSample", "Number of Samples:",
                                           min = 100, max = 500, value = 300),
-                           p(strong("Sample Variance (biased): "), 
+                           p(strong("Sample Variance (biased): "),
                            textOutput("biaVar", inline = TRUE))),
                     column(4, sliderInput("sampleSize", "Size of Samples:",
                                           min = 2, max = 15, value = 10),
-                           p(strong("Sample Variance (unbiased): "), 
+                           p(strong("Sample Variance (unbiased): "),
                            textOutput("unbiaVar", inline = TRUE)))),
                 style = "opacity: 0.92; z-index: 100;"
             ))
@@ -233,7 +233,7 @@ shinyServer(
 # load libraries
 library(shiny)
 require(googleVis)
-# begin shiny server 
+# begin shiny server
 shinyServer(function(input, output) {
 	# define reactive parameters
     pop<- reactive({sample(1:20, input$population, replace = TRUE)})
@@ -307,7 +307,7 @@ manipulate(myHist(mu), mu = slider(62, 74, step = 0.5))
 library(grid); library(png)
 grid.raster(readPNG("figures/5.png"))
 ```
- 
+
 $\pagebreak$
 
 ## rCharts
@@ -323,23 +323,25 @@ $\pagebreak$
 
 * **plot types**
 	- ***Note**: each of the following JS library has different default styles as well as a multitude of capabilities; the following list is just what was demonstrated and more documentation can be found in the corresponding links *
-	- [_Polychart_ [js library](https://github.com/Polychart/polychart2)] `rPlot` --> paneled scatter plots
-	- [_Morris_ [js library](https://github.com/oesmith/morris.js)] `mPlot` --> time series plot (similar to stock price charts)
-	- [_NVD3_ [js library](http://nvd3.org/)] `nPlot` --> stacked/grouped bar charts
-	- [_xCharts_ [js library](https://github.com/tenXer/xcharts/)] --> shaded line graphs
-	- [_HighChart_ [js library](http://www.highcharts.com/)] --> stacked (different styles) scatter/line charts
-	- [_LeafLet_ [js library](http://leafletjs.com/)] --> interactive maps
-	- [_Rickshaw_ [js library](http://ramnathv.github.io/rCharts/)] --> stacked area plots/time series
+	- [_Polychart_ [js library](https://github.com/Polychart/polychart2)] `rPlot` = paneled scatter plots
+	- [_Morris_ [js library](https://github.com/oesmith/morris.js)] `mPlot` = time series plot (similar to stock price charts)
+	- [_NVD3_ [js library](http://nvd3.org/)] `nPlot` = stacked/grouped bar charts
+	- [_xCharts_ [js library](https://github.com/tenXer/xcharts/)] = shaded line graphs
+	- [_HighChart_ [js library](http://www.highcharts.com/)] = stacked (different styles) scatter/line charts
+	- [_LeafLet_ [js library](http://leafletjs.com/)] = interactive maps
+	- [_Rickshaw_ [js library](http://ramnathv.github.io/rCharts/)] = stacked area plots/time series
 
 * rChart objects have various attributes/functions that you can use when saved `n1 <- nplot(...)`
 	- `n1$` + TAB in R Console brings up list of all functions contained in the object
 	- `n1$html()` = prints out the HTML for the plot
-	- `n1$save(filename)` = embeds code into slidify document
+	- `n1$save("filename.html")` = saves result to a file named "filename.html"
 	- `n1$print()` = print out the JavaScript
   - `n1$show("inline", include_assets = TRUE, cdn = F)` = embed HTML/JS code directly with in Rmd file (for HTML output)
 	- `n1$publish('plotname', host = 'gist'/'rpubs')` = publishes the plot under the specified `plotname` as a `gist` or to `rpubs`
-* to use with ***slidify***, the following YAML (Yet Another Markup Language/YAML Ain't Markup Language) must be added
-	- `yaml ext_widgets : {rCharts: ["libraries/nvd3"]}`
+* to use with ***slidify***,
+  - the following YAML (Yet Another Markup Language/YAML Ain't Markup Language) must be added
+    - `yaml ext_widgets : {rCharts: ["libraries/nvd3"]}`
+  - `cat('<iframe src="map3.html" width=100%, height=600></iframe>')` to embed a map or chart form a saved file (saved with: `map3$save('map3.html', cdn = TRUE)`)
 
 ### Example
 
@@ -358,6 +360,37 @@ n1$show("inline", include_assets = TRUE, cdn = F)
 ```{r echo = FALSE, fig.width = 6, fig.height = 4, fig.align = 'center', message = FALSE}
 grid.raster(readPNG("figures/4.png"))
 ```
+
+$\pagebreak$
+
+## `ggvis` package
+* `ggvis` is a data visualization package for R that lets you:
+    - declaratively describe data graphics with a syntax similar in spirit to ggplot2
+    - create rich interactive graphics that you can play with locally in Rstudio or in your browser
+    - leverage `shiny`’s infrastructure to publish interactive graphics usable from any browser (either within your company or to the world).
+* the goal is to combine the best of R and the best of the web
+    + data manipulation and transformation are done in R
+    + graphics are rendered in a web browser, using [Vega](https://github.com/trifacta/vega/)
+    + for RStudio users, ggvis graphics display in a viewer panel, which is possible because RStudio is a web browser
+* can use the **pipe operator**, `%>%`, to chain graphing functions
+    - `set_options(renderer = "canvas")` = can be used to control what renderer the graphics is produced with
+    + ***example***: `mtcars %>% ggvis(~mpg, ~wt, fill = ~ as.factor(am)) %>% layer_points() %>% layer_smooths()`
+
+```r
+# for pdf version
+library(ggvis)
+mtcars %>% ggvis(~mpg, ~wt, fill = ~ as.factor(am)) %>% layer_points() %>% layer_smooths()
+```
+
+```{r echo = FALSE, fig.width = 5, fig.height = 3, fig.align = 'center'}
+grid.raster(readPNG("figures/6.png"))
+```
+
+<!-- ```{r, echo=F, warning = F, message = F}
+# for HTML version
+library(ggvis)
+mtcars %>% ggvis(~mpg, ~wt, fill = ~ as.factor(am)) %>% layer_points() %>% layer_smooths() %>% set_options(renderer = "canvas")
+``` -->
 
 
 $\pagebreak$
@@ -388,6 +421,8 @@ $\pagebreak$
 	- [documentation](http://cran.r-project.org/web/packages/googleVis/googleVis.pdf)
 	- [plot gallery](https://developers.google.com/chart/interactive/docs/gallery)
 	- [FAQ](https://developers.google.com/chart/interactive/faq)
+
+
 
 $\pagebreak$
 
@@ -422,9 +457,10 @@ Line <- gvisLineChart(df, xvar="label", yvar=c("val1","val2"),
 # print the chart in JavaScript
 plot(Line)
 ```
-```{r fig.width = 4, fig.height = 3,fig.align='center',echo = FALSE}
+
+```{r fig.width = 4, fig.height = 3, fig.align='center',echo = FALSE}
 grid.raster(readPNG("figures/1.png"))
-``` 
+```
 
 $\pagebreak$
 
@@ -439,11 +475,11 @@ GTM <- gvisMerge(GT, M, horizontal=TRUE,tableOptions="bgcolor=\"#CCCCCC\" cellsp
 plot(GTM)
 ```
 
-```{r fig.width = 6, fig.height = 4, echo = FALSE}
+```{r fig.width = 6, fig.height = 4, fig.align='center', echo = FALSE}
 grid.raster(readPNG("figures/2.png"))
 ```
 
-* ***Note**: the motion chart only displays when it is hosted on a server or a trusted Macromedia source, see [googlVis vignette](http://cran.r-project.org/web/packages/googleVis/vignettes/googleVis.pdf) for more details * 
+* ***Note**: the motion chart only displays when it is hosted on a server or a trusted Macromedia source, see [googlVis vignette](http://cran.r-project.org/web/packages/googleVis/vignettes/googleVis.pdf) for more details *
 
 $\pagebreak$
 
@@ -475,11 +511,12 @@ $\pagebreak$
 # load packages
 library(plotly); library(ggplot2)
 # make sure your plot.ly credentials are set correctly using the following command
-#   set_credentials_file(username=FILL IN, api_key=FILL IN)
+#   set_credentials_file(username=<FILL IN>, api_key=<FILL IN>)
+
 # load data
 load("courseraData.rda")
 # bar plot using ggplot2
-g <- ggplot(myData, aes(y = enrollment, x = class, fill = offering))
+g <- ggplot(myData, aes(y = enrollment, x = class, fill = as.factor(offering)))
 g <- g + geom_bar(stat = "identity")
 g
 # initiate plotly object
@@ -491,7 +528,7 @@ out$response$url
 ```
 
 * the above is the response URL for the plot created on plot.ly
-  - ***Note**: this particular URL corresponds to the plot on my personal account * 
+  - ***Note**: this particular URL corresponds to the plot on my personal account *
 
 
 $\pagebreak$
@@ -558,9 +595,9 @@ $\pagebreak$
 		+ [Slidy](http://www.w3.org/Talks/Tools/Slidy2/Overview.html#)
 	- `highlighter` = controls effects for presentation (i.e `highlight.js`)
 	- `hitheme` = specifies theme of code (i.e. `tomorrow`)
-	- `widgets` = loads additional libraries to display LaTeX math equations(`mathjax`), quiz-styles components (quiz), and additional style (`bootstrap` --> Twitter-created style)
+	- `widgets` = loads additional libraries to display LaTeX math equations(`mathjax`), quiz-styles components (quiz), and additional style (`bootstrap` = Twitter-created style)
 		+ for math expressions, the code should be enclosed in `$expresion$` for inline expressions, and `$$expression$$` for block equations
-	- `mode = selfcontained/standalone/draft` --> depending whether the presentation will be given with Internet access or not
+	- `mode = selfcontained/standalone/draft` = depending whether the presentation will be given with Internet access or not
 		+ `standalone` = all the JavaScript libraries will be save locally so that the presentation can be executed without Internet access
 		+ `selfcontained` = load all JavaScript library at time of presentation
 	- `logo` = displays a logo in title slide
@@ -588,22 +625,26 @@ mode        : selfcontained # {standalone, draft}
 ```
 
 ### Slides
-* `##` = signifies the title of the slide --> equivalent of `h1` element in HTML
+* `##` = signifies the title of the slide $\rightarrow$ equivalent of `h1` element in HTML
 * `---` = marks the end of a slide
 * `.class #id` = assigns `class` and `id` attributes (CSS) to the slide and can be used to customize the style of the page
 * ***Note**: make sure to leave space between each component of the slidify document (title, code, text, etc) to avoid errors *
 * advanced HTML can be added directly to the `index.Rmd` file and most of the time it should function correctly
 * interactive element (quiz questions, rCharts, shiny apps) can be embedded into slidify documents ([demos](http://slidify.github.io/dcmeetup/demos/interactive/))
 	- quiz elements
+		+ `--- &radio` before slide content for multiple choice (make sure quiz is included in widgets)
 		+ `##` = signifies title of questions
 		+ the question can be type in plain text format
 		+ the multiple choice options are listed by number (`1. a`, `2. b`, etc.)
 			* wrap the correct answer in underscores (`2. _b_`)
 		+ `*** .hint` = denotes the hint that will be displayed when the user clicks on ***Show Hint*** button
 		+ `*** .explanation` = denotes the explanation that will be displayed when the user clicks on ***Show Answer*** button
-		+ a page like the one below will be generated when processed with slidify
+		+ a page like the one below will be generated when processed with `slidify`
 
-```Rmd
+```markdown
+
+--- &radio
+
 ## Question 1
 
 What is 1 + 1?
@@ -623,6 +664,7 @@ This is an explanation
 ```{r fig.width = 6, fig.height = 3, fig.align = 'center', echo = FALSE}
 grid.raster(readPNG("figures/3.png"))
 ```
+
 * **`knit HTML`** button can be used to generate previews for the presentation as well
 
 
@@ -636,13 +678,13 @@ $\pagebreak$
 ## RStudio Presentation
 * presentation authoring tool within the RStudio IDE ([tutorial](http://www.rstudio.com/ide/docs/presentations/overview))
 * output = html5 presentation
-* `.Rpres` file --> converted to `.md` file --> `.html` file
+* `.Rpres` file $\rightarrow$ converted to `.md` file $\rightarrow$ `.html` file
 * uses R Markdown format as slidify/knitr
 	- **mathjax** JS library is loaded by default
 * RStudio format/runs the code when the document is saved
 
 ### Creating Presentation
-* file --> New File --> R Presentation (`alt` + `f` + `p`)
+* file $\rightarrow$ New File $\rightarrow$ R Presentation (`alt-f` + `f` + `p`)
 * `class: classname` = specify slide-specific control from CSS
 * `css: file.css` = can be used to import an external CSS file
 	- alternatively, a css file that has the same name as the presentation will be automatically loaded
@@ -679,7 +721,7 @@ $\pagebreak$
 * **change slide font ([guide](https://support.rstudio.com/hc/en-us/articles/200532307-Customizing-Fonts-and-Appearance))**
 	- `font-family: fontname` = changes the font of slide (specified in the same way as HTML)
 	- `font-import: http://fonts.googleapis.com/css?family=Risque` = imports font
-		+ ***Note**: fonts must be present on the system for presentation (or have Internet), or default fonts will be used *	
+		+ ***Note**: fonts must be present on the system for presentation (or have Internet), or default fonts will be used *
 	- ***Note**: CSS selectors for class and IDs must be preceded by `.reveal` to work (`.reveal section del` applies to any text enclosed by `~~text~~`) *
 
 
@@ -781,7 +823,7 @@ $\pagebreak$
 
 ### NAMESPACE file
 * effectively an API for the package
-* indicates which functions are *exported* --> public functions that users have access to and can use
+* indicates which functions are *exported* $\rightarrow$ public functions that users have access to and can use
 	- functions not exported cannot be called directly by the user
 	- hides the implementation details from the users (clean package interface)
 * lists all dependencies on other packages/indicate what functions you *imported* from other packages
@@ -886,7 +928,7 @@ line(x, y)
 	- documentation stubs are created in `man/` directory
 	- the rest of the content can then be modified and added
 
-* alternatively, you can click on the menu on the top right hand corner of RStudio: _Project_ --> _New Project_ --> _New Directory_ --> _R Package_ --> fill in package names and details --> automatically generate structure/skeleton of a new R package
+* alternatively, you can click on the menu on the top right hand corner of RStudio: _Project_ $\rightarrow$ _New Project_ $\rightarrow$ _New Directory_ $\rightarrow$ _R Package_ $\rightarrow$ fill in package names and details $\rightarrow$ automatically generate structure/skeleton of a new R package
 
 ### Checklist for Creating Package
 - create a new directory with `R/` and `man/` sub-directories (or just use `package.skeleton()`)
@@ -897,7 +939,7 @@ line(x, y)
 - build and check
 
 ### Example: `topten` function
-* when creating a package, generate skeleton by clicking on _Project_ --> _New Project_ --> _New Directory_ --> _R Package_ --> fill in package names and details
+* when creating a package, generate skeleton by clicking on _Project_ $\rightarrow$ _New Project_ $\rightarrow$ _New Directory_ $\rightarrow$ _R Package_ $\rightarrow$ fill in package names and details
 * write the code first in a `.R` script and add documentation directly to the script
 	- **Roxygen2** package will be leveraged to extract and format the documentation from R script automatically
 * Roxygen2 syntax
@@ -973,7 +1015,7 @@ $\pagebreak$
 
 ## R Classes and Methods
 * represents new data types (i.e. list) and its own structure/functions that R doesn't support yet
-* R classes and method --> system for object oriented programming (OOP)
+* R classes and method $\rightarrow$ system for object oriented programming (OOP)
 * R is interactive and supports OOP where as a lot of the other common OOP languages (C++, Java, Python, Perl) are generally not interactive
 * John Chambers wrote most of the code support classes/methods (documented in _Programming with Data_)
 * goal is to allow _user_ (leverage system capabilities) to become _programmers_ (extend system capabilities)
@@ -1222,6 +1264,7 @@ curl -X POST -H "Content-Type: application/json" \
     --data '{ "lon" : -76.61, "lat": 39.28, "radius": 50 }' \
     http://cloud.yhathq.com/rdpeng@gmail.com/models/pollutant/
 ```
+
 * ***additional example***
 
 ```r

@@ -2,15 +2,16 @@
 title: "Data Scientist’s Toolbox Course Notes"
 author: "Xing Su"
 output:
+  pdf_document:
+    toc: yes
+    toc_depth: 3
   html_document:
     highlight: pygments
     theme: spacelab
     toc: yes
-  pdf_document:
-    toc: yes
-    toc_depth: 3
 ---
 
+$\pagebreak$
 
 ## CLI (Command Line Interface)
 
@@ -34,21 +35,21 @@ output:
     * `move <file> <directory>` = move file to directory
     * `move <fileName> <newName>` = rename file
 * `echo` = print arguments you give/variables
-* `date` = print current date 
+* `date` = print current date
 
 
 
 ## GitHub
 
-* **Workflow** 
+* **Workflow**
     1. make edits in workspace
     2. update index/add files
-    3. commit to local repo 
+    3. commit to local repo
     4. push to remote repository
 * `git add .` = add all new files to be tracked
 * `git add -u` = updates tracking for files that are renamed or deleted
 * `git add -A` = both of the above
-    * ***Note**: `add` is performed before committing*
+    * ***Note**: `add` is performed before committing *
 * `git commit -m "message"` = commit the changes you want to be saved to the local copy
 * `git checkout -b branchname` = create new branch
 * `git branch` = tells you what branch you are on
@@ -68,7 +69,7 @@ output:
 
 ## R Packages
 
-* Primary location for R packages --> CRAN
+* Primary location for R packages $\rightarrow$ CRAN
 * `available.packages()` = all packages available
 * `head(rownames(a),3)` = returns first three names of a
 * `install.packages("nameOfPackage")` = install single package
@@ -83,7 +84,7 @@ output:
 
 ## Types of Data Science Questions
 
-* in order of difficulty: ***Descriptive*** --> ***Exploratory*** --> ***Inferential*** --> ***Predictive*** --> ***Causal*** --> ***Mechanistic***
+* in order of difficulty: ***Descriptive*** $\rightarrow$ ***Exploratory*** $\rightarrow$ ***Inferential*** $\rightarrow$ ***Predictive*** $\rightarrow$ ***Causal*** $\rightarrow$ ***Mechanistic***
 * **Descriptive analysis** = describe set of data, interpret what you see (census, Google Ngram)
 * **Exploratory analysis** = discovering connections (correlation does not = causation)
 * **Inferential analysis** = use data conclusions from smaller population for the broader group
@@ -101,7 +102,7 @@ output:
 * **Big data** = now possible to collect data cheap, but not necessarily all useful (need the right data)
 
 ## Experimental Design
-* Formulate you question in advance 
+* Formulate you question in advance
 * **Statistical inference** = select subset, run experiment, calculate descriptive statistics, use inferential statistics to determine if results can be applied broadly
 * ***[Inference]*** **Variability** = lower variability + clearer differences = decision
 * ***[Inference]*** **Confounding** = underlying variable might be causing the correlation (sometimes called Spurious correlation)
@@ -115,7 +116,7 @@ output:
     * **Positive Predictive Value** = Pr(disease | positive test)
     * **Negative Predictive Value** = Pr(no disease | negative test)
     * **Accuracy** = Pr(correct outcome)
-* **Data dredging** = use data to fit hypothesis 
+* **Data dredging** = use data to fit hypothesis
 * **Good experiments** = have replication, measure variability, generalize problem, transparent
 * Prediction is not inference, and be ware of data dredging
 
