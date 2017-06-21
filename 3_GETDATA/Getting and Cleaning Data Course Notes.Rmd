@@ -679,7 +679,7 @@ $\pagebreak$
 * `[0-9]` = searches for a a range of characters (character class)
     * *example*: `[a-zA-Z]` will match any letter in upper or lower case
 * `[^?.]` = when used at beginning of character class, "^" means not (metacharacter)
-    * *example*: `[^?.]$` matches any line that does end in "." or "?"
+    * *example*: `[^?.]$` matches any line that does not end in "." or "?"
 * `.` = any character (metacharacter)
     * *example*: `9.11` matches 9/11, 9911, 9-11, etc
 * `|` = or, used to combine subexpressions called alternatives (metacharacter)
