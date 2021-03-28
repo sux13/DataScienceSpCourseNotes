@@ -589,7 +589,7 @@ pbinom(2, size = 500, prob = .01)
 ppois(2, lambda=500 * .01)
 ```
 
-* as we can see from above, the two probabilities (`r pbinom(2, size = 500, prob = .01)*100`% vs `r pbinom(2, size = 500, prob = .01)*100`%) are extremely close
+* as we can see from above, the two probabilities (`r pbinom(2, size = 500, prob = .01)*100`% vs `r ppois(2, lambda=500 * .01)*100`%) are extremely close
 
 $\pagebreak$
 
