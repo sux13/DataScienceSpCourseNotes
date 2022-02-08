@@ -27,7 +27,7 @@ library(doMC); registerDoMC(cores = 4)
 grid.raster(readPNG("figures/1.png"))
 ```
 
-* **components of predictor** = question $\rightarrow$ input data $\rightarrow$ features _(extracting variables/characteristics)_ $\rightarrow$ algorithm $\rightarrow$ parameters _(estimate)_ $\rightarrow$ evaluation
+* **components of predictor** = question $\rightarrow$ input data $\rightarrow$ features _(extracting variables/characteristics)_ $\rightarrow$ algorithm $\rightarrow$ parameters _(estimate)_ $\rightarrow$ evaluation 
 * **relative order of importance** = question (concrete/specific) **>** data (relevant) **>** features (properly extract) **>** algorithms
 * **data selection**
 	- ***Note**: "garbage in = garbage out" $\rightarrow$ having the correct/relevant data will decide whether the model is successful *
